@@ -1,0 +1,975 @@
+<!-- red rover -->
+<html>
+<head>
+<!--
+ - - - - -
+Scrollable list based off:
+http://stackoverflow.com/questions/21998679/css-how-to-make-scrollable-list
+
+CORS
+https://hacks.mozilla.org/2009/07/cross-site-xmlhttprequest-with-cors/
+-->
+<meta http-equiv="Content-Type" content="text/html;utf-8"> 
+
+<!--
+///////////////////////////////////////////////////////////////////
+Plastic CSS
+-->
+<style>
+ nav ul{height:215px; width:90%;}
+ nav ul{overflow:hidden; overflow-y:scroll;}
+ nav ul{list-style-type:none;}
+ img.map, map area {
+  outline: none;
+ }
+</style>
+
+<!--
+///////////////////////////////////////////////////////////////////
+Plastic JavaScript
+-->
+
+<script type="text/javascript">
+
+///////////////////////////////////////////////////////////////////
+//
+// Translation menu and handlers: see more, offer another, edit, delete
+// The history, lock links direct to the developer wiki - reader can 
+// implement if they want: my purpose is not full-feature implementation here.
+//
+///////////////////////////////////////////////////////////////////
+
+function trnPreferAnother($index) {
+ $status = localStorage.getItem($ls + '.result');
+ if ($status != 200) {
+  // if we're showing undefined, then there is no "see more" to look at
+  // and the user would need to change the lang(s) and refresh to see more.
+  $choices = "No more translations found";
+ } else {
+  // if we're showing defined by contrast the representation will be storing
+  // a link to the all preferable resource (visit_link/langs/all)
+  $res = localStorage.getItem('csi18n_seemore.representations');
+  $json_arr = JSON.parse($res);
+
+  $json_arr.csi18n_xlate_resources = $json_arr.csi18n_xlate_resources.slice($index, $index + 1);
+  $res = JSON.stringify($json_arr);
+
+  $url = localStorage.getItem('csi18n_seemore.per_lang_pref');
+
+  if (XMLHttpRequest) {
+    var request = new XMLHttpRequest();
+    if("withCredentials" in request) {
+     // Firefox 3.5 and Safari 4
+     request.open('PUT', $url, true);
+     request.setRequestHeader("Authorization", "Basic dGVzdDA1OnRlc3Q=");
+     request.setRequestHeader("X-APIKey", "e3c12c03cf320b243977d6ac389805de");
+     request.setRequestHeader("Content-Type", "application/json;v=1.0");
+     request.onload = preferanother_handler;
+     request.send($res);
+    }
+  }
+ }
+}
+
+function trnSeeMore($ls) {
+ localStorage.setItem('csi18n_seemore.representations', '');
+ $status = localStorage.getItem($ls + '.result');
+ if ($status != 200) {
+  // if we're showing undefined, then there is no "see more" to look at
+  // and the user would need to change the lang(s) and refresh to see more.
+  $unsafe_choice = "No more translations found";
+  var d = document.getElementById("trn_menu");
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "101";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+
+  $safe_choices = "See more<hr>" + escapeHtml($unsafe_choice);
+  d.innerHTML = $safe_choices;
+  d.style.display = "";
+
+ } else {
+  // if we're showing defined by contrast the representation will be storing
+  // a link to the all preferable resource (visit_link/langs/all)
+  $res = localStorage.getItem($ls + '.representation');
+  $json = JSON.parse($res);
+  $url = $json.csi18n_all_preferable;
+
+  if (XMLHttpRequest) {
+    var request = new XMLHttpRequest();
+    if("withCredentials" in request) {
+     // Firefox 3.5 and Safari 4
+     $lang = localStorage.getItem('csi18n_lang');
+     if ($lang == null) {
+      $lang = window.navigator.language;
+     }
+     request.open('GET', $url, true);
+     request.setRequestHeader("Authorization", "Basic dGVzdDA1OnRlc3Q=");
+     request.setRequestHeader("X-APIKey", "e3c12c03cf320b243977d6ac389805de");
+     request.setRequestHeader("Accept", "application/json");
+     request.responseType = "json";
+     request.onload = seemore_handler;
+     request.send();
+    }
+  }
+ }
+}
+
+function trnOptions($ls) {
+ var $tlink = localStorage.getItem($ls + '.tlink');
+
+ var d = document.getElementById("trn_menu");
+ d.style.position = "fixed";
+ d.style.fontFamily = "sans";
+ d.style.right = "0px";
+ d.style.top = "240px";
+ d.style.width = "401px";
+ d.style.height = "240px";
+ d.style.zIndex = "100";
+ d.style.backgroundColor = "#AADDDD";
+ d.style.textAlign = "right";
+ d.style.fontSize = "20px";
+ d.innerHTML =  "Options<hr>" +
+ "<input type='button' value='Options' style='font-size:21px' onClick='javascript:sendOptions(\"" + $ls + "\")'>";
+ d.style.display = "";
+}
+
+function trnHead($ls) {
+ var $tlink = localStorage.getItem($ls + '.tlink');
+
+ var d = document.getElementById("trn_menu");
+ d.style.position = "fixed";
+ d.style.fontFamily = "sans";
+ d.style.right = "0px";
+ d.style.top = "240px";
+ d.style.width = "401px";
+ d.style.height = "240px";
+ d.style.zIndex = "100";
+ d.style.backgroundColor = "#AADDDD";
+ d.style.textAlign = "right";
+ d.style.fontSize = "20px";
+ d.innerHTML =  "Head<hr>" +
+ "<input type='button' value='Head' style='font-size:21px' onClick='javascript:sendHead(\"" + $ls + "\")'>";
+ d.style.display = "";
+}
+
+function trnOfferAnother($ls) {
+ var $result = localStorage.getItem($ls + '.result');
+ var $newmark = localStorage.getItem($ls + '.newmark');
+ var $rep = localStorage.getItem($ls + '.representation');
+ var $tlink = localStorage.getItem($ls + '.tlink');
+
+ if ($result == 200) {
+  // yes yes, 200 is not the only response
+  $json_o = JSON.parse($rep);
+  $newmark = $json_o.csi18n_xlate_resource.newmark;
+  $lang = $json_o.csi18n_xlate_resource.language;
+  $trans = $json_o.csi18n_xlate_resource.translation;
+  $vis = $json_o.csi18n_xlate_resource.visibility;
+ } else {
+  $lang = localStorage.getItem('csi18n_lang');
+  if ($lang == null) {
+   $lang = window.navigator.language;
+  }
+  $trans = '';
+  $vis = '';
+ }
+ var isano = ($vis == 'anonymous') ? 'selected' : '';
+ var ispub = ($vis == 'public') ? 'selected' : '';
+ var isprv = ($vis == 'private') ? 'selected' : '';
+ var isper = ($vis == 'personal') ? 'selected' : '';
+
+ var d = document.getElementById("trn_menu");
+ d.style.position = "fixed";
+ d.style.fontFamily = "sans";
+ d.style.right = "0px";
+ d.style.top = "240px";
+ d.style.zIndex = "100";
+ d.style.backgroundColor = "#AADDDD";
+ d.style.textAlign = "right";
+ d.style.fontSize = "20px";
+ d.innerHTML = "Offer another<hr>" +
+ "<input type='text' value='" + escapeHtml($newmark) + "' disabled='' size='30' name='newmark_iv' id='newmark_iv' style='font-size:21px'>Newmark<br>" +
+ "<input type='text' value='" + escapeHtml($lang) + "' size='30' name='cl_iv' id='cl_iv' style='font-size:21px'>Content-Language<br>" +
+ "<textarea cols='20' rows='3' name='translation_iv' id='translation_iv' type='text' style='font-size:21px'>" + escapeHtml($trans) + "</textarea>Translation<br>" +
+ "<select size='4' name='visibility_iv' id='visibility_iv' style='font-size:21px'>" +
+ "<option value='anonymous' " + isano + ">Anonymous</option>" +
+ "<option value='public' " + ispub + ">Public</option>" +
+ "<option value='private' " + isprv + ">Private</option>" +
+ "<option value='personal' " + isper + ">Personal</option>" +
+ "</select>Visibility<br>" +
+ "<input type='hidden' value='1' name='visitsid'>" +
+ "<input type='hidden' value='test05' name='un'>" +
+ "<input type='hidden' value='e3c12c03cf320b243977d6ac389805de' name='apikey'>" +
+ "<input type='hidden' value='test' name='pw'>" +
+ "<input type='button' value='Submit' style='font-size:21px' onClick='javascript:sendPost()'>";
+ d.style.display = "";
+}
+
+function trnDelete($ls) {
+ var $result = localStorage.getItem($ls + '.result');
+ var $newmark = localStorage.getItem($ls + '.newmark');
+ var $rep = localStorage.getItem($ls + '.representation');
+ var $tlink = localStorage.getItem($ls + '.tlink');
+
+ if ($result == 200) {
+  // yes yes, 200 is not the only response
+  $json_o = JSON.parse($rep);
+  $newmark = $json_o.csi18n_xlate_resource.newmark;
+  $lang = $json_o.csi18n_xlate_resource.language;
+  $trans = $json_o.csi18n_xlate_resource.translation;
+  $vis = $json_o.csi18n_xlate_resource.visibility;
+ } else {
+  $lang = localStorage.getItem('csi18n_lang');
+  if ($lang == null) {
+   $lang = window.navigator.language;
+  }
+  $trans = '';
+  $vis = '';
+ }
+ var isano = ($vis == 'anonymous') ? 'selected' : '';
+ var ispub = ($vis == 'public') ? 'selected' : '';
+ var isprv = ($vis == 'private') ? 'selected' : '';
+ var isper = ($vis == 'personal') ? 'selected' : '';
+
+ var d = document.getElementById("trn_menu");
+ d.style.position = "fixed";
+ d.style.fontFamily = "sans";
+ d.style.right = "0px";
+ d.style.top = "240px";
+ d.style.zIndex = "100";
+ d.style.backgroundColor = "#AADDDD";
+ d.style.textAlign = "right";
+ d.style.fontSize = "20px";
+ d.innerHTML = "Delete<hr>" +
+ "<input type='text' value='" + escapeHtml($newmark) + "' disabled size='30' name='newmark_iv' id='newmark_iv' style='font-size:21px'>Newmark<br>" +
+ "<input type='text' value='" + escapeHtml($lang) + "' disabled size='30' name='cl_iv' id='cl_iv' style='font-size:21px'>Content-Language<br>" +
+ "<textarea disabled cols='30' rows='3' name='translation_iv' id='translation_iv' type='text' style='font-size:21px'>" + escapeHtml($trans) + "</textarea>Translation<br>" +
+ "<select disabled size='4' name='visibility_iv' id='visibility_iv' style='font-size:21px'>" +
+ "<option value='anonymous' " + isano + ">Anonymous</option>" +
+ "<option value='public' " + ispub + ">Public</option>" +
+ "<option value='private' " + isprv + ">Private</option>" +
+ "<option value='personal' " + isper + ">Personal</option>" +
+ "</select>Visibility<br>" +
+ "<input type='hidden' value='1' name='visitsid'>" +
+ "<input type='hidden' value='test05' name='un'>" +
+ "<input type='hidden' value='e3c12c03cf320b243977d6ac389805de' name='apikey'>" +
+ "<input type='hidden' value='test' name='pw'>" +
+ "<input type='button' value='Delete' style='font-size:21px' onClick='javascript:sendDelete(\"" + $ls + "\")'>";
+ d.style.display = "";
+}
+
+function trnEdit($ls) {
+ var $result = localStorage.getItem($ls + '.result');
+ var $newmark = localStorage.getItem($ls + '.newmark');
+ var $rep = localStorage.getItem($ls + '.representation');
+ var $tlink = localStorage.getItem($ls + '.tlink');
+
+ if ($result == 200) {
+  // yes yes, 200 is not the only response
+  $json_o = JSON.parse($rep);
+  $newmark = $json_o.csi18n_xlate_resource.newmark;
+  $lang = $json_o.csi18n_xlate_resource.language;
+  $trans = $json_o.csi18n_xlate_resource.translation;
+  $vis = $json_o.csi18n_xlate_resource.visibility;
+ } else {
+  $lang = localStorage.getItem('csi18n_lang');
+  if ($lang == null) {
+   $lang = window.navigator.language;
+  }
+  $trans = '';
+  $vis = '';
+ }
+ var isano = ($vis == 'anonymous') ? 'selected' : '';
+ var ispub = ($vis == 'public') ? 'selected' : '';
+ var isprv = ($vis == 'private') ? 'selected' : '';
+ var isper = ($vis == 'personal') ? 'selected' : '';
+
+ var d = document.getElementById("trn_menu");
+ d.style.position = "fixed";
+ d.style.fontFamily = "sans";
+ d.style.right = "0px";
+ d.style.top = "240px";
+ d.style.zIndex = "100";
+ d.style.backgroundColor = "#AADDDD";
+ d.style.textAlign = "right";
+ d.style.fontSize = "20px";
+ d.innerHTML = "Edit<hr>" +
+ "<input type='text' value='" + escapeHtml($newmark) + "' disabled='' size='30' name='newmark_iv' id='newmark_iv' style='font-size:21px'>Newmark<br>" +
+ "<input type='text' value='" + escapeHtml($lang) + "' size='30' name='cl_iv' id='cl_iv' style='font-size:21px'>Content-Language<br>" +
+ "<textarea cols='30' rows='3' name='translation_iv' id='translation_iv' type='text' style='font-size:21px'>" + escapeHtml($trans) + "</textarea>Translation<br>" +
+ "<select size='4' name='visibility_iv' id='visibility_iv' style='font-size:21px'>" +
+ "<option value='anonymous' " + isano + ">Anonymous</option>" +
+ "<option value='public' " + ispub + ">Public</option>" +
+ "<option value='private' " + isprv + ">Private</option>" +
+ "<option value='personal' " + isper + ">Personal</option>" +
+ "</select>Visibility<br>" +
+ "<input type='hidden' value='1' name='visitsid'>" +
+ "<input type='hidden' value='test05' name='un'>" +
+ "<input type='hidden' value='e3c12c03cf320b243977d6ac389805de' name='apikey'>" +
+ "<input type='hidden' value='test' name='pw'>" +
+ "<input type='button' value='Submit' style='font-size:21px' onClick='javascript:sendPut(\"" + $ls + "\")'>";
+ d.style.display = "";
+}
+
+///////////////////////////////////////////////////////////////////
+
+//
+// Functions for effecting the various HTTP method calls
+//
+// Note that these all make CORS requests in the background first, as the
+// call are all Cross Origin in nature.
+//
+// The functions to send the request appear first; the callback handlers
+// for when the server has replied appear after
+// 
+function sendGet($el, $newmark) {
+ var url = "https://rest.mpsvr.com/newmarks/7/" + $newmark;
+ if (XMLHttpRequest) {
+   var request = new XMLHttpRequest();
+   if("withCredentials" in request) {
+    // Firefox 3.5 and Safari 4
+    $lang = localStorage.getItem('csi18n_lang');
+    if ($lang == null) {
+     $lang = window.navigator.language;
+    }
+    request.open('GET', url, true);
+    request.setRequestHeader("Authorization", "Basic dGVzdDA1OnRlc3Q=");
+    request.setRequestHeader("X-APIKey", "e3c12c03cf320b243977d6ac389805de");
+    request.setRequestHeader("Accept", "application/json");
+    request.responseType = "json";
+    request.setRequestHeader("Accept-Language", $lang);
+    request.setRequestHeader("If-Modified-Since", "Tue,  1 Jan 1980 19:12:53 BST");
+    request.setRequestHeader("If-None-Match", "Wibble");
+    if ($el == 'txtel1') {
+     request.onload = handler_txtel1;
+    } else if ($el == 'txtel2') {
+     request.onload = handler_txtel2;
+    } else if ($el == 'txtel3') {
+     request.onload = handler_txtel3;
+    } else if ($el == 'txtel4') {
+     request.onload = handler_txtel4;
+    }
+    request.send();
+  }
+ }
+}
+
+function sendHead($ls) {
+ var $tlink = localStorage.getItem($ls + '.tlink');
+ if (XMLHttpRequest) {
+   var request = new XMLHttpRequest();
+   if("withCredentials" in request) {
+    // Firefox 3.5 and Safari 4
+    $lang = localStorage.getItem('csi18n_lang');
+    if ($lang == null) {
+     $lang = window.navigator.language;
+    }
+    request.open('HEAD', $tlink, true);
+    request.setRequestHeader("Authorization", "Basic dGVzdDA1OnRlc3Q=");
+    request.setRequestHeader("X-APIKey", "e3c12c03cf320b243977d6ac389805de");
+    request.setRequestHeader("Accept", "application/json");
+    request.responseType = "json";
+    request.onload = head_handler;
+    request.send();
+  }
+ }
+}
+
+function sendOptions($ls) {
+ var $tlink = localStorage.getItem($ls + '.tlink');
+ if (XMLHttpRequest) {
+   var request = new XMLHttpRequest();
+   if("withCredentials" in request) {
+    // Firefox 3.5 and Safari 4
+    request.open('OPTIONS', $tlink, true);
+    request.setRequestHeader("Authorization", "Basic dGVzdDA1OnRlc3Q=");
+    request.setRequestHeader("X-APIKey", "e3c12c03cf320b243977d6ac389805de");
+    request.onload = options_handler;
+    request.send();
+  }
+ }
+}
+
+function sendPost() {
+ var d = document.getElementById("newmark_iv");
+ $newmark = d.value;
+ d = document.getElementById("translation_iv");
+ $translation = d.value;
+ d = document.getElementById("cl_iv");
+ $cont_lang = d.value;
+ d = document.getElementById("visibility_iv");
+ $vis = d.value;
+
+ $arr = { 'csi18n_xlate_resource' : { 'language' : $cont_lang, 'translation' : $translation, 'visibility' : $vis } };
+ $json_s = JSON.stringify($arr);
+
+ var url = "https://rest.mpsvr.com/newmarks/7/" + $newmark;
+ if (XMLHttpRequest) {
+   var request = new XMLHttpRequest();
+   if("withCredentials" in request) {
+    // Firefox 3.5 and Safari 4
+    request.open('POST', url, true);
+    request.setRequestHeader("Authorization", "Basic dGVzdDA1OnRlc3Q=");
+    request.setRequestHeader("X-APIKey", "e3c12c03cf320b243977d6ac389805de");
+    request.setRequestHeader("Content-Type", "application/json;v=1.0");
+    request.onload = post_handler;
+    request.send($json_s);
+  }
+ }
+}
+
+function sendPut($ls) {
+ var d = document.getElementById("newmark_iv");
+ $newmark = d.value;
+ d = document.getElementById("translation_iv");
+ $translation = d.value;
+ d = document.getElementById("cl_iv");
+ $cont_lang = d.value;
+ d = document.getElementById("visibility_iv");
+ $vis = d.value;
+
+ $arr = { 'csi18n_xlate_resource' : { 'language' : $cont_lang, 'translation' : $translation, 'visibility' : $vis } };
+ $json_s = JSON.stringify($arr);
+
+ var $tlink = localStorage.getItem($ls + '.tlink');
+ if (XMLHttpRequest) {
+   var request = new XMLHttpRequest();
+   if("withCredentials" in request) {
+    // Firefox 3.5 and Safari 4
+    request.open('PUT', $tlink, true);
+    request.setRequestHeader("Authorization", "Basic dGVzdDA1OnRlc3Q=");
+    request.setRequestHeader("X-APIKey", "e3c12c03cf320b243977d6ac389805de");
+    request.setRequestHeader("Content-Type", "application/json;v=1.0");
+    request.onload = put_handler;
+    request.send($json_s);
+  }
+ }
+}
+
+function sendDelete($ls) {
+ var $tlink = localStorage.getItem($ls + '.tlink');
+ if (XMLHttpRequest) {
+   var request = new XMLHttpRequest();
+   if("withCredentials" in request) {
+    // Firefox 3.5 and Safari 4
+    request.open('DELETE', $tlink, true);
+    request.setRequestHeader("Authorization", "Basic dGVzdDA1OnRlc3Q=");
+    request.setRequestHeader("X-APIKey", "e3c12c03cf320b243977d6ac389805de");
+    request.setRequestHeader("If-Modified-Since", "Tue,  1 Jan 1980 19:12:53 BST");
+    request.setRequestHeader("If-None-Match", "Wibble");
+    request.setRequestHeader("Accept", "application/json");
+    request.responseType = "json";
+    request.onload = delete_handler;
+    request.send();
+  }
+ }
+}
+
+// callback handlers
+function delete_handler() {
+  $status = this.status;
+  var d = document.getElementById("trn_menu");
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "101";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.innerHTML = escapeHtml(this.statusText);
+  d.style.display = "";
+}
+
+function post_handler() {
+  $status = this.status;
+  var d = document.getElementById("trn_menu");
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "101";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.innerHTML = escapeHtml(this.statusText);
+  d.style.display = "";
+}
+
+function seemore_handler() {
+  $status = this.status;
+   var d = document.getElementById("trn_menu");
+   d.style.position = "fixed";
+   d.style.fontFamily = "sans";
+   d.style.right = "0px";
+   d.style.top = "240px";
+   d.style.zIndex = "101";
+   d.style.backgroundColor = "#AADDDD";
+   d.style.textAlign = "right";
+   d.style.fontSize = "20px";
+
+   $json = this.response;
+   localStorage.setItem('csi18n_seemore.representations', JSON.stringify($json));
+
+   var $el = '';
+   var $safe_choices = '';
+   var $unsafe_choice = '';
+   for(index = 0; index < $json.csi18n_xlate_resources.length; index++) {
+    $el = $json.csi18n_xlate_resources[index];
+    $unsafe_choice = $el.translation;
+    $tlink = $el.url;
+    $safe_choices = $safe_choices + "<li><a href='javascript:trnPreferAnother(\"" + index + "\")'>" + escapeHtml($unsafe_choice) + "</a></li>";
+   }
+   if ($safe_choices.length > 0) {
+    $safe_choices = "<nav><ul>" + $safe_choices + "</ul></nav>";
+   } 
+   $safe_choices = "See more<hr>" + $safe_choices;
+   d.innerHTML = $safe_choices;
+   d.style.display = "";
+}
+
+function put_handler() {
+  $status = this.status;
+  var d = document.getElementById("trn_menu");
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "101";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.innerHTML = escapeHtml(this.statusText);
+  d.style.display = "";
+}
+
+function preferanother_handler() {
+  $status = this.status;
+  var d = document.getElementById("trn_menu");
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "101";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.innerHTML = escapeHtml(this.statusText);
+  d.style.display = "";
+}
+
+function handler_txtel1() {
+  var d = document.getElementById("txtel1");
+  $status = this.status;
+  if ($status == 200) {
+   $json_o = this.response;
+   $translation = $json_o.csi18n_xlate_resource.translation;
+   var currently = localStorage.getItem('csi18n_onOrOff');
+   if (currently != "off") {
+    d.firstChild.innerHTML = escapeHtml($translation);
+   } else {
+    d.innerHTML = escapeHtml($translation);
+   }
+   localStorage.setItem('csi18n_txtel1.representation', JSON.stringify($json_o));
+   localStorage.setItem('csi18n_txtel1.result', $status);
+   localStorage.setItem('csi18n_txtel1.tlink', this.getResponseHeader('Content-Location'));
+   d.style.display = "";
+  } 
+}
+
+function handler_txtel2() {
+  var d = document.getElementById("txtel2");
+  $status = this.status;
+  if ($status == 200) {
+   $json_o = this.response;
+   $translation = $json_o.csi18n_xlate_resource.translation;
+   var currently = localStorage.getItem('csi18n_onOrOff');
+   if (currently == "on") {
+    d.firstChild.innerHTML = escapeHtml($translation);
+   } else {
+    d.innerHTML = escapeHtml($translation);
+   }
+   localStorage.setItem('csi18n_txtel2.representation', JSON.stringify($json_o));
+   localStorage.setItem('csi18n_txtel2.result', $status); 
+   localStorage.setItem('csi18n_txtel2.tlink', this.getResponseHeader('Content-Location'));
+   d.style.display = "";
+  } 
+}
+
+function handler_txtel3() {
+  var d = document.getElementById("txtel3");
+  $status = this.status;
+  if ($status == 200) {
+   $json_o = this.response;
+   $translation = $json_o.csi18n_xlate_resource.translation;
+   var currently = localStorage.getItem('csi18n_onOrOff');
+   if (currently == "on") {
+    d.firstChild.innerHTML = escapeHtml($translation);
+   } else {
+    d.innerHTML = escapeHtml($translation);
+   }
+   localStorage.setItem('csi18n_txtel3.representation', JSON.stringify($json_o));
+   localStorage.setItem('csi18n_txtel3.result', $status); 
+   localStorage.setItem('csi18n_txtel3.tlink', this.getResponseHeader('Content-Location'));
+   d.style.display = "";
+  } 
+}
+
+function handler_txtel4() {
+  var d = document.getElementById("txtel4");
+  $status = this.status;
+  if ($status == 200) {
+   $json_o = this.response;
+   $translation = $json_o.csi18n_xlate_resource.translation;
+   var currently = localStorage.getItem('csi18n_onOrOff');
+   if (currently == "on") {
+    d.firstChild.innerHTML = escapeHtml($translation);
+   } else {
+    d.innerHTML = escapeHtml($translation);
+   }
+   localStorage.setItem('csi18n_txtel4.representation', JSON.stringify($json_o));
+   localStorage.setItem('csi18n_txtel4.result', $status); 
+   localStorage.setItem('csi18n_txtel4.tlink', this.getResponseHeader('Content-Location'));
+   d.style.display = "";
+  } 
+}
+
+function options_handler() {
+  $status = this.status;
+  var d = document.getElementById("trn_menu");
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "101";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.innerHTML = escapeHtml(this.statusText) + "<br>" + escapeHtml(this.responseText);
+  d.style.display = "";
+}
+
+function head_handler() {
+  $status = this.status;
+  var d = document.getElementById("trn_menu");
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "101";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.innerHTML = escapeHtml(this.statusText) + "<br>" + escapeHtml(this.responseText);
+  d.style.display = "";
+}
+
+///////////////////////////////////////////////////////////////////
+
+//
+// Service menu and handlers: hyperlinks, credentials and language
+// toggleShowServiceMenu effected by single-click on Globe
+//
+function toggleShowServiceMenu() {
+ var d = document.getElementById("svc_menu");
+ if (d.style.display == "") {
+  d.style.display = "none";
+ } else {
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "100px";
+  d.style.width = "33%";
+  d.style.zIndex = "100";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.innerHTML = "<a href='javascript:toggleShowHyperlinks()'>hyperlinks on/off<a><br> " +
+ "<a href='javascript:acceptUsername()'>username</a><br>" +
+ "<a href='javascript:acceptPassword()'>password</a><br>" +
+ "<a href='javascript:acceptApikey()'>apikey</a><br>" +
+ "<a href='javascript:acceptDefLang()'>Default Language</a><br>";
+  d.style.display = "";
+ }
+}
+
+// Translation menu effected by click text in the speech bubbles while 
+// hyperlinks on
+// 
+function toggleShowTranslationMenu($ls) {
+ var d = document.getElementById("trn_menu");
+
+ $res = localStorage.getItem($ls + '.representation');
+ if ($res != '') {
+  $json = JSON.parse($res);
+  $seemore_uri = $json.csi18n_per_lang_preference;
+ } else {
+  $seemore_uri = '';
+ }
+ localStorage.setItem('csi18n_seemore.per_lang_pref', $seemore_uri);
+	
+ if (d.style.display == "") {
+  d.style.display = "none";
+ } else {
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "100";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.style.height = "";
+  d.style.width = "33%";
+  d.innerHTML = "<a href='javascript:trnSeeMore(\"" + $ls + "\")'>See more</a><br>" +
+ "<a href='javascript:trnOfferAnother(\"" + $ls + "\")'>Offer another</a><br>" +
+ "<a href='javascript:trnEdit(\"" + $ls + "\")'>- Edit</a><br>" +
+ "<a href='javascript:trnDelete(\"" + $ls + "\")'>- Delete</a><br>" +
+ "<a href='javascript:trnOptions(\"" + $ls + "\")'>- Options</a><br>" +
+ "<a href='javascript:trnHead(\"" + $ls + "\")'>- Head</a><br>" +
+ "<a href='http://csi18n.mpsvr.com/index.php/Storyboard_03'>- Bump</a><br>" +
+ "<a href='http://csi18n.mpsvr.com/index.php/Storyboard_03'>- UnBump</a><br>" +
+ "<a href='http://csi18n.mpsvr.com/index.php/Storyboard_01'>- Lock</a><br>" +
+ "<a href='http://csi18n.mpsvr.com/index.php/Storyboard_01'>- Unlock</a><br>" + 
+ "<a href='http://csi18n.mpsvr.com/index.php/Storyboard_01'>- History</a><br>";
+  d.style.display = "";
+ }
+}
+
+function toggleShowHyperlinks() {
+ var currently = localStorage.getItem('csi18n_onOrOff');
+ if (currently != "off") {
+  localStorage.setItem('csi18n_onOrOff','off');
+ } else {
+  localStorage.setItem('csi18n_onOrOff','on');
+ }
+}
+
+///////////////////////////////////////////////////////////////////
+
+function acceptUsername() {
+ $username = localStorage.getItem('csi18n_un');
+ var rv = prompt("Username", $username);
+ if (rv != null) {
+  localStorage.setItem('csi18n_un', rv);
+ }
+}
+
+function acceptPassword() {
+ $password = localStorage.getItem('csi18n_pw');
+ var rv = prompt("Password", $password);
+ if (rv != null) {
+  localStorage.setItem('csi18n_pw', rv);
+ }
+}
+
+function acceptApikey() {
+ $apikey = localStorage.getItem('csi18n_key');
+ var rv = prompt("APIKey", $apikey);
+ if (rv != null) {
+  localStorage.setItem('csi18n_key', rv);
+ }
+}
+
+function acceptDefLang() {
+ $deflang = localStorage.getItem('csi18n_lang');
+ if ($deflang == null) {
+  $deflang = window.navigator.language;
+ }
+ var rv = prompt("New Language", $deflang);
+ if (rv != null) {
+  localStorage.setItem('csi18n_lang', rv);
+ }
+}
+
+///////////////////////////////////////////////////////////////////
+
+//
+// JS for creating the bubble on page (or hiding it)
+//
+function createDialog($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwidth, $style, $newmark) {
+ var d = document.getElementById($el);
+ d.style.display = "none";
+ d.style.left = "auto";
+ d.style.right = "auto";
+ d.style.top = "auto";
+ d.style.bottom = "auto";
+
+ if ($el === 'txtel1') {
+  localStorage.setItem('csi18n_txtel1.result', 0);
+  localStorage.setItem('csi18n_txtel1.newmark', $newmark);
+  localStorage.setItem('csi18n_txtel1.representation', '');
+  localStorage.setItem('csi18n_txtel1.tlink', '');
+ } else if ($el === 'txtel2') {
+  localStorage.setItem('csi18n_txtel2.result', 0);
+  localStorage.setItem('csi18n_txtel2.newmark', $newmark);
+  localStorage.setItem('csi18n_txtel2.representation', '');
+  localStorage.setItem('csi18n_txtel2.tlink', '');
+ } else if ($el === 'txtel3') {
+  localStorage.setItem('csi18n_txtel3.result', 0);
+  localStorage.setItem('csi18n_txtel3.newmark', $newmark);
+  localStorage.setItem('csi18n_txtel3.representation', '');
+  localStorage.setItem('csi18n_txtel3.tlink', '');
+ } else if ($el === 'txtel4') {
+  localStorage.setItem('csi18n_txtel4.result', 0);
+  localStorage.setItem('csi18n_txtel4.newmark', $newmark);
+  localStorage.setItem('csi18n_txtel4.representation', '');
+  localStorage.setItem('csi18n_txtel4.tlink', '');
+ } 
+
+ if ($corner != 'hide') {
+  $rv = sendGet($el, $newmark);
+  if (typeof $rv === 'undefined') {
+   $translation = 'undefined';
+  } else {
+   $translation = $rv;
+  }
+ }
+
+ if (localStorage.getItem('csi18n_onOrOff') == 'on') {
+  if ($el === 'txtel1') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_txtel1\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'txtel2') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_txtel2\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'txtel3') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_txtel3\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'txtel4') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_txtel4\")'>" + escapeHtml($translation) + "</a>"; 
+  }
+ } else {
+  d.innerHTML = escapeHtml($translation); 
+ }
+
+ if ($corner == 'BR') {
+  d.style.position = "absolute";
+  d.style.right = ($totx - $posx) + "px";
+  d.style.bottom = ($toty - $posy) + "px";
+  d.style.zIndex = "100";
+  d.style.backgroundColor = "#DDDDDD";
+  d.style.textAlign = "right";
+
+ } else if ($corner == 'TR') {
+  d.style.position = "absolute";
+  d.style.right = ($totx - $posx) + "px";
+  d.style.top = $posy + "px";
+  d.style.fontSize = "20px";
+  d.style.zIndex = "100";
+  d.style.backgroundColor = "#FFFFFF";
+  d.style.textAlign = "right";
+
+ } else if ($corner == 'BL') {
+  d.style.position = "absolute";
+  d.style.left = $posx + "px";;
+  d.style.bottom = ($toty - $posy) + "px";
+  d.style.fontSize = "20px";
+  d.style.zIndex = "100";
+  d.style.backgroundColor = "#DDDDDD";
+  d.style.textAlign = "left";
+
+ } else if ($corner == 'TL') {
+  d.style.position = "absolute";
+  d.style.left = $posx + "px";
+  d.style.top = $posy + "px";
+  d.style.fontSize = "20px";
+  d.style.zIndex = "100";
+  d.style.backgroundColor = "#FFFFFF";
+  d.style.textAlign = "left";
+ }
+
+ if ($corner != "hide") {
+  d.style.display = "";
+  d.style.fontSize = $size + "px";
+  d.style.fontFamily = "sans";
+  d.style.fontStyle = $style;
+  if ($maxwidth != "0") {
+   d.style.maxWidth = $maxwidth + "px";
+  } else {
+   d.style.maxWidth = "";
+  }
+ }
+}
+
+///////////////////////////////////////////////////////////////////
+
+//
+//
+// $el, $corner, $totx, $toty, $posx, $posy, $size, $maxwidth, $style, $newmark
+function xkcdShow() {
+ createDialog("txtel1", "TL", 1536, 8192, 189, 73, "16", "392", "", "xkcd-red-rover-el1");
+ createDialog("txtel2", "TL", 1536, 8192, 160, 243, "16", "406", "", "xkcd-red-rover-el2");
+ createDialog("txtel3", "TR", 1536, 8192, 545, 113, "16", "111", "", "xkcd-red-rover-el3");
+ createDialog("txtel4", "TL", 1536, 8192, 70, 614, "16", "582", "", "xkcd-red-rover-el4");
+}
+
+///////////////////////////////////////////////////////////////////
+
+
+// XSS. Storing:
+//   hello</a><img src=bogus onerror=alert(1337)><a href="">
+// is an XSS vuln: sanitise text before use. In practice, I only seem to 
+// use .innerHtml for use so either .innerHtml = escapeHtml(unsafe) or
+// name vars as safe/unsafe and only assign a safe to .innerHtml
+//
+// bjornd @ http://stackoverflow.com/questions/6234773/can-i-escape-html-special-chars-in-javascript
+function escapeHtml(unsafe) {
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+}
+//" <-- emacs discolours below unless I terminate the stroke-quote-stroke above
+
+//
+// Setup when never been here before. Preload with credents and use Canadian English
+// 
+function onLoad() {
+ var currently = localStorage.getItem('csi18n_onOrOff');
+ if (currently != "on" && currently != "off") {
+  localStorage.setItem('csi18n_onOrOff', "on");
+  localStorage.setItem('csi18n_un', "test05");
+  localStorage.setItem('csi18n_pw', "test");
+  localStorage.setItem('csi18n_key', "e3c12c03cf320b243977d6ac389805de");
+  localStorage.setItem('csi18n_lang', "en-CA");
+  localStorage.setItem('csi18n_seemore.representations', '');
+  localStorage.setItem('csi18n_seemore.per_lang_pref', '');
+ }
+ xkcdShow();
+}
+</script>
+</head>
+
+<!--
+///////////////////////////////////////////////////////////////////
+-->
+
+<body onload='javascript:onLoad()'>
+<div style="position: absolute; background: #BBBBBB; font-size:10px; width:1536px; height:8192px; font-family:sans;">
+<img src="xkcd-notext-red_rover.png" alt="" /><br>
+Original work: <a href="http://xkcd.com/1449/">http://xkcd.com/1449/</a><br>
+[ &nbsp; | <a href="../">up</a> | <a href="../20141127">next</a> ]<br>
+
+<div id="globe" class= "" style="position:fixed; right:0; top: 0;"><img onclick="javascript:toggleShowServiceMenu()" src='../translationglobe.png'></div>
+<div id="txtel1" class="" style="display:none" >LAURASIA</div>
+<div id="txtel2" class="" style="display:none" >GONDWANA</div>
+<div id="txtel3" class="" style="display:none" >RED ROVER, RED ROVER, SEND INDIA OVER!</div>
+<div id="txtel4" class="" style="display:none" >HOW THE HIMALAYAS FORMED</div>
+
+<div id="svc_menu" class="" style="display:none" ><a href="http://www.youtube.com/watch?v=CiGPTL8bnC4">Sandy White</a></div>
+<div id="trn_menu" class="" style="display:none" ><a href="http://www.gutenberg.org/cache/epub/74/pg74.txt">Mark Twain</a></div>
+
+<!--
+///////////////////////////////////////////////////////////////////
+-->
+
+<br>
+XKCD example page from 2014-nov-19
+</div>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<body>
+
+Please feel free to copy the source anywhere under http://www.pectw.net/csi18n/ to create your own user-updateble translations site.<br>
+<br>
+The main documentation site is at <a href="http://csi18n.mpsvr.com/">http://csi18n.mpsvr.com/</a><br>
+<br>
+The notes below are a simple cut and paste of my latest process for updating the xkcd <i>du jour</i>.<br>
+-- Alistair Mann
+<br>
+<hr>
+
+
+<ol>
+  <li><p style="margin-bottom: 0cm">Visit <a href="https://xkcd.com/">https://xkcd.com/</a></p>
+    </li><li><p style="margin-bottom: 0cm">Right-click image | save image as
+      | xkcd-orig-&lt;title&gt;.png | save</p>
+    </li><li><p style="margin-bottom: 0cm">Open GIMP</p>
+    </li><li><p style="margin-bottom: 0cm">File | open |
+      xkcd-orig-&lt;title&gt;.png | open</p>
+    </li><li><p style="margin-bottom: 0cm">file | save as |
+      xkcd-orig-&lt;title&gt;.xcf | save</p>
+    </li><li><p style="margin-bottom: 0cm">print the image</p>
+    <ol>
+      <li><p style="margin-bottom: 0cm">title the image</p>
+	</li><li><p style="margin-bottom: 0cm">Hover image: is there a title=””
+	  popup? If so, note a fr0001 
+	  </p>
+	</li><li><p style="margin-bottom: 0cm">label the textual elements
+	  (“fr0104” etc)</p>
+	</li><li><p style="margin-bottom: 0cm">label point elements (“speech
+	  line”)</p>
+	</li></ol>
+    </li><li><p style="margin-bottom: 0cm">Title two tables 
+      </p>
+    <ol>
+      <li><p style="margin-bottom: 0cm">textual</p>
+	<ol>
+	  <li><p style="margin-bottom: 0cm">one row per textual elements</p>
+	    </li><li><p style="margin-bottom: 0cm">cols: corner; w, x,y</p>
+	    </li></ol>
+	</li><li><p style="margin-bottom: 0cm">point elements</p>
+	<ol>
+	  <li><p style="margin-bottom: 0cm">one row per two points (“pt1,
+	      pt2”)</p>
+	    </li><li><p style="margin-bottom: 0cm">Cols: xy-&gt;xy</p>
+	    </li></ol>
+	</li></ol>
+    </li><li><p style="margin-bottom: 0cm">Co-ords:</p>
+    <ol>
+      <li><p style="margin-bottom: 0cm">For each textual element</p>
+	<ol>
+	  <li><p style="margin-bottom: 0cm">determine where the corner
+	      should go (just tl, tr, bl, br for now)</p>
+	    </li><li><p style="margin-bottom: 0cm">determine max width of bubble</p>
+	    </li><li><p style="margin-bottom: 0cm">Get pixel co-ords for textual
+	      element and point elements</p>
+	    </li></ol>
+	</li></ol>
+    </li><li><p style="margin-bottom: 0cm">Erase all textual and speech
+      bubble elements</p>
+    </li><li><p style="margin-bottom: 0cm">File | save as |
+      xkcd-notext-&lt;title&gt;.xcf</p>
+    </li><li><p style="margin-bottom: 0cm">File | export … | export |
+      export</p>
+    </li><li><p style="margin-bottom: 0cm">Close gimp</p>
+    </li><li><p style="margin-bottom: 0cm">Upload png to imgur and capture
+      img src address</p>
+    </li><li><p style="margin-bottom: 0cm">At <a href="http://www.pectw.net/">www.pectw.net</a>,
+      mkdir -p ~/csi18n/xkcd/&lt;title&gt; //title should use underscore
+      not spaces</p>
+    <ol>
+      <li><p style="margin-bottom: 0cm">cd ~/csi18n/xkcd/&lt;title&gt;</p>
+	</li><li><p style="margin-bottom: 0cm">cp ../20141201/index.php . (or
+	  whichever is most recent version)</p>
+	</li><li><p style="margin-bottom: 0cm">cp ../20141201/index.html .</p>
+	</li><li><p style="margin-bottom: 0cm">Edit index.html</p>
+	<ol>
+	  <li><p style="margin-bottom: 0cm">search/replace previous title
+	      with new</p>
+	    </li><li><p style="margin-bottom: 0cm">change &lt;img src=”</p>
+	    </li><li><p style="margin-bottom: 0cm">Change attribution</p>
+	    </li><li><p style="margin-bottom: 0cm">Change date</p>
+	    </li><li><p style="margin-bottom: 0cm">change code to handle particular
+	      number of divs</p>
+	    </li><li><p style="margin-bottom: 0cm">comment out unused items in
+	      xkcdShow()</p>
+	    </li><li><p style="margin-bottom: 0cm">comment out unused items in
+	      xkcdShowLines()</p>
+	    </li><li><p style="margin-bottom: 0cm">Data for xkcdShow() for BT, TL
+	      etc, co-ords and widths</p>
+	    </li><li><p style="margin-bottom: 0cm">Data for xkcdShowLines() for
+	      speech lines</p>
+	    </li><li><p style="margin-bottom: 0cm">If see-through PNG</p>
+	    <ol>
+	      <li><p style="margin-bottom: 0cm">Work up each z-index</p>
+		</li><li><p style="margin-bottom: 0cm">Add second area map because
+		  closer z-index of see through PNG means can't click text behind.
+		  A better solution: divide PNG into four around unused center 
+		  </p>
+		</li></ol>
+	    </li><li><p style="margin-bottom: 0cm">hidden image title?</p>
+	    <ol>
+	      <li><p style="margin-bottom: 0cm">Uncomment hideWhatWasImgTitle</p>
+		</li><li><p style="margin-bottom: 0cm">hideWhatWasImgTitle,
+		  showWhatWasImgTitle correct element</p>
+		</li><li><p style="margin-bottom: 0cm">Correct image-map via
+		  <a href="http://www.image-maps.com/">http://www.image-maps.com/</a></p>
+		<ol>
+		  <li><p style="margin-bottom: 0cm">Use the first &lt;area … tag
+		      in the html code</p>
+		    </li></ol>
+		</li></ol>
+	    </li><li><p style="margin-bottom: 0cm">Comment forms to suit</p>
+	    </li></ol>
+	</li></ol>
+    </li><li><p style="margin-bottom: 0cm">Tie in this page to any indexing
+      pages</p>
+    </li><li><p style="margin-bottom: 0cm">At site: add English text as
+      available translation 
+      </p>
+    <ol>
+      <li><p style="margin-bottom: 0cm">For each “undefined”</p>
+	<ol>
+	  <li><p style="margin-bottom: 0cm">Click</p>
+	    </li><li><p style="margin-bottom: 0cm">Offer Another</p>
+	    </li><li><p style="margin-bottom: 0cm">Add original English</p>
+	    </li><li><p style="margin-bottom: 0cm">Anonymous</p>
+	    </li><li><p style="margin-bottom: 0cm">Submit</p>
+	    </li></ol>
+	</li><li><p style="margin-bottom: 0cm">Make text a bit larger/smaller to
+	  suit</p>
+	</li></ol>
+    </li><li><p style="margin-bottom: 0cm">Adjust co-ords to suit</p>
+    </li><li><p style="margin-bottom: 0cm">These cribs 
+      </p>
+    <ol>
+      <li><p style="margin-bottom: 0cm">Edit in word processor</p>
+	</li><li><p style="margin-bottom: 0cm">save as html</p>
+	</li><li><p style="margin-bottom: 0cm">view as html</p>
+	<p style="margin-bottom: 0cm">rowscut and paste source html into
+	  csi18n_roll_your_own.html</p>
+	</li></ol>
+</li></ol></body>
+</html>

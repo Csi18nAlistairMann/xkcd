@@ -1,0 +1,331 @@
+<!-- documents -->
+<script type="text/javascript">
+
+//
+//
+// $el, $corner, $totx, $toty, $posx, $posy, $size, $maxwidth, $style, $newmark
+function xkcdShow() {
+ $visitsid = 7;
+ // createDialog(elem,  corner, pg_wid, pg_hght, corner_x, corner_y, txt_sz, bubble_wid, "", "xkcd-documents-fr0101", $visitsid);
+ createDialog("fr0001", "TL", 800, 2048, 267, 0, "14", "105", "", "xkcd-documents-fr0001", $visitsid);
+ createDialog("fr0101", "TL", 800, 2048, 0, 20, "14", "297", "", "xkcd-documents-fr0101", $visitsid);
+ createDialog("fr0102", "TL", 800, 2048, 131, 225, "14", "134", "italic", "xkcd-documents-fr0102", $visitsid);
+ createDialog("fr0103", "TL", 800, 2048, 16, 402, "14", "250", "", "xkcd-documents-fr0103", $visitsid);
+/*
+ createDialog("fr0104", "TL", 800, 2048, 23, 53, "12", "145", "", "xkcd-documents-fr0104", $visitsid);
+
+ createDialog("fr0201", "BR", 800, 2048, 320, 43, "12", "135", "", "xkcd-documents-fr0201", $visitsid);
+ createDialog("fr0202", "TL", 800, 2048, 232, 61, "12", "87", "", "xkcd-documents-fr0202", $visitsid);
+ createDialog("fr0203", "BR", 800, 2048, 320, 43, "12", "135", "", "xkcd-documents-fr0203", $visitsid);
+ createDialog("fr0204", "TL", 800, 2048, 232, 61, "12", "87", "", "xkcd-documents-fr0204", $visitsid);
+
+ createDialog("fr0301", "TL", 800, 2048, 342, 102, "12", "46", "", "xkcd-documents-fr0301", $visitsid);
+ createDialog("fr0302", "TL", 800, 2048, 342, 102, "12", "46", "", "xkcd-documents-fr0302", $visitsid);
+ createDialog("fr0303", "TL", 800, 2048, 342, 102, "12", "46", "", "xkcd-documents-fr0303", $visitsid);
+ createDialog("fr0304", "TL", 800, 2048, 342, 102, "12", "46", "", "xkcd-documents-fr0304", $visitsid);
+
+ createDialog("fr0401", "BR", 800, 2048, 589, 82, "12", "178", "", "xkcd-documents-fr0401", $visitsid);
+ createDialog("fr0402", "TL", 800, 2048, 431, 91, "12", "162", "", "xkcd-documents-fr0402", $visitsid);
+ createDialog("fr0403", "TL", 800, 2048, 406, 162, "12", "103", "", "xkcd-documents-fr0403", $visitsid);
+ createDialog("fr0404", "TL", 800, 2048, 406, 162, "12", "103", "", "xkcd-documents-fr0404", $visitsid);
+*/
+}
+
+function xkcdShowLines() {
+ DrawLine(192, 247, 184, 265);
+/*
+ DrawLine(137, 93, 138, 195);
+ DrawLine(226, 47, 290, 196); 
+ DrawLine(294, 123, 296, 195);
+ DrawLine(417, 89, 425, 156);
+ DrawLine(441, 181, 475, 206);
+ DrawLine(530, 150, 492, 206);
+*/
+}
+
+</script>
+</head>
+<!--
+///////////////////////////////////////////////////////////////////
+-->
+
+<body onload='javascript:onLoad()'>
+<div id="tochterAusElysium" style="position: absolute; background: #BBBBBB; font-size:10px; width:800px; height:2048px; font-family:sans;">
+
+<div id="globe" class= "" style="position:fixed; right:0; top: 0;"><img onclick="javascript:toggleShowServiceMenu()" src='../translationglobe.png'></div>
+<div id="fr0001" class="" style="display:none" >frame 00 text 01</div>
+
+<div id="fr0101" class="" style="position: absolute; display:none; padding-left:31px" >frame 01 text 01</div>
+
+<img src="xkcd-notext-documents.png" alt="" usemap="#TupacVsThomasTheTankEngine" style="position: absolute; z-index:0"><br>
+
+<div id="fr0102" class="" style="position: absolute; z-index: 10; display: none">frame 01 text 02</div>
+<div id="fr0103" class="" style="position: absolute; z-index: 10; display: none" >frame 01 text 03</div>
+<div id="fr0104" class="" style="position: absolute; z-index: 10; display: none" >frame 01 text 04</div>
+
+<div id="fr0201" class="" style="display:none" >frame 02 text 01</div>
+<div id="fr0202" class="" style="display:none" >frame 02 text 02</div>
+<div id="fr0203" class="" style="display:none" >frame 02 text 03</div>
+<div id="fr0204" class="" style="display:none" >frame 02 text 04</div>
+
+<div id="fr0301" class="" style="display:none" >frame 03 text 01</div>
+<div id="fr0302" class="" style="display:none" >frame 03 text 02</div>
+<div id="fr0303" class="" style="display:none" >frame 03 text 03</div>
+<div id="fr0304" class="" style="display:none" >frame 03 text 04</div>
+
+<div id="fr0401" class="" style="display:none" >frame 04 text 01</div>
+<div id="fr0402" class="" style="display:none" >frame 04 text 02</div>
+<div id="fr0403" class="" style="display:none" >frame 04 text 03</div>
+<div id="fr0404" class="" style="display:none" >frame 04 text 04</div>
+
+<!-- 
+Using area map to make text appear as per "Jurassic World"
+The 'Hey guys!' text is meant to appear as the <img> title. In the original, this causes the
+text to appear only when hovering over the image. To my knowledge, it's not possible to click on
+such text: while onLoad /could/ obtain the translation and insert it into place, it couldn't 
+then be selected for replacement by the service.
+Rather than rework the UI to make the text selectable without clickin on it, Imma gonna cheat 
+here. Imma gonna make the the T-Rex clickable, and THAT makes the text appear. Once appeared,
+the text can be edited like the rest 
+-->
+<!--
+<div id="fr0401" class="" style="display:none" >Hey guys! What's eating you? Ha ha ha it's me! Oh, what fun we have.</div>
+-->
+
+<div id="svc_menu" class="" style="display:none" ><a href="http://www.youtube.com/watch?v=CiGPTL8bnC4">Sandy White</a></div>
+<div id="trn_menu" class="" style="display:none" ><a href="http://www.gutenberg.org/cache/epub/74/pg74.txt">Mark Twain</a></div>
+
+<!--
+///////////////////////////////////////////////////////////////////
+-->
+
+<map name="TupacVsThomasTheTankEngine">
+  <!-- area poly generated at http://www.image-maps.com/ -->
+  <area  alt="" title="" shape="rect" coords="0,284,266,401" style="outline:2px;" onMouseOver="showWhatWasImgTitle()" />
+  <area  alt="" title="" shape="poly" coords="87,279,111,227,102,229,111,204,242,205,243,19,23,23,21,208,88,204,85,247,96,239" style="outline:2px;" onClick="toggleShowTranslationMenu('csi18n_fr0101')" />
+</map>
+<p>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<!-- wow!  such cheat  most gap -->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+Original work: <a href="http://xkcd.com/1459/">http://xkcd.com/1459/</a><br>
+[ <a href="../small_moon">prev</a> | <a href="../">up</a> | <a href="../smfw">next</a> ]<br>
+XKCD example page from 2014-dec-14<br>
+<div onClick="javascript:toggleUploadForm()">[Click here to upload your own]</div>
+<div id="upload-form">
+<form action="" method="POST">
+<input type="text" name="username" value="username"></input><br>
+<input type="password" name="password" value="password"></input><br>
+<textarea rows=3 cols=30 id="upload_fr0001" name="upload_fr0001"></textarea><br>
+
+<textarea rows=3 cols=30 id="upload_fr0101" name="upload_fr0101"></textarea><br>
+<textarea rows=3 cols=30 id="upload_fr0102" name="upload_fr0102"></textarea><br>
+<textarea rows=3 cols=30 id="upload_fr0103" name="upload_fr0103"></textarea><br>
+<!--
+<textarea rows=3 cols=30 id="upload_fr0104" name="upload_fr0104"></textarea><br>
+
+<textarea rows=3 cols=30 id="upload_fr0201" name="upload_fr0201"></textarea><br>
+<textarea rows=3 cols=30 id="upload_fr0202" name="upload_fr0202"></textarea><br>
+<textarea rows=3 cols=30 id="upload_fr0203" name="upload_fr0203"></textarea><br>
+<textarea rows=3 cols=30 id="upload_fr0204" name="upload_fr0204"></textarea><br>
+
+<textarea rows=3 cols=30 id="upload_fr0301" name="upload_fr0301"></textarea><br>
+<textarea rows=3 cols=30 id="upload_fr0302" name="upload_fr0302"></textarea><br>
+<textarea rows=3 cols=30 id="upload_fr0303" name="upload_fr0303"></textarea><br>
+<textarea rows=3 cols=30 id="upload_fr0304" name="upload_fr0304"></textarea><br>
+
+<textarea rows=3 cols=30 id="upload_fr0401" name="upload_fr0401"></textarea><br>
+<textarea rows=3 cols=30 id="upload_fr0402" name="upload_fr0402"></textarea><br>
+<textarea rows=3 cols=30 id="upload_fr0403" name="upload_fr0403"></textarea><br>
+<textarea rows=3 cols=30 id="upload_fr0404" name="upload_fr0404"></textarea><br>
+-->
+<input type=submit value=submit>
+</form>
+</div>
+
+<br>
+<br>
+<br>
+
+
+<OL>
+  <LI><P STYLE="margin-bottom: 0cm">Visit <A HREF="https://xkcd.com/">https://xkcd.com/</A></P>
+    <LI><P STYLE="margin-bottom: 0cm">Right-click image | save image as
+	| xkcd-orig-&lt;title&gt;.png | save</P>
+      <LI><P STYLE="margin-bottom: 0cm">Open GIMP</P>
+	<LI><P STYLE="margin-bottom: 0cm">File | open |
+	    xkcd-orig-&lt;title&gt;.png | open</P>
+	  <LI><P STYLE="margin-bottom: 0cm">file | save as |
+	      xkcd-orig-&lt;title&gt;.xcf | save</P>
+	    <LI><P STYLE="margin-bottom: 0cm">print the image</P>
+	      <OL>
+		<LI><P STYLE="margin-bottom: 0cm">title the image</P>
+		  <LI><P STYLE="margin-bottom: 0cm">label the textual elements
+		      (“fr0104” etc)</P>
+		    <LI><P STYLE="margin-bottom: 0cm">label point elements (“speech
+			line”)</P>
+		      </OL>
+	      <LI><P STYLE="margin-bottom: 0cm">Hover image: is there a title=””
+		  popup? If so, note as fr0001</P>
+		<LI><P STYLE="margin-bottom: 0cm">Write tables 
+		    </P>
+		  <OL>
+		    <LI><P STYLE="margin-bottom: 0cm">textual</P>
+		      <OL>
+			<LI><P STYLE="margin-bottom: 0cm">one row per textual elements</P>
+			  <LI><P STYLE="margin-bottom: 0cm">cols: corner; w, x,y</P>
+			    </OL>
+		      <LI><P STYLE="margin-bottom: 0cm">point elements</P>
+			<OL>
+			  <LI><P STYLE="margin-bottom: 0cm">one row per two points (“pt1,
+			      pt2”)</P>
+			    <LI><P STYLE="margin-bottom: 0cm">Cols: xy-&gt;xy</P>
+			      </OL>
+			</OL>
+		  <LI><P STYLE="margin-bottom: 0cm">Co-ords:</P>
+		    <OL>
+		      <LI><P STYLE="margin-bottom: 0cm">For each textual element</P>
+			<OL>
+			  <LI><P STYLE="margin-bottom: 0cm">determine where the corner
+			      should go (just tl, tr, bl, br for now)</P>
+			    <LI><P STYLE="margin-bottom: 0cm">determine max width of bubble</P>
+			      <LI><P STYLE="margin-bottom: 0cm">Get pixel co-ords for textual
+				  element and point elements</P>
+				</OL>
+			</OL>
+		    <LI><P STYLE="margin-bottom: 0cm">Erase all textual and speech
+			bubble elements</P>
+		      <LI><P STYLE="margin-bottom: 0cm">File | save as |
+			  xkcd-notext-&lt;title&gt;.xcf</P>
+			<LI><P STYLE="margin-bottom: 0cm">File | export … | export |
+			    export</P>
+			  <LI><P STYLE="margin-bottom: 0cm">Close gimp</P>
+			    <LI><P STYLE="margin-bottom: 0cm">At <A HREF="http://www.pectw.net/">www.pectw.net</A>,
+				mkdir -p ~/csi18n/xkcd/&lt;title&gt; //title should use underscore
+				not spaces</P>
+			      <LI><P STYLE="margin-bottom: 0cm">scp
+				  ~/Worklife/mpsvr.com/csi18n/xkcd-notext-&lt;title&gt;.png
+				  <A HREF="mailto:al@www.pectw.net">al@www.pectw.net</A>:~/csi18n/xkcd/&lt;title&gt;</P>
+				<LI><P STYLE="margin-bottom: 0cm">At <A HREF="http://www.pectw.net/">www.pectw.net</A></P>
+				  <OL>
+				    <LI><P STYLE="margin-bottom: 0cm">cd ~/csi18n/xkcd/&lt;title&gt;</P>
+				      <LI><P STYLE="margin-bottom: 0cm">cp ../20141201/index.php . (or
+					  whichever is most recent version)</P>
+					<LI><P STYLE="margin-bottom: 0cm">cp ../20141201/index.html .</P>
+					  <LI><P STYLE="margin-bottom: 0cm">Edit index.html</P>
+					    <OL>
+					      <LI><P STYLE="margin-bottom: 0cm">search/replace previous title
+						  with new</P>
+						<LI><P STYLE="margin-bottom: 0cm">IMG SRC to uploaded image</P>
+						  <LI><P STYLE="margin-bottom: 0cm">Change attribution</P>
+						    </OL>
+					    <LI><P STYLE="margin-bottom: 0cm">Change date at bottom</P>
+					      <OL>
+						<LI><P STYLE="margin-bottom: 0cm">change code to handle particular
+						    number of elements</P>
+						  <OL>
+						    <LI><P STYLE="margin-bottom: 0cm"><STRIKE>handler_X()</STRIKE></P>
+						      <LI><P STYLE="margin-bottom: 0cm"><STRIKE>if ($el == 'X'</STRIKE></P>
+							<LI><P STYLE="margin-bottom: 0cm"><STRIKE>localstorage.setItem</STRIKE></P>
+							  <LI><P STYLE="margin-bottom: 0cm"><STRIKE>d.innerHTMLs</STRIKE></P>
+							    <LI><P STYLE="margin-bottom: 0cm">comment out xkcdShow()</P>
+							      <LI><P STYLE="margin-bottom: 0cm">comment out xkcdShowLines()</P>
+								<LI><P STYLE="margin-bottom: 0cm"><STRIKE>&lt;div id=”X</STRIKE></P>
+								  </OL>
+						  <LI><P STYLE="margin-bottom: 0cm">Change xkcdShow() for BT, TL
+						      etc, co-ords and widths</P>
+						    <LI><P STYLE="margin-bottom: 0cm">Change xkcdShowLines() for
+							speech lines</P>
+						      <LI><P STYLE="margin-bottom: 0cm">See through PNG</P>
+							<OL>
+							  <LI><P STYLE="margin-bottom: 0cm">Work up each z-index</P>
+							    <LI><P STYLE="margin-bottom: 0cm">Add second area map because
+								closer z-index of see through PNG means can't click text behind.
+								A better solution: divide PNG into four around unused center 
+								</P>
+							      </OL>
+							<LI><P STYLE="margin-bottom: 0cm">hidden image title?</P>
+							  <OL>
+							    <LI><P STYLE="margin-bottom: 0cm">Uncomment hideWhatWasImgTitle</P>
+							      <LI><P STYLE="margin-bottom: 0cm">hideWhatWasImgTitle,
+								  showWhatWasImgTitle correct element</P>
+								<LI><P STYLE="margin-bottom: 0cm">Correct image-map via
+								    <A HREF="http://www.image-maps.com/">http://www.image-maps.com/</A></P>
+								  <OL>
+								    <LI><P STYLE="margin-bottom: 0cm">Use the first &lt;area … tag
+									in the html code</P>
+								      </OL>
+								  </OL>
+							  <LI><P STYLE="margin-bottom: 0cm">Comment forms to suit</P>
+							    </OL>
+					      </OL>
+				  <LI><P STYLE="margin-bottom: 0cm">Tie in this page to any indexing
+				      pages</P>
+				    <LI><P STYLE="margin-bottom: 0cm">Added English text as available
+					translation 
+					</P>
+				      <OL>
+					<LI><P STYLE="margin-bottom: 0cm">For each “undefined”</P>
+					  <OL>
+					    <LI><P STYLE="margin-bottom: 0cm">Click</P>
+					      <LI><P STYLE="margin-bottom: 0cm">Offer Another</P>
+						<LI><P STYLE="margin-bottom: 0cm">Add original English</P>
+						  <LI><P STYLE="margin-bottom: 0cm">Anonymous</P>
+						    <LI><P STYLE="margin-bottom: 0cm">Submit</P>
+						      </OL>
+					  <LI><P STYLE="margin-bottom: 0cm">Make text a bit larger/smaller to
+					      suit</P>
+					    </OL>
+				      <LI><P STYLE="margin-bottom: 0cm">Adjust co-ords to suit</P>
+					<LI><P STYLE="margin-bottom: 0cm">These cribs 
+					    </P>
+					  <OL>
+					    <LI><P STYLE="margin-bottom: 0cm">Edit in word processor</P>
+					      <LI><P STYLE="margin-bottom: 0cm">save as html</P>
+						<LI><P STYLE="margin-bottom: 0cm">view as html</P>
+						  <P STYLE="margin-bottom: 0cm">rowscut and paste source html into
+						    index.html</P>
+						  </OL>
+</OL>
+Next time<br> 
+1. query string in visitsid and lang<br>
+</div>
+</body>
+</html>

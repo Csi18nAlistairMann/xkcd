@@ -1,0 +1,1601 @@
+<!--
+///////////////////////////////////////////////////////////////////
+Plastic JavaScript
+-->
+
+<script type="text/javascript">
+
+///////////////////////////////////////////////////////////////////
+//
+// Translation menu and handlers: see more, offer another, edit, delete
+// The history, lock links direct to the developer wiki - reader can 
+// implement if they want: my purpose is not full-feature implementation here.
+//
+///////////////////////////////////////////////////////////////////
+
+function trnPreferAnother($index) {
+ $status = localStorage.getItem($ls + '.result');
+ if ($status != 200) {
+  // if we're showing undefined, then there is no "see more" to look at
+  // and the user would need to change the lang(s) and refresh to see more.
+  $choices = "No more translations found";
+ } else {
+  // if we're showing defined by contrast the representation will be storing
+  // a link to the all preferable resource (visit_link/langs/all)
+  $res = localStorage.getItem('csi18n_seemore.representations');
+  $json_arr = JSON.parse($res);
+
+  $json_arr.csi18n_xlate_resources = $json_arr.csi18n_xlate_resources.slice($index, $index + 1);
+  $res = JSON.stringify($json_arr);
+
+  $url = localStorage.getItem('csi18n_seemore.per_lang_pref');
+
+  if (XMLHttpRequest) {
+    var request = new XMLHttpRequest();
+    if("withCredentials" in request) {
+     // Firefox 3.5 and Safari 4
+     request.open('PUT', $url, true);
+     request.setRequestHeader("Authorization", "Basic dGVzdDA1OnRlc3Q=");
+     request.setRequestHeader("X-APIKey", "e3c12c03cf320b243977d6ac389805de");
+     request.setRequestHeader("Content-Type", "application/json;v=1.0");
+     request.onload = preferanother_handler;
+     request.send($res);
+    }
+  }
+ }
+}
+
+function trnSeeMore($ls) {
+ localStorage.setItem('csi18n_seemore.representations', '');
+ $status = localStorage.getItem($ls + '.result');
+ if ($status != 200) {
+  // if we're showing undefined, then there is no "see more" to look at
+  // and the user would need to change the lang(s) and refresh to see more.
+  $choice = "No more translations found";
+  var d = document.getElementById("trn_menu");
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "101";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+
+  $choices = "See more<hr>" + $choice;
+  d.innerHTML = escapeHtml($choices);
+  d.style.display = "";
+
+ } else {
+  // if we're showing defined by contrast the representation will be storing
+  // a link to the all preferable resource (visit_link/langs/all)
+  $res = localStorage.getItem($ls + '.representation');
+  $json = JSON.parse($res);
+  $url = $json.csi18n_all_preferable;
+
+  if (XMLHttpRequest) {
+    var request = new XMLHttpRequest();
+    if("withCredentials" in request) {
+     // Firefox 3.5 and Safari 4
+     $lang = localStorage.getItem('csi18n_lang');
+     if ($lang == null) {
+      $lang = window.navigator.language;
+     }
+     request.open('GET', $url, true);
+     request.setRequestHeader("Authorization", "Basic dGVzdDA1OnRlc3Q=");
+     request.setRequestHeader("X-APIKey", "e3c12c03cf320b243977d6ac389805de");
+     request.setRequestHeader("Accept", "application/json");
+     request.responseType = "json";
+     request.onload = seemore_handler;
+     request.send();
+    }
+  }
+ }
+}
+
+function trnOptions($ls) {
+ var $tlink = localStorage.getItem($ls + '.tlink');
+
+ var d = document.getElementById("trn_menu");
+ d.style.position = "fixed";
+ d.style.fontFamily = "sans";
+ d.style.right = "0px";
+ d.style.top = "240px";
+ d.style.width = "401px";
+ d.style.height = "240px";
+ d.style.zIndex = "100";
+ d.style.backgroundColor = "#AADDDD";
+ d.style.textAlign = "right";
+ d.style.fontSize = "20px";
+ d.innerHTML =  "Options<hr>" +
+ "<input type='button' value='Options' style='font-size:21px' onClick='javascript:sendOptions(\"" + $ls + "\")'>";
+ d.style.display = "";
+}
+
+function trnHead($ls) {
+ var $tlink = localStorage.getItem($ls + '.tlink');
+
+ var d = document.getElementById("trn_menu");
+ d.style.position = "fixed";
+ d.style.fontFamily = "sans";
+ d.style.right = "0px";
+ d.style.top = "240px";
+ d.style.width = "401px";
+ d.style.height = "240px";
+ d.style.zIndex = "100";
+ d.style.backgroundColor = "#AADDDD";
+ d.style.textAlign = "right";
+ d.style.fontSize = "20px";
+ d.innerHTML =  "Head<hr>" +
+ "<input type='button' value='Head' style='font-size:21px' onClick='javascript:sendHead(\"" + $ls + "\")'>";
+ d.style.display = "";
+}
+
+function trnOfferAnother($ls) {
+ var $result = localStorage.getItem($ls + '.result');
+ var $newmark = localStorage.getItem($ls + '.newmark');
+ var $visitsid = localStorage.getItem($ls + '.visitsid');
+ var $rep = localStorage.getItem($ls + '.representation');
+ var $tlink = localStorage.getItem($ls + '.tlink');
+
+ if ($result == 200) {
+  // yes yes, 200 is not the only response
+  $json_o = JSON.parse($rep);
+  // $newmark = $json_o.csi18n_xlate_resource.newmark;
+  $lang = $json_o.csi18n_xlate_resource.language;
+  $trans = $json_o.csi18n_xlate_resource.translation;
+  $vis = $json_o.csi18n_xlate_resource.visibility;
+ } else {
+  $lang = localStorage.getItem('csi18n_lang');
+  if ($lang == null) {
+   $lang = window.navigator.language;
+  }
+  $trans = '';
+  $vis = '';
+ }
+ var isano = ($vis == 'anonymous') ? 'selected' : '';
+ var ispub = ($vis == 'public') ? 'selected' : '';
+ var isprv = ($vis == 'private') ? 'selected' : '';
+ var isper = ($vis == 'personal') ? 'selected' : '';
+ if (isano == '' && ispub == '' && isprv == '' && isper == '') {
+  isano = 'selected';
+ }
+
+ var d = document.getElementById("trn_menu");
+ d.style.position = "fixed";
+ d.style.fontFamily = "sans";
+ d.style.right = "0px";
+ d.style.top = "240px";
+ d.style.zIndex = "100";
+ d.style.backgroundColor = "#AADDDD";
+ d.style.textAlign = "right";
+ d.style.fontSize = "20px";
+ d.innerHTML = "Offer another<hr>" +
+ "<input type='text' value='" + escapeHtml($newmark) + "' disabled='' size='30' name='newmark_iv' id='newmark_iv' style='font-size:21px'>Newmark<br>" +
+ "<input type='text' value='" + escapeHtml($lang) + "' size='30' name='cl_iv' id='cl_iv' style='font-size:21px'>Content-Language<br>" +
+ "<textarea cols='20' rows='3' name='translation_iv' id='translation_iv' type='text' style='font-size:21px'>" + escapeHtml($trans) + "</textarea>Translation<br>" +
+ "<select size='4' name='visibility_iv' id='visibility_iv' style='font-size:21px'>" +
+ "<option value='anonymous' " + isano + ">Anonymous</option>" +
+ "<option value='public' " + ispub + ">Public</option>" +
+ "<option value='private' " + isprv + ">Private</option>" +
+ "<option value='personal' " + isper + ">Personal</option>" +
+ "</select>Visibility<br>" +
+ "<input type='hidden' value='" + $visitsid + "' name='visitsid'>" +
+ "<input type='hidden' value='test05' name='un'>" +
+ "<input type='hidden' value='e3c12c03cf320b243977d6ac389805de' name='apikey'>" +
+ "<input type='hidden' value='test' name='pw'>" +
+ "<input type='button' value='Submit' style='font-size:21px' onClick='javascript:sendPost(" + $visitsid + ")'>";
+ d.style.display = "";
+}
+
+function trnDelete($ls) {
+ var $result = localStorage.getItem($ls + '.result');
+ var $newmark = localStorage.getItem($ls + '.newmark');
+ var $rep = localStorage.getItem($ls + '.representation');
+ var $tlink = localStorage.getItem($ls + '.tlink');
+
+ if ($result == 200) {
+  // yes yes, 200 is not the only response
+  $json_o = JSON.parse($rep);
+  // $newmark = $json_o.csi18n_xlate_resource.newmark;
+  $lang = $json_o.csi18n_xlate_resource.language;
+  $trans = $json_o.csi18n_xlate_resource.translation;
+  $vis = $json_o.csi18n_xlate_resource.visibility;
+ } else {
+  $lang = localStorage.getItem('csi18n_lang');
+  if ($lang == null) {
+   $lang = window.navigator.language;
+  }
+  $trans = '';
+  $vis = '';
+ }
+ var isano = ($vis == 'anonymous') ? 'selected' : '';
+ var ispub = ($vis == 'public') ? 'selected' : '';
+ var isprv = ($vis == 'private') ? 'selected' : '';
+ var isper = ($vis == 'personal') ? 'selected' : '';
+
+ var d = document.getElementById("trn_menu");
+ d.style.position = "fixed";
+ d.style.fontFamily = "sans";
+ d.style.right = "0px";
+ d.style.top = "240px";
+ d.style.zIndex = "100";
+ d.style.backgroundColor = "#AADDDD";
+ d.style.textAlign = "right";
+ d.style.fontSize = "20px";
+ d.innerHTML = "Delete<hr>" +
+ "<input type='text' value='" + escapeHtml($newmark) + "' disabled size='30' name='newmark_iv' id='newmark_iv' style='font-size:21px'>Newmark<br>" +
+ "<input type='text' value='" + escapeHtml($lang) + "' disabled size='30' name='cl_iv' id='cl_iv' style='font-size:21px'>Content-Language<br>" +
+ "<textarea disabled cols='30' rows='3' name='translation_iv' id='translation_iv' type='text' style='font-size:21px'>" + escapeHtml($trans) + "</textarea>Translation<br>" +
+ "<select disabled size='4' name='visibility_iv' id='visibility_iv' style='font-size:21px'>" +
+ "<option value='anonymous' " + isano + ">Anonymous</option>" +
+ "<option value='public' " + ispub + ">Public</option>" +
+ "<option value='private' " + isprv + ">Private</option>" +
+ "<option value='personal' " + isper + ">Personal</option>" +
+ "</select>Visibility<br>" +
+ "<input type='hidden' value='1' name='visitsid'>" +
+ "<input type='hidden' value='test05' name='un'>" +
+ "<input type='hidden' value='e3c12c03cf320b243977d6ac389805de' name='apikey'>" +
+ "<input type='hidden' value='test' name='pw'>" +
+ "<input type='button' value='Delete' style='font-size:21px' onClick='javascript:sendDelete(\"" + $ls + "\")'>";
+ d.style.display = "";
+}
+
+function trnEdit($ls) {
+ var $result = localStorage.getItem($ls + '.result');
+ var $newmark = localStorage.getItem($ls + '.newmark');
+ var $rep = localStorage.getItem($ls + '.representation');
+ var $tlink = localStorage.getItem($ls + '.tlink');
+
+ if ($result == 200) {
+  // yes yes, 200 is not the only response
+  $json_o = JSON.parse($rep);
+  //  $newmark = $json_o.csi18n_xlate_resource.newmark;
+  $lang = $json_o.csi18n_xlate_resource.language;
+  $trans = $json_o.csi18n_xlate_resource.translation;
+  $vis = $json_o.csi18n_xlate_resource.visibility;
+ } else {
+  $lang = localStorage.getItem('csi18n_lang');
+  if ($lang == null) {
+   $lang = window.navigator.language;
+  }
+  $trans = '';
+  $vis = '';
+ }
+ var isano = ($vis == 'anonymous') ? 'selected' : '';
+ var ispub = ($vis == 'public') ? 'selected' : '';
+ var isprv = ($vis == 'private') ? 'selected' : '';
+ var isper = ($vis == 'personal') ? 'selected' : '';
+
+ var d = document.getElementById("trn_menu");
+ d.style.position = "fixed";
+ d.style.fontFamily = "sans";
+ d.style.right = "0px";
+ d.style.top = "240px";
+ d.style.zIndex = "100";
+ d.style.backgroundColor = "#AADDDD";
+ d.style.textAlign = "right";
+ d.style.fontSize = "20px";
+ d.innerHTML = "Edit<hr>" +
+ "<input type='text' value='" + escapeHtml($newmark) + "' disabled='' size='30' name='newmark_iv' id='newmark_iv' style='font-size:21px'>Newmark<br>" +
+ "<input type='text' value='" + escapeHtml($lang) + "' size='30' name='cl_iv' id='cl_iv' style='font-size:21px'>Content-Language<br>" +
+ "<textarea cols='30' rows='3' name='translation_iv' id='translation_iv' type='text' style='font-size:21px'>" + escapeHtml($trans) + "</textarea>Translation<br>" +
+ "<select size='4' name='visibility_iv' id='visibility_iv' style='font-size:21px'>" +
+ "<option value='anonymous' " + isano + ">Anonymous</option>" +
+ "<option value='public' " + ispub + ">Public</option>" +
+ "<option value='private' " + isprv + ">Private</option>" +
+ "<option value='personal' " + isper + ">Personal</option>" +
+ "</select>Visibility<br>" +
+ "<input type='hidden' value='1' name='visitsid'>" +
+ "<input type='hidden' value='test05' name='un'>" +
+ "<input type='hidden' value='e3c12c03cf320b243977d6ac389805de' name='apikey'>" +
+ "<input type='hidden' value='test' name='pw'>" +
+ "<input type='button' value='Submit' style='font-size:21px' onClick='javascript:sendPut(\"" + $ls + "\")'>";
+ d.style.display = "";
+}
+
+///////////////////////////////////////////////////////////////////
+
+//
+// Functions for effecting the various HTTP method calls
+//
+// Note that these all make CORS requests in the background first, as the
+// call are all Cross Origin in nature.
+//
+// The functions to send the request appear first; the callback handlers
+// for when the server has replied appear after
+// 
+function sendGet($el, $newmark, $visitsid) {
+ var url = "https://rest.mpsvr.com/newmarks/" + $visitsid + "/" + $newmark;
+ if (XMLHttpRequest) {
+   var request = new XMLHttpRequest();
+   if("withCredentials" in request) {
+    // Firefox 3.5 and Safari 4
+    $lang = localStorage.getItem('csi18n_lang');
+    if ($lang == null) {
+     $lang = window.navigator.language;
+    }
+    request.open('GET', url, true);
+    request.setRequestHeader("Authorization", "Basic dGVzdDA1OnRlc3Q=");
+    request.setRequestHeader("X-APIKey", "e3c12c03cf320b243977d6ac389805de");
+    request.setRequestHeader("Accept", "application/json");
+    request.responseType = "json";
+    request.setRequestHeader("Accept-Language", $lang);
+    request.setRequestHeader("If-Modified-Since", "Tue,  1 Jan 1980 19:12:53 BST");
+    request.setRequestHeader("If-None-Match", "Wibble");
+    if ($el == 'fr0001') {
+     request.onload = handler_fr0001;
+    } else if ($el == 'fr0101') {
+     request.onload = handler_fr0101;
+    } else if ($el == 'fr0102') {
+     request.onload = handler_fr0102;
+    } else if ($el == 'fr0103') {
+     request.onload = handler_fr0103;
+    } else if ($el == 'fr0104') {
+     request.onload = handler_fr0104;
+
+    } else if ($el == 'fr0105') {
+     request.onload = handler_fr0105;
+    } else if ($el == 'fr0106') {
+     request.onload = handler_fr0106;
+    } else if ($el == 'fr0107') {
+     request.onload = handler_fr0107;
+    } else if ($el == 'fr0108') {
+     request.onload = handler_fr0108;
+
+    } else if ($el == 'fr0201') {
+     request.onload = handler_fr0201;
+    } else if ($el == 'fr0202') {
+     request.onload = handler_fr0202;
+    } else if ($el == 'fr0203') {
+     request.onload = handler_fr0203;
+    } else if ($el == 'fr0204') {
+     request.onload = handler_fr0204;
+
+    } else if ($el == 'fr0301') {
+     request.onload = handler_fr0301;
+    } else if ($el == 'fr0302') {
+     request.onload = handler_fr0302;
+    } else if ($el == 'fr0303') {
+     request.onload = handler_fr0303;
+    } else if ($el == 'fr0304') {
+     request.onload = handler_fr0304;
+
+    } else if ($el == 'fr0401') {
+     request.onload = handler_fr0401;
+    } else if ($el == 'fr0402') {
+     request.onload = handler_fr0402;
+    } else if ($el == 'fr0403') {
+     request.onload = handler_fr0403;
+    } else if ($el == 'fr0404') {
+     request.onload = handler_fr0404;
+
+    } else if ($el == 'fr0501') {
+     request.onload = handler_fr0501;
+    } else if ($el == 'fr0502') {
+     request.onload = handler_fr0502;
+    } else if ($el == 'fr0503') {
+     request.onload = handler_fr0503;
+    } else if ($el == 'fr0504') {
+     request.onload = handler_fr0504;
+
+    } else if ($el == 'fr0601') {
+     request.onload = handler_fr0601;
+    } else if ($el == 'fr0602') {
+     request.onload = handler_fr0602;
+    } else if ($el == 'fr0603') {
+     request.onload = handler_fr0603;
+    } else if ($el == 'fr0604') {
+     request.onload = handler_fr0604;
+
+    } else if ($el == 'fr0701') {
+     request.onload = handler_fr0701;
+    } else if ($el == 'fr0702') {
+     request.onload = handler_fr0702;
+    } else if ($el == 'fr0703') {
+     request.onload = handler_fr0703;
+    } else if ($el == 'fr0704') {
+     request.onload = handler_fr0704;
+
+    } else if ($el == 'fr0801') {
+     request.onload = handler_fr0801;
+    } else if ($el == 'fr0802') {
+     request.onload = handler_fr0802;
+    } else if ($el == 'fr0803') {
+     request.onload = handler_fr0803;
+    } else if ($el == 'fr0804') {
+     request.onload = handler_fr0804;
+    }
+    request.send();
+  }
+ }
+}
+
+function sendGet_v2($el, $newmark, $visitsid, $sid, $lang, $newmarkcrid) {
+ var url = "https://rest.mpsvr.com/xlates/" + $sid + "/" + $newmark + "/" + $lang + "/anonymous/" + $newmarkcrid;
+ if (XMLHttpRequest) {
+   var request = new XMLHttpRequest();
+   if("withCredentials" in request) {
+    // Firefox 3.5 and Safari 4
+    $lang = localStorage.getItem('csi18n_lang');
+    if ($lang == null) {
+     $lang = window.navigator.language;
+    }
+    request.open('GET', url, true);
+    request.setRequestHeader("Authorization", "Basic dGVzdDA1OnRlc3Q=");
+    request.setRequestHeader("X-APIKey", "e3c12c03cf320b243977d6ac389805de");
+    request.setRequestHeader("Accept", "application/json");
+    request.responseType = "json";
+    request.setRequestHeader("Accept-Language", $lang);
+    request.setRequestHeader("If-Modified-Since", "Tue,  1 Jan 1980 19:12:53 BST");
+    request.setRequestHeader("If-None-Match", "Wibble");
+    if ($el == 'fr0001') {
+     request.onload = handler_fr0001;
+    } else if ($el == 'fr0101') {
+     request.onload = handler_fr0101;
+    } else if ($el == 'fr0102') {
+     request.onload = handler_fr0102;
+    } else if ($el == 'fr0103') {
+     request.onload = handler_fr0103;
+    } else if ($el == 'fr0104') {
+     request.onload = handler_fr0104;
+
+    } else if ($el == 'fr0105') {
+     request.onload = handler_fr0105;
+    } else if ($el == 'fr0106') {
+     request.onload = handler_fr0106;
+    } else if ($el == 'fr0107') {
+     request.onload = handler_fr0107;
+    } else if ($el == 'fr0108') {
+     request.onload = handler_fr0108;
+
+    } else if ($el == 'fr0201') {
+     request.onload = handler_fr0201;
+    } else if ($el == 'fr0202') {
+     request.onload = handler_fr0202;
+    } else if ($el == 'fr0203') {
+     request.onload = handler_fr0203;
+    } else if ($el == 'fr0204') {
+     request.onload = handler_fr0204;
+
+    } else if ($el == 'fr0301') {
+     request.onload = handler_fr0301;
+    } else if ($el == 'fr0302') {
+     request.onload = handler_fr0302;
+    } else if ($el == 'fr0303') {
+     request.onload = handler_fr0303;
+    } else if ($el == 'fr0304') {
+     request.onload = handler_fr0304;
+
+    } else if ($el == 'fr0401') {
+     request.onload = handler_fr0401;
+    } else if ($el == 'fr0402') {
+     request.onload = handler_fr0402;
+    } else if ($el == 'fr0403') {
+     request.onload = handler_fr0403;
+    } else if ($el == 'fr0404') {
+     request.onload = handler_fr0404;
+
+    } else if ($el == 'fr0501') {
+     request.onload = handler_fr0501;
+    } else if ($el == 'fr0502') {
+     request.onload = handler_fr0502;
+    } else if ($el == 'fr0503') {
+     request.onload = handler_fr0503;
+    } else if ($el == 'fr0504') {
+     request.onload = handler_fr0504;
+
+    } else if ($el == 'fr0601') {
+     request.onload = handler_fr0601;
+    } else if ($el == 'fr0602') {
+     request.onload = handler_fr0602;
+    } else if ($el == 'fr0603') {
+     request.onload = handler_fr0603;
+    } else if ($el == 'fr0604') {
+     request.onload = handler_fr0604;
+
+    } else if ($el == 'fr0701') {
+     request.onload = handler_fr0701;
+    } else if ($el == 'fr0702') {
+     request.onload = handler_fr0702;
+    } else if ($el == 'fr0703') {
+     request.onload = handler_fr0703;
+    } else if ($el == 'fr0704') {
+     request.onload = handler_fr0704;
+
+    } else if ($el == 'fr0801') {
+     request.onload = handler_fr0801;
+    } else if ($el == 'fr0802') {
+     request.onload = handler_fr0802;
+    } else if ($el == 'fr0803') {
+     request.onload = handler_fr0803;
+    } else if ($el == 'fr0804') {
+     request.onload = handler_fr0804;
+    }
+    request.send();
+  }
+ }
+}
+
+function sendHead($ls) {
+ var $tlink = localStorage.getItem($ls + '.tlink');
+ if (XMLHttpRequest) {
+   var request = new XMLHttpRequest();
+   if("withCredentials" in request) {
+    // Firefox 3.5 and Safari 4
+    $lang = localStorage.getItem('csi18n_lang');
+    if ($lang == null) {
+     $lang = window.navigator.language;
+    }
+    request.open('HEAD', $tlink, true);
+    request.setRequestHeader("Authorization", "Basic dGVzdDA1OnRlc3Q=");
+    request.setRequestHeader("X-APIKey", "e3c12c03cf320b243977d6ac389805de");
+    request.setRequestHeader("Accept", "application/json");
+    request.responseType = "json";
+    request.onload = head_handler;
+    request.send();
+  }
+ }
+}
+
+function sendOptions($ls) {
+ var $tlink = localStorage.getItem($ls + '.tlink');
+ if (XMLHttpRequest) {
+   var request = new XMLHttpRequest();
+   if("withCredentials" in request) {
+    // Firefox 3.5 and Safari 4
+    request.open('OPTIONS', $tlink, true);
+    request.setRequestHeader("Authorization", "Basic dGVzdDA1OnRlc3Q=");
+    request.setRequestHeader("X-APIKey", "e3c12c03cf320b243977d6ac389805de");
+    request.onload = options_handler;
+    request.send();
+  }
+ }
+}
+
+function sendPost($visitsid) {
+ var d = document.getElementById("newmark_iv");
+ $newmark = d.value;
+ d = document.getElementById("translation_iv");
+ $translation = d.value;
+ d = document.getElementById("cl_iv");
+ $cont_lang = d.value;
+ d = document.getElementById("visibility_iv");
+ $vis = d.value;
+
+ $arr = { 'csi18n_xlate_resource' : { 'language' : $cont_lang, 'translation' : $translation, 'visibility' : $vis } };
+ $json_s = JSON.stringify($arr);
+
+ var url = "https://rest.mpsvr.com/newmarks/" + $visitsid + "/" + $newmark;
+ if (XMLHttpRequest) {
+   var request = new XMLHttpRequest();
+   if("withCredentials" in request) {
+    // Firefox 3.5 and Safari 4
+    request.open('POST', url, true);
+    request.setRequestHeader("Authorization", "Basic dGVzdDA1OnRlc3Q=");
+    request.setRequestHeader("X-APIKey", "e3c12c03cf320b243977d6ac389805de");
+    request.setRequestHeader("Content-Type", "application/json;v=1.0");
+    request.onload = post_handler;
+    request.send($json_s);
+  }
+ }
+}
+
+function sendPut($ls) {
+ var d = document.getElementById("newmark_iv");
+ $newmark = d.value;
+ d = document.getElementById("translation_iv");
+ $translation = d.value;
+ d = document.getElementById("cl_iv");
+ $cont_lang = d.value;
+ d = document.getElementById("visibility_iv");
+ $vis = d.value;
+
+ $arr = { 'csi18n_xlate_resource' : { 'language' : $cont_lang, 'translation' : $translation, 'visibility' : $vis } };
+ $json_s = JSON.stringify($arr);
+
+ var $tlink = localStorage.getItem($ls + '.tlink');
+ if (XMLHttpRequest) {
+   var request = new XMLHttpRequest();
+   if("withCredentials" in request) {
+    // Firefox 3.5 and Safari 4
+    request.open('PUT', $tlink, true);
+    request.setRequestHeader("Authorization", "Basic dGVzdDA1OnRlc3Q=");
+    request.setRequestHeader("X-APIKey", "e3c12c03cf320b243977d6ac389805de");
+    request.setRequestHeader("Content-Type", "application/json;v=1.0");
+    request.onload = put_handler;
+    request.send($json_s);
+  }
+ }
+}
+
+function sendDelete($ls) {
+ var $tlink = localStorage.getItem($ls + '.tlink');
+ if (XMLHttpRequest) {
+   var request = new XMLHttpRequest();
+   if("withCredentials" in request) {
+    // Firefox 3.5 and Safari 4
+    request.open('DELETE', $tlink, true);
+    request.setRequestHeader("Authorization", "Basic dGVzdDA1OnRlc3Q=");
+    request.setRequestHeader("X-APIKey", "e3c12c03cf320b243977d6ac389805de");
+    request.setRequestHeader("If-Modified-Since", "Tue,  1 Jan 1980 19:12:53 BST");
+    request.setRequestHeader("If-None-Match", "Wibble");
+    request.setRequestHeader("Accept", "application/json");
+    request.responseType = "json";
+    request.onload = delete_handler;
+    request.send();
+  }
+ }
+}
+
+// callback handlers
+function delete_handler() {
+  $status = this.status;
+  var d = document.getElementById("trn_menu");
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "101";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.innerHTML = escapeHtml(this.statusText);
+  d.style.display = "";
+  location.reload(true);
+}
+
+function post_handler() {
+  $status = this.status;
+  var d = document.getElementById("trn_menu");
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "101";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.innerHTML = escapeHtml(this.statusText);
+  d.style.display = "";
+  location.reload(true);
+}
+
+function seemore_handler() {
+  $status = this.status;
+   var d = document.getElementById("trn_menu");
+   d.style.position = "fixed";
+   d.style.fontFamily = "sans";
+   d.style.right = "0px";
+   d.style.top = "240px";
+   d.style.zIndex = "101";
+   d.style.backgroundColor = "#AADDDD";
+   d.style.textAlign = "right";
+   d.style.fontSize = "20px";
+
+   $json_o = this.response;
+   if (window.ie !== false)
+    $json_o = JSON.parse($json_o);
+   localStorage.setItem('csi18n_seemore.representations', JSON.stringify($json_o));
+
+   var $el = '';
+   var $safe_choices = '';
+   for(index = 0; index < $json_o.csi18n_xlate_resources.length; index++) {
+    $el = $json_o.csi18n_xlate_resources[index];
+    $unsafe_choice = $el.translation;
+    $tlink = $el.url;
+    $safe_choices = $safe_choices + "<li><a href='javascript:trnPreferAnother(\"" + index + "\")'>" + escapeHtml($unsafe_choice) + "</a></li>";
+   }
+   if ($safe_choices.length > 0) {
+    $safe_choices = "<nav><ul>" + $safe_choices + "</ul></nav>";
+   } 
+   $choices = "See more<hr>" + $safe_choices;
+   d.innerHTML = $safe_choices;
+   d.style.display = "";
+}
+
+function put_handler() {
+  $status = this.status;
+  var d = document.getElementById("trn_menu");
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "101";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.innerHTML = escapeHtml(this.statusText);
+  d.style.display = "";
+  location.reload(true);
+}
+
+function preferanother_handler() {
+  $status = this.status;
+  var d = document.getElementById("trn_menu");
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "101";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.innerHTML = escapeHtml(this.statusText);
+  d.style.display = "";
+}
+
+function handler_uber(this1, name) {
+  name = name.substr('function '.length);
+  name = name.substr(0, name.indexOf('('));
+  name = name.substr(8);
+
+  var currently = localStorage.getItem('csi18n_onOrOff');
+  var d1 = document.getElementById(name);
+  var d2 = document.getElementById("u_" + name);
+  if (this1.status == 200) {
+
+   $json_o = this1.response;
+   if (window.ie !== false)
+    $json_o = JSON.parse($json_o);
+   $translation = $json_o.csi18n_xlate_resource.translation;
+
+   if (currently != "off") {
+    d1.firstChild.innerHTML = escapeHtml($translation);
+   } else {
+    d1.innerHTML = escapeHtml($translation);
+   }
+   d2.innerHTML = escapeHtml($translation);
+   localStorage.setItem('csi18n_' + name + '.representation', JSON.stringify($json_o));
+   localStorage.setItem('csi18n_' + name + '.result', this1.status);
+   localStorage.setItem('csi18n_' + name + '.tlink', this1.getResponseHeader('Content-Location'));
+  } else {
+   if (currently != "off") {
+    d1.firstChild.innerHTML = escapeHtml(this1.status.toString())
+   } else {
+    d1.innerHTML = escapeHtml(this1.status.toString());
+   }
+  }
+}
+
+function handler_fr0001() {
+  handler_uber(this, arguments.callee.toString());
+}
+
+function handler_fr0101() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0102() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0103() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0104() {
+  handler_uber(this, arguments.callee.toString());
+}
+
+function handler_fr0105() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0106() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0107() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0108() {
+  handler_uber(this, arguments.callee.toString());
+}
+
+function handler_fr0201() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0202() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0203() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0204() {
+  handler_uber(this, arguments.callee.toString());
+}
+
+function handler_fr0301() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0302() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0303() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0304() {
+  handler_uber(this, arguments.callee.toString());
+}
+
+function handler_fr0401() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0402() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0403() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0404() {
+  handler_uber(this, arguments.callee.toString());
+}
+
+function handler_fr0501() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0502() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0503() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0504() {
+  handler_uber(this, arguments.callee.toString());
+}
+
+function handler_fr0601() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0602() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0603() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0604() {
+  handler_uber(this, arguments.callee.toString());
+}
+
+function handler_fr0701() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0702() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0703() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0704() {
+  handler_uber(this, arguments.callee.toString());
+}
+
+function handler_fr0801() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0802() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0803() {
+  handler_uber(this, arguments.callee.toString());
+}
+function handler_fr0804() {
+  handler_uber(this, arguments.callee.toString());
+}
+
+function options_handler() {
+  $status = this.status;
+  var d = document.getElementById("trn_menu");
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "101";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.innerHTML = escapeHtml(this.statusText) + "<br>" + escapeHtml(this.responseText);
+  d.style.display = "";
+}
+
+function head_handler() {
+  $status = this.status;
+  var d = document.getElementById("trn_menu");
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "101";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.innerHTML = escapeHtml(this.statusText) + "<br>" + escapeHtml(this.responseText);
+  d.style.display = "";
+}
+
+///////////////////////////////////////////////////////////////////
+
+//
+// Service menu and handlers: hyperlinks, credentials and language
+// toggleShowServiceMenu effected by single-click on Globe
+//
+function toggleShowServiceMenu() {
+ var d = document.getElementById("svc_menu");
+ if (d.style.display == "") {
+  d.style.display = "none";
+ } else {
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "100px";
+  d.style.width = "33%";
+  d.style.zIndex = "100";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.innerHTML = "<a href='javascript:toggleShowHyperlinks()'>hyperlinks on/off<a><br> " +
+ "<a href='javascript:acceptUsername()'>username</a><br>" +
+ "<a href='javascript:acceptPassword()'>password</a><br>" +
+ "<a href='javascript:acceptApikey()'>apikey</a><br>" +
+ "<a href='javascript:acceptDefLang()'>Default Language</a><br>"+
+ "<a href='/csi18n/service'>[join]</a><br>"+
+ "<a href='http://csi18n.mpsvr.com/index.php/Xkcd'>[documentation]</a><br>";
+  d.style.display = "";
+ }
+}
+
+// Translation menu effected by click text in the speech bubbles while 
+// hyperlinks on
+// 
+function toggleShowTranslationMenu($ls) {
+ var d = document.getElementById("trn_menu");
+
+ $res = localStorage.getItem($ls + '.representation');
+ if ($res != '') {
+  $seemore_uri = $res.csi18n_per_lang_preference;
+ } else {
+  $seemore_uri = '';
+ }
+ localStorage.setItem('csi18n_seemore.per_lang_pref', $seemore_uri);
+	
+ if (d.style.display == "") {
+  d.style.display = "none";
+ } else {
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "100";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.style.height = "";
+  d.style.width = "33%";
+  d.innerHTML = "<a href='javascript:trnSeeMore(\"" + $ls + "\")'>See more</a><br>" +
+ "<a href='javascript:trnOfferAnother(\"" + $ls + "\")'>Offer another</a><br>" +
+ "<a href='javascript:trnEdit(\"" + $ls + "\")'>- Edit</a><br>" +
+ "<a href='javascript:trnDelete(\"" + $ls + "\")'>- Delete</a><br>" +
+ "<a href='javascript:trnOptions(\"" + $ls + "\")'>- Options</a><br>" +
+ "<a href='javascript:trnHead(\"" + $ls + "\")'>- Head</a><br>" +
+ "<a href='http://csi18n.mpsvr.com/index.php/Storyboard_03'>- Bump</a><br>" +
+ "<a href='http://csi18n.mpsvr.com/index.php/Storyboard_03'>- UnBump</a><br>" +
+ "<a href='http://csi18n.mpsvr.com/index.php/Storyboard_01'>- Lock</a><br>" +
+ "<a href='http://csi18n.mpsvr.com/index.php/Storyboard_01'>- Unlock</a><br>" + 
+ "<a href='http://csi18n.mpsvr.com/index.php/Storyboard_01'>- History</a><br>";
+  d.style.display = "";
+ }
+}
+
+function toggleShowHyperlinks() {
+ var currently = localStorage.getItem('csi18n_onOrOff');
+ if (currently != "off") {
+  localStorage.setItem('csi18n_onOrOff','off');
+ } else {
+  localStorage.setItem('csi18n_onOrOff','on');
+ }
+}
+
+///////////////////////////////////////////////////////////////////
+
+function acceptUsername() {
+ $username = localStorage.getItem('csi18n_un');
+ var rv = prompt("Username", $username);
+ if (rv != null) {
+  localStorage.setItem('csi18n_un', rv);
+ }
+}
+
+function acceptPassword() {
+ $password = localStorage.getItem('csi18n_pw');
+ var rv = prompt("Password", $password);
+ if (rv != null) {
+  localStorage.setItem('csi18n_pw', rv);
+ }
+}
+
+function acceptApikey() {
+ $apikey = localStorage.getItem('csi18n_key');
+ var rv = prompt("APIKey", $apikey);
+ if (rv != null) {
+  localStorage.setItem('csi18n_key', rv);
+ }
+}
+
+function acceptDefLang() {
+ $deflang = localStorage.getItem('csi18n_lang');
+ if ($deflang == null) {
+  $deflang = window.navigator.language;
+ }
+ var rv = prompt("New Language", $deflang);
+ if (rv != null) {
+  localStorage.setItem('csi18n_lang', rv);
+ }
+ onLoad();
+}
+
+///////////////////////////////////////////////////////////////////
+
+//
+// JS for creating the bubble on page (or hiding it)
+//
+function createDialog_v2($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwidth, $style, $newmark, $visitsid, $g_uploadersid, $g_lang, $g_newmark) {
+ var d = document.getElementById($el);
+ d.style.display = "none";
+ d.style.left = "auto";
+ d.style.right = "auto";
+ d.style.top = "auto";
+ d.style.bottom = "auto";
+
+ if ($el === 'fr0001') {
+  localStorage.setItem('csi18n_fr0001.result', 0);
+  localStorage.setItem('csi18n_fr0001.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0001.representation', '');
+  localStorage.setItem('csi18n_fr0001.tlink', '');
+  localStorage.setItem('csi18n_fr0001.visitsid', $visitsid);
+
+ } else if ($el === 'fr0101') {
+  localStorage.setItem('csi18n_fr0101.result', 0);
+  localStorage.setItem('csi18n_fr0101.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0101.representation', '');
+  localStorage.setItem('csi18n_fr0101.tlink', '');
+  localStorage.setItem('csi18n_fr0101.visitsid', $visitsid);
+ } else if ($el === 'fr0102') {
+  localStorage.setItem('csi18n_fr0102.result', 0);
+  localStorage.setItem('csi18n_fr0102.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0102.representation', '');
+  localStorage.setItem('csi18n_fr0102.tlink', '');
+  localStorage.setItem('csi18n_fr0102.visitsid', $visitsid);
+ } else if ($el === 'fr0103') {
+  localStorage.setItem('csi18n_fr0103.result', 0);
+  localStorage.setItem('csi18n_fr0103.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0103.representation', '');
+  localStorage.setItem('csi18n_fr0103.tlink', '');
+  localStorage.setItem('csi18n_fr0103.visitsid', $visitsid);
+ } else if ($el === 'fr0104') {
+  localStorage.setItem('csi18n_fr0104.result', 0);
+  localStorage.setItem('csi18n_fr0104.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0104.representation', '');
+  localStorage.setItem('csi18n_fr0104.tlink', '');
+  localStorage.setItem('csi18n_fr0104.visitsid', $visitsid);
+
+ } else if ($el === 'fr0105') {
+  localStorage.setItem('csi18n_fr0105.result', 0);
+  localStorage.setItem('csi18n_fr0105.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0105.representation', '');
+  localStorage.setItem('csi18n_fr0105.tlink', '');
+  localStorage.setItem('csi18n_fr0105.visitsid', $visitsid);
+ } else if ($el === 'fr0106') {
+  localStorage.setItem('csi18n_fr0106.result', 0);
+  localStorage.setItem('csi18n_fr0106.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0106.representation', '');
+  localStorage.setItem('csi18n_fr0106.tlink', '');
+  localStorage.setItem('csi18n_fr0106.visitsid', $visitsid);
+ } else if ($el === 'fr0107') {
+  localStorage.setItem('csi18n_fr0107.result', 0);
+  localStorage.setItem('csi18n_fr0107.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0107.representation', '');
+  localStorage.setItem('csi18n_fr0107.tlink', '');
+  localStorage.setItem('csi18n_fr0107.visitsid', $visitsid);
+ } else if ($el === 'fr0108') {
+  localStorage.setItem('csi18n_fr0108.result', 0);
+  localStorage.setItem('csi18n_fr0108.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0108.representation', '');
+  localStorage.setItem('csi18n_fr0108.tlink', '');
+  localStorage.setItem('csi18n_fr0108.visitsid', $visitsid);
+
+ } else if ($el === 'fr0201') {
+  localStorage.setItem('csi18n_fr0201.result', 0);
+  localStorage.setItem('csi18n_fr0201.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0201.representation', '');
+  localStorage.setItem('csi18n_fr0201.tlink', '');
+  localStorage.setItem('csi18n_fr0201.visitsid', $visitsid);
+ } else if ($el === 'fr0202') {
+  localStorage.setItem('csi18n_fr0202.result', 0);
+  localStorage.setItem('csi18n_fr0202.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0202.representation', '');
+  localStorage.setItem('csi18n_fr0202.tlink', '');
+  localStorage.setItem('csi18n_fr0202.visitsid', $visitsid);
+ } else if ($el === 'fr0203') {
+  localStorage.setItem('csi18n_fr0203.result', 0);
+  localStorage.setItem('csi18n_fr0203.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0203.representation', '');
+  localStorage.setItem('csi18n_fr0203.tlink', '');
+  localStorage.setItem('csi18n_fr0203.visitsid', $visitsid);
+ } else if ($el === 'fr0204') {
+  localStorage.setItem('csi18n_fr0204.result', 0);
+  localStorage.setItem('csi18n_fr0204.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0204.representation', '');
+  localStorage.setItem('csi18n_fr0204.tlink', '');
+  localStorage.setItem('csi18n_fr0204.visitsid', $visitsid);
+
+ } else if ($el === 'fr0301') {
+  localStorage.setItem('csi18n_fr0301.result', 0);
+  localStorage.setItem('csi18n_fr0301.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0301.representation', '');
+  localStorage.setItem('csi18n_fr0301.tlink', '');
+  localStorage.setItem('csi18n_fr0301.visitsid', $visitsid);
+ } else if ($el === 'fr0302') {
+  localStorage.setItem('csi18n_fr0302.result', 0);
+  localStorage.setItem('csi18n_fr0302.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0302.representation', '');
+  localStorage.setItem('csi18n_fr0302.tlink', '');
+  localStorage.setItem('csi18n_fr0302.visitsid', $visitsid);
+ } else if ($el === 'fr0303') {
+  localStorage.setItem('csi18n_fr0303.result', 0);
+  localStorage.setItem('csi18n_fr0303.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0303.representation', '');
+  localStorage.setItem('csi18n_fr0303.tlink', '');
+  localStorage.setItem('csi18n_fr0303.visitsid', $visitsid);
+ } else if ($el === 'fr0304') {
+  localStorage.setItem('csi18n_fr0304.result', 0);
+  localStorage.setItem('csi18n_fr0304.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0304.representation', '');
+  localStorage.setItem('csi18n_fr0304.tlink', '');
+  localStorage.setItem('csi18n_fr0304.visitsid', $visitsid);
+
+ } else if ($el === 'fr0401') {
+  localStorage.setItem('csi18n_fr0401.result', 0);
+  localStorage.setItem('csi18n_fr0401.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0401.representation', '');
+  localStorage.setItem('csi18n_fr0401.tlink', '');
+  localStorage.setItem('csi18n_fr0401.visitsid', $visitsid);
+ } else if ($el === 'fr0402') {
+  localStorage.setItem('csi18n_fr0402.result', 0);
+  localStorage.setItem('csi18n_fr0402.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0402.representation', '');
+  localStorage.setItem('csi18n_fr0402.tlink', '');
+  localStorage.setItem('csi18n_fr0402.visitsid', $visitsid);
+ } else if ($el === 'fr0403') {
+  localStorage.setItem('csi18n_fr0403.result', 0);
+  localStorage.setItem('csi18n_fr0403.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0403.representation', '');
+  localStorage.setItem('csi18n_fr0403.tlink', '');
+  localStorage.setItem('csi18n_fr0403.visitsid', $visitsid);
+ } else if ($el === 'fr0404') {
+  localStorage.setItem('csi18n_fr0404.result', 0);
+  localStorage.setItem('csi18n_fr0404.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0404.representation', '');
+  localStorage.setItem('csi18n_fr0404.tlink', '');
+  localStorage.setItem('csi18n_fr0404.visitsid', $visitsid);
+
+ } else if ($el === 'fr0501') {
+  localStorage.setItem('csi18n_fr0501.result', 0);
+  localStorage.setItem('csi18n_fr0501.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0501.representation', '');
+  localStorage.setItem('csi18n_fr0501.tlink', '');
+  localStorage.setItem('csi18n_fr0501.visitsid', $visitsid);
+ } else if ($el === 'fr0502') {
+  localStorage.setItem('csi18n_fr0502.result', 0);
+  localStorage.setItem('csi18n_fr0502.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0502.representation', '');
+  localStorage.setItem('csi18n_fr0502.tlink', '');
+  localStorage.setItem('csi18n_fr0502.visitsid', $visitsid);
+ } else if ($el === 'fr0503') {
+  localStorage.setItem('csi18n_fr0503.result', 0);
+  localStorage.setItem('csi18n_fr0503.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0503.representation', '');
+  localStorage.setItem('csi18n_fr0503.tlink', '');
+  localStorage.setItem('csi18n_fr0503.visitsid', $visitsid);
+ } else if ($el === 'fr0504') {
+  localStorage.setItem('csi18n_fr0504.result', 0);
+  localStorage.setItem('csi18n_fr0504.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0504.representation', '');
+  localStorage.setItem('csi18n_fr0504.tlink', '');
+  localStorage.setItem('csi18n_fr0504.visitsid', $visitsid);
+
+ } else if ($el === 'fr0601') {
+  localStorage.setItem('csi18n_fr0601.result', 0);
+  localStorage.setItem('csi18n_fr0601.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0601.representation', '');
+  localStorage.setItem('csi18n_fr0601.tlink', '');
+  localStorage.setItem('csi18n_fr0601.visitsid', $visitsid);
+ } else if ($el === 'fr0602') {
+  localStorage.setItem('csi18n_fr0602.result', 0);
+  localStorage.setItem('csi18n_fr0602.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0602.representation', '');
+  localStorage.setItem('csi18n_fr0602.tlink', '');
+  localStorage.setItem('csi18n_fr0602.visitsid', $visitsid);
+ } else if ($el === 'fr0603') {
+  localStorage.setItem('csi18n_fr0603.result', 0);
+  localStorage.setItem('csi18n_fr0603.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0603.representation', '');
+  localStorage.setItem('csi18n_fr0603.tlink', '');
+  localStorage.setItem('csi18n_fr0603.visitsid', $visitsid);
+ } else if ($el === 'fr0604') {
+  localStorage.setItem('csi18n_fr0604.result', 0);
+  localStorage.setItem('csi18n_fr0604.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0604.representation', '');
+  localStorage.setItem('csi18n_fr0604.tlink', '');
+  localStorage.setItem('csi18n_fr0604.visitsid', $visitsid);
+
+ } else if ($el === 'fr0701') {
+  localStorage.setItem('csi18n_fr0701.result', 0);
+  localStorage.setItem('csi18n_fr0701.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0701.representation', '');
+  localStorage.setItem('csi18n_fr0701.tlink', '');
+  localStorage.setItem('csi18n_fr0701.visitsid', $visitsid);
+ } else if ($el === 'fr0702') {
+  localStorage.setItem('csi18n_fr0702.result', 0);
+  localStorage.setItem('csi18n_fr0702.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0702.representation', '');
+  localStorage.setItem('csi18n_fr0702.tlink', '');
+  localStorage.setItem('csi18n_fr0702.visitsid', $visitsid);
+ } else if ($el === 'fr0703') {
+  localStorage.setItem('csi18n_fr0703.result', 0);
+  localStorage.setItem('csi18n_fr0703.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0703.representation', '');
+  localStorage.setItem('csi18n_fr0703.tlink', '');
+  localStorage.setItem('csi18n_fr0703.visitsid', $visitsid);
+ } else if ($el === 'fr0704') {
+  localStorage.setItem('csi18n_fr0704.result', 0);
+  localStorage.setItem('csi18n_fr0704.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0704.representation', '');
+  localStorage.setItem('csi18n_fr0704.tlink', '');
+  localStorage.setItem('csi18n_fr0704.visitsid', $visitsid);
+
+ } else if ($el === 'fr0801') {
+  localStorage.setItem('csi18n_fr0801.result', 0);
+  localStorage.setItem('csi18n_fr0801.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0801.representation', '');
+  localStorage.setItem('csi18n_fr0801.tlink', '');
+  localStorage.setItem('csi18n_fr0801.visitsid', $visitsid);
+ } else if ($el === 'fr0802') {
+  localStorage.setItem('csi18n_fr0802.result', 0);
+  localStorage.setItem('csi18n_fr0802.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0802.representation', '');
+  localStorage.setItem('csi18n_fr0802.tlink', '');
+  localStorage.setItem('csi18n_fr0802.visitsid', $visitsid);
+ } else if ($el === 'fr0803') {
+  localStorage.setItem('csi18n_fr0803.result', 0);
+  localStorage.setItem('csi18n_fr0803.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0803.representation', '');
+  localStorage.setItem('csi18n_fr0803.tlink', '');
+  localStorage.setItem('csi18n_fr0803.visitsid', $visitsid);
+ } else if ($el === 'fr0804') {
+  localStorage.setItem('csi18n_fr0804.result', 0);
+  localStorage.setItem('csi18n_fr0804.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0804.representation', '');
+  localStorage.setItem('csi18n_fr0804.tlink', '');
+  localStorage.setItem('csi18n_fr0804.visitsid', $visitsid);
+ } 
+
+ if ($corner != 'hide') {
+  if ($g_uploadersid !== 'null' && $g_lang !== 'null' && $g_newmark !== 'null' && $g_newmark !== '') {
+   $rv = sendGet_v2($el, $newmark, $visitsid, $g_uploadersid, $g_lang, $g_newmark);
+  } else if ($g_newmark === '') {
+   $rv = '&#xA0;';
+  } else {
+   $rv = sendGet($el, $newmark, $visitsid);
+  }
+  if (typeof $rv === 'undefined') {
+   $translation = 'undefined';
+  } else {
+   $translation = $rv;
+  }
+ }
+
+ if (localStorage.getItem('csi18n_onOrOff') == 'on') {
+  if ($el === 'fr0001') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0001\")'>" + escapeHtml($translation) + "</a>"; 
+
+  } else if ($el === 'fr0101') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0101\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0102') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0102\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0103') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0103\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0104') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0104\")'>" + escapeHtml($translation) + "</a>"; 
+
+  } else if ($el === 'fr0105') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0105\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0106') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0106\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0107') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0107\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0108') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0108\")'>" + escapeHtml($translation) + "</a>"; 
+
+  } else if ($el === 'fr0201') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0201\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0202') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0202\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0203') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0203\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0204') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0204\")'>" + escapeHtml($translation) + "</a>"; 
+
+  } else if ($el === 'fr0301') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0301\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0302') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0302\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0303') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0303\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0304') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0304\")'>" + escapeHtml($translation) + "</a>"; 
+
+  } else if ($el === 'fr0401') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0401\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0402') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0402\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0403') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0403\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0404') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0404\")'>" + escapeHtml($translation) + "</a>"; 
+
+  } else if ($el === 'fr0501') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0501\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0502') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0502\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0503') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0503\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0504') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0504\")'>" + escapeHtml($translation) + "</a>"; 
+
+  } else if ($el === 'fr0601') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0601\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0602') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0602\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0603') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0603\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0604') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0604\")'>" + escapeHtml($translation) + "</a>"; 
+
+  } else if ($el === 'fr0701') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0701\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0702') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0702\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0703') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0703\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0704') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0704\")'>" + escapeHtml($translation) + "</a>"; 
+
+  } else if ($el === 'fr0801') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0801\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0802') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0802\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0803') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0803\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0804') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0804\")'>" + escapeHtml($translation) + "</a>"; 
+  }
+ } else {
+  d.innerHTML = escapeHtml($translation); 
+ }
+
+ if ($corner == 'BR') {
+  d.style.position = "absolute";
+  d.style.right = ($totx - $posx) + "px";
+  d.style.bottom = ($toty - $posy) + "px";
+  d.style.backgroundColor = "#DDDDDD";
+  d.style.textAlign = "right";
+
+ } else if ($corner == 'TR') {
+  d.style.position = "absolute";
+  d.style.right = ($totx - $posx) + "px";
+  d.style.top = $posy + "px";
+  d.style.fontSize = "20px";
+  d.style.backgroundColor = "#FFFFFF";
+  d.style.textAlign = "right";
+
+ } else if ($corner == 'BL') {
+  d.style.position = "absolute";
+  d.style.left = $posx + "px";;
+  d.style.bottom = ($toty - $posy) + "px";
+  d.style.fontSize = "20px";
+  d.style.zIndex = "100";
+  d.style.backgroundColor = "#DDDDDD";
+  d.style.textAlign = "left";
+
+ } else if ($corner == 'TL') {
+  d.style.position = "absolute";
+  d.style.left = $posx + "px";
+  d.style.top = $posy + "px";
+  d.style.fontSize = "20px";
+  d.style.backgroundColor = "#FFFFFF";
+  d.style.textAlign = "left";
+ }
+
+ if ($corner != "hide") {
+  d.style.display = "";
+  d.style.fontSize = $size + "px";
+  d.style.fontFamily = "sans";
+  d.style.fontStyle = $style;
+  if ($maxwidth != "0") {
+   d.style.maxWidth = $maxwidth + "px";
+  } else {
+   d.style.maxWidth = "";
+  }
+ }
+}
+
+///////////////////////////////////////////////////////////////////
+//
+// madox2 @ http://stackoverflow.com/questions/4270485/drawing-lines-on-html-page
+// as modified by suggestion on the same page to include transform:rotate('+deg+'deg); for
+// the benefit of IE
+function DrawLine(x1, y1, x2, y2){
+
+    if(y1 < y2){
+        var pom = y1;
+        y1 = y2;
+        y2 = pom;
+        pom = x1;
+        x1 = x2;
+        x2 = pom;
+    }
+
+    var a = Math.abs(x1-x2);
+    var b = Math.abs(y1-y2);
+    var c;
+    var sx = (x1+x2)/2 ;
+    var sy = (y1+y2)/2 ;
+    var width = Math.sqrt(a*a + b*b ) ;
+    var x = sx - width/2;
+    var y = sy;
+
+    a = width / 2;
+
+    c = Math.abs(sx-x);
+
+    b = Math.sqrt(Math.abs(x1-x)*Math.abs(x1-x)+Math.abs(y1-y)*Math.abs(y1-y) );
+
+    var cosb = (b*b - a*a - c*c) / (2*a*c);
+    var rad = Math.acos(cosb);
+    var deg = (rad*180)/Math.PI
+
+    htmlns = "http://www.w3.org/1999/xhtml";
+    div = document.createElementNS(htmlns, "div");
+    div.setAttribute('style','border:1px solid black;width:'+width+'px;height:0px;transform:rotate('+deg+'deg);-moz-transform:rotate('+deg+'deg);-webkit-transform:rotate('+deg+'deg);position:absolute;top:'+y+'px;left:'+x+'px;');   
+
+    document.getElementById("tochterAusElysium").appendChild(div);
+}
+
+// XSS. Storing:
+//   hello</a><img src=bogus onerror=alert(1337)><a href="">
+// is an XSS vuln: sanitise text before use. In practice, I only seem to 
+// use .innerHtml for use so either .innerHtml = escapeHtml(unsafe) or
+// name vars as safe/unsafe and only assign a safe to .innerHtml
+//
+// Bolted on: allow the user to let <br> <i> </i> <b> and </b> through
+//
+// developed from bjornd @ http://stackoverflow.com/questions/6234773/can-i-escape-html-special-chars-in-javascript
+function escapeHtml(unsafe) {
+ unsafe = unsafe.replace(/<br>/g, "LadiesWithAnAttitudeFellasThatWereInTheMood");
+ unsafe = unsafe.replace(/<i>/g, "DeepDishvsDireStraitsFlashingForMoneySultanClubMix");
+ unsafe = unsafe.replace(/<\/i>/g, "WhatIsThiSIdontEven1");
+ unsafe = unsafe.replace(/<b>/g, "WhatIsThiSIdontEven2");
+ unsafe = unsafe.replace(/<\/b>/g, "WhatIsThiSIdontEven3");
+ unsafe = unsafe.replace(/&#x/g, "WhatIsThiSIdontEven4");
+ unsafe = unsafe
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+ unsafe = unsafe.replace(/LadiesWithAnAttitudeFellasThatWereInTheMood/g, "<br>");
+ unsafe = unsafe.replace(/DeepDishvsDireStraitsFlashingForMoneySultanClubMix/g, "<i>");
+ unsafe = unsafe.replace(/WhatIsThiSIdontEven1/g, "</i>");
+ unsafe = unsafe.replace(/WhatIsThiSIdontEven2/g, "<b>");
+ unsafe = unsafe.replace(/WhatIsThiSIdontEven3/g, "</b>");
+ unsafe = unsafe.replace(/WhatIsThiSIdontEven4/g, "&#x");
+ safe = unsafe;
+ return safe;
+}
+//" <-- emacs discolours below unless I terminate the stroke-quote-stroke above
+
+//
+// It's 2014 and it's /still/ necessary to detect the browser. HOLY CRAP
+// 
+// IE doesn't automagical a JSON response string into JSON proper, so make a global
+// called window.ie that is false for working browsers, and !false otherwise. Not that
+// I'm implying this page will render on anything under IE11.
+//   $json_o = this.response;
+//   if (window.ie !== false)
+//    $json_o = JSON.parse($json_o);
+//   $translation = $json_o.csi18n_xlate_resource.translation;
+// 
+// mario @ http://stackoverflow.com/questions/19999388/jquery-check-if-user-is-using-ie
+function detectIE() {
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf('MSIE ');
+    var trident = ua.indexOf('Trident/');
+
+    if (msie > 0) {
+        // IE 10 or older => return version number
+        return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+    }
+
+    if (trident > 0) {
+        // IE 11 (or newer) => return version number
+        var rv = ua.indexOf('rv:');
+        return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+    }
+
+    // other browser
+    return false;
+}
+
+function showWhatWasImgTitle(){
+  var d = document.getElementById("fr0001");
+  d.style.display = "";
+}
+
+function hideWhatWasImgTitle(){
+  var d = document.getElementById("fr0001");
+  d.style.display = "none";
+}
+
+function showUploadForm(){
+  var d = document.getElementById("upload-form");
+  d.style.display = "";
+}
+
+function hideUploadForm(){
+  var d = document.getElementById("upload-form");
+  d.style.display = "none";
+}
+
+function toggleUploadForm(){
+  var d = document.getElementById("upload-form");
+  if (d.style.display != "none") {
+    d.style.display = "none";
+  } else {
+    d.style.display = "";
+  }
+}
+
+///////////////////////////////////////////////////////////////////
+
+//
+// Setup when never been here before. Preload with credents and use non-localised English
+// 
+function onLoad() {
+ window.ie = detectIE();
+ 
+ var currently = localStorage.getItem('csi18n_onOrOff');
+ if (currently != "on" && currently != "off") {
+  localStorage.setItem('csi18n_onOrOff', "on");
+  localStorage.setItem('csi18n_un', "test05");
+  localStorage.setItem('csi18n_pw', "test");
+  localStorage.setItem('csi18n_key', "e3c12c03cf320b243977d6ac389805de");
+  localStorage.setItem('csi18n_lang', "en");
+  localStorage.setItem('csi18n_seemore.representations', '');
+  localStorage.setItem('csi18n_seemore.per_lang_pref', '');
+ }
+<?php
+   if ($lang !== '') {
+   echo "localStorage.setItem('csi18n_lang', '$lang');";
+   }
+?>
+ xkcdShow(global_g_uploadersid, global_g_lang, global_g_newmarkfr0001, 
+global_g_newmarkfr0101, global_g_newmarkfr0102, global_g_newmarkfr0103, global_g_newmarkfr0104,
+global_g_newmarkfr0105, global_g_newmarkfr0106, global_g_newmarkfr0107, global_g_newmarkfr0108,
+global_g_newmarkfr0201, global_g_newmarkfr0202, global_g_newmarkfr0203, global_g_newmarkfr0204,
+global_g_newmarkfr0301, global_g_newmarkfr0302, global_g_newmarkfr0303, global_g_newmarkfr0304,
+global_g_newmarkfr0401, global_g_newmarkfr0402, global_g_newmarkfr0403, global_g_newmarkfr0404,
+global_g_newmarkfr0501, global_g_newmarkfr0502, global_g_newmarkfr0503, global_g_newmarkfr0504,
+global_g_newmarkfr0601, global_g_newmarkfr0602, global_g_newmarkfr0603, global_g_newmarkfr0604,
+global_g_newmarkfr0701, global_g_newmarkfr0702, global_g_newmarkfr0703, global_g_newmarkfr0704,
+global_g_newmarkfr0801, global_g_newmarkfr0802, global_g_newmarkfr0803, global_g_newmarkfr0804);
+ hideWhatWasImgTitle();
+ hideUploadForm();
+ xkcdShowLines();
+}
+</script>
