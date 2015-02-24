@@ -4,7 +4,7 @@
 //
 //
 // $el, $corner, $totx, $toty, $posx, $posy, $size, $maxwidth, $style, $newmark
-function xkcdShow($g_uploadersid, $g_lang, $g_newmarkfr0001, 
+function xkcdShow($g_uploadersid, $g_lang, $g_newmarkfr0001, $g_newmarkfr0002, 
 $g_newmarkfr0101, $g_newmarkfr0102, $g_newmarkfr0103, $g_newmarkfr0104,
 $g_newmarkfr0201, $g_newmarkfr0202, $g_newmarkfr0203, $g_newmarkfr0204,
 $g_newmarkfr0301, $g_newmarkfr0302, $g_newmarkfr0303, $g_newmarkfr0304,
@@ -18,6 +18,7 @@ $g_newmarkfr0801, $g_newmarkfr0802, $g_newmarkfr0803, $g_newmarkfr0804) {
  // createDialog_v2(elem,  corner, pg_wid, pg_hght, corner_x, corner_y, txt_sz, bubble_wid, "", "xkcd-uv-fr0101", $visitsid, uploader_sid, language, crid);
 
  createDialog_v2("fr0001", "TL", 800, 2048, 0, 505, "13", "740", "", "xkcd-uv-fr0001", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0001);
+// createDialog_v2("fr0002", "TL", 800, 2048, 0, 505, "13", "740", "", "xkcd-uv-fr0002", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0002);
 
  createDialog_v2("fr0101", "BR", 800, 2048, 173, 44, "13", "169", "", "xkcd-uv-fr0101", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0101);
  createDialog_v2("fr0102", "TL", 800, 2048, 39, 49, "13", "139", "", "xkcd-uv-fr0102", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0102);
@@ -94,6 +95,7 @@ XKCD example page from 2015-jan-05<br><br>
 
 <div id="globe" class= "" style="position:fixed; right:0; top: 0;"><img onclick="javascript:toggleShowServiceMenu()" src='../translationglobe.png'></div>
 <div id="fr0001" class="" style="display: none" >frame 00 text 01</div>
+<div id="fr0002" class="" style="display: none" >frame 00 text 02</div>
 
 <div id="fr0101" class="" style="display: none" >frame 01 text 01</div>
 <div id="fr0102" class="" style="display: none" >frame 01 text 02</div>
@@ -230,6 +232,7 @@ the text can be edited like the rest
 -->
 
 <textarea rows=3 cols=30 id="u_fr0001" name="u_fr0001"></textarea><br>
+<!--<textarea rows=3 cols=30 id="u_fr0002" name="u_fr0002"></textarea><br>-->
 <input type=submit value=submit>
 </form>
 </div>

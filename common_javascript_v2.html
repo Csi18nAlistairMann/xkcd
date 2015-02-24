@@ -325,6 +325,8 @@ function sendGet($el, $newmark, $visitsid) {
     request.setRequestHeader("If-None-Match", "Wibble");
     if ($el == 'fr0001') {
      request.onload = handler_fr0001;
+    } else if ($el == 'fr0002') {
+     request.onload = handler_fr0002;
     } else if ($el == 'fr0101') {
      request.onload = handler_fr0101;
     } else if ($el == 'fr0102') {
@@ -431,6 +433,8 @@ function sendGet_v2($el, $newmark, $visitsid, $sid, $lang, $newmarkcrid) {
     request.setRequestHeader("If-None-Match", "Wibble");
     if ($el == 'fr0001') {
      request.onload = handler_fr0001;
+    } else if ($el == 'fr0002') {
+     request.onload = handler_fr0002;
     } else if ($el == 'fr0101') {
      request.onload = handler_fr0101;
     } else if ($el == 'fr0102') {
@@ -761,6 +765,9 @@ function handler_uber(this1, name) {
 function handler_fr0001() {
   handler_uber(this, arguments.callee.toString());
 }
+function handler_fr0002() {
+  handler_uber(this, arguments.callee.toString());
+}
 
 function handler_fr0101() {
   handler_uber(this, arguments.callee.toString());
@@ -1048,6 +1055,12 @@ function createDialog_v2($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwi
   localStorage.setItem('csi18n_fr0001.representation', '');
   localStorage.setItem('csi18n_fr0001.tlink', '');
   localStorage.setItem('csi18n_fr0001.visitsid', $visitsid);
+ } else if ($el === 'fr0002') {
+  localStorage.setItem('csi18n_fr0002.result', 0);
+  localStorage.setItem('csi18n_fr0002.newmark', $newmark);
+  localStorage.setItem('csi18n_fr0002.representation', '');
+  localStorage.setItem('csi18n_fr0002.tlink', '');
+  localStorage.setItem('csi18n_fr0002.visitsid', $visitsid);
 
  } else if ($el === 'fr0101') {
   localStorage.setItem('csi18n_fr0101.result', 0);
@@ -1293,6 +1306,8 @@ function createDialog_v2($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwi
  if (localStorage.getItem('csi18n_onOrOff') == 'on') {
   if ($el === 'fr0001') {
    d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0001\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0002') {
+   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0002\")'>" + escapeHtml($translation) + "</a>"; 
 
   } else if ($el === 'fr0101') {
    d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0101\")'>" + escapeHtml($translation) + "</a>"; 
@@ -1383,7 +1398,7 @@ function createDialog_v2($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwi
   d.style.position = "absolute";
   d.style.right = ($totx - $posx) + "px";
   d.style.bottom = ($toty - $posy) + "px";
-  d.style.backgroundColor = "#DDDDDD";
+  d.style.backgroundColor = "#FFFFFF";
   d.style.textAlign = "right";
 
  } else if ($corner == 'TR') {
@@ -1400,7 +1415,7 @@ function createDialog_v2($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwi
   d.style.bottom = ($toty - $posy) + "px";
   d.style.fontSize = "20px";
   d.style.zIndex = "100";
-  d.style.backgroundColor = "#DDDDDD";
+  d.style.backgroundColor = "#FFFFFF";
   d.style.textAlign = "left";
 
  } else if ($corner == 'TL') {
@@ -1584,7 +1599,7 @@ function onLoad() {
    echo "localStorage.setItem('csi18n_lang', '$lang');";
    }
 ?>
- xkcdShow(global_g_uploadersid, global_g_lang, global_g_newmarkfr0001, 
+ xkcdShow(global_g_uploadersid, global_g_lang, global_g_newmarkfr0001, global_g_newmarkfr0002,
 global_g_newmarkfr0101, global_g_newmarkfr0102, global_g_newmarkfr0103, global_g_newmarkfr0104,
 global_g_newmarkfr0105, global_g_newmarkfr0106, global_g_newmarkfr0107, global_g_newmarkfr0108,
 global_g_newmarkfr0201, global_g_newmarkfr0202, global_g_newmarkfr0203, global_g_newmarkfr0204,

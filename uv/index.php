@@ -82,7 +82,7 @@ foreach($in_arr as $el) {
 // investigate if user has uploaded new material
 // u_ as in user
 $u_username = $u_password = $u_languagecode = null;
-$u_fr0001 = 
+$u_fr0001 = $u_fr0002 = 
   $u_fr0101 = $u_fr0102 = $u_fr0103 = $u_fr0104 =
   $u_fr0105 = $u_fr0106 = $u_fr0107 = $u_fr0108 =
   $u_fr0201 = $u_fr0202 = $u_fr0203 = $u_fr0204 =
@@ -101,6 +101,8 @@ if (array_key_exists('u_languagecode', $_POST))
   $u_languagecode = $_POST['u_languagecode'];
 if (array_key_exists('u_fr0001', $_POST))
   $u_fr0001 = $_POST['u_fr0001'];
+if (array_key_exists('u_fr0002', $_POST))
+  $u_fr0002 = $_POST['u_fr0002'];
 
 if (array_key_exists('u_fr0101', $_POST))
   $u_fr0101 = $_POST['u_fr0101'];
@@ -222,7 +224,14 @@ how would you assert that THESE xlates should be used and not THOSE?
     preg_match('|.*/([^/]*)$|', $rv, $matches);
     $crid_fr0001 = $matches[1];
   }
-  
+  if (0) {
+    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-uv-fr0002', $u_languagecode, 'anonymous', $u_fr0002);
+    if ($rv !== '') {
+      preg_match('|.*/([^/]*)$|', $rv, $matches);
+      $crid_fr0002 = $matches[1];
+    }
+  }
+
   $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-uv-fr0101', $u_languagecode, 'anonymous', $u_fr0101);
   if ($rv !== '') {
     preg_match('|.*/([^/]*)$|', $rv, $matches);
@@ -308,7 +317,7 @@ how would you assert that THESE xlates should be used and not THOSE?
 
 } else {
   $u_username = $u_password = $u_languagecode = null;
-  $u_fr0001 = 
+  $u_fr0001 = $u_fr0002 = 
     $u_fr0101 = $u_fr0102 = $u_fr0103 = $u_fr0104 =
     $u_fr0105 = $u_fr0106 = $u_fr0107 = $u_fr0108 =
     $u_fr0201 = $u_fr0202 = $u_fr0203 = $u_fr0204 =
@@ -331,7 +340,7 @@ if (sizeof($qs_arr) === 2 && $qs_arr[0] === 'q') {
 }
 
 $g_uploadersid = $g_lang = null;
-$g_newmarkfr0001 = 
+$g_newmarkfr0001 = $g_newmarkfr0002 = 
   $g_newmarkfr0101 = $g_newmarkfr0102 = $g_newmarkfr0103 = $g_newmarkfr0104 = 
   $g_newmarkfr0105 = $g_newmarkfr0106 = $g_newmarkfr0107 = $g_newmarkfr0108 = 
   $g_newmarkfr0201 = $g_newmarkfr0202 = $g_newmarkfr0203 = $g_newmarkfr0204 = 
@@ -377,7 +386,7 @@ if ($g_uploadersid !== null && $g_lang !== null &&
   //  echo ">-$g_uploadersid-$g_lang-$g_newmarkfr0001-$g_newmarkfr0101-$g_newmarkfr0102<";
 } else {
   $g_uploadersid = $g_lang = null;
-  $g_newmarkfr0001 = 
+  $g_newmarkfr0001 = $g_newmarkfr0002 = 
     $g_newmarkfr0101 = $g_newmarkfr0102 = $g_newmarkfr0103 = $g_newmarkfr0104 = 
     $g_newmarkfr0105 = $g_newmarkfr0106 = $g_newmarkfr0107 = $g_newmarkfr0108 = 
     $g_newmarkfr0201 = $g_newmarkfr0202 = $g_newmarkfr0203 = $g_newmarkfr0204 = 
@@ -396,6 +405,8 @@ if ($g_lang === null)
   $g_lang = 'null';
 if ($g_newmarkfr0001 === null) 
   $g_newmarkfr0001 = 'null';
+if ($g_newmarkfr0002 === null) 
+  $g_newmarkfr0002 = 'null';
 
 if ($g_newmarkfr0101 === null) 
   $g_newmarkfr0101 = 'null';
@@ -484,6 +495,7 @@ echo "<script type='text/javascript'>\n".
 "var global_g_uploadersid = '$g_uploadersid';\n".
 "var global_g_lang = '$g_lang';\n".
 "var global_g_newmarkfr0001 = '$g_newmarkfr0001';\n".
+"var global_g_newmarkfr0002 = '$g_newmarkfr0002';\n".
 
 "var global_g_newmarkfr0101 = '$g_newmarkfr0101';\n".
 "var global_g_newmarkfr0102 = '$g_newmarkfr0102';\n".
