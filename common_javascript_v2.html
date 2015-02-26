@@ -749,10 +749,22 @@ function handler_uber(this1, name) {
    } else {
     d1.innerHTML = escapeHtml($translation);
    }
-   d2.innerHTML = escapeHtml($translation);
+   if (d2 != null) {
+    // if a representation is used multiple times, only the first use will attract a 
+    // textarea where the user can upload his own version. Later uses will see a null d2
+    // as the textarea doesn't exist.
+    d2.innerHTML = escapeHtml($translation);
+   }
    localStorage.setItem('csi18n_' + name + '.representation', JSON.stringify($json_o));
    localStorage.setItem('csi18n_' + name + '.result', this1.status);
-   localStorage.setItem('csi18n_' + name + '.tlink', this1.getResponseHeader('Content-Location'));
+   var cl = this1.getResponseHeader('Content-Location');
+   if (cl == null) {
+    // If we ask via /newmark for best translation we get a Content-Location header to
+    // tell us where that resource lives. If we ask via /xlates for a specific translation
+    // we already know where it lives: at the URL we requested
+    cl = this1.responseURL;
+   }
+   localStorage.setItem('csi18n_' + name + '.tlink', cl);
   } else {
    if (currently != "off") {
     d1.firstChild.innerHTML = escapeHtml(this1.status.toString())
@@ -941,7 +953,7 @@ function toggleShowServiceMenu() {
  "<a href='javascript:acceptPassword()'>password</a><br>" +
  "<a href='javascript:acceptApikey()'>apikey</a><br>" +
  "<a href='javascript:acceptDefLang()'>Default Language</a><br>"+
- "<a href='/csi18n/service'>[join]</a><br>"+
+ "<a href='https://service.mpsvr.com'>[join]</a><br>"+
  "<a href='http://csi18n.mpsvr.com/index.php/Xkcd'>[documentation]</a><br>";
   d.style.display = "";
  }
