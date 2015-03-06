@@ -1,10 +1,10 @@
-<!-- screws -->
+<!-- pwned -->
 <script type="text/javascript">
 
 //
 //
 // $el, $corner, $totx, $toty, $posx, $posy, $size, $maxwidth, $style, $newmark
-function xkcdShow($g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $cont_width, $cont_height, 
+function xkcdShow($g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $cont_width, $cont_height,
 $g_newmarkfr0001, $g_newmarkfr0002, 
 $g_newmarkfr0101, $g_newmarkfr0102, $g_newmarkfr0103, $g_newmarkfr0104,
 $g_newmarkfr0105, $g_newmarkfr0106, $g_newmarkfr0107, $g_newmarkfr0108,
@@ -16,55 +16,60 @@ $g_newmarkfr0601, $g_newmarkfr0602, $g_newmarkfr0603, $g_newmarkfr0604,
 $g_newmarkfr0701, $g_newmarkfr0702, $g_newmarkfr0703, $g_newmarkfr0704,
 $g_newmarkfr0801, $g_newmarkfr0802, $g_newmarkfr0803, $g_newmarkfr0804) {
 
- // createDialog_v2(elem,  corner, pg_wid, pg_hght, corner_x, corner_y, txt_sz, bubble_wid, "", "xkcd-screws-fr0101", $g_thisPageBelongsToSID, uploader_sid, language, crid);
+ // createDialog_v2(elem,  corner, pg_wid, pg_hght, corner_x, corner_y, txt_sz, bubble_wid, "", "xkcd-pwned-fr0101", $g_thisPageBelongsToSID, uploader_sid, language, crid);
 
- createDialog_v2("fr0001", "TL T", $cont_width, $cont_height, 0, 253, "12", "384", "", "xkcd-screws-fr0001", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0001);
-// createDialog_v2("fr0002", "TL", $cont_width, $cont_height, 0, 253, "12", "384", "", "xkcd-screws-fr0002", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0002);
+ // fr0001 normally holds the mouseover text
+ createDialog_v2("fr0001", "TL T", $cont_width, $cont_height, 0, 0, "12", 350, "", "xkcd-pwned-fr0001", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0001);
+ // fr0002 holds the title
+ createDialog_v2("fr0002", "TLCT", $cont_width, $cont_height, 0, 0, "16", 350, "", "xkcd-pwned-fr0002", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0002);
 
- createDialog_v2("fr0101", "TL", $cont_width, $cont_height, 5, 63, "12", "89", "", "xkcd-screws-fr0101", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0101);
- createDialog_v2("fr0102", "TL", $cont_width, $cont_height, 98, 63, "12", "84", "", "xkcd-screws-fr0102", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0102);
- createDialog_v2("fr0103", "TL", $cont_width, $cont_height, 188, 63, "12", "98", "", "xkcd-screws-fr0103", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0103);
- createDialog_v2("fr0104", "TL", $cont_width, $cont_height, 284, 63, "12", "92", "", "xkcd-screws-fr0104", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0104);
- createDialog_v2("fr0105", "TL", $cont_width, $cont_height, 4, 185, "12", "90", "", "xkcd-screws-fr0105", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0105);
- createDialog_v2("fr0106", "TL", $cont_width, $cont_height, 99, 185, "12", "87", "", "xkcd-screws-fr0106", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0106);
- createDialog_v2("fr0107", "TL", $cont_width, $cont_height, 191, 185, "12", "83", "", "xkcd-screws-fr0107", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0107);
- createDialog_v2("fr0108", "TL", $cont_width, $cont_height, 282, 198, "12", "99", "", "xkcd-screws-fr0108", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0108);
-
+ // the remainder are of the form frXXYY - where fr = frame; XX is the frame number starting from 01
+ // and YY is the textual element within the frame, also starting at 01
+ createDialog_v2("fr0101", "BL", $cont_width, $cont_height, 14, 78, "17", 323, "", "xkcd-pwned-fr0101", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0101);
+ createDialog_v2("fr0102", "TL", $cont_width, $cont_height, 44, 85, "17", 295, "", "xkcd-pwned-fr0102", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0102);
+ createDialog_v2("fr0103", "TL", $cont_width, $cont_height, 14, 119, "17", 327, "", "xkcd-pwned-fr0103", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0103);
 /*
- createDialog_v2("fr0201", "BR", $cont_width, $cont_height, 320, 43, "13", "135", "", "xkcd-screws-fr0201", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0201);
- createDialog_v2("fr0202", "TL", $cont_width, $cont_height, 232, 61, "13", "87", "", "xkcd-screws-fr0202", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0202);
- createDialog_v2("fr0203", "BR", $cont_width, $cont_height, 320, 43, "13", "135", "", "xkcd-screws-fr0203", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0203);
- createDialog_v2("fr0204", "TL", $cont_width, $cont_height, 232, 61, "13", "87", "", "xkcd-screws-fr0204", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0204);
+ createDialog_v2("fr0104", "TLC", $cont_width, $cont_height, 245, 175, "12", 191, "", "xkcd-pwned-fr0104", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0104);
+ createDialog_v2("fr0105", "TLC", $cont_width, $cont_height, 0, 205, "12", 465, "", "xkcd-pwned-fr0105", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0105);
 
- createDialog_v2("fr0301", "BL", $cont_width, $cont_height, 384, 42, "13", "163", "", "xkcd-screws-fr0301", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0301);
- createDialog_v2("fr0302", "BL", $cont_width, $cont_height, 403, 103, "13", "141", "", "xkcd-screws-fr0302", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0302);
- createDialog_v2("fr0303", "TL", $cont_width, $cont_height, 391, 173, "13", "159", "", "xkcd-screws-fr0303", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0303);
- createDialog_v2("fr0304", "TL", $cont_width, $cont_height, 342, 102, "13", "46", "", "xkcd-screws-fr0304", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0304);
+ createDialog_v2("fr0106", "TL", $cont_width, $cont_height, 99, 185, "12", 87, "", "xkcd-pwned-fr0106", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0106);
+ createDialog_v2("fr0107", "TL", $cont_width, $cont_height, 191, 185, "12", 83, "", "xkcd-pwned-fr0107", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0107);
+ createDialog_v2("fr0108", "TL", $cont_width, $cont_height, 282, 198, "12", 99, "", "xkcd-pwned-fr0108", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0108);
 
- createDialog_v2("fr0401", "BR", $cont_width, $cont_height, 706, 69, "13", "140", "", "xkcd-screws-fr0401", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0401);
- createDialog_v2("fr0402", "TL", $cont_width, $cont_height, 599, 89, "13", "136", "", "xkcd-screws-fr0402", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0402);
- createDialog_v2("fr0403", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-screws-fr0403", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0403);
- createDialog_v2("fr0404", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-screws-fr0404", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0404);
+ createDialog_v2("fr0201", "BR", $cont_width, $cont_height, 276, 196, "12", 130, "", "xkcd-pwned-fr0201", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0201);
+ createDialog_v2("fr0202", "BL", $cont_width, $cont_height, 325, 115, "16", 90, "", "xkcd-pwned-fr0202", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0202);
+ createDialog_v2("fr0203", "BR", $cont_width, $cont_height, 320, 43, "13", 135, "", "xkcd-pwned-fr0203", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0203);
+ createDialog_v2("fr0204", "TL", $cont_width, $cont_height, 232, 61, "13", 87, "", "xkcd-pwned-fr0204", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0204);
 
- createDialog_v2("fr0501", "BR", $cont_width, $cont_height, 174, 302, "13", "170", "", "xkcd-screws-fr0501", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0501);
- createDialog_v2("fr0502", "TL", $cont_width, $cont_height, 20, 303, "13", "154", "", "xkcd-screws-fr0502", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0502);
- createDialog_v2("fr0503", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-screws-fr0503", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0503);
- createDialog_v2("fr0504", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-screws-fr0504", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0504);
+ createDialog_v2("fr0301", "BR", $cont_width, $cont_height, 415, 196, "12", 128, "", "xkcd-pwned-fr0301", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0301);
+ createDialog_v2("fr0302", "BL", $cont_width, $cont_height, 403, 103, "13", 141, "", "xkcd-pwned-fr0302", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0302);
+ createDialog_v2("fr0303", "TL", $cont_width, $cont_height, 391, 173, "13", 159, "", "xkcd-pwned-fr0303", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0303);
+ createDialog_v2("fr0304", "TL", $cont_width, $cont_height, 342, 102, "13", 46, "", "xkcd-pwned-fr0304", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0304);
 
- createDialog_v2("fr0601", "BR", $cont_width, $cont_height, 353, 281, "13", "163", "", "xkcd-screws-fr0601", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0601);
- createDialog_v2("fr0602", "TL", $cont_width, $cont_height, 218, 290, "13", "146", "", "xkcd-screws-fr0602", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0602);
- createDialog_v2("fr0603", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-screws-fr0603", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0603);
- createDialog_v2("fr0604", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-screws-fr0604", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0604);
+ createDialog_v2("fr0401", "BR", $cont_width, $cont_height, 556, 196, "12", 68, "", "xkcd-pwned-fr0401", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0401);
+ createDialog_v2("fr0402", "TL", $cont_width, $cont_height, 553, 139, "14", 67, "", "xkcd-pwned-fr0402", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0402);
+ createDialog_v2("fr0403", "TL", $cont_width, $cont_height, 406, 162, "13", 103, "", "xkcd-pwned-fr0403", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0403);
+ createDialog_v2("fr0404", "TL", $cont_width, $cont_height, 406, 162, "13", 103, "", "xkcd-pwned-fr0404", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0404);
 
- createDialog_v2("fr0701", "BR", $cont_width, $cont_height, 589, 82, "13", "178", "", "xkcd-screws-fr0701", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0701);
- createDialog_v2("fr0702", "TL", $cont_width, $cont_height, 431, 91, "13", "162", "", "xkcd-screws-fr0702", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0702);
- createDialog_v2("fr0703", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-screws-fr0703", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0703);
- createDialog_v2("fr0704", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-screws-fr0704", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0704);
+ createDialog_v2("fr0501", "TL", $cont_width, $cont_height, 568, 24, "12", 127, "", "xkcd-pwned-fr0501", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0501);
+ createDialog_v2("fr0502", "BR", $cont_width, $cont_height, 695, 162, "16", 60, "", "xkcd-pwned-fr0502", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0502);
+ createDialog_v2("fr0503", "BR", $cont_width, $cont_height, 686, 192, "18", 120, "", "xkcd-pwned-fr0502", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0503);
+ createDialog_v2("fr0504", "TL", $cont_width, $cont_height, 406, 162, "13", 103, "", "xkcd-pwned-fr0504", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0504);
 
- createDialog_v2("fr0801", "BR", $cont_width, $cont_height, 728, 339, "13", "164", "", "xkcd-screws-fr0801", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0801);
- createDialog_v2("fr0802", "TL", $cont_width, $cont_height, 609, 347, "13", "128", "", "xkcd-screws-fr0802", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0802);
- createDialog_v2("fr0803", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-screws-fr0803", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0803);
- createDialog_v2("fr0804", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-screws-fr0804", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0804);
+ createDialog_v2("fr0601", "BR", $cont_width, $cont_height, 353, 281, "13", 163, "", "xkcd-pwned-fr0601", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0601);
+ createDialog_v2("fr0602", "TL", $cont_width, $cont_height, 218, 290, "13", 146, "", "xkcd-pwned-fr0602", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0602);
+ createDialog_v2("fr0603", "TL", $cont_width, $cont_height, 406, 162, "13", 103, "", "xkcd-pwned-fr0603", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0603);
+ createDialog_v2("fr0604", "TL", $cont_width, $cont_height, 406, 162, "13", 103, "", "xkcd-pwned-fr0604", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0604);
+
+ createDialog_v2("fr0701", "BR", $cont_width, $cont_height, 589, 82, "13", 178, "", "xkcd-pwned-fr0701", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0701);
+ createDialog_v2("fr0702", "TL", $cont_width, $cont_height, 431, 91, "13", 162, "", "xkcd-pwned-fr0702", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0702);
+ createDialog_v2("fr0703", "TL", $cont_width, $cont_height, 406, 162, "13", 103, "", "xkcd-pwned-fr0703", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0703);
+ createDialog_v2("fr0704", "TL", $cont_width, $cont_height, 406, 162, "13", 103, "", "xkcd-pwned-fr0704", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0704);
+
+ createDialog_v2("fr0801", "BR", $cont_width, $cont_height, 728, 339, "13", 164, "", "xkcd-pwned-fr0801", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0801);
+ createDialog_v2("fr0802", "TL", $cont_width, $cont_height, 609, 347, "13", 128, "", "xkcd-pwned-fr0802", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0802);
+ createDialog_v2("fr0803", "TL", $cont_width, $cont_height, 406, 162, "13", 103, "", "xkcd-pwned-fr0803", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0803);
+ createDialog_v2("fr0804", "TL", $cont_width, $cont_height, 406, 162, "13", 103, "", "xkcd-pwned-fr0804", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0804);
 */
 }
 
@@ -88,21 +93,21 @@ function xkcdShowLines() {
 -->
 
 <body onload='javascript:onLoad()'>
-<div id="fr0002" class="" style="display: none" >frame 00 text 02</div>
+
+<div id="fr0002" class="" style="display: block" >frame 00 text 02</div>
 <div id="tochterAusElysium" style="position: absolute; background: #BBBBBB; font-size:10px; width:
 <?php echo $container_width; ?>px; height:<?php echo $container_height; ?>px; font-family:sans;"> 
-
-<img src="http://i.imgur.com/D02MVw6.png" alt="" usemap="#TupacVsThomasTheTankEngine" ><br>
+<img src="http://i.imgur.com/SIcTImg.png" alt="" usemap="#TupacVsThomasTheTankEngine" ><br>
 <map name="TupacVsThomasTheTankEngine" >
   <!-- coords generated at http://www.image-maps.com/ -->
-  <area alt="" title="" shape="rect" coords="3,127,380,181" onMouseOver="showWhatWasImgTitle()"/>
-  <area alt="" title="" shape="rect" coords="4,13,378,60" onMouseOver="showWhatWasImgTitle()"/>
+  <area alt="" title="" shape="rect" coords="14,86,39,113" onMouseOver="showWhatWasImgTitle()"/>
+<!--  <area alt="" title="" shape="poly" coords="85,70,72,73,61,80,54,91,51,104,54,117,61,128,72,135,85,138,98,135,109,128,116,117,119,104,116,91,109,80,98,73" onMouseOver="showWhatWasImgTitle()"/> -->
 </map>
-<div id="fr0001" class="" style="display: none" >frame 00 text 01</div>
+<div id="fr0001" class="" style="display: none " >frame 00 text 01</div>
 
-Attribution: <a href="http://xkcd.com/1474/">http://xkcd.com/1474/</a><br>
-XKCD example page from 2015-jan-15<br><br>
-[ <a href="../uv">prev</a> | <a href="../">up</a> | <a href="../flowcharts">next</a> ]<br>
+Attribution: <a href="http://xkcd.com/91/">http://xkcd.com/91/</a><br>
+XKCD example page retrieved 2015-mar-06<br><br>
+[ <a href="../hard_reboot">prev</a> | <a href="../">up</a> | <!--<a href="../">next</a>--> ]<br>
 
 <div id="globe" class= "" style="position:fixed; right:0; top: 0;"><img onclick="javascript:toggleShowServiceMenu()" src='../translationglobe.png'></div>
 <div id="globe-lang" class= "" style="position:fixed; right:0; top: 0; color: white; font-family: sans-serif; font-size: 4em; font-weight: bold; 
@@ -112,19 +117,21 @@ text-shadow:
     -2px 2px #0645ad,
     2px 2px #0645ad;">
 <?php
-   echo $probable_lang;
+//   echo $probable_lang;
 ?>
 </div>
 
 <div id="fr0101" class="" style="display: inline" >frame 01 text 01</div>
 <div id="fr0102" class="" style="display: inline" >frame 01 text 02</div>
 <div id="fr0103" class="" style="display: inline" >frame 01 text 03</div>
+<!--
 <div id="fr0104" class="" style="display: inline" >frame 01 text 04</div>
 <div id="fr0105" class="" style="display: inline" >frame 01 text 05</div>
+
 <div id="fr0106" class="" style="display: inline" >frame 01 text 06</div>
 <div id="fr0107" class="" style="display: inline" >frame 01 text 07</div>
 <div id="fr0108" class="" style="display: inline" >frame 01 text 08</div>
-<!--
+
 <div id="fr0201" class="" style="display: inline" >frame 02 text 01</div>
 <div id="fr0202" class="" style="display: inline" >frame 02 text 02</div>
 <div id="fr0203" class="" style="display: inline" >frame 02 text 03</div>
@@ -137,13 +144,11 @@ text-shadow:
 
 <div id="fr0401" class="" style="display: inline" >frame 04 text 01</div>
 <div id="fr0402" class="" style="display: inline" >frame 04 text 02</div>
-
 <div id="fr0403" class="" style="display: inline" >frame 04 text 03</div>
 <div id="fr0404" class="" style="display: inline" >frame 04 text 04</div>
 
 <div id="fr0501" class="" style="display: inline" >frame 05 text 01</div>
 <div id="fr0502" class="" style="display: inline" >frame 05 text 02</div>
-
 <div id="fr0503" class="" style="display: inline" >frame 05 text 03</div>
 <div id="fr0504" class="" style="display: inline" >frame 05 text 04</div>
 
@@ -175,9 +180,6 @@ Rather than rework the UI to make the text selectable without clickin on it, Imm
 here. Imma gonna make the the T-Rex clickable, and THAT makes the text appear. Once appeared,
 the text can be edited like the rest 
 -->
-<!--
-<div id="fr0401" class="" style="display:none" >Hey guys! What's eating you? Ha ha ha it's me! Oh, what fun we have.</div>
--->
 
 <div id="svc_menu" class="" style="display:none" ><a href="http://www.youtube.com/watch?v=CiGPTL8bnC4">Sandy White</a></div>
 <div id="trn_menu" class="" style="display:none" ><a href="http://www.gutenberg.org/cache/epub/74/pg74.txt">Mark Twain</a></div>
@@ -197,15 +199,20 @@ the text can be edited like the rest
    echo $probable_lang;
 ?>
 "></input><br>
+
+<textarea rows=3 cols=30 id="u_fr0002" name="u_fr0002"></textarea><br> <!--Title text-->
+
 <textarea rows=3 cols=30 id="u_fr0101" name="u_fr0101"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0102" name="u_fr0102"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0103" name="u_fr0103"></textarea><br>
+<!--
 <textarea rows=3 cols=30 id="u_fr0104" name="u_fr0104"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0105" name="u_fr0105"></textarea><br>
+
 <textarea rows=3 cols=30 id="u_fr0106" name="u_fr0106"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0107" name="u_fr0107"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0108" name="u_fr0108"></textarea><br>
-<!--
+
 <textarea rows=3 cols=30 id="u_fr0201" name="u_fr0201"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0202" name="u_fr0202"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0203" name="u_fr0203"></textarea><br>
@@ -214,24 +221,20 @@ the text can be edited like the rest
 <textarea rows=3 cols=30 id="u_fr0301" name="u_fr0301"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0302" name="u_fr0302"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0303" name="u_fr0303"></textarea><br>
-
 <textarea rows=3 cols=30 id="u_fr0304" name="u_fr0304"></textarea><br>
 
 <textarea rows=3 cols=30 id="u_fr0401" name="u_fr0401"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0402" name="u_fr0402"></textarea><br>
-
 <textarea rows=3 cols=30 id="u_fr0403" name="u_fr0403"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0404" name="u_fr0404"></textarea><br>
 
 <textarea rows=3 cols=30 id="u_fr0501" name="u_fr0501"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0502" name="u_fr0502"></textarea><br>
-
 <textarea rows=3 cols=30 id="u_fr0503" name="u_fr0503"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0504" name="u_fr0504"></textarea><br>
 
 <textarea rows=3 cols=30 id="u_fr0601" name="u_fr0601"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0602" name="u_fr0602"></textarea><br>
-
 <textarea rows=3 cols=30 id="u_fr0603" name="u_fr0603"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0604" name="u_fr0604"></textarea><br>
 
@@ -247,8 +250,8 @@ the text can be edited like the rest
 <textarea rows=3 cols=30 id="u_fr0804" name="u_fr0804"></textarea><br>
 -->
 
-<textarea rows=3 cols=30 id="u_fr0001" name="u_fr0001"></textarea><br>
-<!--<textarea rows=3 cols=30 id="u_fr0002" name="u_fr0002"></textarea><br>-->
+<textarea rows=3 cols=30 id="u_fr0001" name="u_fr0001"></textarea><br> <!--Mouseover text-->
+
 <input type=checkbox name=ignore_blanks value=ignore checked>Ignore blank entries<br>
 <input type=submit value=submit>
 </form>

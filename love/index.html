@@ -4,7 +4,7 @@
 //
 //
 // $el, $corner, $totx, $toty, $posx, $posy, $size, $maxwidth, $style, $newmark
-function xkcdShow($g_thisPageBelongsToSID, $g_uploadersid, $g_lang, 
+function xkcdShow($g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $cont_width, $cont_height, 
 $g_newmarkfr0001, $g_newmarkfr0002, 
 $g_newmarkfr0101, $g_newmarkfr0102, $g_newmarkfr0103, $g_newmarkfr0104,
 $g_newmarkfr0105, $g_newmarkfr0106, $g_newmarkfr0107, $g_newmarkfr0108,
@@ -18,54 +18,54 @@ $g_newmarkfr0801, $g_newmarkfr0802, $g_newmarkfr0803, $g_newmarkfr0804) {
 
  // createDialog_v2(elem,  corner, pg_wid, pg_hght, corner_x, corner_y, txt_sz, bubble_wid, "", "xkcd-love-fr0101", $g_thisPageBelongsToSID, uploader_sid, language, crid);
 
- createDialog_v2("fr0001", "TL", 800, 2048, 0, 224, "18", "640", "", "xkcd-love-fr0001", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0001);
-// createDialog_v2("fr0002", "TL", 800, 2048, 0, 224, "18", "640", "", "xkcd-love-fr0002", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0002);
+ createDialog_v2("fr0001", "TL T", $cont_width, $cont_height, 0, 224, "18", "640", "", "xkcd-love-fr0001", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0001);
+// createDialog_v2("fr0002", "TL", $cont_width, $cont_height, 0, 224, "18", "640", "", "xkcd-love-fr0002", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0002);
 
- createDialog_v2("fr0101", "BR", 800, 2048, 91, 85, "16", 72, "", "xkcd-love-fr0101", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0101);
- createDialog_v2("fr0102", "BL", 800, 2048, 136, 102, "16", "81", "", "xkcd-love-fr0102", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0102);
+ createDialog_v2("fr0101", "BR", $cont_width, $cont_height, 91, 85, "16", 72, "", "xkcd-love-fr0101", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0101);
+ createDialog_v2("fr0102", "BL", $cont_width, $cont_height, 136, 102, "16", "81", "", "xkcd-love-fr0102", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0102);
 /*
- createDialog_v2("fr0103", "TL", 800, 2048, 188, 63, "12", "98", "", "xkcd-love-fr0103", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0103);
- createDialog_v2("fr0104", "TL", 800, 2048, 284, 63, "12", "92", "", "xkcd-love-fr0104", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0104);
- createDialog_v2("fr0105", "TL", 800, 2048, 4, 185, "12", "90", "", "xkcd-love-fr0105", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0105);
- createDialog_v2("fr0106", "TL", 800, 2048, 99, 185, "12", "87", "", "xkcd-love-fr0106", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0106);
- createDialog_v2("fr0107", "TL", 800, 2048, 191, 185, "12", "83", "", "xkcd-love-fr0107", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0107);
- createDialog_v2("fr0108", "TL", 800, 2048, 282, 198, "12", "99", "", "xkcd-love-fr0108", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0108);
+ createDialog_v2("fr0103", "TL", $cont_width, $cont_height, 188, 63, "12", "98", "", "xkcd-love-fr0103", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0103);
+ createDialog_v2("fr0104", "TL", $cont_width, $cont_height, 284, 63, "12", "92", "", "xkcd-love-fr0104", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0104);
+ createDialog_v2("fr0105", "TL", $cont_width, $cont_height, 4, 185, "12", "90", "", "xkcd-love-fr0105", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0105);
+ createDialog_v2("fr0106", "TL", $cont_width, $cont_height, 99, 185, "12", "87", "", "xkcd-love-fr0106", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0106);
+ createDialog_v2("fr0107", "TL", $cont_width, $cont_height, 191, 185, "12", "83", "", "xkcd-love-fr0107", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0107);
+ createDialog_v2("fr0108", "TL", $cont_width, $cont_height, 282, 198, "12", "99", "", "xkcd-love-fr0108", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0108);
 */
- createDialog_v2("fr0201", "BL", 800, 2048, 284, 70, "22", "133", "", "xkcd-love-fr0201", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0201);
- createDialog_v2("fr0202", "BL", 800, 2048, 325, 115, "16", 90, "", "xkcd-love-fr0202", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0202);
+ createDialog_v2("fr0201", "BL", $cont_width, $cont_height, 284, 70, "22", "133", "", "xkcd-love-fr0201", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0201);
+ createDialog_v2("fr0202", "BL", $cont_width, $cont_height, 325, 115, "16", 90, "", "xkcd-love-fr0202", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0202);
 /*
- createDialog_v2("fr0203", "BR", 800, 2048, 320, 43, "13", "135", "", "xkcd-love-fr0203", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0203);
- createDialog_v2("fr0204", "TL", 800, 2048, 232, 61, "13", "87", "", "xkcd-love-fr0204", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0204);
+ createDialog_v2("fr0203", "BR", $cont_width, $cont_height, 320, 43, "13", "135", "", "xkcd-love-fr0203", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0203);
+ createDialog_v2("fr0204", "TL", $cont_width, $cont_height, 232, 61, "13", "87", "", "xkcd-love-fr0204", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0204);
 
- createDialog_v2("fr0301", "BL", 800, 2048, 384, 42, "13", "163", "", "xkcd-love-fr0301", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0301);
- createDialog_v2("fr0302", "BL", 800, 2048, 403, 103, "13", "141", "", "xkcd-love-fr0302", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0302);
- createDialog_v2("fr0303", "TL", 800, 2048, 391, 173, "13", "159", "", "xkcd-love-fr0303", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0303);
- createDialog_v2("fr0304", "TL", 800, 2048, 342, 102, "13", "46", "", "xkcd-love-fr0304", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0304);
+ createDialog_v2("fr0301", "BL", $cont_width, $cont_height, 384, 42, "13", "163", "", "xkcd-love-fr0301", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0301);
+ createDialog_v2("fr0302", "BL", $cont_width, $cont_height, 403, 103, "13", "141", "", "xkcd-love-fr0302", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0302);
+ createDialog_v2("fr0303", "TL", $cont_width, $cont_height, 391, 173, "13", "159", "", "xkcd-love-fr0303", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0303);
+ createDialog_v2("fr0304", "TL", $cont_width, $cont_height, 342, 102, "13", "46", "", "xkcd-love-fr0304", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0304);
 
- createDialog_v2("fr0401", "BR", 800, 2048, 706, 69, "13", "140", "", "xkcd-love-fr0401", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0401);
- createDialog_v2("fr0402", "TL", 800, 2048, 599, 89, "13", "136", "", "xkcd-love-fr0402", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0402);
- createDialog_v2("fr0403", "TL", 800, 2048, 406, 162, "13", "103", "", "xkcd-love-fr0403", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0403);
- createDialog_v2("fr0404", "TL", 800, 2048, 406, 162, "13", "103", "", "xkcd-love-fr0404", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0404);
+ createDialog_v2("fr0401", "BR", $cont_width, $cont_height, 706, 69, "13", "140", "", "xkcd-love-fr0401", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0401);
+ createDialog_v2("fr0402", "TL", $cont_width, $cont_height, 599, 89, "13", "136", "", "xkcd-love-fr0402", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0402);
+ createDialog_v2("fr0403", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-love-fr0403", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0403);
+ createDialog_v2("fr0404", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-love-fr0404", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0404);
 
- createDialog_v2("fr0501", "BR", 800, 2048, 174, 302, "13", "170", "", "xkcd-love-fr0501", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0501);
- createDialog_v2("fr0502", "TL", 800, 2048, 20, 303, "13", "154", "", "xkcd-love-fr0502", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0502);
- createDialog_v2("fr0503", "TL", 800, 2048, 406, 162, "13", "103", "", "xkcd-love-fr0503", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0503);
- createDialog_v2("fr0504", "TL", 800, 2048, 406, 162, "13", "103", "", "xkcd-love-fr0504", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0504);
+ createDialog_v2("fr0501", "BR", $cont_width, $cont_height, 174, 302, "13", "170", "", "xkcd-love-fr0501", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0501);
+ createDialog_v2("fr0502", "TL", $cont_width, $cont_height, 20, 303, "13", "154", "", "xkcd-love-fr0502", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0502);
+ createDialog_v2("fr0503", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-love-fr0503", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0503);
+ createDialog_v2("fr0504", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-love-fr0504", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0504);
 
- createDialog_v2("fr0601", "BR", 800, 2048, 353, 281, "13", "163", "", "xkcd-love-fr0601", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0601);
- createDialog_v2("fr0602", "TL", 800, 2048, 218, 290, "13", "146", "", "xkcd-love-fr0602", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0602);
- createDialog_v2("fr0603", "TL", 800, 2048, 406, 162, "13", "103", "", "xkcd-love-fr0603", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0603);
- createDialog_v2("fr0604", "TL", 800, 2048, 406, 162, "13", "103", "", "xkcd-love-fr0604", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0604);
+ createDialog_v2("fr0601", "BR", $cont_width, $cont_height, 353, 281, "13", "163", "", "xkcd-love-fr0601", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0601);
+ createDialog_v2("fr0602", "TL", $cont_width, $cont_height, 218, 290, "13", "146", "", "xkcd-love-fr0602", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0602);
+ createDialog_v2("fr0603", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-love-fr0603", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0603);
+ createDialog_v2("fr0604", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-love-fr0604", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0604);
 
- createDialog_v2("fr0701", "BR", 800, 2048, 589, 82, "13", "178", "", "xkcd-love-fr0701", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0701);
- createDialog_v2("fr0702", "TL", 800, 2048, 431, 91, "13", "162", "", "xkcd-love-fr0702", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0702);
- createDialog_v2("fr0703", "TL", 800, 2048, 406, 162, "13", "103", "", "xkcd-love-fr0703", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0703);
- createDialog_v2("fr0704", "TL", 800, 2048, 406, 162, "13", "103", "", "xkcd-love-fr0704", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0704);
+ createDialog_v2("fr0701", "BR", $cont_width, $cont_height, 589, 82, "13", "178", "", "xkcd-love-fr0701", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0701);
+ createDialog_v2("fr0702", "TL", $cont_width, $cont_height, 431, 91, "13", "162", "", "xkcd-love-fr0702", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0702);
+ createDialog_v2("fr0703", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-love-fr0703", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0703);
+ createDialog_v2("fr0704", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-love-fr0704", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0704);
 
- createDialog_v2("fr0801", "BR", 800, 2048, 728, 339, "13", "164", "", "xkcd-love-fr0801", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0801);
- createDialog_v2("fr0802", "TL", 800, 2048, 609, 347, "13", "128", "", "xkcd-love-fr0802", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0802);
- createDialog_v2("fr0803", "TL", 800, 2048, 406, 162, "13", "103", "", "xkcd-love-fr0803", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0803);
- createDialog_v2("fr0804", "TL", 800, 2048, 406, 162, "13", "103", "", "xkcd-love-fr0804", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0804);
+ createDialog_v2("fr0801", "BR", $cont_width, $cont_height, 728, 339, "13", "164", "", "xkcd-love-fr0801", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0801);
+ createDialog_v2("fr0802", "TL", $cont_width, $cont_height, 609, 347, "13", "128", "", "xkcd-love-fr0802", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0802);
+ createDialog_v2("fr0803", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-love-fr0803", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0803);
+ createDialog_v2("fr0804", "TL", $cont_width, $cont_height, 406, 162, "13", "103", "", "xkcd-love-fr0804", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0804);
 */
 }
 
@@ -89,13 +89,17 @@ function xkcdShowLines() {
 -->
 
 <body onload='javascript:onLoad()'>
-<div id="tochterAusElysium" style="position: absolute; background: #BBBBBB; font-size:10px; width:800px; height:2048px; font-family:sans;">
+
+<div id="fr0002" class="" style="display: none" >frame 00 text 02</div>
+<div id="tochterAusElysium" style="position: absolute; background: #BBBBBB; font-size:10px; width:
+<?php echo $container_width; ?>px; height:<?php echo $container_height; ?>px; font-family:sans;"> 
 
 <img src="http://i.imgur.com/5Yb8Rx5.jpg" alt="" usemap="#TupacVsThomasTheTankEngine" ><br>
 <map name="TupacVsThomasTheTankEngine" >
   <!-- coords generated at http://www.image-maps.com/ -->
   <area alt="" title="" shape="rect" coords="85,120,516,203" onMouseOver="showWhatWasImgTitle()"/>
 </map>
+<div id="fr0001" class="" style="display: none" >frame 00 text 01</div>
 
 Attribution: <a href="http://xkcd.com/44/">http://xkcd.com/44/</a><br>
 XKCD example page found 2015-feb-24<br><br>
@@ -112,58 +116,55 @@ text-shadow:
 //   echo $probable_lang;
 ?>
 </div>
-<div id="fr0001" class="" style="display: none" >frame 00 text 01</div>
-<div id="fr0002" class="" style="display: none" >frame 00 text 02</div>
-
-<div id="fr0101" class="" style="display: none" >frame 01 text 01</div>
-<div id="fr0102" class="" style="display: none" >frame 01 text 02</div>
+<div id="fr0101" class="" style="display: inline" >frame 01 text 01</div>
+<div id="fr0102" class="" style="display: inline" >frame 01 text 02</div>
 <!--
-<div id="fr0103" class="" style="display: none" >frame 01 text 03</div>
-<div id="fr0104" class="" style="display: none" >frame 01 text 04</div>
-<div id="fr0105" class="" style="display: none" >frame 01 text 05</div>
-<div id="fr0106" class="" style="display: none" >frame 01 text 06</div>
-<div id="fr0107" class="" style="display: none" >frame 01 text 07</div>
-<div id="fr0108" class="" style="display: none" >frame 01 text 08</div>
+<div id="fr0103" class="" style="display: inline" >frame 01 text 03</div>
+<div id="fr0104" class="" style="display: inline" >frame 01 text 04</div>
+<div id="fr0105" class="" style="display: inline" >frame 01 text 05</div>
+<div id="fr0106" class="" style="display: inline" >frame 01 text 06</div>
+<div id="fr0107" class="" style="display: inline" >frame 01 text 07</div>
+<div id="fr0108" class="" style="display: inline" >frame 01 text 08</div>
 -->
-<div id="fr0201" class="" style="display:none" >frame 02 text 01</div>
-<div id="fr0202" class="" style="display:none" >frame 02 text 02</div>
+<div id="fr0201" class="" style="display: inline" >frame 02 text 01</div>
+<div id="fr0202" class="" style="display: inline" >frame 02 text 02</div>
 <!--
-<div id="fr0203" class="" style="display:none" >frame 02 text 03</div>
-<div id="fr0204" class="" style="display:none" >frame 02 text 04</div>
+<div id="fr0203" class="" style="display: inline" >frame 02 text 03</div>
+<div id="fr0204" class="" style="display: inline" >frame 02 text 04</div>
 
-<div id="fr0301" class="" style="display:none" >frame 03 text 01</div>
-<div id="fr0302" class="" style="display:none" >frame 03 text 02</div>
-<div id="fr0303" class="" style="display:none" >frame 03 text 03</div>
-<div id="fr0304" class="" style="display:none" >frame 03 text 04</div>
+<div id="fr0301" class="" style="display: inline" >frame 03 text 01</div>
+<div id="fr0302" class="" style="display: inline" >frame 03 text 02</div>
+<div id="fr0303" class="" style="display: inline" >frame 03 text 03</div>
+<div id="fr0304" class="" style="display: inline" >frame 03 text 04</div>
 
-<div id="fr0401" class="" style="display:none" >frame 04 text 01</div>
-<div id="fr0402" class="" style="display:none" >frame 04 text 02</div>
+<div id="fr0401" class="" style="display: inline" >frame 04 text 01</div>
+<div id="fr0402" class="" style="display: inline" >frame 04 text 02</div>
 
-<div id="fr0403" class="" style="display:none" >frame 04 text 03</div>
-<div id="fr0404" class="" style="display:none" >frame 04 text 04</div>
+<div id="fr0403" class="" style="display: inline" >frame 04 text 03</div>
+<div id="fr0404" class="" style="display: inline" >frame 04 text 04</div>
 
-<div id="fr0501" class="" style="display:none" >frame 05 text 01</div>
-<div id="fr0502" class="" style="display:none" >frame 05 text 02</div>
+<div id="fr0501" class="" style="display: inline" >frame 05 text 01</div>
+<div id="fr0502" class="" style="display: inline" >frame 05 text 02</div>
 
-<div id="fr0503" class="" style="display:none" >frame 05 text 03</div>
-<div id="fr0504" class="" style="display:none" >frame 05 text 04</div>
+<div id="fr0503" class="" style="display: inline" >frame 05 text 03</div>
+<div id="fr0504" class="" style="display: inline" >frame 05 text 04</div>
 
-<div id="fr0601" class="" style="display:none" >frame 06 text 01</div>
-<div id="fr0602" class="" style="display:none" >frame 06 text 02</div>
+<div id="fr0601" class="" style="display: inline" >frame 06 text 01</div>
+<div id="fr0602" class="" style="display: inline" >frame 06 text 02</div>
 
-<div id="fr0603" class="" style="display:none" >frame 06 text 03</div>
-<div id="fr0604" class="" style="display:none" >frame 06 text 04</div>
+<div id="fr0603" class="" style="display: inline" >frame 06 text 03</div>
+<div id="fr0604" class="" style="display: inline" >frame 06 text 04</div>
 
-<div id="fr0701" class="" style="display:none" >frame 07 text 01</div>
-<div id="fr0702" class="" style="display:none" >frame 07 text 02</div>
-<div id="fr0703" class="" style="display:none" >frame 07 text 03</div>
-<div id="fr0704" class="" style="display:none" >frame 07 text 04</div>
+<div id="fr0701" class="" style="display: inline" >frame 07 text 01</div>
+<div id="fr0702" class="" style="display: inline" >frame 07 text 02</div>
+<div id="fr0703" class="" style="display: inline" >frame 07 text 03</div>
+<div id="fr0704" class="" style="display: inline" >frame 07 text 04</div>
 
-<div id="fr0801" class="" style="display:none" >frame 08 text 01</div>
-<div id="fr0802" class="" style="display:none" >frame 08 text 02</div>
+<div id="fr0801" class="" style="display: inline" >frame 08 text 01</div>
+<div id="fr0802" class="" style="display: inline" >frame 08 text 02</div>
 
-<div id="fr0803" class="" style="display:none" >frame 08 text 03</div>
-<div id="fr0804" class="" style="display:none" >frame 08 text 04</div>
+<div id="fr0803" class="" style="display: inline" >frame 08 text 03</div>
+<div id="fr0804" class="" style="display: inline" >frame 08 text 04</div>
 -->
 
 <!-- 

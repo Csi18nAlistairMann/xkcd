@@ -8,6 +8,16 @@
 // known to the software here. 
 $thisPageBelongsToSID = 92;
 
+//
+// The image lives in a div whose dimensions are below. Knowing
+// the dimensions ahead of time is a cheap and tacky way of ensuring
+// that the bottom edge of an element of an as yet unknown height
+// can nevertheless be kept a certain distance from the top. For
+// now the width is the width of the webcomic img, and the height
+// sticks at 1 Kilopixels (Kibipixels?)
+$container_width = 317;
+$container_height = 1024;
+
 header("Content-Type: text/html; charset=utf-8");
 
 function post_a_new($un, $pw, $apikey, $newmark, $lang, $vis, $trans, $opt_ignore_blanks, $thisPageBelongsToSID) {
@@ -563,6 +573,9 @@ echo "<script type='text/javascript'>\n".
 "var global_g_visitsid = '$thisPageBelongsToSID';\n" .
 "var global_g_uploadersid = '$g_uploadersid';\n".
 "var global_g_lang = '$g_lang';\n".
+"var global_container_width = '$container_width';\n".
+"var global_container_height = '$container_height';\n".
+
 "var global_g_newmarkfr0001 = '$g_newmarkfr0001';\n".
 "var global_g_newmarkfr0002 = '$g_newmarkfr0002';\n".
 

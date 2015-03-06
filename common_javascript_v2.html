@@ -1058,7 +1058,7 @@ function acceptDefLang() {
 //
 function createDialog_v2($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwidth, $style, $newmark, $visitsid, $g_uploadersid, $g_lang, $g_newmark) {
  var d = document.getElementById($el);
- d.style.display = "none";
+// d.style.display = "none";
  d.style.left = "auto";
  d.style.right = "auto";
  d.style.top = "auto";
@@ -1409,50 +1409,47 @@ function createDialog_v2($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwi
   d.innerHTML = escapeHtml($translation); 
  }
 
- if ($corner == 'BR') {
+ // title and mouseover div shunt down all else
+ if ($corner.substr(3,1) != 'T') { 
   d.style.position = "absolute";
+ }
+
+ var align = 'auto';
+ if ($corner.substr(0,2) == 'BR') {
   d.style.right = ($totx - $posx) + "px";
   d.style.bottom = ($toty - $posy) + "px";
-  d.style.backgroundColor = "#FFFFFF";
-  d.style.textAlign = "right";
+  align = 'right';
 
- } else if ($corner == 'TR') {
-  d.style.position = "absolute";
+ } else if ($corner.substr(0,2) == 'TR') {
   d.style.right = ($totx - $posx) + "px";
   d.style.top = $posy + "px";
-  d.style.fontSize = "20px";
-  d.style.backgroundColor = "#FFFFFF";
-  d.style.textAlign = "right";
+  align = 'right';
 
- } else if ($corner == 'BL') {
-  d.style.position = "absolute";
+ } else if ($corner.substr(0,2) == 'BL') {
   d.style.left = $posx + "px";;
   d.style.bottom = ($toty - $posy) + "px";
-  d.style.fontSize = "20px";
-  d.style.zIndex = "100";
-  d.style.backgroundColor = "#FFFFFF";
-  d.style.textAlign = "left";
+  align = 'left';
 
- } else if ($corner == 'TL') {
-  d.style.position = "absolute";
+ } else if ($corner.substr(0,2) == 'TL') {
   d.style.left = $posx + "px";
   d.style.top = $posy + "px";
-  d.style.fontSize = "20px";
-  d.style.backgroundColor = "#FFFFFF";
-  d.style.textAlign = "left";
+  align = 'left';
  }
+ // Xlates that center within their div
+ if ($corner.substr(2,1) == 'C') {
+  align = 'center'; 
+  d.style.minWidth = $maxwidth + "px";
+ }
+ d.style.textAlign = align;
 
- if ($corner != "hide") {
-  d.style.display = "";
-  d.style.fontSize = $size + "px";
-  d.style.fontFamily = "sans";
-  d.style.fontStyle = $style;
-  if ($maxwidth != "0") {
-   d.style.maxWidth = $maxwidth + "px";
-  } else {
-   d.style.maxWidth = "";
-  }
- }
+ // common to all xlates appearing
+ d.style.backgroundColor = 'rgba(255, 255, 255, 1)'; // final value is transparent - 1 = 'not'
+ d.style.fontSize = "20px";
+ d.style.zIndex = "100";
+ d.style.fontSize = $size + "px";
+ d.style.fontFamily = "sans";
+ d.style.fontStyle = $style;
+ d.style.maxWidth = $maxwidth + "px";
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -1615,7 +1612,7 @@ function onLoad() {
      echo "localStorage.setItem('csi18n_lang', '$lang');";
    }
 ?>
- xkcdShow(global_g_visitsid, global_g_uploadersid, global_g_lang, 
+ xkcdShow(global_g_visitsid, global_g_uploadersid, global_g_lang, global_container_width, global_container_height,
 global_g_newmarkfr0001, global_g_newmarkfr0002,
 global_g_newmarkfr0101, global_g_newmarkfr0102, global_g_newmarkfr0103, global_g_newmarkfr0104,
 global_g_newmarkfr0105, global_g_newmarkfr0106, global_g_newmarkfr0107, global_g_newmarkfr0108,
