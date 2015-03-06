@@ -14,7 +14,7 @@ Plastic JavaScript
 ///////////////////////////////////////////////////////////////////
 
 function trnPreferAnother($index) {
- $status = localStorage.getItem($ls + '.result');
+ $status = sessionStorage.getItem($ls + '.result');
  if ($status != 200) {
   // if we're showing undefined, then there is no "see more" to look at
   // and the user would need to change the lang(s) and refresh to see more.
@@ -22,13 +22,13 @@ function trnPreferAnother($index) {
  } else {
   // if we're showing defined by contrast the representation will be storing
   // a link to the all preferable resource (visit_link/langs/all)
-  $res = localStorage.getItem('csi18n_seemore.representations');
+  $res = sessionStorage.getItem('csi18n_seemore.representations');
   $json_arr = JSON.parse($res);
 
   $json_arr.csi18n_xlate_resources = $json_arr.csi18n_xlate_resources.slice($index, $index + 1);
   $res = JSON.stringify($json_arr);
 
-  $url = localStorage.getItem('csi18n_seemore.per_lang_pref');
+  $url = sessionStorage.getItem('csi18n_seemore.per_lang_pref');
 
   if (XMLHttpRequest) {
     var request = new XMLHttpRequest();
@@ -46,8 +46,8 @@ function trnPreferAnother($index) {
 }
 
 function trnSeeMore($ls) {
- localStorage.setItem('csi18n_seemore.representations', '');
- $status = localStorage.getItem($ls + '.result');
+ sessionStorage.setItem('csi18n_seemore.representations', '');
+ $status = sessionStorage.getItem($ls + '.result');
  if ($status != 200) {
   // if we're showing undefined, then there is no "see more" to look at
   // and the user would need to change the lang(s) and refresh to see more.
@@ -69,7 +69,7 @@ function trnSeeMore($ls) {
  } else {
   // if we're showing defined by contrast the representation will be storing
   // a link to the all preferable resource (visit_link/langs/all)
-  $res = localStorage.getItem($ls + '.representation');
+  $res = sessionStorage.getItem($ls + '.representation');
   $json = JSON.parse($res);
   $url = $json.csi18n_all_preferable;
 
@@ -94,7 +94,7 @@ function trnSeeMore($ls) {
 }
 
 function trnOptions($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  var d = document.getElementById("trn_menu");
  d.style.position = "fixed";
@@ -113,7 +113,7 @@ function trnOptions($ls) {
 }
 
 function trnHead($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  var d = document.getElementById("trn_menu");
  d.style.position = "fixed";
@@ -132,11 +132,11 @@ function trnHead($ls) {
 }
 
 function trnOfferAnother($ls) {
- var $result = localStorage.getItem($ls + '.result');
- var $newmark = localStorage.getItem($ls + '.newmark');
- var $visitsid = localStorage.getItem($ls + '.visitsid');
- var $rep = localStorage.getItem($ls + '.representation');
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $result = sessionStorage.getItem($ls + '.result');
+ var $newmark = sessionStorage.getItem($ls + '.newmark');
+ var $visitsid = sessionStorage.getItem($ls + '.visitsid');
+ var $rep = sessionStorage.getItem($ls + '.representation');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  if ($result == 200) {
   // yes yes, 200 is not the only response
@@ -186,10 +186,10 @@ function trnOfferAnother($ls) {
 }
 
 function trnDelete($ls) {
- var $result = localStorage.getItem($ls + '.result');
- var $newmark = localStorage.getItem($ls + '.newmark');
- var $rep = localStorage.getItem($ls + '.representation');
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $result = sessionStorage.getItem($ls + '.result');
+ var $newmark = sessionStorage.getItem($ls + '.newmark');
+ var $rep = sessionStorage.getItem($ls + '.representation');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  if ($result == 200) {
   // yes yes, 200 is not the only response
@@ -239,10 +239,10 @@ function trnDelete($ls) {
 }
 
 function trnEdit($ls) {
- var $result = localStorage.getItem($ls + '.result');
- var $newmark = localStorage.getItem($ls + '.newmark');
- var $rep = localStorage.getItem($ls + '.representation');
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $result = sessionStorage.getItem($ls + '.result');
+ var $newmark = sessionStorage.getItem($ls + '.newmark');
+ var $rep = sessionStorage.getItem($ls + '.representation');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  if ($result == 200) {
   // yes yes, 200 is not the only response
@@ -516,7 +516,7 @@ function sendGet($el, $newmark, $visitsid) {
 }
 
 function sendHead($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
  if (XMLHttpRequest) {
    var request = new XMLHttpRequest();
    if("withCredentials" in request) {
@@ -537,7 +537,7 @@ function sendHead($ls) {
 }
 
 function sendOptions($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
  if (XMLHttpRequest) {
    var request = new XMLHttpRequest();
    if("withCredentials" in request) {
@@ -592,7 +592,7 @@ function sendPut($ls) {
  $arr = { 'csi18n_xlate_resource' : { 'language' : $cont_lang, 'translation' : $translation, 'visibility' : $vis } };
  $json_s = JSON.stringify($arr);
 
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
  if (XMLHttpRequest) {
    var request = new XMLHttpRequest();
    if("withCredentials" in request) {
@@ -608,7 +608,7 @@ function sendPut($ls) {
 }
 
 function sendDelete($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
  if (XMLHttpRequest) {
    var request = new XMLHttpRequest();
    if("withCredentials" in request) {
@@ -672,7 +672,7 @@ function seemore_handler() {
    $json_o = this.response;
    if (window.ie !== false)
     $json_o = JSON.parse($json_o);
-   localStorage.setItem('csi18n_seemore.representations', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_seemore.representations', JSON.stringify($json_o));
 
    var $el = '';
    var $safe_choices = '';
@@ -738,9 +738,9 @@ function handler_fr0001() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0001.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0001.result', $status);
-   localStorage.setItem('csi18n_fr0001.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0001.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0001.result', $status);
+   sessionStorage.setItem('csi18n_fr0001.tlink', this.getResponseHeader('Content-Location'));
 //   d.style.display = "";
   } 
 }
@@ -763,9 +763,9 @@ function handler_fr0101() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0101.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0101.result', $status);
-   localStorage.setItem('csi18n_fr0101.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0101.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0101.result', $status);
+   sessionStorage.setItem('csi18n_fr0101.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -788,9 +788,9 @@ function handler_fr0102() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0102.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0102.result', $status); 
-   localStorage.setItem('csi18n_fr0102.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0102.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0102.result', $status); 
+   sessionStorage.setItem('csi18n_fr0102.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -813,9 +813,9 @@ function handler_fr0103() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0103.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0103.result', $status); 
-   localStorage.setItem('csi18n_fr0103.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0103.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0103.result', $status); 
+   sessionStorage.setItem('csi18n_fr0103.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -838,9 +838,9 @@ function handler_fr0104() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0104.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0104.result', $status); 
-   localStorage.setItem('csi18n_fr0104.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0104.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0104.result', $status); 
+   sessionStorage.setItem('csi18n_fr0104.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -863,9 +863,9 @@ function handler_fr0105() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0105.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0105.result', $status); 
-   localStorage.setItem('csi18n_fr0105.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0105.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0105.result', $status); 
+   sessionStorage.setItem('csi18n_fr0105.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -888,9 +888,9 @@ function handler_fr0106() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0106.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0106.result', $status); 
-   localStorage.setItem('csi18n_fr0106.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0106.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0106.result', $status); 
+   sessionStorage.setItem('csi18n_fr0106.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -913,9 +913,9 @@ function handler_fr0107() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0107.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0107.result', $status); 
-   localStorage.setItem('csi18n_fr0107.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0107.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0107.result', $status); 
+   sessionStorage.setItem('csi18n_fr0107.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -938,9 +938,9 @@ function handler_fr0108() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0108.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0108.result', $status); 
-   localStorage.setItem('csi18n_fr0108.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0108.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0108.result', $status); 
+   sessionStorage.setItem('csi18n_fr0108.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -963,9 +963,9 @@ function handler_fr0109() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0109.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0109.result', $status); 
-   localStorage.setItem('csi18n_fr0109.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0109.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0109.result', $status); 
+   sessionStorage.setItem('csi18n_fr0109.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -990,9 +990,9 @@ function handler_fr0110() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0110.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0110.result', $status);
-   localStorage.setItem('csi18n_fr0110.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0110.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0110.result', $status);
+   sessionStorage.setItem('csi18n_fr0110.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1015,9 +1015,9 @@ function handler_fr0111() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0111.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0111.result', $status);
-   localStorage.setItem('csi18n_fr0111.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0111.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0111.result', $status);
+   sessionStorage.setItem('csi18n_fr0111.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1040,9 +1040,9 @@ function handler_fr0112() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0112.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0112.result', $status); 
-   localStorage.setItem('csi18n_fr0112.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0112.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0112.result', $status); 
+   sessionStorage.setItem('csi18n_fr0112.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1065,9 +1065,9 @@ function handler_fr0113() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0113.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0113.result', $status); 
-   localStorage.setItem('csi18n_fr0113.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0113.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0113.result', $status); 
+   sessionStorage.setItem('csi18n_fr0113.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1090,9 +1090,9 @@ function handler_fr0114() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0114.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0114.result', $status); 
-   localStorage.setItem('csi18n_fr0114.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0114.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0114.result', $status); 
+   sessionStorage.setItem('csi18n_fr0114.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1115,9 +1115,9 @@ function handler_fr0115() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0115.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0115.result', $status); 
-   localStorage.setItem('csi18n_fr0115.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0115.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0115.result', $status); 
+   sessionStorage.setItem('csi18n_fr0115.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1140,9 +1140,9 @@ function handler_fr0116() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0116.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0116.result', $status); 
-   localStorage.setItem('csi18n_fr0116.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0116.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0116.result', $status); 
+   sessionStorage.setItem('csi18n_fr0116.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1165,9 +1165,9 @@ function handler_fr0117() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0117.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0117.result', $status); 
-   localStorage.setItem('csi18n_fr0117.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0117.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0117.result', $status); 
+   sessionStorage.setItem('csi18n_fr0117.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1190,9 +1190,9 @@ function handler_fr0118() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0118.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0118.result', $status); 
-   localStorage.setItem('csi18n_fr0118.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0118.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0118.result', $status); 
+   sessionStorage.setItem('csi18n_fr0118.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1215,9 +1215,9 @@ function handler_fr0119() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0119.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0119.result', $status); 
-   localStorage.setItem('csi18n_fr0119.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0119.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0119.result', $status); 
+   sessionStorage.setItem('csi18n_fr0119.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1242,9 +1242,9 @@ function handler_fr0120() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0120.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0120.result', $status);
-   localStorage.setItem('csi18n_fr0120.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0120.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0120.result', $status);
+   sessionStorage.setItem('csi18n_fr0120.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1267,9 +1267,9 @@ function handler_fr0121() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0121.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0121.result', $status);
-   localStorage.setItem('csi18n_fr0121.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0121.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0121.result', $status);
+   sessionStorage.setItem('csi18n_fr0121.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1292,9 +1292,9 @@ function handler_fr0122() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0122.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0122.result', $status); 
-   localStorage.setItem('csi18n_fr0122.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0122.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0122.result', $status); 
+   sessionStorage.setItem('csi18n_fr0122.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1317,9 +1317,9 @@ function handler_fr0123() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0123.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0123.result', $status); 
-   localStorage.setItem('csi18n_fr0123.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0123.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0123.result', $status); 
+   sessionStorage.setItem('csi18n_fr0123.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1342,9 +1342,9 @@ function handler_fr0124() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0124.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0124.result', $status); 
-   localStorage.setItem('csi18n_fr0124.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0124.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0124.result', $status); 
+   sessionStorage.setItem('csi18n_fr0124.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1367,9 +1367,9 @@ function handler_fr0125() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0125.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0125.result', $status); 
-   localStorage.setItem('csi18n_fr0125.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0125.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0125.result', $status); 
+   sessionStorage.setItem('csi18n_fr0125.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1392,9 +1392,9 @@ function handler_fr0126() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0126.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0126.result', $status); 
-   localStorage.setItem('csi18n_fr0126.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0126.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0126.result', $status); 
+   sessionStorage.setItem('csi18n_fr0126.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1417,9 +1417,9 @@ function handler_fr0127() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0127.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0127.result', $status); 
-   localStorage.setItem('csi18n_fr0127.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0127.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0127.result', $status); 
+   sessionStorage.setItem('csi18n_fr0127.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1442,9 +1442,9 @@ function handler_fr0128() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0128.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0128.result', $status); 
-   localStorage.setItem('csi18n_fr0128.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0128.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0128.result', $status); 
+   sessionStorage.setItem('csi18n_fr0128.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1467,9 +1467,9 @@ function handler_fr0129() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0129.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0129.result', $status); 
-   localStorage.setItem('csi18n_fr0129.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0129.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0129.result', $status); 
+   sessionStorage.setItem('csi18n_fr0129.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1494,9 +1494,9 @@ function handler_fr0130() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0130.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0130.result', $status);
-   localStorage.setItem('csi18n_fr0130.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0130.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0130.result', $status);
+   sessionStorage.setItem('csi18n_fr0130.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1519,9 +1519,9 @@ function handler_fr0131() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0131.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0131.result', $status);
-   localStorage.setItem('csi18n_fr0131.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0131.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0131.result', $status);
+   sessionStorage.setItem('csi18n_fr0131.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1544,9 +1544,9 @@ function handler_fr0132() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0132.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0132.result', $status); 
-   localStorage.setItem('csi18n_fr0132.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0132.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0132.result', $status); 
+   sessionStorage.setItem('csi18n_fr0132.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1569,9 +1569,9 @@ function handler_fr0133() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0133.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0133.result', $status); 
-   localStorage.setItem('csi18n_fr0133.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0133.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0133.result', $status); 
+   sessionStorage.setItem('csi18n_fr0133.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1594,9 +1594,9 @@ function handler_fr0134() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0134.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0134.result', $status); 
-   localStorage.setItem('csi18n_fr0134.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0134.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0134.result', $status); 
+   sessionStorage.setItem('csi18n_fr0134.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1619,9 +1619,9 @@ function handler_fr0135() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0135.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0135.result', $status); 
-   localStorage.setItem('csi18n_fr0135.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0135.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0135.result', $status); 
+   sessionStorage.setItem('csi18n_fr0135.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1644,9 +1644,9 @@ function handler_fr0136() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0136.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0136.result', $status); 
-   localStorage.setItem('csi18n_fr0136.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0136.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0136.result', $status); 
+   sessionStorage.setItem('csi18n_fr0136.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1669,9 +1669,9 @@ function handler_fr0137() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0137.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0137.result', $status); 
-   localStorage.setItem('csi18n_fr0137.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0137.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0137.result', $status); 
+   sessionStorage.setItem('csi18n_fr0137.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1694,9 +1694,9 @@ function handler_fr0138() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0138.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0138.result', $status); 
-   localStorage.setItem('csi18n_fr0138.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0138.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0138.result', $status); 
+   sessionStorage.setItem('csi18n_fr0138.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1719,9 +1719,9 @@ function handler_fr0139() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0139.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0139.result', $status); 
-   localStorage.setItem('csi18n_fr0139.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0139.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0139.result', $status); 
+   sessionStorage.setItem('csi18n_fr0139.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1746,9 +1746,9 @@ function handler_fr0140() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0140.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0140.result', $status);
-   localStorage.setItem('csi18n_fr0140.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0140.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0140.result', $status);
+   sessionStorage.setItem('csi18n_fr0140.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1771,9 +1771,9 @@ function handler_fr0141() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0141.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0141.result', $status);
-   localStorage.setItem('csi18n_fr0141.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0141.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0141.result', $status);
+   sessionStorage.setItem('csi18n_fr0141.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1796,9 +1796,9 @@ function handler_fr0142() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0142.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0142.result', $status); 
-   localStorage.setItem('csi18n_fr0142.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0142.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0142.result', $status); 
+   sessionStorage.setItem('csi18n_fr0142.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1821,9 +1821,9 @@ function handler_fr0143() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0143.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0143.result', $status); 
-   localStorage.setItem('csi18n_fr0143.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0143.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0143.result', $status); 
+   sessionStorage.setItem('csi18n_fr0143.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1846,9 +1846,9 @@ function handler_fr0144() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0144.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0144.result', $status); 
-   localStorage.setItem('csi18n_fr0144.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0144.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0144.result', $status); 
+   sessionStorage.setItem('csi18n_fr0144.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1871,9 +1871,9 @@ function handler_fr0145() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0145.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0145.result', $status); 
-   localStorage.setItem('csi18n_fr0145.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0145.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0145.result', $status); 
+   sessionStorage.setItem('csi18n_fr0145.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1896,9 +1896,9 @@ function handler_fr0146() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0146.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0146.result', $status); 
-   localStorage.setItem('csi18n_fr0146.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0146.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0146.result', $status); 
+   sessionStorage.setItem('csi18n_fr0146.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1921,9 +1921,9 @@ function handler_fr0147() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0147.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0147.result', $status); 
-   localStorage.setItem('csi18n_fr0147.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0147.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0147.result', $status); 
+   sessionStorage.setItem('csi18n_fr0147.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1946,9 +1946,9 @@ function handler_fr0148() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0148.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0148.result', $status); 
-   localStorage.setItem('csi18n_fr0148.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0148.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0148.result', $status); 
+   sessionStorage.setItem('csi18n_fr0148.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1971,9 +1971,9 @@ function handler_fr0149() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0149.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0149.result', $status); 
-   localStorage.setItem('csi18n_fr0149.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0149.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0149.result', $status); 
+   sessionStorage.setItem('csi18n_fr0149.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -1998,9 +1998,9 @@ function handler_fr0150() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0150.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0150.result', $status);
-   localStorage.setItem('csi18n_fr0150.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0150.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0150.result', $status);
+   sessionStorage.setItem('csi18n_fr0150.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2023,9 +2023,9 @@ function handler_fr0151() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0151.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0151.result', $status);
-   localStorage.setItem('csi18n_fr0151.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0151.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0151.result', $status);
+   sessionStorage.setItem('csi18n_fr0151.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2048,9 +2048,9 @@ function handler_fr0152() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0152.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0152.result', $status); 
-   localStorage.setItem('csi18n_fr0152.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0152.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0152.result', $status); 
+   sessionStorage.setItem('csi18n_fr0152.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2073,9 +2073,9 @@ function handler_fr0153() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0153.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0153.result', $status); 
-   localStorage.setItem('csi18n_fr0153.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0153.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0153.result', $status); 
+   sessionStorage.setItem('csi18n_fr0153.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2098,9 +2098,9 @@ function handler_fr0154() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0154.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0154.result', $status); 
-   localStorage.setItem('csi18n_fr0154.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0154.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0154.result', $status); 
+   sessionStorage.setItem('csi18n_fr0154.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2123,9 +2123,9 @@ function handler_fr0155() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0155.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0155.result', $status); 
-   localStorage.setItem('csi18n_fr0155.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0155.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0155.result', $status); 
+   sessionStorage.setItem('csi18n_fr0155.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2148,9 +2148,9 @@ function handler_fr0156() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0156.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0156.result', $status); 
-   localStorage.setItem('csi18n_fr0156.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0156.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0156.result', $status); 
+   sessionStorage.setItem('csi18n_fr0156.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2173,9 +2173,9 @@ function handler_fr0157() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0157.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0157.result', $status); 
-   localStorage.setItem('csi18n_fr0157.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0157.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0157.result', $status); 
+   sessionStorage.setItem('csi18n_fr0157.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2198,9 +2198,9 @@ function handler_fr0158() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0158.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0158.result', $status); 
-   localStorage.setItem('csi18n_fr0158.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0158.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0158.result', $status); 
+   sessionStorage.setItem('csi18n_fr0158.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2223,9 +2223,9 @@ function handler_fr0159() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0159.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0159.result', $status); 
-   localStorage.setItem('csi18n_fr0159.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0159.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0159.result', $status); 
+   sessionStorage.setItem('csi18n_fr0159.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2250,9 +2250,9 @@ function handler_fr0160() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0160.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0160.result', $status);
-   localStorage.setItem('csi18n_fr0160.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0160.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0160.result', $status);
+   sessionStorage.setItem('csi18n_fr0160.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2275,9 +2275,9 @@ function handler_fr0161() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0161.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0161.result', $status);
-   localStorage.setItem('csi18n_fr0161.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0161.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0161.result', $status);
+   sessionStorage.setItem('csi18n_fr0161.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2300,9 +2300,9 @@ function handler_fr0162() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0162.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0162.result', $status); 
-   localStorage.setItem('csi18n_fr0162.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0162.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0162.result', $status); 
+   sessionStorage.setItem('csi18n_fr0162.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2325,9 +2325,9 @@ function handler_fr0163() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0163.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0163.result', $status); 
-   localStorage.setItem('csi18n_fr0163.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0163.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0163.result', $status); 
+   sessionStorage.setItem('csi18n_fr0163.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2350,9 +2350,9 @@ function handler_fr0164() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0164.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0164.result', $status); 
-   localStorage.setItem('csi18n_fr0164.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0164.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0164.result', $status); 
+   sessionStorage.setItem('csi18n_fr0164.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2375,9 +2375,9 @@ function handler_fr0165() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0165.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0165.result', $status); 
-   localStorage.setItem('csi18n_fr0165.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0165.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0165.result', $status); 
+   sessionStorage.setItem('csi18n_fr0165.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2400,9 +2400,9 @@ function handler_fr0166() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0166.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0166.result', $status); 
-   localStorage.setItem('csi18n_fr0166.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0166.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0166.result', $status); 
+   sessionStorage.setItem('csi18n_fr0166.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2425,9 +2425,9 @@ function handler_fr0167() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0167.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0167.result', $status); 
-   localStorage.setItem('csi18n_fr0167.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0167.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0167.result', $status); 
+   sessionStorage.setItem('csi18n_fr0167.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2450,9 +2450,9 @@ function handler_fr0168() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0168.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0168.result', $status); 
-   localStorage.setItem('csi18n_fr0168.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0168.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0168.result', $status); 
+   sessionStorage.setItem('csi18n_fr0168.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2475,9 +2475,9 @@ function handler_fr0169() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0169.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0169.result', $status); 
-   localStorage.setItem('csi18n_fr0169.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0169.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0169.result', $status); 
+   sessionStorage.setItem('csi18n_fr0169.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2502,9 +2502,9 @@ function handler_fr0170() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0170.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0170.result', $status);
-   localStorage.setItem('csi18n_fr0170.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0170.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0170.result', $status);
+   sessionStorage.setItem('csi18n_fr0170.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2527,9 +2527,9 @@ function handler_fr0171() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0171.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0171.result', $status);
-   localStorage.setItem('csi18n_fr0171.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0171.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0171.result', $status);
+   sessionStorage.setItem('csi18n_fr0171.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2552,9 +2552,9 @@ function handler_fr0172() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0172.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0172.result', $status); 
-   localStorage.setItem('csi18n_fr0172.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0172.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0172.result', $status); 
+   sessionStorage.setItem('csi18n_fr0172.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2577,9 +2577,9 @@ function handler_fr0173() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0173.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0173.result', $status); 
-   localStorage.setItem('csi18n_fr0173.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0173.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0173.result', $status); 
+   sessionStorage.setItem('csi18n_fr0173.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2602,9 +2602,9 @@ function handler_fr0174() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0174.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0174.result', $status); 
-   localStorage.setItem('csi18n_fr0174.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0174.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0174.result', $status); 
+   sessionStorage.setItem('csi18n_fr0174.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2627,9 +2627,9 @@ function handler_fr0175() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0175.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0175.result', $status); 
-   localStorage.setItem('csi18n_fr0175.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0175.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0175.result', $status); 
+   sessionStorage.setItem('csi18n_fr0175.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2652,9 +2652,9 @@ function handler_fr0176() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0176.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0176.result', $status); 
-   localStorage.setItem('csi18n_fr0176.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0176.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0176.result', $status); 
+   sessionStorage.setItem('csi18n_fr0176.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2677,9 +2677,9 @@ function handler_fr0177() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0177.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0177.result', $status); 
-   localStorage.setItem('csi18n_fr0177.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0177.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0177.result', $status); 
+   sessionStorage.setItem('csi18n_fr0177.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2702,9 +2702,9 @@ function handler_fr0178() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0178.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0178.result', $status); 
-   localStorage.setItem('csi18n_fr0178.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0178.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0178.result', $status); 
+   sessionStorage.setItem('csi18n_fr0178.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2727,9 +2727,9 @@ function handler_fr0179() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0179.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0179.result', $status); 
-   localStorage.setItem('csi18n_fr0179.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0179.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0179.result', $status); 
+   sessionStorage.setItem('csi18n_fr0179.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2754,9 +2754,9 @@ function handler_fr0180() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0180.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0180.result', $status);
-   localStorage.setItem('csi18n_fr0180.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0180.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0180.result', $status);
+   sessionStorage.setItem('csi18n_fr0180.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2779,9 +2779,9 @@ function handler_fr0181() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0181.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0181.result', $status);
-   localStorage.setItem('csi18n_fr0181.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0181.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0181.result', $status);
+   sessionStorage.setItem('csi18n_fr0181.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2804,9 +2804,9 @@ function handler_fr0182() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0182.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0182.result', $status); 
-   localStorage.setItem('csi18n_fr0182.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0182.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0182.result', $status); 
+   sessionStorage.setItem('csi18n_fr0182.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2829,9 +2829,9 @@ function handler_fr0183() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0183.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0183.result', $status); 
-   localStorage.setItem('csi18n_fr0183.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0183.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0183.result', $status); 
+   sessionStorage.setItem('csi18n_fr0183.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2854,9 +2854,9 @@ function handler_fr0184() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0184.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0184.result', $status); 
-   localStorage.setItem('csi18n_fr0184.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0184.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0184.result', $status); 
+   sessionStorage.setItem('csi18n_fr0184.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2885,9 +2885,9 @@ function handler_fr0185() {
    } else {
     d3.innerHTML = escapeHtml($translation);
    }
-   localStorage.setItem('csi18n_fr0185.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0185.result', $status); 
-   localStorage.setItem('csi18n_fr0185.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0185.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0185.result', $status); 
+   sessionStorage.setItem('csi18n_fr0185.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2910,9 +2910,9 @@ function handler_fr0186() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0186.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0186.result', $status); 
-   localStorage.setItem('csi18n_fr0186.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0186.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0186.result', $status); 
+   sessionStorage.setItem('csi18n_fr0186.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2935,9 +2935,9 @@ function handler_fr0187() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0187.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0187.result', $status); 
-   localStorage.setItem('csi18n_fr0187.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0187.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0187.result', $status); 
+   sessionStorage.setItem('csi18n_fr0187.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2960,9 +2960,9 @@ function handler_fr0188() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0188.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0188.result', $status); 
-   localStorage.setItem('csi18n_fr0188.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0188.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0188.result', $status); 
+   sessionStorage.setItem('csi18n_fr0188.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -2985,9 +2985,9 @@ function handler_fr0189() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0189.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0189.result', $status); 
-   localStorage.setItem('csi18n_fr0189.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0189.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0189.result', $status); 
+   sessionStorage.setItem('csi18n_fr0189.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -3057,13 +3057,13 @@ function toggleShowServiceMenu() {
 function toggleShowTranslationMenu($ls) {
  var d = document.getElementById("trn_menu");
 
- $res = localStorage.getItem($ls + '.representation');
+ $res = sessionStorage.getItem($ls + '.representation');
  if ($res != '') {
   $seemore_uri = $res.csi18n_per_lang_preference;
  } else {
   $seemore_uri = '';
  }
- localStorage.setItem('csi18n_seemore.per_lang_pref', $seemore_uri);
+ sessionStorage.setItem('csi18n_seemore.per_lang_pref', $seemore_uri);
 	
  if (d.style.display == "") {
   d.style.display = "none";
@@ -3153,548 +3153,548 @@ function createDialog($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwidth
  d.style.bottom = "auto";
 
  if ($el === 'fr0001') {
-  localStorage.setItem('csi18n_fr0001.result', 0);
-  localStorage.setItem('csi18n_fr0001.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0001.representation', '');
-  localStorage.setItem('csi18n_fr0001.tlink', '');
-  localStorage.setItem('csi18n_fr0001.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0001.result', 0);
+  sessionStorage.setItem('csi18n_fr0001.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0001.representation', '');
+  sessionStorage.setItem('csi18n_fr0001.tlink', '');
+  sessionStorage.setItem('csi18n_fr0001.visitsid', $visitsid);
 
  } else if ($el === 'fr0101') {
-  localStorage.setItem('csi18n_fr0101.result', 0);
-  localStorage.setItem('csi18n_fr0101.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0101.representation', '');
-  localStorage.setItem('csi18n_fr0101.tlink', '');
-  localStorage.setItem('csi18n_fr0101.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0101.result', 0);
+  sessionStorage.setItem('csi18n_fr0101.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0101.representation', '');
+  sessionStorage.setItem('csi18n_fr0101.tlink', '');
+  sessionStorage.setItem('csi18n_fr0101.visitsid', $visitsid);
  } else if ($el === 'fr0102') {
-  localStorage.setItem('csi18n_fr0102.result', 0);
-  localStorage.setItem('csi18n_fr0102.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0102.representation', '');
-  localStorage.setItem('csi18n_fr0102.tlink', '');
-  localStorage.setItem('csi18n_fr0102.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0102.result', 0);
+  sessionStorage.setItem('csi18n_fr0102.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0102.representation', '');
+  sessionStorage.setItem('csi18n_fr0102.tlink', '');
+  sessionStorage.setItem('csi18n_fr0102.visitsid', $visitsid);
  } else if ($el === 'fr0103') {
-  localStorage.setItem('csi18n_fr0103.result', 0);
-  localStorage.setItem('csi18n_fr0103.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0103.representation', '');
-  localStorage.setItem('csi18n_fr0103.tlink', '');
-  localStorage.setItem('csi18n_fr0103.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0103.result', 0);
+  sessionStorage.setItem('csi18n_fr0103.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0103.representation', '');
+  sessionStorage.setItem('csi18n_fr0103.tlink', '');
+  sessionStorage.setItem('csi18n_fr0103.visitsid', $visitsid);
  } else if ($el === 'fr0104') {
-  localStorage.setItem('csi18n_fr0104.result', 0);
-  localStorage.setItem('csi18n_fr0104.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0104.representation', '');
-  localStorage.setItem('csi18n_fr0104.tlink', '');
-  localStorage.setItem('csi18n_fr0104.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0104.result', 0);
+  sessionStorage.setItem('csi18n_fr0104.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0104.representation', '');
+  sessionStorage.setItem('csi18n_fr0104.tlink', '');
+  sessionStorage.setItem('csi18n_fr0104.visitsid', $visitsid);
  } else if ($el === 'fr0105') {
-  localStorage.setItem('csi18n_fr0105.result', 0);
-  localStorage.setItem('csi18n_fr0105.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0105.representation', '');
-  localStorage.setItem('csi18n_fr0105.tlink', '');
-  localStorage.setItem('csi18n_fr0105.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0105.result', 0);
+  sessionStorage.setItem('csi18n_fr0105.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0105.representation', '');
+  sessionStorage.setItem('csi18n_fr0105.tlink', '');
+  sessionStorage.setItem('csi18n_fr0105.visitsid', $visitsid);
  } else if ($el === 'fr0106') {
-  localStorage.setItem('csi18n_fr0106.result', 0);
-  localStorage.setItem('csi18n_fr0106.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0106.representation', '');
-  localStorage.setItem('csi18n_fr0106.tlink', '');
-  localStorage.setItem('csi18n_fr0106.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0106.result', 0);
+  sessionStorage.setItem('csi18n_fr0106.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0106.representation', '');
+  sessionStorage.setItem('csi18n_fr0106.tlink', '');
+  sessionStorage.setItem('csi18n_fr0106.visitsid', $visitsid);
  } else if ($el === 'fr0107') {
-  localStorage.setItem('csi18n_fr0107.result', 0);
-  localStorage.setItem('csi18n_fr0107.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0107.representation', '');
-  localStorage.setItem('csi18n_fr0107.tlink', '');
-  localStorage.setItem('csi18n_fr0107.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0107.result', 0);
+  sessionStorage.setItem('csi18n_fr0107.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0107.representation', '');
+  sessionStorage.setItem('csi18n_fr0107.tlink', '');
+  sessionStorage.setItem('csi18n_fr0107.visitsid', $visitsid);
  } else if ($el === 'fr0108') {
-  localStorage.setItem('csi18n_fr0108.result', 0);
-  localStorage.setItem('csi18n_fr0108.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0108.representation', '');
-  localStorage.setItem('csi18n_fr0108.tlink', '');
-  localStorage.setItem('csi18n_fr0108.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0108.result', 0);
+  sessionStorage.setItem('csi18n_fr0108.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0108.representation', '');
+  sessionStorage.setItem('csi18n_fr0108.tlink', '');
+  sessionStorage.setItem('csi18n_fr0108.visitsid', $visitsid);
  } else if ($el === 'fr0109') {
-  localStorage.setItem('csi18n_fr0109.result', 0);
-  localStorage.setItem('csi18n_fr0109.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0109.representation', '');
-  localStorage.setItem('csi18n_fr0109.tlink', '');
-  localStorage.setItem('csi18n_fr0109.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0109.result', 0);
+  sessionStorage.setItem('csi18n_fr0109.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0109.representation', '');
+  sessionStorage.setItem('csi18n_fr0109.tlink', '');
+  sessionStorage.setItem('csi18n_fr0109.visitsid', $visitsid);
 
  } else if ($el === 'fr0110') {
-  localStorage.setItem('csi18n_fr0110.result', 0);
-  localStorage.setItem('csi18n_fr0110.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0110.representation', '');
-  localStorage.setItem('csi18n_fr0110.tlink', '');
-  localStorage.setItem('csi18n_fr0110.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0110.result', 0);
+  sessionStorage.setItem('csi18n_fr0110.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0110.representation', '');
+  sessionStorage.setItem('csi18n_fr0110.tlink', '');
+  sessionStorage.setItem('csi18n_fr0110.visitsid', $visitsid);
  } else if ($el === 'fr0111') {
-  localStorage.setItem('csi18n_fr0111.result', 0);
-  localStorage.setItem('csi18n_fr0111.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0111.representation', '');
-  localStorage.setItem('csi18n_fr0111.tlink', '');
-  localStorage.setItem('csi18n_fr0111.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0111.result', 0);
+  sessionStorage.setItem('csi18n_fr0111.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0111.representation', '');
+  sessionStorage.setItem('csi18n_fr0111.tlink', '');
+  sessionStorage.setItem('csi18n_fr0111.visitsid', $visitsid);
  } else if ($el === 'fr0112') {
-  localStorage.setItem('csi18n_fr0112.result', 0);
-  localStorage.setItem('csi18n_fr0112.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0112.representation', '');
-  localStorage.setItem('csi18n_fr0112.tlink', '');
-  localStorage.setItem('csi18n_fr0112.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0112.result', 0);
+  sessionStorage.setItem('csi18n_fr0112.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0112.representation', '');
+  sessionStorage.setItem('csi18n_fr0112.tlink', '');
+  sessionStorage.setItem('csi18n_fr0112.visitsid', $visitsid);
  } else if ($el === 'fr0113') {
-  localStorage.setItem('csi18n_fr0113.result', 0);
-  localStorage.setItem('csi18n_fr0113.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0113.representation', '');
-  localStorage.setItem('csi18n_fr0113.tlink', '');
-  localStorage.setItem('csi18n_fr0113.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0113.result', 0);
+  sessionStorage.setItem('csi18n_fr0113.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0113.representation', '');
+  sessionStorage.setItem('csi18n_fr0113.tlink', '');
+  sessionStorage.setItem('csi18n_fr0113.visitsid', $visitsid);
  } else if ($el === 'fr0114') {
-  localStorage.setItem('csi18n_fr0114.result', 0);
-  localStorage.setItem('csi18n_fr0114.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0114.representation', '');
-  localStorage.setItem('csi18n_fr0114.tlink', '');
-  localStorage.setItem('csi18n_fr0114.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0114.result', 0);
+  sessionStorage.setItem('csi18n_fr0114.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0114.representation', '');
+  sessionStorage.setItem('csi18n_fr0114.tlink', '');
+  sessionStorage.setItem('csi18n_fr0114.visitsid', $visitsid);
  } else if ($el === 'fr0115') {
-  localStorage.setItem('csi18n_fr0115.result', 0);
-  localStorage.setItem('csi18n_fr0115.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0115.representation', '');
-  localStorage.setItem('csi18n_fr0115.tlink', '');
-  localStorage.setItem('csi18n_fr0115.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0115.result', 0);
+  sessionStorage.setItem('csi18n_fr0115.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0115.representation', '');
+  sessionStorage.setItem('csi18n_fr0115.tlink', '');
+  sessionStorage.setItem('csi18n_fr0115.visitsid', $visitsid);
  } else if ($el === 'fr0116') {
-  localStorage.setItem('csi18n_fr0116.result', 0);
-  localStorage.setItem('csi18n_fr0116.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0116.representation', '');
-  localStorage.setItem('csi18n_fr0116.tlink', '');
-  localStorage.setItem('csi18n_fr0116.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0116.result', 0);
+  sessionStorage.setItem('csi18n_fr0116.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0116.representation', '');
+  sessionStorage.setItem('csi18n_fr0116.tlink', '');
+  sessionStorage.setItem('csi18n_fr0116.visitsid', $visitsid);
  } else if ($el === 'fr0117') {
-  localStorage.setItem('csi18n_fr0117.result', 0);
-  localStorage.setItem('csi18n_fr0117.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0117.representation', '');
-  localStorage.setItem('csi18n_fr0117.tlink', '');
-  localStorage.setItem('csi18n_fr0117.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0117.result', 0);
+  sessionStorage.setItem('csi18n_fr0117.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0117.representation', '');
+  sessionStorage.setItem('csi18n_fr0117.tlink', '');
+  sessionStorage.setItem('csi18n_fr0117.visitsid', $visitsid);
  } else if ($el === 'fr0118') {
-  localStorage.setItem('csi18n_fr0118.result', 0);
-  localStorage.setItem('csi18n_fr0118.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0118.representation', '');
-  localStorage.setItem('csi18n_fr0118.tlink', '');
-  localStorage.setItem('csi18n_fr0118.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0118.result', 0);
+  sessionStorage.setItem('csi18n_fr0118.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0118.representation', '');
+  sessionStorage.setItem('csi18n_fr0118.tlink', '');
+  sessionStorage.setItem('csi18n_fr0118.visitsid', $visitsid);
  } else if ($el === 'fr0119') {
-  localStorage.setItem('csi18n_fr0119.result', 0);
-  localStorage.setItem('csi18n_fr0119.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0119.representation', '');
-  localStorage.setItem('csi18n_fr0119.tlink', '');
-  localStorage.setItem('csi18n_fr0119.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0119.result', 0);
+  sessionStorage.setItem('csi18n_fr0119.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0119.representation', '');
+  sessionStorage.setItem('csi18n_fr0119.tlink', '');
+  sessionStorage.setItem('csi18n_fr0119.visitsid', $visitsid);
 
  } else if ($el === 'fr0120') {
-  localStorage.setItem('csi18n_fr0120.result', 0);
-  localStorage.setItem('csi18n_fr0120.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0120.representation', '');
-  localStorage.setItem('csi18n_fr0120.tlink', '');
-  localStorage.setItem('csi18n_fr0120.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0120.result', 0);
+  sessionStorage.setItem('csi18n_fr0120.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0120.representation', '');
+  sessionStorage.setItem('csi18n_fr0120.tlink', '');
+  sessionStorage.setItem('csi18n_fr0120.visitsid', $visitsid);
  } else if ($el === 'fr0121') {
-  localStorage.setItem('csi18n_fr0121.result', 0);
-  localStorage.setItem('csi18n_fr0121.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0121.representation', '');
-  localStorage.setItem('csi18n_fr0121.tlink', '');
-  localStorage.setItem('csi18n_fr0121.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0121.result', 0);
+  sessionStorage.setItem('csi18n_fr0121.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0121.representation', '');
+  sessionStorage.setItem('csi18n_fr0121.tlink', '');
+  sessionStorage.setItem('csi18n_fr0121.visitsid', $visitsid);
  } else if ($el === 'fr0122') {
-  localStorage.setItem('csi18n_fr0122.result', 0);
-  localStorage.setItem('csi18n_fr0122.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0122.representation', '');
-  localStorage.setItem('csi18n_fr0122.tlink', '');
-  localStorage.setItem('csi18n_fr0122.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0122.result', 0);
+  sessionStorage.setItem('csi18n_fr0122.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0122.representation', '');
+  sessionStorage.setItem('csi18n_fr0122.tlink', '');
+  sessionStorage.setItem('csi18n_fr0122.visitsid', $visitsid);
  } else if ($el === 'fr0123') {
-  localStorage.setItem('csi18n_fr0123.result', 0);
-  localStorage.setItem('csi18n_fr0123.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0123.representation', '');
-  localStorage.setItem('csi18n_fr0123.tlink', '');
-  localStorage.setItem('csi18n_fr0123.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0123.result', 0);
+  sessionStorage.setItem('csi18n_fr0123.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0123.representation', '');
+  sessionStorage.setItem('csi18n_fr0123.tlink', '');
+  sessionStorage.setItem('csi18n_fr0123.visitsid', $visitsid);
  } else if ($el === 'fr0124') {
-  localStorage.setItem('csi18n_fr0124.result', 0);
-  localStorage.setItem('csi18n_fr0124.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0124.representation', '');
-  localStorage.setItem('csi18n_fr0124.tlink', '');
-  localStorage.setItem('csi18n_fr0124.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0124.result', 0);
+  sessionStorage.setItem('csi18n_fr0124.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0124.representation', '');
+  sessionStorage.setItem('csi18n_fr0124.tlink', '');
+  sessionStorage.setItem('csi18n_fr0124.visitsid', $visitsid);
  } else if ($el === 'fr0125') {
-  localStorage.setItem('csi18n_fr0125.result', 0);
-  localStorage.setItem('csi18n_fr0125.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0125.representation', '');
-  localStorage.setItem('csi18n_fr0125.tlink', '');
-  localStorage.setItem('csi18n_fr0125.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0125.result', 0);
+  sessionStorage.setItem('csi18n_fr0125.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0125.representation', '');
+  sessionStorage.setItem('csi18n_fr0125.tlink', '');
+  sessionStorage.setItem('csi18n_fr0125.visitsid', $visitsid);
  } else if ($el === 'fr0126') {
-  localStorage.setItem('csi18n_fr0126.result', 0);
-  localStorage.setItem('csi18n_fr0126.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0126.representation', '');
-  localStorage.setItem('csi18n_fr0126.tlink', '');
-  localStorage.setItem('csi18n_fr0126.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0126.result', 0);
+  sessionStorage.setItem('csi18n_fr0126.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0126.representation', '');
+  sessionStorage.setItem('csi18n_fr0126.tlink', '');
+  sessionStorage.setItem('csi18n_fr0126.visitsid', $visitsid);
  } else if ($el === 'fr0127') {
-  localStorage.setItem('csi18n_fr0127.result', 0);
-  localStorage.setItem('csi18n_fr0127.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0127.representation', '');
-  localStorage.setItem('csi18n_fr0127.tlink', '');
-  localStorage.setItem('csi18n_fr0127.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0127.result', 0);
+  sessionStorage.setItem('csi18n_fr0127.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0127.representation', '');
+  sessionStorage.setItem('csi18n_fr0127.tlink', '');
+  sessionStorage.setItem('csi18n_fr0127.visitsid', $visitsid);
  } else if ($el === 'fr0128') {
-  localStorage.setItem('csi18n_fr0128.result', 0);
-  localStorage.setItem('csi18n_fr0128.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0128.representation', '');
-  localStorage.setItem('csi18n_fr0128.tlink', '');
-  localStorage.setItem('csi18n_fr0128.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0128.result', 0);
+  sessionStorage.setItem('csi18n_fr0128.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0128.representation', '');
+  sessionStorage.setItem('csi18n_fr0128.tlink', '');
+  sessionStorage.setItem('csi18n_fr0128.visitsid', $visitsid);
  } else if ($el === 'fr0129') {
-  localStorage.setItem('csi18n_fr0129.result', 0);
-  localStorage.setItem('csi18n_fr0129.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0129.representation', '');
-  localStorage.setItem('csi18n_fr0129.tlink', '');
-  localStorage.setItem('csi18n_fr0129.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0129.result', 0);
+  sessionStorage.setItem('csi18n_fr0129.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0129.representation', '');
+  sessionStorage.setItem('csi18n_fr0129.tlink', '');
+  sessionStorage.setItem('csi18n_fr0129.visitsid', $visitsid);
 
  } else if ($el === 'fr0130') {
-  localStorage.setItem('csi18n_fr0130.result', 0);
-  localStorage.setItem('csi18n_fr0130.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0130.representation', '');
-  localStorage.setItem('csi18n_fr0130.tlink', '');
-  localStorage.setItem('csi18n_fr0130.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0130.result', 0);
+  sessionStorage.setItem('csi18n_fr0130.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0130.representation', '');
+  sessionStorage.setItem('csi18n_fr0130.tlink', '');
+  sessionStorage.setItem('csi18n_fr0130.visitsid', $visitsid);
  } else if ($el === 'fr0131') {
-  localStorage.setItem('csi18n_fr0131.result', 0);
-  localStorage.setItem('csi18n_fr0131.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0131.representation', '');
-  localStorage.setItem('csi18n_fr0131.tlink', '');
-  localStorage.setItem('csi18n_fr0131.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0131.result', 0);
+  sessionStorage.setItem('csi18n_fr0131.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0131.representation', '');
+  sessionStorage.setItem('csi18n_fr0131.tlink', '');
+  sessionStorage.setItem('csi18n_fr0131.visitsid', $visitsid);
  } else if ($el === 'fr0132') {
-  localStorage.setItem('csi18n_fr0132.result', 0);
-  localStorage.setItem('csi18n_fr0132.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0132.representation', '');
-  localStorage.setItem('csi18n_fr0132.tlink', '');
-  localStorage.setItem('csi18n_fr0132.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0132.result', 0);
+  sessionStorage.setItem('csi18n_fr0132.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0132.representation', '');
+  sessionStorage.setItem('csi18n_fr0132.tlink', '');
+  sessionStorage.setItem('csi18n_fr0132.visitsid', $visitsid);
  } else if ($el === 'fr0133') {
-  localStorage.setItem('csi18n_fr0133.result', 0);
-  localStorage.setItem('csi18n_fr0133.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0133.representation', '');
-  localStorage.setItem('csi18n_fr0133.tlink', '');
-  localStorage.setItem('csi18n_fr0133.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0133.result', 0);
+  sessionStorage.setItem('csi18n_fr0133.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0133.representation', '');
+  sessionStorage.setItem('csi18n_fr0133.tlink', '');
+  sessionStorage.setItem('csi18n_fr0133.visitsid', $visitsid);
  } else if ($el === 'fr0134') {
-  localStorage.setItem('csi18n_fr0134.result', 0);
-  localStorage.setItem('csi18n_fr0134.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0134.representation', '');
-  localStorage.setItem('csi18n_fr0134.tlink', '');
-  localStorage.setItem('csi18n_fr0134.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0134.result', 0);
+  sessionStorage.setItem('csi18n_fr0134.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0134.representation', '');
+  sessionStorage.setItem('csi18n_fr0134.tlink', '');
+  sessionStorage.setItem('csi18n_fr0134.visitsid', $visitsid);
  } else if ($el === 'fr0135') {
-  localStorage.setItem('csi18n_fr0135.result', 0);
-  localStorage.setItem('csi18n_fr0135.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0135.representation', '');
-  localStorage.setItem('csi18n_fr0135.tlink', '');
-  localStorage.setItem('csi18n_fr0135.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0135.result', 0);
+  sessionStorage.setItem('csi18n_fr0135.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0135.representation', '');
+  sessionStorage.setItem('csi18n_fr0135.tlink', '');
+  sessionStorage.setItem('csi18n_fr0135.visitsid', $visitsid);
  } else if ($el === 'fr0136') {
-  localStorage.setItem('csi18n_fr0136.result', 0);
-  localStorage.setItem('csi18n_fr0136.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0136.representation', '');
-  localStorage.setItem('csi18n_fr0136.tlink', '');
-  localStorage.setItem('csi18n_fr0136.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0136.result', 0);
+  sessionStorage.setItem('csi18n_fr0136.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0136.representation', '');
+  sessionStorage.setItem('csi18n_fr0136.tlink', '');
+  sessionStorage.setItem('csi18n_fr0136.visitsid', $visitsid);
  } else if ($el === 'fr0137') {
-  localStorage.setItem('csi18n_fr0137.result', 0);
-  localStorage.setItem('csi18n_fr0137.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0137.representation', '');
-  localStorage.setItem('csi18n_fr0137.tlink', '');
-  localStorage.setItem('csi18n_fr0137.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0137.result', 0);
+  sessionStorage.setItem('csi18n_fr0137.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0137.representation', '');
+  sessionStorage.setItem('csi18n_fr0137.tlink', '');
+  sessionStorage.setItem('csi18n_fr0137.visitsid', $visitsid);
  } else if ($el === 'fr0138') {
-  localStorage.setItem('csi18n_fr0138.result', 0);
-  localStorage.setItem('csi18n_fr0138.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0138.representation', '');
-  localStorage.setItem('csi18n_fr0138.tlink', '');
-  localStorage.setItem('csi18n_fr0138.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0138.result', 0);
+  sessionStorage.setItem('csi18n_fr0138.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0138.representation', '');
+  sessionStorage.setItem('csi18n_fr0138.tlink', '');
+  sessionStorage.setItem('csi18n_fr0138.visitsid', $visitsid);
  } else if ($el === 'fr0139') {
-  localStorage.setItem('csi18n_fr0139.result', 0);
-  localStorage.setItem('csi18n_fr0139.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0139.representation', '');
-  localStorage.setItem('csi18n_fr0139.tlink', '');
-  localStorage.setItem('csi18n_fr0139.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0139.result', 0);
+  sessionStorage.setItem('csi18n_fr0139.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0139.representation', '');
+  sessionStorage.setItem('csi18n_fr0139.tlink', '');
+  sessionStorage.setItem('csi18n_fr0139.visitsid', $visitsid);
 
  } else if ($el === 'fr0140') {
-  localStorage.setItem('csi18n_fr0140.result', 0);
-  localStorage.setItem('csi18n_fr0140.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0140.representation', '');
-  localStorage.setItem('csi18n_fr0140.tlink', '');
-  localStorage.setItem('csi18n_fr0140.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0140.result', 0);
+  sessionStorage.setItem('csi18n_fr0140.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0140.representation', '');
+  sessionStorage.setItem('csi18n_fr0140.tlink', '');
+  sessionStorage.setItem('csi18n_fr0140.visitsid', $visitsid);
  } else if ($el === 'fr0141') {
-  localStorage.setItem('csi18n_fr0141.result', 0);
-  localStorage.setItem('csi18n_fr0141.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0141.representation', '');
-  localStorage.setItem('csi18n_fr0141.tlink', '');
-  localStorage.setItem('csi18n_fr0141.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0141.result', 0);
+  sessionStorage.setItem('csi18n_fr0141.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0141.representation', '');
+  sessionStorage.setItem('csi18n_fr0141.tlink', '');
+  sessionStorage.setItem('csi18n_fr0141.visitsid', $visitsid);
  } else if ($el === 'fr0142') {
-  localStorage.setItem('csi18n_fr0142.result', 0);
-  localStorage.setItem('csi18n_fr0142.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0142.representation', '');
-  localStorage.setItem('csi18n_fr0142.tlink', '');
-  localStorage.setItem('csi18n_fr0142.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0142.result', 0);
+  sessionStorage.setItem('csi18n_fr0142.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0142.representation', '');
+  sessionStorage.setItem('csi18n_fr0142.tlink', '');
+  sessionStorage.setItem('csi18n_fr0142.visitsid', $visitsid);
  } else if ($el === 'fr0143') {
-  localStorage.setItem('csi18n_fr0143.result', 0);
-  localStorage.setItem('csi18n_fr0143.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0143.representation', '');
-  localStorage.setItem('csi18n_fr0143.tlink', '');
-  localStorage.setItem('csi18n_fr0143.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0143.result', 0);
+  sessionStorage.setItem('csi18n_fr0143.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0143.representation', '');
+  sessionStorage.setItem('csi18n_fr0143.tlink', '');
+  sessionStorage.setItem('csi18n_fr0143.visitsid', $visitsid);
  } else if ($el === 'fr0144') {
-  localStorage.setItem('csi18n_fr0144.result', 0);
-  localStorage.setItem('csi18n_fr0144.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0144.representation', '');
-  localStorage.setItem('csi18n_fr0144.tlink', '');
-  localStorage.setItem('csi18n_fr0144.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0144.result', 0);
+  sessionStorage.setItem('csi18n_fr0144.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0144.representation', '');
+  sessionStorage.setItem('csi18n_fr0144.tlink', '');
+  sessionStorage.setItem('csi18n_fr0144.visitsid', $visitsid);
  } else if ($el === 'fr0145') {
-  localStorage.setItem('csi18n_fr0145.result', 0);
-  localStorage.setItem('csi18n_fr0145.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0145.representation', '');
-  localStorage.setItem('csi18n_fr0145.tlink', '');
-  localStorage.setItem('csi18n_fr0145.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0145.result', 0);
+  sessionStorage.setItem('csi18n_fr0145.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0145.representation', '');
+  sessionStorage.setItem('csi18n_fr0145.tlink', '');
+  sessionStorage.setItem('csi18n_fr0145.visitsid', $visitsid);
  } else if ($el === 'fr0146') {
-  localStorage.setItem('csi18n_fr0146.result', 0);
-  localStorage.setItem('csi18n_fr0146.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0146.representation', '');
-  localStorage.setItem('csi18n_fr0146.tlink', '');
-  localStorage.setItem('csi18n_fr0146.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0146.result', 0);
+  sessionStorage.setItem('csi18n_fr0146.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0146.representation', '');
+  sessionStorage.setItem('csi18n_fr0146.tlink', '');
+  sessionStorage.setItem('csi18n_fr0146.visitsid', $visitsid);
  } else if ($el === 'fr0147') {
-  localStorage.setItem('csi18n_fr0147.result', 0);
-  localStorage.setItem('csi18n_fr0147.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0147.representation', '');
-  localStorage.setItem('csi18n_fr0147.tlink', '');
-  localStorage.setItem('csi18n_fr0147.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0147.result', 0);
+  sessionStorage.setItem('csi18n_fr0147.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0147.representation', '');
+  sessionStorage.setItem('csi18n_fr0147.tlink', '');
+  sessionStorage.setItem('csi18n_fr0147.visitsid', $visitsid);
  } else if ($el === 'fr0148') {
-  localStorage.setItem('csi18n_fr0148.result', 0);
-  localStorage.setItem('csi18n_fr0148.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0148.representation', '');
-  localStorage.setItem('csi18n_fr0148.tlink', '');
-  localStorage.setItem('csi18n_fr0148.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0148.result', 0);
+  sessionStorage.setItem('csi18n_fr0148.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0148.representation', '');
+  sessionStorage.setItem('csi18n_fr0148.tlink', '');
+  sessionStorage.setItem('csi18n_fr0148.visitsid', $visitsid);
  } else if ($el === 'fr0149') {
-  localStorage.setItem('csi18n_fr0149.result', 0);
-  localStorage.setItem('csi18n_fr0149.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0149.representation', '');
-  localStorage.setItem('csi18n_fr0149.tlink', '');
-  localStorage.setItem('csi18n_fr0149.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0149.result', 0);
+  sessionStorage.setItem('csi18n_fr0149.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0149.representation', '');
+  sessionStorage.setItem('csi18n_fr0149.tlink', '');
+  sessionStorage.setItem('csi18n_fr0149.visitsid', $visitsid);
 
  } else if ($el === 'fr0150') {
-  localStorage.setItem('csi18n_fr0150.result', 0);
-  localStorage.setItem('csi18n_fr0150.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0150.representation', '');
-  localStorage.setItem('csi18n_fr0150.tlink', '');
-  localStorage.setItem('csi18n_fr0150.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0150.result', 0);
+  sessionStorage.setItem('csi18n_fr0150.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0150.representation', '');
+  sessionStorage.setItem('csi18n_fr0150.tlink', '');
+  sessionStorage.setItem('csi18n_fr0150.visitsid', $visitsid);
  } else if ($el === 'fr0151') {
-  localStorage.setItem('csi18n_fr0151.result', 0);
-  localStorage.setItem('csi18n_fr0151.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0151.representation', '');
-  localStorage.setItem('csi18n_fr0151.tlink', '');
-  localStorage.setItem('csi18n_fr0151.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0151.result', 0);
+  sessionStorage.setItem('csi18n_fr0151.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0151.representation', '');
+  sessionStorage.setItem('csi18n_fr0151.tlink', '');
+  sessionStorage.setItem('csi18n_fr0151.visitsid', $visitsid);
  } else if ($el === 'fr0152') {
-  localStorage.setItem('csi18n_fr0152.result', 0);
-  localStorage.setItem('csi18n_fr0152.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0152.representation', '');
-  localStorage.setItem('csi18n_fr0152.tlink', '');
-  localStorage.setItem('csi18n_fr0152.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0152.result', 0);
+  sessionStorage.setItem('csi18n_fr0152.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0152.representation', '');
+  sessionStorage.setItem('csi18n_fr0152.tlink', '');
+  sessionStorage.setItem('csi18n_fr0152.visitsid', $visitsid);
  } else if ($el === 'fr0153') {
-  localStorage.setItem('csi18n_fr0153.result', 0);
-  localStorage.setItem('csi18n_fr0153.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0153.representation', '');
-  localStorage.setItem('csi18n_fr0153.tlink', '');
-  localStorage.setItem('csi18n_fr0153.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0153.result', 0);
+  sessionStorage.setItem('csi18n_fr0153.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0153.representation', '');
+  sessionStorage.setItem('csi18n_fr0153.tlink', '');
+  sessionStorage.setItem('csi18n_fr0153.visitsid', $visitsid);
  } else if ($el === 'fr0154') {
-  localStorage.setItem('csi18n_fr0154.result', 0);
-  localStorage.setItem('csi18n_fr0154.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0154.representation', '');
-  localStorage.setItem('csi18n_fr0154.tlink', '');
-  localStorage.setItem('csi18n_fr0154.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0154.result', 0);
+  sessionStorage.setItem('csi18n_fr0154.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0154.representation', '');
+  sessionStorage.setItem('csi18n_fr0154.tlink', '');
+  sessionStorage.setItem('csi18n_fr0154.visitsid', $visitsid);
  } else if ($el === 'fr0155') {
-  localStorage.setItem('csi18n_fr0155.result', 0);
-  localStorage.setItem('csi18n_fr0155.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0155.representation', '');
-  localStorage.setItem('csi18n_fr0155.tlink', '');
-  localStorage.setItem('csi18n_fr0155.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0155.result', 0);
+  sessionStorage.setItem('csi18n_fr0155.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0155.representation', '');
+  sessionStorage.setItem('csi18n_fr0155.tlink', '');
+  sessionStorage.setItem('csi18n_fr0155.visitsid', $visitsid);
  } else if ($el === 'fr0156') {
-  localStorage.setItem('csi18n_fr0156.result', 0);
-  localStorage.setItem('csi18n_fr0156.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0156.representation', '');
-  localStorage.setItem('csi18n_fr0156.tlink', '');
-  localStorage.setItem('csi18n_fr0156.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0156.result', 0);
+  sessionStorage.setItem('csi18n_fr0156.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0156.representation', '');
+  sessionStorage.setItem('csi18n_fr0156.tlink', '');
+  sessionStorage.setItem('csi18n_fr0156.visitsid', $visitsid);
  } else if ($el === 'fr0157') {
-  localStorage.setItem('csi18n_fr0157.result', 0);
-  localStorage.setItem('csi18n_fr0157.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0157.representation', '');
-  localStorage.setItem('csi18n_fr0157.tlink', '');
-  localStorage.setItem('csi18n_fr0157.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0157.result', 0);
+  sessionStorage.setItem('csi18n_fr0157.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0157.representation', '');
+  sessionStorage.setItem('csi18n_fr0157.tlink', '');
+  sessionStorage.setItem('csi18n_fr0157.visitsid', $visitsid);
  } else if ($el === 'fr0158') {
-  localStorage.setItem('csi18n_fr0158.result', 0);
-  localStorage.setItem('csi18n_fr0158.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0158.representation', '');
-  localStorage.setItem('csi18n_fr0158.tlink', '');
-  localStorage.setItem('csi18n_fr0158.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0158.result', 0);
+  sessionStorage.setItem('csi18n_fr0158.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0158.representation', '');
+  sessionStorage.setItem('csi18n_fr0158.tlink', '');
+  sessionStorage.setItem('csi18n_fr0158.visitsid', $visitsid);
  } else if ($el === 'fr0159') {
-  localStorage.setItem('csi18n_fr0159.result', 0);
-  localStorage.setItem('csi18n_fr0159.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0159.representation', '');
-  localStorage.setItem('csi18n_fr0159.tlink', '');
-  localStorage.setItem('csi18n_fr0159.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0159.result', 0);
+  sessionStorage.setItem('csi18n_fr0159.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0159.representation', '');
+  sessionStorage.setItem('csi18n_fr0159.tlink', '');
+  sessionStorage.setItem('csi18n_fr0159.visitsid', $visitsid);
 
  } else if ($el === 'fr0160') {
-  localStorage.setItem('csi18n_fr0160.result', 0);
-  localStorage.setItem('csi18n_fr0160.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0160.representation', '');
-  localStorage.setItem('csi18n_fr0160.tlink', '');
-  localStorage.setItem('csi18n_fr0160.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0160.result', 0);
+  sessionStorage.setItem('csi18n_fr0160.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0160.representation', '');
+  sessionStorage.setItem('csi18n_fr0160.tlink', '');
+  sessionStorage.setItem('csi18n_fr0160.visitsid', $visitsid);
  } else if ($el === 'fr0161') {
-  localStorage.setItem('csi18n_fr0161.result', 0);
-  localStorage.setItem('csi18n_fr0161.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0161.representation', '');
-  localStorage.setItem('csi18n_fr0161.tlink', '');
-  localStorage.setItem('csi18n_fr0161.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0161.result', 0);
+  sessionStorage.setItem('csi18n_fr0161.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0161.representation', '');
+  sessionStorage.setItem('csi18n_fr0161.tlink', '');
+  sessionStorage.setItem('csi18n_fr0161.visitsid', $visitsid);
  } else if ($el === 'fr0162') {
-  localStorage.setItem('csi18n_fr0162.result', 0);
-  localStorage.setItem('csi18n_fr0162.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0162.representation', '');
-  localStorage.setItem('csi18n_fr0162.tlink', '');
-  localStorage.setItem('csi18n_fr0162.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0162.result', 0);
+  sessionStorage.setItem('csi18n_fr0162.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0162.representation', '');
+  sessionStorage.setItem('csi18n_fr0162.tlink', '');
+  sessionStorage.setItem('csi18n_fr0162.visitsid', $visitsid);
  } else if ($el === 'fr0163') {
-  localStorage.setItem('csi18n_fr0163.result', 0);
-  localStorage.setItem('csi18n_fr0163.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0163.representation', '');
-  localStorage.setItem('csi18n_fr0163.tlink', '');
-  localStorage.setItem('csi18n_fr0163.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0163.result', 0);
+  sessionStorage.setItem('csi18n_fr0163.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0163.representation', '');
+  sessionStorage.setItem('csi18n_fr0163.tlink', '');
+  sessionStorage.setItem('csi18n_fr0163.visitsid', $visitsid);
  } else if ($el === 'fr0164') {
-  localStorage.setItem('csi18n_fr0164.result', 0);
-  localStorage.setItem('csi18n_fr0164.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0164.representation', '');
-  localStorage.setItem('csi18n_fr0164.tlink', '');
-  localStorage.setItem('csi18n_fr0164.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0164.result', 0);
+  sessionStorage.setItem('csi18n_fr0164.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0164.representation', '');
+  sessionStorage.setItem('csi18n_fr0164.tlink', '');
+  sessionStorage.setItem('csi18n_fr0164.visitsid', $visitsid);
  } else if ($el === 'fr0165') {
-  localStorage.setItem('csi18n_fr0165.result', 0);
-  localStorage.setItem('csi18n_fr0165.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0165.representation', '');
-  localStorage.setItem('csi18n_fr0165.tlink', '');
-  localStorage.setItem('csi18n_fr0165.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0165.result', 0);
+  sessionStorage.setItem('csi18n_fr0165.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0165.representation', '');
+  sessionStorage.setItem('csi18n_fr0165.tlink', '');
+  sessionStorage.setItem('csi18n_fr0165.visitsid', $visitsid);
  } else if ($el === 'fr0166') {
-  localStorage.setItem('csi18n_fr0166.result', 0);
-  localStorage.setItem('csi18n_fr0166.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0166.representation', '');
-  localStorage.setItem('csi18n_fr0166.tlink', '');
-  localStorage.setItem('csi18n_fr0166.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0166.result', 0);
+  sessionStorage.setItem('csi18n_fr0166.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0166.representation', '');
+  sessionStorage.setItem('csi18n_fr0166.tlink', '');
+  sessionStorage.setItem('csi18n_fr0166.visitsid', $visitsid);
  } else if ($el === 'fr0167') {
-  localStorage.setItem('csi18n_fr0167.result', 0);
-  localStorage.setItem('csi18n_fr0167.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0167.representation', '');
-  localStorage.setItem('csi18n_fr0167.tlink', '');
-  localStorage.setItem('csi18n_fr0167.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0167.result', 0);
+  sessionStorage.setItem('csi18n_fr0167.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0167.representation', '');
+  sessionStorage.setItem('csi18n_fr0167.tlink', '');
+  sessionStorage.setItem('csi18n_fr0167.visitsid', $visitsid);
  } else if ($el === 'fr0168') {
-  localStorage.setItem('csi18n_fr0168.result', 0);
-  localStorage.setItem('csi18n_fr0168.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0168.representation', '');
-  localStorage.setItem('csi18n_fr0168.tlink', '');
-  localStorage.setItem('csi18n_fr0168.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0168.result', 0);
+  sessionStorage.setItem('csi18n_fr0168.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0168.representation', '');
+  sessionStorage.setItem('csi18n_fr0168.tlink', '');
+  sessionStorage.setItem('csi18n_fr0168.visitsid', $visitsid);
  } else if ($el === 'fr0169') {
-  localStorage.setItem('csi18n_fr0169.result', 0);
-  localStorage.setItem('csi18n_fr0169.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0169.representation', '');
-  localStorage.setItem('csi18n_fr0169.tlink', '');
-  localStorage.setItem('csi18n_fr0169.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0169.result', 0);
+  sessionStorage.setItem('csi18n_fr0169.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0169.representation', '');
+  sessionStorage.setItem('csi18n_fr0169.tlink', '');
+  sessionStorage.setItem('csi18n_fr0169.visitsid', $visitsid);
 
  } else if ($el === 'fr0170') {
-  localStorage.setItem('csi18n_fr0170.result', 0);
-  localStorage.setItem('csi18n_fr0170.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0170.representation', '');
-  localStorage.setItem('csi18n_fr0170.tlink', '');
-  localStorage.setItem('csi18n_fr0170.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0170.result', 0);
+  sessionStorage.setItem('csi18n_fr0170.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0170.representation', '');
+  sessionStorage.setItem('csi18n_fr0170.tlink', '');
+  sessionStorage.setItem('csi18n_fr0170.visitsid', $visitsid);
  } else if ($el === 'fr0171') {
-  localStorage.setItem('csi18n_fr0171.result', 0);
-  localStorage.setItem('csi18n_fr0171.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0171.representation', '');
-  localStorage.setItem('csi18n_fr0171.tlink', '');
-  localStorage.setItem('csi18n_fr0171.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0171.result', 0);
+  sessionStorage.setItem('csi18n_fr0171.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0171.representation', '');
+  sessionStorage.setItem('csi18n_fr0171.tlink', '');
+  sessionStorage.setItem('csi18n_fr0171.visitsid', $visitsid);
  } else if ($el === 'fr0172') {
-  localStorage.setItem('csi18n_fr0172.result', 0);
-  localStorage.setItem('csi18n_fr0172.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0172.representation', '');
-  localStorage.setItem('csi18n_fr0172.tlink', '');
-  localStorage.setItem('csi18n_fr0172.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0172.result', 0);
+  sessionStorage.setItem('csi18n_fr0172.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0172.representation', '');
+  sessionStorage.setItem('csi18n_fr0172.tlink', '');
+  sessionStorage.setItem('csi18n_fr0172.visitsid', $visitsid);
  } else if ($el === 'fr0173') {
-  localStorage.setItem('csi18n_fr0173.result', 0);
-  localStorage.setItem('csi18n_fr0173.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0173.representation', '');
-  localStorage.setItem('csi18n_fr0173.tlink', '');
-  localStorage.setItem('csi18n_fr0173.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0173.result', 0);
+  sessionStorage.setItem('csi18n_fr0173.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0173.representation', '');
+  sessionStorage.setItem('csi18n_fr0173.tlink', '');
+  sessionStorage.setItem('csi18n_fr0173.visitsid', $visitsid);
  } else if ($el === 'fr0174') {
-  localStorage.setItem('csi18n_fr0174.result', 0);
-  localStorage.setItem('csi18n_fr0174.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0174.representation', '');
-  localStorage.setItem('csi18n_fr0174.tlink', '');
-  localStorage.setItem('csi18n_fr0174.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0174.result', 0);
+  sessionStorage.setItem('csi18n_fr0174.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0174.representation', '');
+  sessionStorage.setItem('csi18n_fr0174.tlink', '');
+  sessionStorage.setItem('csi18n_fr0174.visitsid', $visitsid);
  } else if ($el === 'fr0175') {
-  localStorage.setItem('csi18n_fr0175.result', 0);
-  localStorage.setItem('csi18n_fr0175.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0175.representation', '');
-  localStorage.setItem('csi18n_fr0175.tlink', '');
-  localStorage.setItem('csi18n_fr0175.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0175.result', 0);
+  sessionStorage.setItem('csi18n_fr0175.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0175.representation', '');
+  sessionStorage.setItem('csi18n_fr0175.tlink', '');
+  sessionStorage.setItem('csi18n_fr0175.visitsid', $visitsid);
  } else if ($el === 'fr0176') {
-  localStorage.setItem('csi18n_fr0176.result', 0);
-  localStorage.setItem('csi18n_fr0176.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0176.representation', '');
-  localStorage.setItem('csi18n_fr0176.tlink', '');
-  localStorage.setItem('csi18n_fr0176.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0176.result', 0);
+  sessionStorage.setItem('csi18n_fr0176.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0176.representation', '');
+  sessionStorage.setItem('csi18n_fr0176.tlink', '');
+  sessionStorage.setItem('csi18n_fr0176.visitsid', $visitsid);
  } else if ($el === 'fr0177') {
-  localStorage.setItem('csi18n_fr0177.result', 0);
-  localStorage.setItem('csi18n_fr0177.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0177.representation', '');
-  localStorage.setItem('csi18n_fr0177.tlink', '');
-  localStorage.setItem('csi18n_fr0177.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0177.result', 0);
+  sessionStorage.setItem('csi18n_fr0177.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0177.representation', '');
+  sessionStorage.setItem('csi18n_fr0177.tlink', '');
+  sessionStorage.setItem('csi18n_fr0177.visitsid', $visitsid);
  } else if ($el === 'fr0178') {
-  localStorage.setItem('csi18n_fr0178.result', 0);
-  localStorage.setItem('csi18n_fr0178.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0178.representation', '');
-  localStorage.setItem('csi18n_fr0178.tlink', '');
-  localStorage.setItem('csi18n_fr0178.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0178.result', 0);
+  sessionStorage.setItem('csi18n_fr0178.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0178.representation', '');
+  sessionStorage.setItem('csi18n_fr0178.tlink', '');
+  sessionStorage.setItem('csi18n_fr0178.visitsid', $visitsid);
  } else if ($el === 'fr0179') {
-  localStorage.setItem('csi18n_fr0179.result', 0);
-  localStorage.setItem('csi18n_fr0179.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0179.representation', '');
-  localStorage.setItem('csi18n_fr0179.tlink', '');
-  localStorage.setItem('csi18n_fr0179.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0179.result', 0);
+  sessionStorage.setItem('csi18n_fr0179.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0179.representation', '');
+  sessionStorage.setItem('csi18n_fr0179.tlink', '');
+  sessionStorage.setItem('csi18n_fr0179.visitsid', $visitsid);
 
  } else if ($el === 'fr0180') {
-  localStorage.setItem('csi18n_fr0180.result', 0);
-  localStorage.setItem('csi18n_fr0180.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0180.representation', '');
-  localStorage.setItem('csi18n_fr0180.tlink', '');
-  localStorage.setItem('csi18n_fr0180.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0180.result', 0);
+  sessionStorage.setItem('csi18n_fr0180.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0180.representation', '');
+  sessionStorage.setItem('csi18n_fr0180.tlink', '');
+  sessionStorage.setItem('csi18n_fr0180.visitsid', $visitsid);
  } else if ($el === 'fr0181') {
-  localStorage.setItem('csi18n_fr0181.result', 0);
-  localStorage.setItem('csi18n_fr0181.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0181.representation', '');
-  localStorage.setItem('csi18n_fr0181.tlink', '');
-  localStorage.setItem('csi18n_fr0181.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0181.result', 0);
+  sessionStorage.setItem('csi18n_fr0181.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0181.representation', '');
+  sessionStorage.setItem('csi18n_fr0181.tlink', '');
+  sessionStorage.setItem('csi18n_fr0181.visitsid', $visitsid);
  } else if ($el === 'fr0182') {
-  localStorage.setItem('csi18n_fr0182.result', 0);
-  localStorage.setItem('csi18n_fr0182.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0182.representation', '');
-  localStorage.setItem('csi18n_fr0182.tlink', '');
-  localStorage.setItem('csi18n_fr0182.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0182.result', 0);
+  sessionStorage.setItem('csi18n_fr0182.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0182.representation', '');
+  sessionStorage.setItem('csi18n_fr0182.tlink', '');
+  sessionStorage.setItem('csi18n_fr0182.visitsid', $visitsid);
  } else if ($el === 'fr0183') {
-  localStorage.setItem('csi18n_fr0183.result', 0);
-  localStorage.setItem('csi18n_fr0183.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0183.representation', '');
-  localStorage.setItem('csi18n_fr0183.tlink', '');
-  localStorage.setItem('csi18n_fr0183.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0183.result', 0);
+  sessionStorage.setItem('csi18n_fr0183.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0183.representation', '');
+  sessionStorage.setItem('csi18n_fr0183.tlink', '');
+  sessionStorage.setItem('csi18n_fr0183.visitsid', $visitsid);
  } else if ($el === 'fr0184') {
-  localStorage.setItem('csi18n_fr0184.result', 0);
-  localStorage.setItem('csi18n_fr0184.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0184.representation', '');
-  localStorage.setItem('csi18n_fr0184.tlink', '');
-  localStorage.setItem('csi18n_fr0184.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0184.result', 0);
+  sessionStorage.setItem('csi18n_fr0184.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0184.representation', '');
+  sessionStorage.setItem('csi18n_fr0184.tlink', '');
+  sessionStorage.setItem('csi18n_fr0184.visitsid', $visitsid);
  } else if ($el === 'fr0185' || $el === 'fr0185star') {
-  localStorage.setItem('csi18n_fr0185.result', 0);
-  localStorage.setItem('csi18n_fr0185.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0185.representation', '');
-  localStorage.setItem('csi18n_fr0185.tlink', '');
-  localStorage.setItem('csi18n_fr0185.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0185.result', 0);
+  sessionStorage.setItem('csi18n_fr0185.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0185.representation', '');
+  sessionStorage.setItem('csi18n_fr0185.tlink', '');
+  sessionStorage.setItem('csi18n_fr0185.visitsid', $visitsid);
  } else if ($el === 'fr0186') {
-  localStorage.setItem('csi18n_fr0186.result', 0);
-  localStorage.setItem('csi18n_fr0186.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0186.representation', '');
-  localStorage.setItem('csi18n_fr0186.tlink', '');
-  localStorage.setItem('csi18n_fr0186.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0186.result', 0);
+  sessionStorage.setItem('csi18n_fr0186.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0186.representation', '');
+  sessionStorage.setItem('csi18n_fr0186.tlink', '');
+  sessionStorage.setItem('csi18n_fr0186.visitsid', $visitsid);
  } else if ($el === 'fr0187') {
-  localStorage.setItem('csi18n_fr0187.result', 0);
-  localStorage.setItem('csi18n_fr0187.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0187.representation', '');
-  localStorage.setItem('csi18n_fr0187.tlink', '');
-  localStorage.setItem('csi18n_fr0187.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0187.result', 0);
+  sessionStorage.setItem('csi18n_fr0187.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0187.representation', '');
+  sessionStorage.setItem('csi18n_fr0187.tlink', '');
+  sessionStorage.setItem('csi18n_fr0187.visitsid', $visitsid);
  } else if ($el === 'fr0188') {
-  localStorage.setItem('csi18n_fr0188.result', 0);
-  localStorage.setItem('csi18n_fr0188.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0188.representation', '');
-  localStorage.setItem('csi18n_fr0188.tlink', '');
-  localStorage.setItem('csi18n_fr0188.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0188.result', 0);
+  sessionStorage.setItem('csi18n_fr0188.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0188.representation', '');
+  sessionStorage.setItem('csi18n_fr0188.tlink', '');
+  sessionStorage.setItem('csi18n_fr0188.visitsid', $visitsid);
  } 
 
  if ($corner != 'hide') {
@@ -4084,8 +4084,8 @@ function onLoad() {
   localStorage.setItem('csi18n_pw', "test");
   localStorage.setItem('csi18n_key', "e3c12c03cf320b243977d6ac389805de");
   localStorage.setItem('csi18n_lang', "en");
-  localStorage.setItem('csi18n_seemore.representations', '');
-  localStorage.setItem('csi18n_seemore.per_lang_pref', '');
+  sessionStorage.setItem('csi18n_seemore.representations', '');
+  sessionStorage.setItem('csi18n_seemore.per_lang_pref', '');
  }
 <?php
    if ($lang !== '') {

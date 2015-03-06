@@ -40,7 +40,7 @@ Plastic JavaScript
 ///////////////////////////////////////////////////////////////////
 
 function trnPreferAnother($index) {
- $status = localStorage.getItem($ls + '.result');
+ $status = sessionStorage.getItem($ls + '.result');
  if ($status != 200) {
   // if we're showing undefined, then there is no "see more" to look at
   // and the user would need to change the lang(s) and refresh to see more.
@@ -48,13 +48,13 @@ function trnPreferAnother($index) {
  } else {
   // if we're showing defined by contrast the representation will be storing
   // a link to the all preferable resource (visit_link/langs/all)
-  $res = localStorage.getItem('csi18n_seemore.representations');
+  $res = sessionStorage.getItem('csi18n_seemore.representations');
   $json_arr = JSON.parse($res);
 
   $json_arr.csi18n_xlate_resources = $json_arr.csi18n_xlate_resources.slice($index, $index + 1);
   $res = JSON.stringify($json_arr);
 
-  $url = localStorage.getItem('csi18n_seemore.per_lang_pref');
+  $url = sessionStorage.getItem('csi18n_seemore.per_lang_pref');
 
   if (XMLHttpRequest) {
     var request = new XMLHttpRequest();
@@ -72,8 +72,8 @@ function trnPreferAnother($index) {
 }
 
 function trnSeeMore($ls) {
- localStorage.setItem('csi18n_seemore.representations', '');
- $status = localStorage.getItem($ls + '.result');
+ sessionStorage.setItem('csi18n_seemore.representations', '');
+ $status = sessionStorage.getItem($ls + '.result');
  if ($status != 200) {
   // if we're showing undefined, then there is no "see more" to look at
   // and the user would need to change the lang(s) and refresh to see more.
@@ -95,7 +95,7 @@ function trnSeeMore($ls) {
  } else {
   // if we're showing defined by contrast the representation will be storing
   // a link to the all preferable resource (visit_link/langs/all)
-  $res = localStorage.getItem($ls + '.representation');
+  $res = sessionStorage.getItem($ls + '.representation');
   $json = JSON.parse($res);
   $url = $json.csi18n_all_preferable;
 
@@ -120,7 +120,7 @@ function trnSeeMore($ls) {
 }
 
 function trnOptions($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  var d = document.getElementById("trn_menu");
  d.style.position = "fixed";
@@ -139,7 +139,7 @@ function trnOptions($ls) {
 }
 
 function trnHead($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  var d = document.getElementById("trn_menu");
  d.style.position = "fixed";
@@ -158,10 +158,10 @@ function trnHead($ls) {
 }
 
 function trnOfferAnother($ls) {
- var $result = localStorage.getItem($ls + '.result');
- var $newmark = localStorage.getItem($ls + '.newmark');
- var $rep = localStorage.getItem($ls + '.representation');
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $result = sessionStorage.getItem($ls + '.result');
+ var $newmark = sessionStorage.getItem($ls + '.newmark');
+ var $rep = sessionStorage.getItem($ls + '.representation');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  if ($result == 200) {
   // yes yes, 200 is not the only response
@@ -211,10 +211,10 @@ function trnOfferAnother($ls) {
 }
 
 function trnDelete($ls) {
- var $result = localStorage.getItem($ls + '.result');
- var $newmark = localStorage.getItem($ls + '.newmark');
- var $rep = localStorage.getItem($ls + '.representation');
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $result = sessionStorage.getItem($ls + '.result');
+ var $newmark = sessionStorage.getItem($ls + '.newmark');
+ var $rep = sessionStorage.getItem($ls + '.representation');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  if ($result == 200) {
   // yes yes, 200 is not the only response
@@ -264,10 +264,10 @@ function trnDelete($ls) {
 }
 
 function trnEdit($ls) {
- var $result = localStorage.getItem($ls + '.result');
- var $newmark = localStorage.getItem($ls + '.newmark');
- var $rep = localStorage.getItem($ls + '.representation');
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $result = sessionStorage.getItem($ls + '.result');
+ var $newmark = sessionStorage.getItem($ls + '.newmark');
+ var $rep = sessionStorage.getItem($ls + '.representation');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  if ($result == 200) {
   // yes yes, 200 is not the only response
@@ -328,7 +328,7 @@ function trnEdit($ls) {
 // for when the server has replied appear after
 // 
 function sendGet($el, $newmark) {
- var url = "https://rest.mpsvr.com/newmarks/7/" + $newmark;
+ var url = "https://rest.mpsvr.com/newmarks/92/" + $newmark;
  if (XMLHttpRequest) {
    var request = new XMLHttpRequest();
    if("withCredentials" in request) {
@@ -360,7 +360,7 @@ function sendGet($el, $newmark) {
 }
 
 function sendHead($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
  if (XMLHttpRequest) {
    var request = new XMLHttpRequest();
    if("withCredentials" in request) {
@@ -381,7 +381,7 @@ function sendHead($ls) {
 }
 
 function sendOptions($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
  if (XMLHttpRequest) {
    var request = new XMLHttpRequest();
    if("withCredentials" in request) {
@@ -408,7 +408,7 @@ function sendPost() {
  $arr = { 'csi18n_xlate_resource' : { 'language' : $cont_lang, 'translation' : $translation, 'visibility' : $vis } };
  $json_s = JSON.stringify($arr);
 
- var url = "https://rest.mpsvr.com/newmarks/7/" + $newmark;
+ var url = "https://rest.mpsvr.com/newmarks/92/" + $newmark;
  if (XMLHttpRequest) {
    var request = new XMLHttpRequest();
    if("withCredentials" in request) {
@@ -436,7 +436,7 @@ function sendPut($ls) {
  $arr = { 'csi18n_xlate_resource' : { 'language' : $cont_lang, 'translation' : $translation, 'visibility' : $vis } };
  $json_s = JSON.stringify($arr);
 
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
  if (XMLHttpRequest) {
    var request = new XMLHttpRequest();
    if("withCredentials" in request) {
@@ -452,7 +452,7 @@ function sendPut($ls) {
 }
 
 function sendDelete($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
  if (XMLHttpRequest) {
    var request = new XMLHttpRequest();
    if("withCredentials" in request) {
@@ -514,7 +514,7 @@ function seemore_handler() {
    d.style.fontSize = "20px";
 
    $json = this.response;
-   localStorage.setItem('csi18n_seemore.representations', JSON.stringify($json));
+   sessionStorage.setItem('csi18n_seemore.representations', JSON.stringify($json));
 
    var $el = '';
    var $safe_choices = '';
@@ -575,9 +575,9 @@ function handler_txtel1() {
    } else {
     d.innerHTML = escapeHtml($translation);
    }
-   localStorage.setItem('csi18n_txtel1.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_txtel1.result', $status);
-   localStorage.setItem('csi18n_txtel1.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_txtel1.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_txtel1.result', $status);
+   sessionStorage.setItem('csi18n_txtel1.tlink', this.getResponseHeader('Content-Location'));
    d.style.display = "";
   } 
 }
@@ -594,9 +594,9 @@ function handler_txtel2() {
    } else {
     d.innerHTML = escapeHtml($translation);
    }
-   localStorage.setItem('csi18n_txtel2.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_txtel2.result', $status); 
-   localStorage.setItem('csi18n_txtel2.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_txtel2.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_txtel2.result', $status); 
+   sessionStorage.setItem('csi18n_txtel2.tlink', this.getResponseHeader('Content-Location'));
    d.style.display = "";
   } 
 }
@@ -613,9 +613,9 @@ function handler_txtel3() {
    } else {
     d.innerHTML = escapeHtml($translation);
    }
-   localStorage.setItem('csi18n_txtel3.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_txtel3.result', $status); 
-   localStorage.setItem('csi18n_txtel3.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_txtel3.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_txtel3.result', $status); 
+   sessionStorage.setItem('csi18n_txtel3.tlink', this.getResponseHeader('Content-Location'));
    d.style.display = "";
   } 
 }
@@ -632,9 +632,9 @@ function handler_txtel4() {
    } else {
     d.innerHTML = escapeHtml($translation);
    }
-   localStorage.setItem('csi18n_txtel4.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_txtel4.result', $status); 
-   localStorage.setItem('csi18n_txtel4.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_txtel4.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_txtel4.result', $status); 
+   sessionStorage.setItem('csi18n_txtel4.tlink', this.getResponseHeader('Content-Location'));
    d.style.display = "";
   } 
 }
@@ -704,14 +704,14 @@ function toggleShowServiceMenu() {
 function toggleShowTranslationMenu($ls) {
  var d = document.getElementById("trn_menu");
 
- $res = localStorage.getItem($ls + '.representation');
+ $res = sessionStorage.getItem($ls + '.representation');
  if ($res != '') {
   $json = JSON.parse($res);
   $seemore_uri = $json.csi18n_per_lang_preference;
  } else {
   $seemore_uri = '';
  }
- localStorage.setItem('csi18n_seemore.per_lang_pref', $seemore_uri);
+ sessionStorage.setItem('csi18n_seemore.per_lang_pref', $seemore_uri);
 	
  if (d.style.display == "") {
   d.style.display = "none";
@@ -801,25 +801,25 @@ function createDialog($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwidth
  d.style.bottom = "auto";
 
  if ($el === 'txtel1') {
-  localStorage.setItem('csi18n_txtel1.result', 0);
-  localStorage.setItem('csi18n_txtel1.newmark', $newmark);
-  localStorage.setItem('csi18n_txtel1.representation', '');
-  localStorage.setItem('csi18n_txtel1.tlink', '');
+  sessionStorage.setItem('csi18n_txtel1.result', 0);
+  sessionStorage.setItem('csi18n_txtel1.newmark', $newmark);
+  sessionStorage.setItem('csi18n_txtel1.representation', '');
+  sessionStorage.setItem('csi18n_txtel1.tlink', '');
  } else if ($el === 'txtel2') {
-  localStorage.setItem('csi18n_txtel2.result', 0);
-  localStorage.setItem('csi18n_txtel2.newmark', $newmark);
-  localStorage.setItem('csi18n_txtel2.representation', '');
-  localStorage.setItem('csi18n_txtel2.tlink', '');
+  sessionStorage.setItem('csi18n_txtel2.result', 0);
+  sessionStorage.setItem('csi18n_txtel2.newmark', $newmark);
+  sessionStorage.setItem('csi18n_txtel2.representation', '');
+  sessionStorage.setItem('csi18n_txtel2.tlink', '');
  } else if ($el === 'txtel3') {
-  localStorage.setItem('csi18n_txtel3.result', 0);
-  localStorage.setItem('csi18n_txtel3.newmark', $newmark);
-  localStorage.setItem('csi18n_txtel3.representation', '');
-  localStorage.setItem('csi18n_txtel3.tlink', '');
+  sessionStorage.setItem('csi18n_txtel3.result', 0);
+  sessionStorage.setItem('csi18n_txtel3.newmark', $newmark);
+  sessionStorage.setItem('csi18n_txtel3.representation', '');
+  sessionStorage.setItem('csi18n_txtel3.tlink', '');
  } else if ($el === 'txtel4') {
-  localStorage.setItem('csi18n_txtel4.result', 0);
-  localStorage.setItem('csi18n_txtel4.newmark', $newmark);
-  localStorage.setItem('csi18n_txtel4.representation', '');
-  localStorage.setItem('csi18n_txtel4.tlink', '');
+  sessionStorage.setItem('csi18n_txtel4.result', 0);
+  sessionStorage.setItem('csi18n_txtel4.newmark', $newmark);
+  sessionStorage.setItem('csi18n_txtel4.representation', '');
+  sessionStorage.setItem('csi18n_txtel4.tlink', '');
  } 
 
  if ($corner != 'hide') {
@@ -932,11 +932,12 @@ function escapeHtml(unsafe) {
 function onLoad() {
  var currently = localStorage.getItem('csi18n_onOrOff');
  if (currently != "on" && currently != "off") {
+  localStorage.clear();
   localStorage.setItem('csi18n_onOrOff', "on");
   localStorage.setItem('csi18n_un', "test05");
   localStorage.setItem('csi18n_pw', "test");
   localStorage.setItem('csi18n_key', "e3c12c03cf320b243977d6ac389805de");
-  localStorage.setItem('csi18n_lang', "en-CA");
+  localStorage.setItem('csi18n_lang', "en");
   localStorage.setItem('csi18n_seemore.representations', '');
   localStorage.setItem('csi18n_seemore.per_lang_pref', '');
  }

@@ -1,8 +1,19 @@
 <?php
 
+//
+// Who has final moderation control over the content at whichever
+// page/ site/ application/ webservice this is? That would normally
+// be an account created by the developer. That account has a 
+// SubscriberID (SID) associated with it, and that SID needs to
+// known to the software here. 
+$thisPageBelongsToSID = 92;
+
 header("Content-Type: text/html; charset=utf-8");
 
-function post_a_new($un, $pw, $apikey, $newmark, $lang, $vis, $trans) {
+function post_a_new($un, $pw, $apikey, $newmark, $lang, $vis, $trans, $opt_ignore_blanks, $thisPageBelongsToSID) {
+  if ($opt_ignore_blanks === 'ignore' && $trans == '') {
+    return '';
+  }
   $errno = $errstr = '';
   $fp = fsockopen("tls://rest.mpsvr.com", 443, $errno, $errstr, 10);
   if (!$fp) {
@@ -16,7 +27,7 @@ function post_a_new($un, $pw, $apikey, $newmark, $lang, $vis, $trans) {
 							    'translation' => $trans)));
     $x .= "\r\n\r\n";
 
-    $out = "POST /newmarks/me/" . $newmark . " HTTP/1.1\r\n";
+    $out = "POST /newmarks/$thisPageBelongsToSID/$newmark HTTP/1.1\r\n";
     $out .= "Host: rest.mpsvr.com\r\n";
     $out .= "X-APIKey: $apikey\r\n";
     $out .= "Authorization: Basic " . base64_encode("$un:$pw") . "\r\n";
@@ -41,6 +52,8 @@ function post_a_new($un, $pw, $apikey, $newmark, $lang, $vis, $trans) {
     case (201) : //201 created ok
     case (301) : //301 moved 
       break;
+    case (401) : //401 Unauthorised
+      return 401;
     default: 
       echo substr($headers_arr[0], 9); break;
     }
@@ -59,6 +72,37 @@ function post_a_new($un, $pw, $apikey, $newmark, $lang, $vis, $trans) {
   //var_dump($headers_arr);
   return $loc;
 }
+
+$al = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+$al_arr = explode(',', $al);
+$al_pref_arr = array();
+$maxq = 0;
+foreach($al_arr as $l) {
+  //  echo "new lang seq: $l<br>";
+  $l_arr = explode(';', $l);
+  //  $lang = $l_arr[0]; //array_shift($l_arr);
+  $lang = array_shift($l_arr);
+  //  echo "Lang: $lang (" . print_r($l_arr, true) . ")<br>";
+  $q = 1;
+  foreach($l_arr as $param) {
+    //    echo " new param seq: $param<br>";
+    $param_arr = explode('=', $param);
+    if (sizeof($param_arr) === 2) {
+      if ($param_arr[0] === 'q') {
+	$q = $param_arr[1];
+      }
+    }
+  }
+  $q = (int) ($q * 1000);
+  if ($q > $maxq) {
+    $maxq = $q;
+  }
+  $al_pref_arr[$q][] = $lang;
+}
+$probable_lang = $al_pref_arr[$maxq][0]; //$first_lang;
+$probable_lang = htmlentities($probable_lang);
+//echo ">>" . print_r($al_pref_arr, true) . "<<";
+//echo ">>$probable_lang<<<br>";
 
 $qs = $_SERVER['QUERY_STRING'];
 $in_arr = explode('&', $qs);
@@ -92,7 +136,9 @@ $u_fr0001 = $u_fr0002 =
   $u_fr0601 = $u_fr0602 = $u_fr0603 = $u_fr0604 =
   $u_fr0701 = $u_fr0702 = $u_fr0703 = $u_fr0704 =
   $u_fr0801 = $u_fr0802 = $u_fr0803 = $u_fr0804 =
-  null;
+  $opt_ignore_blanks = null;
+if (array_key_exists('ignore_blanks', $_POST))
+  $opt_ignore_blanks = $_POST['ignore_blanks'];
 if (array_key_exists('u_username', $_POST))
   $u_username = $_POST['u_username'];
 if (array_key_exists('u_password', $_POST))
@@ -218,111 +264,125 @@ if ($u_username !== null && $u_password !== null && $u_languagecode !== null &&
 
   $apikey = '798e31c43d6b9f03aa504a6f88cb4550';
   
-  $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0001', $u_languagecode, 'anonymous', $u_fr0001);
-  if ($rv !== '') {
-    preg_match('|.*/xlates/([^/]*)/.*$|', $rv, $matches);
-    $uploadersid = $matches[1];
-  }
-  if ($rv !== '') {
-    preg_match('|.*/([^/]*)$|', $rv, $matches);
-    $crid_fr0001 = $matches[1];
-  }
-  if (0) {
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0002', $u_languagecode, 'anonymous', $u_fr0002);
+  $crid_fr0001 = $crid_fr0002 = 
+    $crid_fr0101 = $crid_fr0102 = $crid_fr0103 = $crid_fr0104 = 
+    $crid_fr0105 = $crid_fr0106 = $crid_fr0107 = $crid_fr0108 = 
+    $crid_fr0201 = $crid_fr0202 = $crid_fr0203 = $crid_fr0204 = 
+    $crid_fr0301 = $crid_fr0302 = $crid_fr0303 = $crid_fr0304 = 
+    $crid_fr0401 = $crid_fr0402 = $crid_fr0403 = $crid_fr0404 = 
+    $crid_fr0501 = $crid_fr0502 = $crid_fr0503 = $crid_fr0504 = 
+    $crid_fr0601 = $crid_fr0602 = $crid_fr0603 = $crid_fr0604 = 
+    $crid_fr0701 = $crid_fr0702 = $crid_fr0703 = $crid_fr0704 = 
+    $crid_fr0801 = $crid_fr0802 = $crid_fr0803 = $crid_fr0804 = '';
+
+  $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0001', $u_languagecode, 'anonymous', $u_fr0001, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv === 401) {
+    echo "<font color=red>The username and/or password is wrong.</font> Please go back and check them!<br><br>\n";
+  } else {
+    if ($rv !== '') {
+      preg_match('|.*/xlates/\d+,([^/]*)/.*$|', $rv, $matches);
+      $uploadersid = $matches[1];
+    }
     if ($rv !== '') {
       preg_match('|.*/([^/]*)$|', $rv, $matches);
-      $crid_fr0002 = $matches[1];
+      $crid_fr0001 = $matches[1];
     }
-  }  
+    if (0) {
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0002', $u_languagecode, 'anonymous', $u_fr0002, $opt_ignore_blanks, $thisPageBelongsToSID);
+      if ($rv !== '') {
+	preg_match('|.*/([^/]*)$|', $rv, $matches);
+	$crid_fr0002 = $matches[1];
+      }
+    }  
 
-  $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0101', $u_languagecode, 'anonymous', $u_fr0101);
-  if ($rv !== '') {
-    preg_match('|.*/([^/]*)$|', $rv, $matches);
-    $crid_fr0101 = $matches[1];
-  }
-  $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0102', $u_languagecode, 'anonymous', $u_fr0102);
-  if ($rv !== '') {
-    preg_match('|.*/([^/]*)$|', $rv, $matches);
-    $crid_fr0102 = $matches[1];
-  }
+    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0101', $u_languagecode, 'anonymous', $u_fr0101, $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== '') {
+      preg_match('|.*/([^/]*)$|', $rv, $matches);
+      $crid_fr0101 = $matches[1];
+    }
+    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0102', $u_languagecode, 'anonymous', $u_fr0102, $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== '') {
+      preg_match('|.*/([^/]*)$|', $rv, $matches);
+      $crid_fr0102 = $matches[1];
+    }
   
-  if (0) {
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0103', $u_languagecode, 'anonymous', $u_fr0103);
-    if ($rv !== '') {
-      preg_match('|.*/([^/]*)$|', $rv, $matches);
-      $crid_fr0103 = $matches[1];
+    if (0) {
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0103', $u_languagecode, 'anonymous', $u_fr0103, $opt_ignore_blanks, $thisPageBelongsToSID);
+      if ($rv !== '') {
+	preg_match('|.*/([^/]*)$|', $rv, $matches);
+	$crid_fr0103 = $matches[1];
+      }
+
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0301', $u_languagecode, 'anonymous', $u_fr0301, $opt_ignore_blanks, $thisPageBelongsToSID);
+      if ($rv !== '') {
+	preg_match('|.*/([^/]*)$|', $rv, $matches);
+	$crid_fr0301 = $matches[1];
+      }
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0302', $u_languagecode, 'anonymous', $u_fr0302, $opt_ignore_blanks, $thisPageBelongsToSID);
+      if ($rv !== '') {
+	preg_match('|.*/([^/]*)$|', $rv, $matches);
+	$crid_fr0302 = $matches[1];
+      }
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0303', $u_languagecode, 'anonymous', $u_fr0303, $opt_ignore_blanks, $thisPageBelongsToSID);
+      if ($rv !== '') {
+	preg_match('|.*/([^/]*)$|', $rv, $matches);
+	$crid_fr0303 = $matches[1];
+      }
+
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0401', $u_languagecode, 'anonymous', $u_fr0401, $opt_ignore_blanks, $thisPageBelongsToSID);
+      if ($rv !== '') {
+	preg_match('|.*/([^/]*)$|', $rv, $matches);
+	$crid_fr0401 = $matches[1];
+      }
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0402', $u_languagecode, 'anonymous', $u_fr0402, $opt_ignore_blanks, $thisPageBelongsToSID);
+      if ($rv !== '') {
+	preg_match('|.*/([^/]*)$|', $rv, $matches);
+	$crid_fr0402 = $matches[1];
+      }
+
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0501', $u_languagecode, 'anonymous', $u_fr0501, $opt_ignore_blanks, $thisPageBelongsToSID);
+      if ($rv !== '') {
+	preg_match('|.*/([^/]*)$|', $rv, $matches);
+	$crid_fr0501 = $matches[1];
+      }
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0502', $u_languagecode, 'anonymous', $u_fr0502, $opt_ignore_blanks, $thisPageBelongsToSID);
+      if ($rv !== '') {
+	preg_match('|.*/([^/]*)$|', $rv, $matches);
+	$crid_fr0502 = $matches[1];
+      }
+
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0601', $u_languagecode, 'anonymous', $u_fr0601, $opt_ignore_blanks, $thisPageBelongsToSID);
+      if ($rv !== '') {
+	preg_match('|.*/([^/]*)$|', $rv, $matches);
+	$crid_fr0601 = $matches[1];
+      }
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0602', $u_languagecode, 'anonymous', $u_fr0602, $opt_ignore_blanks, $thisPageBelongsToSID);
+      if ($rv !== '') {
+	preg_match('|.*/([^/]*)$|', $rv, $matches);
+	$crid_fr0602 = $matches[1];
+      }
+
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0801', $u_languagecode, 'anonymous', $u_fr0801, $opt_ignore_blanks, $thisPageBelongsToSID);
+      if ($rv !== '') {
+	preg_match('|.*/([^/]*)$|', $rv, $matches);
+	$crid_fr0801 = $matches[1];
+      }
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0802', $u_languagecode, 'anonymous', $u_fr0802, $opt_ignore_blanks, $thisPageBelongsToSID);
+      if ($rv !== '') {
+	preg_match('|.*/([^/]*)$|', $rv, $matches);
+	$crid_fr0802 = $matches[1];
+      }
     }
 
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0301', $u_languagecode, 'anonymous', $u_fr0301);
-    if ($rv !== '') {
-      preg_match('|.*/([^/]*)$|', $rv, $matches);
-      $crid_fr0301 = $matches[1];
-    }
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0302', $u_languagecode, 'anonymous', $u_fr0302);
-    if ($rv !== '') {
-      preg_match('|.*/([^/]*)$|', $rv, $matches);
-      $crid_fr0302 = $matches[1];
-    }
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0303', $u_languagecode, 'anonymous', $u_fr0303);
-    if ($rv !== '') {
-      preg_match('|.*/([^/]*)$|', $rv, $matches);
-      $crid_fr0303 = $matches[1];
-    }
+    $u_languagecode = urlencode($u_languagecode);
+    $link = $_SERVER['SCRIPT_URI'] . "?q=$uploadersid,$u_languagecode,$crid_fr0001,$crid_fr0101,$crid_fr0102";
 
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0401', $u_languagecode, 'anonymous', $u_fr0401);
-    if ($rv !== '') {
-      preg_match('|.*/([^/]*)$|', $rv, $matches);
-      $crid_fr0401 = $matches[1];
-    }
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0402', $u_languagecode, 'anonymous', $u_fr0402);
-    if ($rv !== '') {
-      preg_match('|.*/([^/]*)$|', $rv, $matches);
-      $crid_fr0402 = $matches[1];
-    }
-
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0501', $u_languagecode, 'anonymous', $u_fr0501);
-    if ($rv !== '') {
-      preg_match('|.*/([^/]*)$|', $rv, $matches);
-      $crid_fr0501 = $matches[1];
-    }
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0502', $u_languagecode, 'anonymous', $u_fr0502);
-    if ($rv !== '') {
-      preg_match('|.*/([^/]*)$|', $rv, $matches);
-      $crid_fr0502 = $matches[1];
-    }
-
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0601', $u_languagecode, 'anonymous', $u_fr0601);
-    if ($rv !== '') {
-      preg_match('|.*/([^/]*)$|', $rv, $matches);
-      $crid_fr0601 = $matches[1];
-    }
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0602', $u_languagecode, 'anonymous', $u_fr0602);
-    if ($rv !== '') {
-      preg_match('|.*/([^/]*)$|', $rv, $matches);
-      $crid_fr0602 = $matches[1];
-    }
-
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0801', $u_languagecode, 'anonymous', $u_fr0801);
-    if ($rv !== '') {
-      preg_match('|.*/([^/]*)$|', $rv, $matches);
-      $crid_fr0801 = $matches[1];
-    }
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-blind_trials-fr0802', $u_languagecode, 'anonymous', $u_fr0802);
-    if ($rv !== '') {
-      preg_match('|.*/([^/]*)$|', $rv, $matches);
-      $crid_fr0802 = $matches[1];
-    }
+    echo "Your changes are at this link, and you can forward it to others!<br>";
+    echo "<a href='$link' target=_blank>$link</a><br>";
+    echo "<br>";
   }
-
-  $u_languagecode = urlencode($u_languagecode);
-  $link = $_SERVER['SCRIPT_URI'] . "?q=$uploadersid,$u_languagecode,$crid_fr0001,$crid_fr0101,$crid_fr0102";
-
-  echo "Your changes are at this link, and you can forward it to others!<br>";
-  echo "<a href='$link' target=_blank>$link</a><br>";
-  echo "<br>";
-
 } else {
-  $u_username = $u_password = $u_languagecode = null;
+  $u_username = $u_password = $u_languagecode = $opt_ignore_blanks = null;
   $u_fr0001 = $u_fr0002 = 
     $u_fr0101 = $u_fr0102 = $u_fr0103 = $u_fr0104 =
     $u_fr0105 = $u_fr0106 = $u_fr0107 = $u_fr0108 =
@@ -500,6 +560,7 @@ if ($g_newmarkfr0804 === null)
 include_once('../head_and_style.html');
 
 echo "<script type='text/javascript'>\n".
+"var global_g_visitsid = '$thisPageBelongsToSID';\n" .
 "var global_g_uploadersid = '$g_uploadersid';\n".
 "var global_g_lang = '$g_lang';\n".
 "var global_g_newmarkfr0001 = '$g_newmarkfr0001';\n".

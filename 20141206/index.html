@@ -40,7 +40,7 @@ Plastic JavaScript
 ///////////////////////////////////////////////////////////////////
 
 function trnPreferAnother($index) {
- $status = localStorage.getItem($ls + '.result');
+ $status = sessionStorage.getItem($ls + '.result');
  if ($status != 200) {
   // if we're showing undefined, then there is no "see more" to look at
   // and the user would need to change the lang(s) and refresh to see more.
@@ -48,13 +48,13 @@ function trnPreferAnother($index) {
  } else {
   // if we're showing defined by contrast the representation will be storing
   // a link to the all preferable resource (visit_link/langs/all)
-  $res = localStorage.getItem('csi18n_seemore.representations');
+  $res = sessionStorage.getItem('csi18n_seemore.representations');
   $json_arr = JSON.parse($res);
 
   $json_arr.csi18n_xlate_resources = $json_arr.csi18n_xlate_resources.slice($index, $index + 1);
   $res = JSON.stringify($json_arr);
 
-  $url = localStorage.getItem('csi18n_seemore.per_lang_pref');
+  $url = sessionStorage.getItem('csi18n_seemore.per_lang_pref');
 
   if (XMLHttpRequest) {
     var request = new XMLHttpRequest();
@@ -72,8 +72,8 @@ function trnPreferAnother($index) {
 }
 
 function trnSeeMore($ls) {
- localStorage.setItem('csi18n_seemore.representations', '');
- $status = localStorage.getItem($ls + '.result');
+ sessionStorage.setItem('csi18n_seemore.representations', '');
+ $status = sessionStorage.getItem($ls + '.result');
  if ($status != 200) {
   // if we're showing undefined, then there is no "see more" to look at
   // and the user would need to change the lang(s) and refresh to see more.
@@ -95,7 +95,7 @@ function trnSeeMore($ls) {
  } else {
   // if we're showing defined by contrast the representation will be storing
   // a link to the all preferable resource (visit_link/langs/all)
-  $res = localStorage.getItem($ls + '.representation');
+  $res = sessionStorage.getItem($ls + '.representation');
   $json = JSON.parse($res);
   $url = $json.csi18n_all_preferable;
 
@@ -120,7 +120,7 @@ function trnSeeMore($ls) {
 }
 
 function trnOptions($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  var d = document.getElementById("trn_menu");
  d.style.position = "fixed";
@@ -139,7 +139,7 @@ function trnOptions($ls) {
 }
 
 function trnHead($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  var d = document.getElementById("trn_menu");
  d.style.position = "fixed";
@@ -158,11 +158,11 @@ function trnHead($ls) {
 }
 
 function trnOfferAnother($ls) {
- var $result = localStorage.getItem($ls + '.result');
- var $newmark = localStorage.getItem($ls + '.newmark');
- var $visitsid = localStorage.getItem($ls + '.visitsid');
- var $rep = localStorage.getItem($ls + '.representation');
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $result = sessionStorage.getItem($ls + '.result');
+ var $newmark = sessionStorage.getItem($ls + '.newmark');
+ var $visitsid = sessionStorage.getItem($ls + '.visitsid');
+ var $rep = sessionStorage.getItem($ls + '.representation');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  if ($result == 200) {
   // yes yes, 200 is not the only response
@@ -172,7 +172,7 @@ function trnOfferAnother($ls) {
   $trans = $json_o.csi18n_xlate_resource.translation;
   $vis = $json_o.csi18n_xlate_resource.visibility;
  } else {
-  $lang = localStorage.getItem('csi18n_lang');
+  $lang = sessionStorage.getItem('csi18n_lang');
   if ($lang == null) {
    $lang = window.navigator.language;
   }
@@ -212,10 +212,10 @@ function trnOfferAnother($ls) {
 }
 
 function trnDelete($ls) {
- var $result = localStorage.getItem($ls + '.result');
- var $newmark = localStorage.getItem($ls + '.newmark');
- var $rep = localStorage.getItem($ls + '.representation');
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $result = sessionStorage.getItem($ls + '.result');
+ var $newmark = sessionStorage.getItem($ls + '.newmark');
+ var $rep = sessionStorage.getItem($ls + '.representation');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  if ($result == 200) {
   // yes yes, 200 is not the only response
@@ -265,10 +265,10 @@ function trnDelete($ls) {
 }
 
 function trnEdit($ls) {
- var $result = localStorage.getItem($ls + '.result');
- var $newmark = localStorage.getItem($ls + '.newmark');
- var $rep = localStorage.getItem($ls + '.representation');
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $result = sessionStorage.getItem($ls + '.result');
+ var $newmark = sessionStorage.getItem($ls + '.newmark');
+ var $rep = sessionStorage.getItem($ls + '.representation');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  if ($result == 200) {
   // yes yes, 200 is not the only response
@@ -367,7 +367,7 @@ function sendGet($el, $newmark, $visitsid) {
 }
 
 function sendHead($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
  if (XMLHttpRequest) {
    var request = new XMLHttpRequest();
    if("withCredentials" in request) {
@@ -388,7 +388,7 @@ function sendHead($ls) {
 }
 
 function sendOptions($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
  if (XMLHttpRequest) {
    var request = new XMLHttpRequest();
    if("withCredentials" in request) {
@@ -443,7 +443,7 @@ function sendPut($ls) {
  $arr = { 'csi18n_xlate_resource' : { 'language' : $cont_lang, 'translation' : $translation, 'visibility' : $vis } };
  $json_s = JSON.stringify($arr);
 
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
  if (XMLHttpRequest) {
    var request = new XMLHttpRequest();
    if("withCredentials" in request) {
@@ -459,7 +459,7 @@ function sendPut($ls) {
 }
 
 function sendDelete($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
  if (XMLHttpRequest) {
    var request = new XMLHttpRequest();
    if("withCredentials" in request) {
@@ -521,7 +521,7 @@ function seemore_handler() {
    d.style.fontSize = "20px";
 
    $json = this.response;
-   localStorage.setItem('csi18n_seemore.representations', JSON.stringify($json));
+   sessionStorage.setItem('csi18n_seemore.representations', JSON.stringify($json));
 
    var $el = '';
    var $safe_choices = '';
@@ -584,9 +584,9 @@ function handler_fr0001() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0001.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0001.result', $status);
-   localStorage.setItem('csi18n_fr0001.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0001.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0001.result', $status);
+   sessionStorage.setItem('csi18n_fr0001.tlink', this.getResponseHeader('Content-Location'));
 //   d.style.display = "";
   } 
 }
@@ -605,9 +605,9 @@ function handler_fr0101() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0101.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0101.result', $status);
-   localStorage.setItem('csi18n_fr0101.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0101.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0101.result', $status);
+   sessionStorage.setItem('csi18n_fr0101.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -626,9 +626,9 @@ function handler_fr0102() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0102.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0102.result', $status); 
-   localStorage.setItem('csi18n_fr0102.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0102.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0102.result', $status); 
+   sessionStorage.setItem('csi18n_fr0102.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -647,9 +647,9 @@ function handler_fr0103() {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_fr0103.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_fr0103.result', $status); 
-   localStorage.setItem('csi18n_fr0103.tlink', this.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_fr0103.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_fr0103.result', $status); 
+   sessionStorage.setItem('csi18n_fr0103.tlink', this.getResponseHeader('Content-Location'));
    d1.style.display = "";
   } 
 }
@@ -719,13 +719,13 @@ function toggleShowServiceMenu() {
 function toggleShowTranslationMenu($ls) {
  var d = document.getElementById("trn_menu");
 
- $res = localStorage.getItem($ls + '.representation');
+ $res = sessionStorage.getItem($ls + '.representation');
  if ($res != '') {
   $seemore_uri = $res.csi18n_per_lang_preference;
  } else {
   $seemore_uri = '';
  }
- localStorage.setItem('csi18n_seemore.per_lang_pref', $seemore_uri);
+ sessionStorage.setItem('csi18n_seemore.per_lang_pref', $seemore_uri);
 	
  if (d.style.display == "") {
   d.style.display = "none";
@@ -815,42 +815,42 @@ function createDialog($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwidth
  d.style.bottom = "auto";
 
  if ($el === 'fr0001') {
-  localStorage.setItem('csi18n_fr0001.result', 0);
-  localStorage.setItem('csi18n_fr0001.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0001.representation', '');
-  localStorage.setItem('csi18n_fr0001.tlink', '');
-  localStorage.setItem('csi18n_fr0001.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0001.result', 0);
+  sessionStorage.setItem('csi18n_fr0001.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0001.representation', '');
+  sessionStorage.setItem('csi18n_fr0001.tlink', '');
+  sessionStorage.setItem('csi18n_fr0001.visitsid', $visitsid);
  } else if ($el === 'fr0101') {
-  localStorage.setItem('csi18n_fr0101.result', 0);
-  localStorage.setItem('csi18n_fr0101.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0101.representation', '');
-  localStorage.setItem('csi18n_fr0101.tlink', '');
-  localStorage.setItem('csi18n_fr0101.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0101.result', 0);
+  sessionStorage.setItem('csi18n_fr0101.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0101.representation', '');
+  sessionStorage.setItem('csi18n_fr0101.tlink', '');
+  sessionStorage.setItem('csi18n_fr0101.visitsid', $visitsid);
  } else if ($el === 'fr0102') {
-  localStorage.setItem('csi18n_fr0102.result', 0);
-  localStorage.setItem('csi18n_fr0102.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0102.representation', '');
-  localStorage.setItem('csi18n_fr0102.tlink', '');
-  localStorage.setItem('csi18n_fr0102.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0102.result', 0);
+  sessionStorage.setItem('csi18n_fr0102.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0102.representation', '');
+  sessionStorage.setItem('csi18n_fr0102.tlink', '');
+  sessionStorage.setItem('csi18n_fr0102.visitsid', $visitsid);
  } else if ($el === 'fr0103') {
-  localStorage.setItem('csi18n_fr0103.result', 0);
-  localStorage.setItem('csi18n_fr0103.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0103.representation', '');
-  localStorage.setItem('csi18n_fr0103.tlink', '');
-  localStorage.setItem('csi18n_fr0103.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0103.result', 0);
+  sessionStorage.setItem('csi18n_fr0103.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0103.representation', '');
+  sessionStorage.setItem('csi18n_fr0103.tlink', '');
+  sessionStorage.setItem('csi18n_fr0103.visitsid', $visitsid);
 /*
  } else if ($el === 'fr0301') {
-  localStorage.setItem('csi18n_fr0301.result', 0);
-  localStorage.setItem('csi18n_fr0301.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0301.representation', '');
-  localStorage.setItem('csi18n_fr0301.tlink', '');
-  localStorage.setItem('csi18n_fr0301.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0301.result', 0);
+  sessionStorage.setItem('csi18n_fr0301.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0301.representation', '');
+  sessionStorage.setItem('csi18n_fr0301.tlink', '');
+  sessionStorage.setItem('csi18n_fr0301.visitsid', $visitsid);
  } else if ($el === 'fr0401') {
-  localStorage.setItem('csi18n_fr0401.result', 0);
-  localStorage.setItem('csi18n_fr0401.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0401.representation', '');
-  localStorage.setItem('csi18n_fr0401.tlink', '');
-  localStorage.setItem('csi18n_fr0401.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0401.result', 0);
+  sessionStorage.setItem('csi18n_fr0401.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0401.representation', '');
+  sessionStorage.setItem('csi18n_fr0401.tlink', '');
+  sessionStorage.setItem('csi18n_fr0401.visitsid', $visitsid);
 */
  } 
 
@@ -932,7 +932,7 @@ function createDialog($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwidth
 //
 // $el, $corner, $totx, $toty, $posx, $posy, $size, $maxwidth, $style, $newmark
 function xkcdShow() {
- $visitsid = 7;
+ $visitsid = 92;
 // createDialog(elem,  corner, pg_wid, pg_hght, corner_x, corner_y, txt_sz, bubble_wid, "", "xkcd-on_the_moon-fr0101", $visitsid);
  createDialog("fr0001", "TL", 1536, 8192, 255, 223, "12", "257", "", "xkcd-on_the_moon-fr0001", $visitsid);
  createDialog("fr0101", "TL", 1536, 8192, 17, 17, "12", "223", "", "xkcd-on_the_moon-fr0101", $visitsid);
@@ -1046,6 +1046,7 @@ function escapeHtml(unsafe) {
 // Setup when never been here before. Preload with credents and use non-localised English
 // 
 function onLoad() {
+ sessionStorage.clear();
  var currently = localStorage.getItem('csi18n_onOrOff');
  if (currently != "on" && currently != "off") {
   localStorage.setItem('csi18n_onOrOff', "on");
@@ -1053,8 +1054,8 @@ function onLoad() {
   localStorage.setItem('csi18n_pw', "test");
   localStorage.setItem('csi18n_key', "e3c12c03cf320b243977d6ac389805de");
   localStorage.setItem('csi18n_lang', "en");
-  localStorage.setItem('csi18n_seemore.representations', '');
-  localStorage.setItem('csi18n_seemore.per_lang_pref', '');
+  sessionStorage.setItem('csi18n_seemore.representations', '');
+  sessionStorage.setItem('csi18n_seemore.per_lang_pref', '');
  }
 <?php
    if ($lang !== '') {

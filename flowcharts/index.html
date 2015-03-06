@@ -4,7 +4,8 @@
 //
 //
 // $el, $corner, $totx, $toty, $posx, $posy, $size, $maxwidth, $style, $newmark
-function xkcdShow($g_uploadersid, $g_lang, $g_newmarkfr0001, 
+function xkcdShow($g_thisPageBelongsToSID, $g_uploadersid, $g_lang, 
+$g_newmarkfr0001, $g_newmarkfr0002, 
 $g_newmarkfr0101, $g_newmarkfr0102, $g_newmarkfr0103, $g_newmarkfr0104,
 $g_newmarkfr0105, $g_newmarkfr0106, $g_newmarkfr0107, $g_newmarkfr0108,
 $g_newmarkfr0109, $g_newmarkfr0110, $g_newmarkfr0111, $g_newmarkfr0112,
@@ -17,62 +18,61 @@ $g_newmarkfr0133, $g_newmarkfr0134, $g_newmarkfr0135, $g_newmarkfr0136,
 $g_newmarkfr0137, $g_newmarkfr0138, $g_newmarkfr0139, $g_newmarkfr0140,
 $g_newmarkfr0141, $g_newmarkfr0142, $g_newmarkfr0143, $g_newmarkfr0144,
 $g_newmarkfr0145, $g_newmarkfr0146) {
- $visitsid = 7;
 
- // createDialog_v2(elem,  corner, pg_wid, pg_hght, corner_x, corner_y, txt_sz, bubble_wid, "", "xkcd-flowcharts-fr0101", $visitsid, uploader_sid, language, crid);
+ // createDialog_v2(elem,  corner, pg_wid, pg_hght, corner_x, corner_y, txt_sz, bubble_wid, "", "xkcd-flowcharts-fr0101", $g_thisPageBelongsToSID, uploader_sid, language, crid);
 
- createDialog_v2("fr0001", "TL", 800, 2048, 466, 567, "9", "231", "", "xkcd-flowcharts-fr0001", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0001);
+ createDialog_v2("fr0001", "TL", 800, 2048, 466, 567, "9", "231", "", "xkcd-flowcharts-fr0001", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0001);
 
- createDialog_v2("fr0101", "TL", 800, 2048, 128, 46, "9", "48", "", "xkcd-flowcharts-fr0101", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0101);
- createDialog_v2("fr0102", "TL", 800, 2048, 115, 128, "9", "75", "", "xkcd-flowcharts-fr0102", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0102);
- createDialog_v2("fr0103", "TL", 800, 2048, 262, 50, "9", "54", "", "xkcd-flowcharts-fr0103", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0103);
- createDialog_v2("fr0104", "TL", 800, 2048, 265, 170, "9", "49", "", "xkcd-flowcharts-fr0104", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0104);
- createDialog_v2("fr0105", "TL", 800, 2048, 440, 57, "9", "36", "", "xkcd-flowcharts-fr0105", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0105);
- createDialog_v2("fr0106", "TL", 800, 2048, 540, 112, "9", "52", "", "xkcd-flowcharts-fr0106", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0106);
- createDialog_v2("fr0107", "TL", 800, 2048, 431, 235, "9", "39", "", "xkcd-flowcharts-fr0107", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0107);
- createDialog_v2("fr0108", "TL", 800, 2048, 165, 318, "9", "44", "", "xkcd-flowcharts-fr0108", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0108);
- createDialog_v2("fr0109", "TL", 800, 2048, 264, 311, "9", "50", "", "xkcd-flowcharts-fr0109", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0109);
+ createDialog_v2("fr0101", "TL", 800, 2048, 128, 46, "9", "48", "", "xkcd-flowcharts-fr0101", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0101);
+ createDialog_v2("fr0102", "TL", 800, 2048, 115, 128, "9", "75", "", "xkcd-flowcharts-fr0102", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0102);
+ createDialog_v2("fr0103", "TL", 800, 2048, 262, 50, "9", "54", "", "xkcd-flowcharts-fr0103", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0103);
+ createDialog_v2("fr0104", "TL", 800, 2048, 265, 170, "9", "49", "", "xkcd-flowcharts-fr0104", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0104);
+ createDialog_v2("fr0105", "TL", 800, 2048, 440, 57, "9", "36", "", "xkcd-flowcharts-fr0105", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0105);
+ createDialog_v2("fr0106", "TL", 800, 2048, 540, 112, "9", "52", "", "xkcd-flowcharts-fr0106", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0106);
+ createDialog_v2("fr0107", "TL", 800, 2048, 431, 235, "9", "39", "", "xkcd-flowcharts-fr0107", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0107);
+ createDialog_v2("fr0108", "TL", 800, 2048, 165, 318, "9", "44", "", "xkcd-flowcharts-fr0108", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0108);
+ createDialog_v2("fr0109", "TL", 800, 2048, 264, 311, "9", "50", "", "xkcd-flowcharts-fr0109", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0109);
 
- createDialog_v2("fr0110", "TL", 800, 2048, 378, 314, "9", "47", "", "xkcd-flowcharts-fr0110", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0110);
- createDialog_v2("fr0111", "TL", 800, 2048, 485, 302, "9", "36", "", "xkcd-flowcharts-fr0111", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0111);
- createDialog_v2("fr0112", "TL", 800, 2048, 84, 416, "9", "61", "", "xkcd-flowcharts-fr0112", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0112);
- createDialog_v2("fr0113", "TL", 800, 2048, 250, 474, "9", "77", "", "xkcd-flowcharts-fr0113", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0113);
- createDialog_v2("fr0114", "TL", 800, 2048, 376, 408, "9", "46", "", "xkcd-flowcharts-fr0114", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0114);
- createDialog_v2("fr0115", "TL", 800, 2048, 504, 411, "9", "77", "", "xkcd-flowcharts-fr0115", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0115);
- createDialog_v2("fr0116", "TL", 800, 2048, 263, 610, "9", "48", "", "xkcd-flowcharts-fr0116", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0116);
- createDialog_v2("fr0117", "BL", 800, 2048, 498, 66, "9", "98", "", "xkcd-flowcharts-fr0117", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0117);
- createDialog_v2("fr0118", "TL", 800, 2048, 568, 86, "9", "54", "", "xkcd-flowcharts-fr0118", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0118);
- createDialog_v2("fr0119", "BL", 800, 2048, 628, 128, "9", "64", "", "xkcd-flowcharts-fr0119", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0119);
+ createDialog_v2("fr0110", "TL", 800, 2048, 378, 314, "9", "47", "", "xkcd-flowcharts-fr0110", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0110);
+ createDialog_v2("fr0111", "TL", 800, 2048, 485, 302, "9", "36", "", "xkcd-flowcharts-fr0111", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0111);
+ createDialog_v2("fr0112", "TL", 800, 2048, 84, 416, "9", "61", "", "xkcd-flowcharts-fr0112", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0112);
+ createDialog_v2("fr0113", "TL", 800, 2048, 250, 474, "9", "77", "", "xkcd-flowcharts-fr0113", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0113);
+ createDialog_v2("fr0114", "TL", 800, 2048, 376, 408, "9", "46", "", "xkcd-flowcharts-fr0114", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0114);
+ createDialog_v2("fr0115", "TL", 800, 2048, 504, 411, "9", "77", "", "xkcd-flowcharts-fr0115", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0115);
+ createDialog_v2("fr0116", "TL", 800, 2048, 263, 610, "9", "48", "", "xkcd-flowcharts-fr0116", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0116);
+ createDialog_v2("fr0117", "BL", 800, 2048, 498, 66, "9", "98", "", "xkcd-flowcharts-fr0117", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0117);
+ createDialog_v2("fr0118", "TL", 800, 2048, 568, 86, "9", "54", "", "xkcd-flowcharts-fr0118", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0118);
+ createDialog_v2("fr0119", "BL", 800, 2048, 628, 128, "9", "64", "", "xkcd-flowcharts-fr0119", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0119);
 
- createDialog_v2("fr0120", "BL", 800, 2048, 490, 244, "9", "47", "", "xkcd-flowcharts-fr0120", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0120);
- createDialog_v2("fr0121", "BL", 800, 2048, 504, 276, "9", "33", "", "xkcd-flowcharts-fr0121", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0121);
- createDialog_v2("fr0122", "BL", 800, 2048, 542, 310, "9", "105", "", "xkcd-flowcharts-fr0122", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0122);
- createDialog_v2("fr0123", "TL", 800, 2048, 458, 328, "9", "39", "", "xkcd-flowcharts-fr0123", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0123);
- createDialog_v2("fr0124", "TR", 800, 2048, 397, 365, "9", "77", "", "xkcd-flowcharts-fr0124", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0124);
- createDialog_v2("fr0125", "BR", 800, 2048, 57, 433, "9", "33", "", "xkcd-flowcharts-fr0125", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0125);
- createDialog_v2("fr0126", "TL", 800, 2048, 370, 506, "9", "110", "", "xkcd-flowcharts-fr0126", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0126);
- createDialog_v2("fr0127", "TR", 800, 2048, 282, 563, "9", "50", "", "xkcd-flowcharts-fr0127", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0127);
- createDialog_v2("fr0128", "BL", 800, 2048, 372, 626, "9", "68", "", "xkcd-flowcharts-fr0128", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0128);
- createDialog_v2("fr0129", "TL", 800, 2048, 153, 184, "9", "95", "", "xkcd-flowcharts-fr0129", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0129);
+ createDialog_v2("fr0120", "BL", 800, 2048, 490, 244, "9", "47", "", "xkcd-flowcharts-fr0120", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0120);
+ createDialog_v2("fr0121", "BL", 800, 2048, 504, 276, "9", "33", "", "xkcd-flowcharts-fr0121", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0121);
+ createDialog_v2("fr0122", "BL", 800, 2048, 542, 310, "9", "105", "", "xkcd-flowcharts-fr0122", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0122);
+ createDialog_v2("fr0123", "TL", 800, 2048, 458, 328, "9", "39", "", "xkcd-flowcharts-fr0123", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0123);
+ createDialog_v2("fr0124", "TR", 800, 2048, 397, 365, "9", "77", "", "xkcd-flowcharts-fr0124", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0124);
+ createDialog_v2("fr0125", "BR", 800, 2048, 57, 433, "9", "33", "", "xkcd-flowcharts-fr0125", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0125);
+ createDialog_v2("fr0126", "TL", 800, 2048, 370, 506, "9", "110", "", "xkcd-flowcharts-fr0126", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0126);
+ createDialog_v2("fr0127", "TR", 800, 2048, 282, 563, "9", "50", "", "xkcd-flowcharts-fr0127", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0127);
+ createDialog_v2("fr0128", "BL", 800, 2048, 372, 626, "9", "68", "", "xkcd-flowcharts-fr0128", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0128);
+ createDialog_v2("fr0129", "TL", 800, 2048, 153, 184, "9", "95", "", "xkcd-flowcharts-fr0129", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0129);
 
- createDialog_v2("fr0130", "BL", 800, 2048, 342, 64, "9", "67", "", "xkcd-flowcharts-fr0129", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0130);
- createDialog_v2("fr0131", "BL", 800, 2048, 330, 179, "9", "100", "", "xkcd-flowcharts-fr0129", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0131);
- createDialog_v2("fr0132", "BL", 800, 2048, 334, 324, "9", "24", "", "xkcd-flowcharts-fr0129", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0132);
- createDialog_v2("fr0133", "TR", 800, 2048, 184, 360, "9", "66", "", "xkcd-flowcharts-fr0129", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0133);
- createDialog_v2("fr0134", "BL", 800, 2048, 118, 498, "9", "20", "", "xkcd-flowcharts-fr0129", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0134);
- createDialog_v2("fr0135", "TL", 800, 2048, 208, 142, "9", "64", "", "xkcd-flowcharts-fr0135", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0135);
- createDialog_v2("fr0136", "TL", 800, 2048, 290, 108, "9", "80", "", "xkcd-flowcharts-fr0135", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0136);
- createDialog_v2("fr0137", "TL", 800, 2048, 290, 213, "9", "119", "", "xkcd-flowcharts-fr0135", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0137);
- createDialog_v2("fr0138", "BR", 800, 2048, 144, 326, "9", "117", "", "xkcd-flowcharts-fr0135", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0138);
- createDialog_v2("fr0139", "TL", 800, 2048, 222, 336, "9", "21", "", "xkcd-flowcharts-fr0135", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0139);
+ createDialog_v2("fr0130", "BL", 800, 2048, 342, 64, "9", "67", "", "xkcd-flowcharts-fr0129", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0130);
+ createDialog_v2("fr0131", "BL", 800, 2048, 330, 179, "9", "100", "", "xkcd-flowcharts-fr0129", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0131);
+ createDialog_v2("fr0132", "BL", 800, 2048, 334, 324, "9", "24", "", "xkcd-flowcharts-fr0129", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0132);
+ createDialog_v2("fr0133", "TR", 800, 2048, 184, 360, "9", "66", "", "xkcd-flowcharts-fr0129", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0133);
+ createDialog_v2("fr0134", "BL", 800, 2048, 118, 498, "9", "20", "", "xkcd-flowcharts-fr0129", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0134);
+ createDialog_v2("fr0135", "TL", 800, 2048, 208, 142, "9", "64", "", "xkcd-flowcharts-fr0135", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0135);
+ createDialog_v2("fr0136", "TL", 800, 2048, 290, 108, "9", "80", "", "xkcd-flowcharts-fr0135", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0136);
+ createDialog_v2("fr0137", "TL", 800, 2048, 290, 213, "9", "119", "", "xkcd-flowcharts-fr0135", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0137);
+ createDialog_v2("fr0138", "BR", 800, 2048, 144, 326, "9", "117", "", "xkcd-flowcharts-fr0135", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0138);
+ createDialog_v2("fr0139", "TL", 800, 2048, 222, 336, "9", "21", "", "xkcd-flowcharts-fr0135", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0139);
 
- createDialog_v2("fr0140", "BR", 800, 2048, 234, 624, "9", "200", "", "xkcd-flowcharts-fr0135", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0140);
- createDialog_v2("fr0141", "TR", 800, 2048, 446, 276, "9", "148", "", "xkcd-flowcharts-fr0141", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0141);
- createDialog_v2("fr0142", "TR", 800, 2048, 456, 98, "9", "70", "", "xkcd-flowcharts-fr0141", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0142);
- createDialog_v2("fr0143", "BL", 800, 2048, 546, 378, "9", "80", "", "xkcd-flowcharts-fr0143", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0143);
- createDialog_v2("fr0144", "TL", 800, 2048, 446, 430, "9", "35", "", "xkcd-flowcharts-fr0143", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0144);
- createDialog_v2("fr0145", "TR", 800, 2048, 396, 466, "9", "56", "", "xkcd-flowcharts-fr0145", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0145);
- createDialog_v2("fr0146", "TL", 800, 2048, 546, 472, "9", "83", "", "xkcd-flowcharts-fr0145", $visitsid, $g_uploadersid, $g_lang, $g_newmarkfr0146);
+ createDialog_v2("fr0140", "BR", 800, 2048, 234, 624, "9", "200", "", "xkcd-flowcharts-fr0135", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0140);
+ createDialog_v2("fr0141", "TR", 800, 2048, 446, 276, "9", "148", "", "xkcd-flowcharts-fr0141", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0141);
+ createDialog_v2("fr0142", "TR", 800, 2048, 456, 98, "9", "70", "", "xkcd-flowcharts-fr0141", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0142);
+ createDialog_v2("fr0143", "BL", 800, 2048, 546, 378, "9", "80", "", "xkcd-flowcharts-fr0143", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0143);
+ createDialog_v2("fr0144", "TL", 800, 2048, 446, 430, "9", "35", "", "xkcd-flowcharts-fr0143", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0144);
+ createDialog_v2("fr0145", "TR", 800, 2048, 396, 466, "9", "56", "", "xkcd-flowcharts-fr0145", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0145);
+ createDialog_v2("fr0146", "TL", 800, 2048, 546, 472, "9", "83", "", "xkcd-flowcharts-fr0145", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0146);
 }
 
 function xkcdShowLines() {
@@ -209,7 +209,7 @@ the text can be edited like the rest
 <div onClick="javascript:toggleUploadForm()">[Click here to upload your own]</div>
 <div id="upload-form">
 <form action="" method="POST">
-<input type="text" name="u_username" value="username"></input><br>
+<input type="text" name="u_username" value="username"></input><a href="https://service.mpsvr.com/">Join?</a><br>
 <input type="password" name="u_password" value="password"></input><br>
 <input type="text" name="u_languagecode" value="<?php
    echo $probable_lang;

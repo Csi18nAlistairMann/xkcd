@@ -125,6 +125,7 @@ foreach($in_arr as $el) {
 // 
 // investigate if user has uploaded new material
 // u_ as in user
+//-- Doc: handle POSTS
 $u_username = $u_password = $u_languagecode = null;
 $u_fr0001 = $u_fr0002 = 
   $u_fr0101 = $u_fr0102 = $u_fr0103 = $u_fr0104 =
@@ -168,43 +169,38 @@ if (array_key_exists('u_fr0107', $_POST))
   $u_fr0107 = $_POST['u_fr0107'];
 if (array_key_exists('u_fr0108', $_POST))
   $u_fr0108 = $_POST['u_fr0108'];
-*/
+
 if (array_key_exists('u_fr0201', $_POST))
   $u_fr0201 = $_POST['u_fr0201'];
-/*
 if (array_key_exists('u_fr0202', $_POST))
   $u_fr0202 = $_POST['u_fr0202'];
-
 if (array_key_exists('u_fr0203', $_POST))
   $u_fr0203 = $_POST['u_fr0203'];
 if (array_key_exists('u_fr0204', $_POST))
   $u_fr0204 = $_POST['u_fr0204'];
-*/
+
 if (array_key_exists('u_fr0301', $_POST))
   $u_fr0301 = $_POST['u_fr0301'];
-/*
 if (array_key_exists('u_fr0302', $_POST))
   $u_fr0302 = $_POST['u_fr0302'];
 if (array_key_exists('u_fr0303', $_POST))
   $u_fr0303 = $_POST['u_fr0303'];
 if (array_key_exists('u_fr0304', $_POST))
   $u_fr0304 = $_POST['u_fr0304'];
-*/
+
 if (array_key_exists('u_fr0401', $_POST))
   $u_fr0401 = $_POST['u_fr0401'];
-/*
 if (array_key_exists('u_fr0402', $_POST))
   $u_fr0402 = $_POST['u_fr0402'];
 if (array_key_exists('u_fr0403', $_POST))
   $u_fr0403 = $_POST['u_fr0403'];
 if (array_key_exists('u_fr0404', $_POST))
   $u_fr0404 = $_POST['u_fr0404'];
-*/
+
 if (array_key_exists('u_fr0501', $_POST))
   $u_fr0501 = $_POST['u_fr0501'];
 if (array_key_exists('u_fr0502', $_POST))
   $u_fr0502 = $_POST['u_fr0502'];
-/*
 if (array_key_exists('u_fr0503', $_POST))
   $u_fr0503 = $_POST['u_fr0503'];
 if (array_key_exists('u_fr0504', $_POST))
@@ -238,10 +234,9 @@ if (array_key_exists('u_fr0804', $_POST))
   $u_fr0804 = $_POST['u_fr0804'];
 */
 
+//-- Doc: check if enough to POST
 if ($u_username !== null && $u_password !== null && $u_languagecode !== null &&
-    $u_fr0001 !== null && $u_fr0002 !== null && 
-    $u_fr0201 !== null && $u_fr0301 !== null && $u_fr0401 !== null &&
-    $u_fr0501 !== null && $u_fr0502 !== null){
+    $u_fr0001 !== null && $u_fr0002 !== null){
     
   // Assuming all well, the service will upload this new creation, 
   // create a link to it
@@ -279,7 +274,8 @@ how would you assert that THESE xlates should be used and not THOSE?
     $crid_fr0701 = $crid_fr0702 = $crid_fr0703 = $crid_fr0704 = 
     $crid_fr0801 = $crid_fr0802 = $crid_fr0803 = $crid_fr0804 = '';
 
-  $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0001', $u_languagecode, 'anonymous', $u_fr0001, $opt_ignore_blanks, $thisPageBelongsToSID);
+  //-- Doc: perform POSTs
+  $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0001', $u_languagecode, 'anonymous', $u_fr0001, $opt_ignore_blanks, $thisPageBelongsToSID);
   if ($rv === 401) {
     echo "<font color=red>The username and/or password is wrong.</font> Please go back and check them!<br><br>\n";
   } else {
@@ -291,131 +287,120 @@ how would you assert that THESE xlates should be used and not THOSE?
       preg_match('|.*/([^/]*)$|', $rv, $matches);
       $crid_fr0001 = $matches[1];
     }
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0002', $u_languagecode, 'anonymous', $u_fr0002, $opt_ignore_blanks, $thisPageBelongsToSID);
+    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0002', $u_languagecode, 'anonymous', $u_fr0002, $opt_ignore_blanks, $thisPageBelongsToSID);
     if ($rv !== '') {
       preg_match('|.*/([^/]*)$|', $rv, $matches);
       $crid_fr0002 = $matches[1];
     }
   
     if (0) {
-      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0101', $u_languagecode, 'anonymous', $u_fr0101, $opt_ignore_blanks, $thisPageBelongsToSID);
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0101', $u_languagecode, 'anonymous', $u_fr0101, $opt_ignore_blanks, $thisPageBelongsToSID);
       if ($rv !== '') {
 	preg_match('|.*/([^/]*)$|', $rv, $matches);
 	$crid_fr0101 = $matches[1];
       }
-      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0102', $u_languagecode, 'anonymous', $u_fr0102, $opt_ignore_blanks, $thisPageBelongsToSID);
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0102', $u_languagecode, 'anonymous', $u_fr0102, $opt_ignore_blanks, $thisPageBelongsToSID);
       if ($rv !== '') {
 	preg_match('|.*/([^/]*)$|', $rv, $matches);
 	$crid_fr0102 = $matches[1];
       }
-      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0103', $u_languagecode, 'anonymous', $u_fr0103, $opt_ignore_blanks, $thisPageBelongsToSID);
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0103', $u_languagecode, 'anonymous', $u_fr0103, $opt_ignore_blanks, $thisPageBelongsToSID);
       if ($rv !== '') {
 	preg_match('|.*/([^/]*)$|', $rv, $matches);
 	$crid_fr0103 = $matches[1];
       }
-      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0104', $u_languagecode, 'anonymous', $u_fr0104, $opt_ignore_blanks, $thisPageBelongsToSID);
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0104', $u_languagecode, 'anonymous', $u_fr0104, $opt_ignore_blanks, $thisPageBelongsToSID);
       if ($rv !== '') {
 	preg_match('|.*/([^/]*)$|', $rv, $matches);
 	$crid_fr0104 = $matches[1];
       }
-      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0105', $u_languagecode, 'anonymous', $u_fr0105, $opt_ignore_blanks, $thisPageBelongsToSID);
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0105', $u_languagecode, 'anonymous', $u_fr0105, $opt_ignore_blanks, $thisPageBelongsToSID);
       if ($rv !== '') {
 	preg_match('|.*/([^/]*)$|', $rv, $matches);
 	$crid_fr0105 = $matches[1];
       }
-      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0106', $u_languagecode, 'anonymous', $u_fr0106, $opt_ignore_blanks, $thisPageBelongsToSID);
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0106', $u_languagecode, 'anonymous', $u_fr0106, $opt_ignore_blanks, $thisPageBelongsToSID);
       if ($rv !== '') {
 	preg_match('|.*/([^/]*)$|', $rv, $matches);
 	$crid_fr0106 = $matches[1];
       }
-      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0107', $u_languagecode, 'anonymous', $u_fr0107, $opt_ignore_blanks, $thisPageBelongsToSID);
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0107', $u_languagecode, 'anonymous', $u_fr0107, $opt_ignore_blanks, $thisPageBelongsToSID);
       if ($rv !== '') {
 	preg_match('|.*/([^/]*)$|', $rv, $matches);
 	$crid_fr0107 = $matches[1];
       }
-      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0108', $u_languagecode, 'anonymous', $u_fr0108, $opt_ignore_blanks, $thisPageBelongsToSID);
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0108', $u_languagecode, 'anonymous', $u_fr0108, $opt_ignore_blanks, $thisPageBelongsToSID);
       if ($rv !== '') {
 	preg_match('|.*/([^/]*)$|', $rv, $matches);
 	$crid_fr0108 = $matches[1];
       }
-    }
 
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0201', $u_languagecode, 'anonymous', $u_fr0201, $opt_ignore_blanks, $thisPageBelongsToSID);
-    if ($rv !== '') {
-      preg_match('|.*/([^/]*)$|', $rv, $matches);
-      $crid_fr0201 = $matches[1];
-    }
-
-    if (0) {
-      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0202', $u_languagecode, 'anonymous', $u_fr0202, $opt_ignore_blanks, $thisPageBelongsToSID);
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0201', $u_languagecode, 'anonymous', $u_fr0201, $opt_ignore_blanks, $thisPageBelongsToSID);
+      if ($rv !== '') {
+	preg_match('|.*/([^/]*)$|', $rv, $matches);
+	$crid_fr0201 = $matches[1];
+      }
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0202', $u_languagecode, 'anonymous', $u_fr0202, $opt_ignore_blanks, $thisPageBelongsToSID);
       if ($rv !== '') {
 	preg_match('|.*/([^/]*)$|', $rv, $matches);
 	$crid_fr0202 = $matches[1];
       }
-    }
     
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0301', $u_languagecode, 'anonymous', $u_fr0301, $opt_ignore_blanks, $thisPageBelongsToSID);
-    if ($rv !== '') {
-      preg_match('|.*/([^/]*)$|', $rv, $matches);
-      $crid_fr0301 = $matches[1];
-    }
-
-    if (0) {
-      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0302', $u_languagecode, 'anonymous', $u_fr0302, $opt_ignore_blanks, $thisPageBelongsToSID);
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0301', $u_languagecode, 'anonymous', $u_fr0301, $opt_ignore_blanks, $thisPageBelongsToSID);
+      if ($rv !== '') {
+	preg_match('|.*/([^/]*)$|', $rv, $matches);
+	$crid_fr0301 = $matches[1];
+      }
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0302', $u_languagecode, 'anonymous', $u_fr0302, $opt_ignore_blanks, $thisPageBelongsToSID);
       if ($rv !== '') {
 	preg_match('|.*/([^/]*)$|', $rv, $matches);
 	$crid_fr0302 = $matches[1];
       }
-      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0303', $u_languagecode, 'anonymous', $u_fr0303, $opt_ignore_blanks, $thisPageBelongsToSID);
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0303', $u_languagecode, 'anonymous', $u_fr0303, $opt_ignore_blanks, $thisPageBelongsToSID);
       if ($rv !== '') {
 	preg_match('|.*/([^/]*)$|', $rv, $matches);
 	$crid_fr0303 = $matches[1];
       }
-    }
 
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0401', $u_languagecode, 'anonymous', $u_fr0401, $opt_ignore_blanks, $thisPageBelongsToSID);
-    if ($rv !== '') {
-      preg_match('|.*/([^/]*)$|', $rv, $matches);
-      $crid_fr0401 = $matches[1];
-    }
-
-    if (0) {
-      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0402', $u_languagecode, 'anonymous', $u_fr0402, $opt_ignore_blanks, $thisPageBelongsToSID);
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0401', $u_languagecode, 'anonymous', $u_fr0401, $opt_ignore_blanks, $thisPageBelongsToSID);
+      if ($rv !== '') {
+	preg_match('|.*/([^/]*)$|', $rv, $matches);
+	$crid_fr0401 = $matches[1];
+      }
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0402', $u_languagecode, 'anonymous', $u_fr0402, $opt_ignore_blanks, $thisPageBelongsToSID);
       if ($rv !== '') {
 	preg_match('|.*/([^/]*)$|', $rv, $matches);
 	$crid_fr0402 = $matches[1];
       }
-    }
 
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0501', $u_languagecode, 'anonymous', $u_fr0501, $opt_ignore_blanks, $thisPageBelongsToSID);
-    if ($rv !== '') {
-      preg_match('|.*/([^/]*)$|', $rv, $matches);
-      $crid_fr0501 = $matches[1];
-    }
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0502', $u_languagecode, 'anonymous', $u_fr0502, $opt_ignore_blanks, $thisPageBelongsToSID);
-    if ($rv !== '') {
-      preg_match('|.*/([^/]*)$|', $rv, $matches);
-      $crid_fr0502 = $matches[1];
-    }
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0501', $u_languagecode, 'anonymous', $u_fr0501, $opt_ignore_blanks, $thisPageBelongsToSID);
+      if ($rv !== '') {
+	preg_match('|.*/([^/]*)$|', $rv, $matches);
+	$crid_fr0501 = $matches[1];
+      }
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0502', $u_languagecode, 'anonymous', $u_fr0502, $opt_ignore_blanks, $thisPageBelongsToSID);
+      if ($rv !== '') {
+	preg_match('|.*/([^/]*)$|', $rv, $matches);
+	$crid_fr0502 = $matches[1];
+      }
 
-    if (0) {  
-      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0601', $u_languagecode, 'anonymous', $u_fr0601, $opt_ignore_blanks, $thisPageBelongsToSID);
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0601', $u_languagecode, 'anonymous', $u_fr0601, $opt_ignore_blanks, $thisPageBelongsToSID);
       if ($rv !== '') {
 	preg_match('|.*/([^/]*)$|', $rv, $matches);
 	$crid_fr0601 = $matches[1];
       }
-      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0602', $u_languagecode, 'anonymous', $u_fr0602, $opt_ignore_blanks, $thisPageBelongsToSID);
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0602', $u_languagecode, 'anonymous', $u_fr0602, $opt_ignore_blanks, $thisPageBelongsToSID);
       if ($rv !== '') {
 	preg_match('|.*/([^/]*)$|', $rv, $matches);
 	$crid_fr0602 = $matches[1];
       }
 
-      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0801', $u_languagecode, 'anonymous', $u_fr0801, $opt_ignore_blanks, $thisPageBelongsToSID);
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0801', $u_languagecode, 'anonymous', $u_fr0801, $opt_ignore_blanks, $thisPageBelongsToSID);
       if ($rv !== '') {
 	preg_match('|.*/([^/]*)$|', $rv, $matches);
 	$crid_fr0801 = $matches[1];
       }
-      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-drawing_stars-fr0802', $u_languagecode, 'anonymous', $u_fr0802, $opt_ignore_blanks, $thisPageBelongsToSID);
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-dress_colour-fr0802', $u_languagecode, 'anonymous', $u_fr0802, $opt_ignore_blanks, $thisPageBelongsToSID);
       if ($rv !== '') {
 	preg_match('|.*/([^/]*)$|', $rv, $matches);
 	$crid_fr0802 = $matches[1];
@@ -423,7 +408,8 @@ how would you assert that THESE xlates should be used and not THOSE?
     }
 
     $u_languagecode = urlencode($u_languagecode);
-    $link = $_SERVER['SCRIPT_URI'] . "?q=$uploadersid,$u_languagecode,$crid_fr0001,$crid_fr0002,$crid_fr0201,$crid_fr0301,$crid_fr0401,$crid_fr0501,$crid_fr0502";
+    //-- Doc: script uri
+    $link = $_SERVER['SCRIPT_URI'] . "?q=$uploadersid,$u_languagecode,$crid_fr0001,$crid_fr0002";
 
     echo "Your changes are at this link, and you can forward it to others!<br>";
     echo "<a href='$link' target=_blank>$link</a><br>";
@@ -466,10 +452,11 @@ $g_newmarkfr0001 = $g_newmarkfr0002 =
   $g_newmarkfr0801 = $g_newmarkfr0802 = $g_newmarkfr0803 = $g_newmarkfr0804 = 
   null;
 
+//-- Doc: handle guest params inbound
 if ($guest_params !== '') {
   $guest_params_arr = explode(',', $guest_params);
   // DONT FORGET TO CHANEGE THE SIZEOF!!
-  if (sizeof($guest_params_arr) === 9 ) {
+  if (sizeof($guest_params_arr) === 4 ) {
     $g_uploadersid = $guest_params_arr[0];
     $g_lang = urldecode($guest_params_arr[1]);
     $g_newmarkfr0001 = $guest_params_arr[2];
@@ -477,31 +464,26 @@ if ($guest_params !== '') {
     /*
     $g_newmarkfr0101 = $guest_params_arr[3];
     $g_newmarkfr0102 = $guest_params_arr[4];
-    */
-    $g_newmarkfr0201 = $guest_params_arr[4];
-    /*
-    $g_newmarkfr0202 = $guest_params_arr[6];
-   
     $g_newmarkfr0104 = $guest_params_arr[6];
     $g_newmarkfr0105 = $guest_params_arr[7];
     $g_newmarkfr0106 = $guest_params_arr[8];
     $g_newmarkfr0107 = $guest_params_arr[9];
     $g_newmarkfr0108 = $guest_params_arr[10];
-    */
+
+    $g_newmarkfr0201 = $guest_params_arr[4];
+    $g_newmarkfr0202 = $guest_params_arr[6];
+   
     $g_newmarkfr0301 = $guest_params_arr[5];
-    /*
     $g_newmarkfr0302 = $guest_params_arr[7];
     $g_newmarkfr0303 = $guest_params_arr[8];
-    */
+
     $g_newmarkfr0401 = $guest_params_arr[6];
-    /*
     $g_newmarkfr0402 = $guest_params_arr[4];
-    */
 
     $g_newmarkfr0501 = $guest_params_arr[7];
     $g_newmarkfr0502 = $guest_params_arr[8];
     $g_newmarkfr0503 = $g_newmarkfr0502;
-    /*
+
     $g_newmarkfr0601 = $guest_params_arr[9];
     $g_newmarkfr0602 = $guest_params_arr[14];
     $g_newmarkfr0801 = $guest_params_arr[15];
@@ -510,10 +492,9 @@ if ($guest_params !== '') {
   }
 }
 
+//-- Doc: reset all the things, if not got expected things
 if ($g_uploadersid !== null && $g_lang !== null &&
-    $g_newmarkfr0001 !== null && $g_newmarkfr0002 !== null && 
-    $g_newmarkfr0201 !== null && $g_newmarkfr0301 !== null && $g_newmarkfr0401 !== null &&
-    $g_newmarkfr0501 !== null && $g_newmarkfr0502 !== null) {
+    $g_newmarkfr0001 !== null && $g_newmarkfr0002 !== null) {
   //  echo ">-$g_uploadersid-$g_lang-$g_newmarkfr0001-$g_newmarkfr0101-$g_newmarkfr0102<";
 } else {
   $g_uploadersid = $g_lang = null;

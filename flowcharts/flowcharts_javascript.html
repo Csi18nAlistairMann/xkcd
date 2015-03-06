@@ -14,7 +14,7 @@ Plastic JavaScript
 ///////////////////////////////////////////////////////////////////
 
 function trnPreferAnother($index) {
- $status = localStorage.getItem($ls + '.result');
+ $status = sessionStorage.getItem($ls + '.result');
  if ($status != 200) {
   // if we're showing undefined, then there is no "see more" to look at
   // and the user would need to change the lang(s) and refresh to see more.
@@ -22,13 +22,13 @@ function trnPreferAnother($index) {
  } else {
   // if we're showing defined by contrast the representation will be storing
   // a link to the all preferable resource (visit_link/langs/all)
-  $res = localStorage.getItem('csi18n_seemore.representations');
+  $res = sessionStorage.getItem('csi18n_seemore.representations');
   $json_arr = JSON.parse($res);
 
   $json_arr.csi18n_xlate_resources = $json_arr.csi18n_xlate_resources.slice($index, $index + 1);
   $res = JSON.stringify($json_arr);
 
-  $url = localStorage.getItem('csi18n_seemore.per_lang_pref');
+  $url = sessionStorage.getItem('csi18n_seemore.per_lang_pref');
 
   if (XMLHttpRequest) {
     var request = new XMLHttpRequest();
@@ -46,8 +46,8 @@ function trnPreferAnother($index) {
 }
 
 function trnSeeMore($ls) {
- localStorage.setItem('csi18n_seemore.representations', '');
- $status = localStorage.getItem($ls + '.result');
+ sessionStorage.setItem('csi18n_seemore.representations', '');
+ $status = sessionStorage.getItem($ls + '.result');
  if ($status != 200) {
   // if we're showing undefined, then there is no "see more" to look at
   // and the user would need to change the lang(s) and refresh to see more.
@@ -69,7 +69,7 @@ function trnSeeMore($ls) {
  } else {
   // if we're showing defined by contrast the representation will be storing
   // a link to the all preferable resource (visit_link/langs/all)
-  $res = localStorage.getItem($ls + '.representation');
+  $res = sessionStorage.getItem($ls + '.representation');
   $json = JSON.parse($res);
   $url = $json.csi18n_all_preferable;
 
@@ -94,7 +94,7 @@ function trnSeeMore($ls) {
 }
 
 function trnOptions($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  var d = document.getElementById("trn_menu");
  d.style.position = "fixed";
@@ -113,7 +113,7 @@ function trnOptions($ls) {
 }
 
 function trnHead($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  var d = document.getElementById("trn_menu");
  d.style.position = "fixed";
@@ -132,11 +132,11 @@ function trnHead($ls) {
 }
 
 function trnOfferAnother($ls) {
- var $result = localStorage.getItem($ls + '.result');
- var $newmark = localStorage.getItem($ls + '.newmark');
- var $visitsid = localStorage.getItem($ls + '.visitsid');
- var $rep = localStorage.getItem($ls + '.representation');
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $result = sessionStorage.getItem($ls + '.result');
+ var $newmark = sessionStorage.getItem($ls + '.newmark');
+ var $visitsid = sessionStorage.getItem($ls + '.visitsid');
+ var $rep = sessionStorage.getItem($ls + '.representation');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  if ($result == 200) {
   // yes yes, 200 is not the only response
@@ -189,10 +189,10 @@ function trnOfferAnother($ls) {
 }
 
 function trnDelete($ls) {
- var $result = localStorage.getItem($ls + '.result');
- var $newmark = localStorage.getItem($ls + '.newmark');
- var $rep = localStorage.getItem($ls + '.representation');
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $result = sessionStorage.getItem($ls + '.result');
+ var $newmark = sessionStorage.getItem($ls + '.newmark');
+ var $rep = sessionStorage.getItem($ls + '.representation');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  if ($result == 200) {
   // yes yes, 200 is not the only response
@@ -242,10 +242,10 @@ function trnDelete($ls) {
 }
 
 function trnEdit($ls) {
- var $result = localStorage.getItem($ls + '.result');
- var $newmark = localStorage.getItem($ls + '.newmark');
- var $rep = localStorage.getItem($ls + '.representation');
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $result = sessionStorage.getItem($ls + '.result');
+ var $newmark = sessionStorage.getItem($ls + '.newmark');
+ var $rep = sessionStorage.getItem($ls + '.representation');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
 
  if ($result == 200) {
   // yes yes, 200 is not the only response
@@ -433,8 +433,8 @@ function sendGet($el, $newmark, $visitsid) {
  }
 }
 
-function sendGet_v2($el, $newmark, $visitsid, $sid, $lang, $newmarkcrid) {
- var url = "https://rest.mpsvr.com/xlates/" + $sid + "/" + $newmark + "/" + $lang + "/anonymous/" + $newmarkcrid;
+function sendGet_v2($el, $newmark, $visitsid, $uploader_sid, $lang, $newmarkcrid) {
+ var url = "https://rest.mpsvr.com/xlates/" + $visitsid + "," + $uploader_sid + "/" + $newmark + "/" + $lang + "/anonymous/" + $newmarkcrid;
  if (XMLHttpRequest) {
    var request = new XMLHttpRequest();
    if("withCredentials" in request) {
@@ -562,7 +562,7 @@ function sendGet_v2($el, $newmark, $visitsid, $sid, $lang, $newmarkcrid) {
 }
 
 function sendHead($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
  if (XMLHttpRequest) {
    var request = new XMLHttpRequest();
    if("withCredentials" in request) {
@@ -583,7 +583,7 @@ function sendHead($ls) {
 }
 
 function sendOptions($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
  if (XMLHttpRequest) {
    var request = new XMLHttpRequest();
    if("withCredentials" in request) {
@@ -638,7 +638,7 @@ function sendPut($ls) {
  $arr = { 'csi18n_xlate_resource' : { 'language' : $cont_lang, 'translation' : $translation, 'visibility' : $vis } };
  $json_s = JSON.stringify($arr);
 
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
  if (XMLHttpRequest) {
    var request = new XMLHttpRequest();
    if("withCredentials" in request) {
@@ -654,7 +654,7 @@ function sendPut($ls) {
 }
 
 function sendDelete($ls) {
- var $tlink = localStorage.getItem($ls + '.tlink');
+ var $tlink = sessionStorage.getItem($ls + '.tlink');
  if (XMLHttpRequest) {
    var request = new XMLHttpRequest();
    if("withCredentials" in request) {
@@ -720,7 +720,7 @@ function seemore_handler() {
    $json_o = this.response;
    if (window.ie !== false)
     $json_o = JSON.parse($json_o);
-   localStorage.setItem('csi18n_seemore.representations', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_seemore.representations', JSON.stringify($json_o));
 
    var $el = '';
    var $safe_choices = '';
@@ -790,9 +790,9 @@ function handler_uber(this1, name) {
     d1.innerHTML = escapeHtml($translation);
    }
    d2.innerHTML = escapeHtml($translation);
-   localStorage.setItem('csi18n_' + name + '.representation', JSON.stringify($json_o));
-   localStorage.setItem('csi18n_' + name + '.result', this1.status);
-   localStorage.setItem('csi18n_' + name + '.tlink', this1.getResponseHeader('Content-Location'));
+   sessionStorage.setItem('csi18n_' + name + '.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_' + name + '.result', this1.status);
+   sessionStorage.setItem('csi18n_' + name + '.tlink', this1.getResponseHeader('Content-Location'));
   } else {
    if (currently != "off") {
     d1.firstChild.innerHTML = escapeHtml(this1.status.toString())
@@ -1024,13 +1024,13 @@ function toggleShowServiceMenu() {
 function toggleShowTranslationMenu($ls) {
  var d = document.getElementById("trn_menu");
 
- $res = localStorage.getItem($ls + '.representation');
+ $res = sessionStorage.getItem($ls + '.representation');
  if ($res != '') {
   $seemore_uri = $res.csi18n_per_lang_preference;
  } else {
   $seemore_uri = '';
  }
- localStorage.setItem('csi18n_seemore.per_lang_pref', $seemore_uri);
+ sessionStorage.setItem('csi18n_seemore.per_lang_pref', $seemore_uri);
 	
  if (d.style.display == "") {
   d.style.display = "none";
@@ -1121,298 +1121,298 @@ function createDialog_v2($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwi
  d.style.bottom = "auto";
 
  if ($el === 'fr0001') {
-  localStorage.setItem('csi18n_fr0001.result', 0);
-  localStorage.setItem('csi18n_fr0001.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0001.representation', '');
-  localStorage.setItem('csi18n_fr0001.tlink', '');
-  localStorage.setItem('csi18n_fr0001.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0001.result', 0);
+  sessionStorage.setItem('csi18n_fr0001.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0001.representation', '');
+  sessionStorage.setItem('csi18n_fr0001.tlink', '');
+  sessionStorage.setItem('csi18n_fr0001.visitsid', $visitsid);
 
  } else if ($el === 'fr0101') {
-  localStorage.setItem('csi18n_fr0101.result', 0);
-  localStorage.setItem('csi18n_fr0101.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0101.representation', '');
-  localStorage.setItem('csi18n_fr0101.tlink', '');
-  localStorage.setItem('csi18n_fr0101.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0101.result', 0);
+  sessionStorage.setItem('csi18n_fr0101.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0101.representation', '');
+  sessionStorage.setItem('csi18n_fr0101.tlink', '');
+  sessionStorage.setItem('csi18n_fr0101.visitsid', $visitsid);
  } else if ($el === 'fr0102') {
-  localStorage.setItem('csi18n_fr0102.result', 0);
-  localStorage.setItem('csi18n_fr0102.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0102.representation', '');
-  localStorage.setItem('csi18n_fr0102.tlink', '');
-  localStorage.setItem('csi18n_fr0102.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0102.result', 0);
+  sessionStorage.setItem('csi18n_fr0102.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0102.representation', '');
+  sessionStorage.setItem('csi18n_fr0102.tlink', '');
+  sessionStorage.setItem('csi18n_fr0102.visitsid', $visitsid);
  } else if ($el === 'fr0103') {
-  localStorage.setItem('csi18n_fr0103.result', 0);
-  localStorage.setItem('csi18n_fr0103.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0103.representation', '');
-  localStorage.setItem('csi18n_fr0103.tlink', '');
-  localStorage.setItem('csi18n_fr0103.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0103.result', 0);
+  sessionStorage.setItem('csi18n_fr0103.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0103.representation', '');
+  sessionStorage.setItem('csi18n_fr0103.tlink', '');
+  sessionStorage.setItem('csi18n_fr0103.visitsid', $visitsid);
  } else if ($el === 'fr0104') {
-  localStorage.setItem('csi18n_fr0104.result', 0);
-  localStorage.setItem('csi18n_fr0104.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0104.representation', '');
-  localStorage.setItem('csi18n_fr0104.tlink', '');
-  localStorage.setItem('csi18n_fr0104.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0104.result', 0);
+  sessionStorage.setItem('csi18n_fr0104.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0104.representation', '');
+  sessionStorage.setItem('csi18n_fr0104.tlink', '');
+  sessionStorage.setItem('csi18n_fr0104.visitsid', $visitsid);
 
  } else if ($el === 'fr0105') {
-  localStorage.setItem('csi18n_fr0105.result', 0);
-  localStorage.setItem('csi18n_fr0105.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0105.representation', '');
-  localStorage.setItem('csi18n_fr0105.tlink', '');
-  localStorage.setItem('csi18n_fr0105.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0105.result', 0);
+  sessionStorage.setItem('csi18n_fr0105.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0105.representation', '');
+  sessionStorage.setItem('csi18n_fr0105.tlink', '');
+  sessionStorage.setItem('csi18n_fr0105.visitsid', $visitsid);
  } else if ($el === 'fr0106') {
-  localStorage.setItem('csi18n_fr0106.result', 0);
-  localStorage.setItem('csi18n_fr0106.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0106.representation', '');
-  localStorage.setItem('csi18n_fr0106.tlink', '');
-  localStorage.setItem('csi18n_fr0106.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0106.result', 0);
+  sessionStorage.setItem('csi18n_fr0106.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0106.representation', '');
+  sessionStorage.setItem('csi18n_fr0106.tlink', '');
+  sessionStorage.setItem('csi18n_fr0106.visitsid', $visitsid);
  } else if ($el === 'fr0107') {
-  localStorage.setItem('csi18n_fr0107.result', 0);
-  localStorage.setItem('csi18n_fr0107.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0107.representation', '');
-  localStorage.setItem('csi18n_fr0107.tlink', '');
-  localStorage.setItem('csi18n_fr0107.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0107.result', 0);
+  sessionStorage.setItem('csi18n_fr0107.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0107.representation', '');
+  sessionStorage.setItem('csi18n_fr0107.tlink', '');
+  sessionStorage.setItem('csi18n_fr0107.visitsid', $visitsid);
  } else if ($el === 'fr0108') {
-  localStorage.setItem('csi18n_fr0108.result', 0);
-  localStorage.setItem('csi18n_fr0108.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0108.representation', '');
-  localStorage.setItem('csi18n_fr0108.tlink', '');
-  localStorage.setItem('csi18n_fr0108.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0108.result', 0);
+  sessionStorage.setItem('csi18n_fr0108.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0108.representation', '');
+  sessionStorage.setItem('csi18n_fr0108.tlink', '');
+  sessionStorage.setItem('csi18n_fr0108.visitsid', $visitsid);
 
  } else if ($el === 'fr0109') {
-  localStorage.setItem('csi18n_fr0109.result', 0);
-  localStorage.setItem('csi18n_fr0109.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0109.representation', '');
-  localStorage.setItem('csi18n_fr0109.tlink', '');
-  localStorage.setItem('csi18n_fr0109.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0109.result', 0);
+  sessionStorage.setItem('csi18n_fr0109.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0109.representation', '');
+  sessionStorage.setItem('csi18n_fr0109.tlink', '');
+  sessionStorage.setItem('csi18n_fr0109.visitsid', $visitsid);
  } else if ($el === 'fr0110') {
-  localStorage.setItem('csi18n_fr0110.result', 0);
-  localStorage.setItem('csi18n_fr0110.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0110.representation', '');
-  localStorage.setItem('csi18n_fr0110.tlink', '');
-  localStorage.setItem('csi18n_fr0110.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0110.result', 0);
+  sessionStorage.setItem('csi18n_fr0110.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0110.representation', '');
+  sessionStorage.setItem('csi18n_fr0110.tlink', '');
+  sessionStorage.setItem('csi18n_fr0110.visitsid', $visitsid);
  } else if ($el === 'fr0111') {
-  localStorage.setItem('csi18n_fr0111.result', 0);
-  localStorage.setItem('csi18n_fr0111.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0111.representation', '');
-  localStorage.setItem('csi18n_fr0111.tlink', '');
-  localStorage.setItem('csi18n_fr0111.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0111.result', 0);
+  sessionStorage.setItem('csi18n_fr0111.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0111.representation', '');
+  sessionStorage.setItem('csi18n_fr0111.tlink', '');
+  sessionStorage.setItem('csi18n_fr0111.visitsid', $visitsid);
  } else if ($el === 'fr0112') {
-  localStorage.setItem('csi18n_fr0112.result', 0);
-  localStorage.setItem('csi18n_fr0112.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0112.representation', '');
-  localStorage.setItem('csi18n_fr0112.tlink', '');
-  localStorage.setItem('csi18n_fr0112.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0112.result', 0);
+  sessionStorage.setItem('csi18n_fr0112.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0112.representation', '');
+  sessionStorage.setItem('csi18n_fr0112.tlink', '');
+  sessionStorage.setItem('csi18n_fr0112.visitsid', $visitsid);
 
  } else if ($el === 'fr0113') {
-  localStorage.setItem('csi18n_fr0113.result', 0);
-  localStorage.setItem('csi18n_fr0113.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0113.representation', '');
-  localStorage.setItem('csi18n_fr0113.tlink', '');
-  localStorage.setItem('csi18n_fr0113.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0113.result', 0);
+  sessionStorage.setItem('csi18n_fr0113.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0113.representation', '');
+  sessionStorage.setItem('csi18n_fr0113.tlink', '');
+  sessionStorage.setItem('csi18n_fr0113.visitsid', $visitsid);
  } else if ($el === 'fr0114') {
-  localStorage.setItem('csi18n_fr0114.result', 0);
-  localStorage.setItem('csi18n_fr0114.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0114.representation', '');
-  localStorage.setItem('csi18n_fr0114.tlink', '');
-  localStorage.setItem('csi18n_fr0114.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0114.result', 0);
+  sessionStorage.setItem('csi18n_fr0114.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0114.representation', '');
+  sessionStorage.setItem('csi18n_fr0114.tlink', '');
+  sessionStorage.setItem('csi18n_fr0114.visitsid', $visitsid);
  } else if ($el === 'fr0115') {
-  localStorage.setItem('csi18n_fr0115.result', 0);
-  localStorage.setItem('csi18n_fr0115.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0115.representation', '');
-  localStorage.setItem('csi18n_fr0115.tlink', '');
-  localStorage.setItem('csi18n_fr0115.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0115.result', 0);
+  sessionStorage.setItem('csi18n_fr0115.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0115.representation', '');
+  sessionStorage.setItem('csi18n_fr0115.tlink', '');
+  sessionStorage.setItem('csi18n_fr0115.visitsid', $visitsid);
  } else if ($el === 'fr0116') {
-  localStorage.setItem('csi18n_fr0116.result', 0);
-  localStorage.setItem('csi18n_fr0116.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0116.representation', '');
-  localStorage.setItem('csi18n_fr0116.tlink', '');
-  localStorage.setItem('csi18n_fr0116.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0116.result', 0);
+  sessionStorage.setItem('csi18n_fr0116.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0116.representation', '');
+  sessionStorage.setItem('csi18n_fr0116.tlink', '');
+  sessionStorage.setItem('csi18n_fr0116.visitsid', $visitsid);
 
  } else if ($el === 'fr0117') {
-  localStorage.setItem('csi18n_fr0117.result', 0);
-  localStorage.setItem('csi18n_fr0117.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0117.representation', '');
-  localStorage.setItem('csi18n_fr0117.tlink', '');
-  localStorage.setItem('csi18n_fr0117.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0117.result', 0);
+  sessionStorage.setItem('csi18n_fr0117.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0117.representation', '');
+  sessionStorage.setItem('csi18n_fr0117.tlink', '');
+  sessionStorage.setItem('csi18n_fr0117.visitsid', $visitsid);
  } else if ($el === 'fr0118') {
-  localStorage.setItem('csi18n_fr0118.result', 0);
-  localStorage.setItem('csi18n_fr0118.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0118.representation', '');
-  localStorage.setItem('csi18n_fr0118.tlink', '');
-  localStorage.setItem('csi18n_fr0118.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0118.result', 0);
+  sessionStorage.setItem('csi18n_fr0118.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0118.representation', '');
+  sessionStorage.setItem('csi18n_fr0118.tlink', '');
+  sessionStorage.setItem('csi18n_fr0118.visitsid', $visitsid);
  } else if ($el === 'fr0119') {
-  localStorage.setItem('csi18n_fr0119.result', 0);
-  localStorage.setItem('csi18n_fr0119.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0119.representation', '');
-  localStorage.setItem('csi18n_fr0119.tlink', '');
-  localStorage.setItem('csi18n_fr0119.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0119.result', 0);
+  sessionStorage.setItem('csi18n_fr0119.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0119.representation', '');
+  sessionStorage.setItem('csi18n_fr0119.tlink', '');
+  sessionStorage.setItem('csi18n_fr0119.visitsid', $visitsid);
  } else if ($el === 'fr0120') {
-  localStorage.setItem('csi18n_fr0120.result', 0);
-  localStorage.setItem('csi18n_fr0120.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0120.representation', '');
-  localStorage.setItem('csi18n_fr0120.tlink', '');
-  localStorage.setItem('csi18n_fr0120.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0120.result', 0);
+  sessionStorage.setItem('csi18n_fr0120.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0120.representation', '');
+  sessionStorage.setItem('csi18n_fr0120.tlink', '');
+  sessionStorage.setItem('csi18n_fr0120.visitsid', $visitsid);
 
  } else if ($el === 'fr0121') {
-  localStorage.setItem('csi18n_fr0121.result', 0);
-  localStorage.setItem('csi18n_fr0121.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0121.representation', '');
-  localStorage.setItem('csi18n_fr0121.tlink', '');
-  localStorage.setItem('csi18n_fr0121.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0121.result', 0);
+  sessionStorage.setItem('csi18n_fr0121.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0121.representation', '');
+  sessionStorage.setItem('csi18n_fr0121.tlink', '');
+  sessionStorage.setItem('csi18n_fr0121.visitsid', $visitsid);
  } else if ($el === 'fr0122') {
-  localStorage.setItem('csi18n_fr0122.result', 0);
-  localStorage.setItem('csi18n_fr0122.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0122.representation', '');
-  localStorage.setItem('csi18n_fr0122.tlink', '');
-  localStorage.setItem('csi18n_fr0122.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0122.result', 0);
+  sessionStorage.setItem('csi18n_fr0122.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0122.representation', '');
+  sessionStorage.setItem('csi18n_fr0122.tlink', '');
+  sessionStorage.setItem('csi18n_fr0122.visitsid', $visitsid);
  } else if ($el === 'fr0123') {
-  localStorage.setItem('csi18n_fr0123.result', 0);
-  localStorage.setItem('csi18n_fr0123.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0123.representation', '');
-  localStorage.setItem('csi18n_fr0123.tlink', '');
-  localStorage.setItem('csi18n_fr0123.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0123.result', 0);
+  sessionStorage.setItem('csi18n_fr0123.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0123.representation', '');
+  sessionStorage.setItem('csi18n_fr0123.tlink', '');
+  sessionStorage.setItem('csi18n_fr0123.visitsid', $visitsid);
  } else if ($el === 'fr0124') {
-  localStorage.setItem('csi18n_fr0124.result', 0);
-  localStorage.setItem('csi18n_fr0124.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0124.representation', '');
-  localStorage.setItem('csi18n_fr0124.tlink', '');
-  localStorage.setItem('csi18n_fr0124.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0124.result', 0);
+  sessionStorage.setItem('csi18n_fr0124.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0124.representation', '');
+  sessionStorage.setItem('csi18n_fr0124.tlink', '');
+  sessionStorage.setItem('csi18n_fr0124.visitsid', $visitsid);
 
  } else if ($el === 'fr0125') {
-  localStorage.setItem('csi18n_fr0125.result', 0);
-  localStorage.setItem('csi18n_fr0125.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0125.representation', '');
-  localStorage.setItem('csi18n_fr0125.tlink', '');
-  localStorage.setItem('csi18n_fr0125.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0125.result', 0);
+  sessionStorage.setItem('csi18n_fr0125.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0125.representation', '');
+  sessionStorage.setItem('csi18n_fr0125.tlink', '');
+  sessionStorage.setItem('csi18n_fr0125.visitsid', $visitsid);
  } else if ($el === 'fr0126') {
-  localStorage.setItem('csi18n_fr0126.result', 0);
-  localStorage.setItem('csi18n_fr0126.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0126.representation', '');
-  localStorage.setItem('csi18n_fr0126.tlink', '');
-  localStorage.setItem('csi18n_fr0126.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0126.result', 0);
+  sessionStorage.setItem('csi18n_fr0126.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0126.representation', '');
+  sessionStorage.setItem('csi18n_fr0126.tlink', '');
+  sessionStorage.setItem('csi18n_fr0126.visitsid', $visitsid);
  } else if ($el === 'fr0127') {
-  localStorage.setItem('csi18n_fr0127.result', 0);
-  localStorage.setItem('csi18n_fr0127.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0127.representation', '');
-  localStorage.setItem('csi18n_fr0127.tlink', '');
-  localStorage.setItem('csi18n_fr0127.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0127.result', 0);
+  sessionStorage.setItem('csi18n_fr0127.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0127.representation', '');
+  sessionStorage.setItem('csi18n_fr0127.tlink', '');
+  sessionStorage.setItem('csi18n_fr0127.visitsid', $visitsid);
  } else if ($el === 'fr0128') {
-  localStorage.setItem('csi18n_fr0128.result', 0);
-  localStorage.setItem('csi18n_fr0128.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0128.representation', '');
-  localStorage.setItem('csi18n_fr0128.tlink', '');
-  localStorage.setItem('csi18n_fr0128.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0128.result', 0);
+  sessionStorage.setItem('csi18n_fr0128.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0128.representation', '');
+  sessionStorage.setItem('csi18n_fr0128.tlink', '');
+  sessionStorage.setItem('csi18n_fr0128.visitsid', $visitsid);
 
  } else if ($el === 'fr0129') {
-  localStorage.setItem('csi18n_fr0129.result', 0);
-  localStorage.setItem('csi18n_fr0129.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0129.representation', '');
-  localStorage.setItem('csi18n_fr0129.tlink', '');
-  localStorage.setItem('csi18n_fr0129.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0129.result', 0);
+  sessionStorage.setItem('csi18n_fr0129.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0129.representation', '');
+  sessionStorage.setItem('csi18n_fr0129.tlink', '');
+  sessionStorage.setItem('csi18n_fr0129.visitsid', $visitsid);
  } else if ($el === 'fr0130') {
-  localStorage.setItem('csi18n_fr0130.result', 0);
-  localStorage.setItem('csi18n_fr0130.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0130.representation', '');
-  localStorage.setItem('csi18n_fr0130.tlink', '');
-  localStorage.setItem('csi18n_fr0130.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0130.result', 0);
+  sessionStorage.setItem('csi18n_fr0130.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0130.representation', '');
+  sessionStorage.setItem('csi18n_fr0130.tlink', '');
+  sessionStorage.setItem('csi18n_fr0130.visitsid', $visitsid);
  } else if ($el === 'fr0131') {
-  localStorage.setItem('csi18n_fr0131.result', 0);
-  localStorage.setItem('csi18n_fr0131.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0131.representation', '');
-  localStorage.setItem('csi18n_fr0131.tlink', '');
-  localStorage.setItem('csi18n_fr0131.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0131.result', 0);
+  sessionStorage.setItem('csi18n_fr0131.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0131.representation', '');
+  sessionStorage.setItem('csi18n_fr0131.tlink', '');
+  sessionStorage.setItem('csi18n_fr0131.visitsid', $visitsid);
  } else if ($el === 'fr0132') {
-  localStorage.setItem('csi18n_fr0132.result', 0);
-  localStorage.setItem('csi18n_fr0132.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0132.representation', '');
-  localStorage.setItem('csi18n_fr0132.tlink', '');
-  localStorage.setItem('csi18n_fr0132.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0132.result', 0);
+  sessionStorage.setItem('csi18n_fr0132.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0132.representation', '');
+  sessionStorage.setItem('csi18n_fr0132.tlink', '');
+  sessionStorage.setItem('csi18n_fr0132.visitsid', $visitsid);
 
  } else if ($el === 'fr0133') {
-  localStorage.setItem('csi18n_fr0133.result', 0);
-  localStorage.setItem('csi18n_fr0133.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0133.representation', '');
-  localStorage.setItem('csi18n_fr0133.tlink', '');
-  localStorage.setItem('csi18n_fr0133.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0133.result', 0);
+  sessionStorage.setItem('csi18n_fr0133.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0133.representation', '');
+  sessionStorage.setItem('csi18n_fr0133.tlink', '');
+  sessionStorage.setItem('csi18n_fr0133.visitsid', $visitsid);
  } else if ($el === 'fr0134') {
-  localStorage.setItem('csi18n_fr0134.result', 0);
-  localStorage.setItem('csi18n_fr0134.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0134.representation', '');
-  localStorage.setItem('csi18n_fr0134.tlink', '');
-  localStorage.setItem('csi18n_fr0134.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0134.result', 0);
+  sessionStorage.setItem('csi18n_fr0134.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0134.representation', '');
+  sessionStorage.setItem('csi18n_fr0134.tlink', '');
+  sessionStorage.setItem('csi18n_fr0134.visitsid', $visitsid);
  } else if ($el === 'fr0135') {
-  localStorage.setItem('csi18n_fr0135.result', 0);
-  localStorage.setItem('csi18n_fr0135.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0135.representation', '');
-  localStorage.setItem('csi18n_fr0135.tlink', '');
-  localStorage.setItem('csi18n_fr0135.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0135.result', 0);
+  sessionStorage.setItem('csi18n_fr0135.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0135.representation', '');
+  sessionStorage.setItem('csi18n_fr0135.tlink', '');
+  sessionStorage.setItem('csi18n_fr0135.visitsid', $visitsid);
  } else if ($el === 'fr0136') {
-  localStorage.setItem('csi18n_fr0136.result', 0);
-  localStorage.setItem('csi18n_fr0136.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0136.representation', '');
-  localStorage.setItem('csi18n_fr0136.tlink', '');
-  localStorage.setItem('csi18n_fr0136.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0136.result', 0);
+  sessionStorage.setItem('csi18n_fr0136.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0136.representation', '');
+  sessionStorage.setItem('csi18n_fr0136.tlink', '');
+  sessionStorage.setItem('csi18n_fr0136.visitsid', $visitsid);
  } else if ($el === 'fr0137') {
-  localStorage.setItem('csi18n_fr0137.result', 0);
-  localStorage.setItem('csi18n_fr0137.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0137.representation', '');
-  localStorage.setItem('csi18n_fr0137.tlink', '');
-  localStorage.setItem('csi18n_fr0137.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0137.result', 0);
+  sessionStorage.setItem('csi18n_fr0137.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0137.representation', '');
+  sessionStorage.setItem('csi18n_fr0137.tlink', '');
+  sessionStorage.setItem('csi18n_fr0137.visitsid', $visitsid);
  } else if ($el === 'fr0138') {
-  localStorage.setItem('csi18n_fr0138.result', 0);
-  localStorage.setItem('csi18n_fr0138.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0138.representation', '');
-  localStorage.setItem('csi18n_fr0138.tlink', '');
-  localStorage.setItem('csi18n_fr0138.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0138.result', 0);
+  sessionStorage.setItem('csi18n_fr0138.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0138.representation', '');
+  sessionStorage.setItem('csi18n_fr0138.tlink', '');
+  sessionStorage.setItem('csi18n_fr0138.visitsid', $visitsid);
 
  } else if ($el === 'fr0139') {
-  localStorage.setItem('csi18n_fr0139.result', 0);
-  localStorage.setItem('csi18n_fr0139.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0139.representation', '');
-  localStorage.setItem('csi18n_fr0139.tlink', '');
-  localStorage.setItem('csi18n_fr0139.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0139.result', 0);
+  sessionStorage.setItem('csi18n_fr0139.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0139.representation', '');
+  sessionStorage.setItem('csi18n_fr0139.tlink', '');
+  sessionStorage.setItem('csi18n_fr0139.visitsid', $visitsid);
  } else if ($el === 'fr0140') {
-  localStorage.setItem('csi18n_fr0140.result', 0);
-  localStorage.setItem('csi18n_fr0140.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0140.representation', '');
-  localStorage.setItem('csi18n_fr0140.tlink', '');
-  localStorage.setItem('csi18n_fr0140.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0140.result', 0);
+  sessionStorage.setItem('csi18n_fr0140.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0140.representation', '');
+  sessionStorage.setItem('csi18n_fr0140.tlink', '');
+  sessionStorage.setItem('csi18n_fr0140.visitsid', $visitsid);
  } else if ($el === 'fr0141') {
-  localStorage.setItem('csi18n_fr0141.result', 0);
-  localStorage.setItem('csi18n_fr0141.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0141.representation', '');
-  localStorage.setItem('csi18n_fr0141.tlink', '');
-  localStorage.setItem('csi18n_fr0141.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0141.result', 0);
+  sessionStorage.setItem('csi18n_fr0141.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0141.representation', '');
+  sessionStorage.setItem('csi18n_fr0141.tlink', '');
+  sessionStorage.setItem('csi18n_fr0141.visitsid', $visitsid);
  } else if ($el === 'fr0142') {
-  localStorage.setItem('csi18n_fr0142.result', 0);
-  localStorage.setItem('csi18n_fr0142.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0142.representation', '');
-  localStorage.setItem('csi18n_fr0142.tlink', '');
-  localStorage.setItem('csi18n_fr0142.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0142.result', 0);
+  sessionStorage.setItem('csi18n_fr0142.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0142.representation', '');
+  sessionStorage.setItem('csi18n_fr0142.tlink', '');
+  sessionStorage.setItem('csi18n_fr0142.visitsid', $visitsid);
 
  } else if ($el === 'fr0143') {
-  localStorage.setItem('csi18n_fr0143.result', 0);
-  localStorage.setItem('csi18n_fr0143.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0143.representation', '');
-  localStorage.setItem('csi18n_fr0143.tlink', '');
-  localStorage.setItem('csi18n_fr0143.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0143.result', 0);
+  sessionStorage.setItem('csi18n_fr0143.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0143.representation', '');
+  sessionStorage.setItem('csi18n_fr0143.tlink', '');
+  sessionStorage.setItem('csi18n_fr0143.visitsid', $visitsid);
  } else if ($el === 'fr0144') {
-  localStorage.setItem('csi18n_fr0144.result', 0);
-  localStorage.setItem('csi18n_fr0144.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0144.representation', '');
-  localStorage.setItem('csi18n_fr0144.tlink', '');
-  localStorage.setItem('csi18n_fr0144.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0144.result', 0);
+  sessionStorage.setItem('csi18n_fr0144.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0144.representation', '');
+  sessionStorage.setItem('csi18n_fr0144.tlink', '');
+  sessionStorage.setItem('csi18n_fr0144.visitsid', $visitsid);
  } else if ($el === 'fr0145') {
-  localStorage.setItem('csi18n_fr0145.result', 0);
-  localStorage.setItem('csi18n_fr0145.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0145.representation', '');
-  localStorage.setItem('csi18n_fr0145.tlink', '');
-  localStorage.setItem('csi18n_fr0145.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0145.result', 0);
+  sessionStorage.setItem('csi18n_fr0145.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0145.representation', '');
+  sessionStorage.setItem('csi18n_fr0145.tlink', '');
+  sessionStorage.setItem('csi18n_fr0145.visitsid', $visitsid);
  } else if ($el === 'fr0146') {
-  localStorage.setItem('csi18n_fr0146.result', 0);
-  localStorage.setItem('csi18n_fr0146.newmark', $newmark);
-  localStorage.setItem('csi18n_fr0146.representation', '');
-  localStorage.setItem('csi18n_fr0146.tlink', '');
-  localStorage.setItem('csi18n_fr0146.visitsid', $visitsid);
+  sessionStorage.setItem('csi18n_fr0146.result', 0);
+  sessionStorage.setItem('csi18n_fr0146.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0146.representation', '');
+  sessionStorage.setItem('csi18n_fr0146.tlink', '');
+  sessionStorage.setItem('csi18n_fr0146.visitsid', $visitsid);
  } 
 
 
@@ -1732,7 +1732,7 @@ function toggleUploadForm(){
 // 
 function onLoad() {
  window.ie = detectIE();
- 
+ sessionStorage.clear();
  var currently = localStorage.getItem('csi18n_onOrOff');
  if (currently != "on" && currently != "off") {
   localStorage.setItem('csi18n_onOrOff', "on");
@@ -1740,15 +1740,16 @@ function onLoad() {
   localStorage.setItem('csi18n_pw', "test");
   localStorage.setItem('csi18n_key', "e3c12c03cf320b243977d6ac389805de");
   localStorage.setItem('csi18n_lang', "en");
-  localStorage.setItem('csi18n_seemore.representations', '');
-  localStorage.setItem('csi18n_seemore.per_lang_pref', '');
+  sessionStorage.setItem('csi18n_seemore.representations', '');
+  sessionStorage.setItem('csi18n_seemore.per_lang_pref', '');
  }
 <?php
    if ($lang !== '') {
-   echo "localStorage.setItem('csi18n_lang', '$lang');";
+     echo "localStorage.setItem('csi18n_lang', '$lang');";
    }
 ?>
- xkcdShow(global_g_uploadersid, global_g_lang, global_g_newmarkfr0001, 
+ xkcdShow(global_g_visitsid, global_g_uploadersid, global_g_lang, 
+global_g_newmarkfr0001, global_g_newmarkfr0002, 
 global_g_newmarkfr0101, global_g_newmarkfr0102, global_g_newmarkfr0103, global_g_newmarkfr0104,
 global_g_newmarkfr0105, global_g_newmarkfr0106, global_g_newmarkfr0107, global_g_newmarkfr0108,
 global_g_newmarkfr0109, global_g_newmarkfr0110, global_g_newmarkfr0111, global_g_newmarkfr0112,
