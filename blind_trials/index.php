@@ -85,6 +85,7 @@ function post_a_new($un, $pw, $apikey, $newmark, $lang, $vis, $trans, $opt_ignor
 }
 
 $al = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+$hal_lang = $al;
 $al_arr = explode(',', $al);
 $al_pref_arr = array();
 $maxq = 0;

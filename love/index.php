@@ -85,6 +85,8 @@ function post_a_new($un, $pw, $apikey, $newmark, $lang, $vis, $trans, $opt_ignor
 }
 
 $al = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+$hal_lang = $al;
+$hal_lang = $al;
 $al_arr = explode(',', $al);
 $al_pref_arr = array();
 $maxq = 0;
@@ -159,7 +161,7 @@ if (array_key_exists('u_languagecode', $_POST))
 if (array_key_exists('u_fr0001', $_POST))
   $u_fr0001 = $_POST['u_fr0001'];
 /*
-if (array_key_exists('u_fr0002', $_POST))
+  if (array_key_exists('u_fr0002', $_POST))
   $u_fr0001 = $_POST['u_fr0002'];
 */
 
@@ -168,18 +170,18 @@ if (array_key_exists('u_fr0101', $_POST))
 if (array_key_exists('u_fr0102', $_POST))
   $u_fr0102 = $_POST['u_fr0102'];
 /*
-f (array_key_exists('u_fr0103', $_POST))
+  f (array_key_exists('u_fr0103', $_POST))
   $u_fr0103 = $_POST['u_fr0103'];
-if (array_key_exists('u_fr0104', $_POST))
+  if (array_key_exists('u_fr0104', $_POST))
   $u_fr0104 = $_POST['u_fr0104'];
 
-if (array_key_exists('u_fr0105', $_POST))
+  if (array_key_exists('u_fr0105', $_POST))
   $u_fr0105 = $_POST['u_fr0105'];
-if (array_key_exists('u_fr0106', $_POST))
+  if (array_key_exists('u_fr0106', $_POST))
   $u_fr0106 = $_POST['u_fr0106'];
-if (array_key_exists('u_fr0107', $_POST))
+  if (array_key_exists('u_fr0107', $_POST))
   $u_fr0107 = $_POST['u_fr0107'];
-if (array_key_exists('u_fr0108', $_POST))
+  if (array_key_exists('u_fr0108', $_POST))
   $u_fr0108 = $_POST['u_fr0108'];
 */
 
@@ -188,63 +190,63 @@ if (array_key_exists('u_fr0201', $_POST))
 if (array_key_exists('u_fr0202', $_POST))
   $u_fr0202 = $_POST['u_fr0202'];
 /*
-if (array_key_exists('u_fr0203', $_POST))
+  if (array_key_exists('u_fr0203', $_POST))
   $u_fr0203 = $_POST['u_fr0203'];
-if (array_key_exists('u_fr0204', $_POST))
+  if (array_key_exists('u_fr0204', $_POST))
   $u_fr0204 = $_POST['u_fr0204'];
 
-if (array_key_exists('u_fr0301', $_POST))
+  if (array_key_exists('u_fr0301', $_POST))
   $u_fr0301 = $_POST['u_fr0301'];
-if (array_key_exists('u_fr0302', $_POST))
+  if (array_key_exists('u_fr0302', $_POST))
   $u_fr0302 = $_POST['u_fr0302'];
-if (array_key_exists('u_fr0303', $_POST))
+  if (array_key_exists('u_fr0303', $_POST))
   $u_fr0303 = $_POST['u_fr0303'];
-if (array_key_exists('u_fr0304', $_POST))
+  if (array_key_exists('u_fr0304', $_POST))
   $u_fr0304 = $_POST['u_fr0304'];
 
-if (array_key_exists('u_fr0401', $_POST))
+  if (array_key_exists('u_fr0401', $_POST))
   $u_fr0401 = $_POST['u_fr0401'];
-if (array_key_exists('u_fr0402', $_POST))
+  if (array_key_exists('u_fr0402', $_POST))
   $u_fr0402 = $_POST['u_fr0402'];
-if (array_key_exists('u_fr0403', $_POST))
+  if (array_key_exists('u_fr0403', $_POST))
   $u_fr0403 = $_POST['u_fr0403'];
-if (array_key_exists('u_fr0404', $_POST))
+  if (array_key_exists('u_fr0404', $_POST))
   $u_fr0404 = $_POST['u_fr0404'];
 
-if (array_key_exists('u_fr0501', $_POST))
+  if (array_key_exists('u_fr0501', $_POST))
   $u_fr0501 = $_POST['u_fr0501'];
-if (array_key_exists('u_fr0502', $_POST))
+  if (array_key_exists('u_fr0502', $_POST))
   $u_fr0502 = $_POST['u_fr0502'];
-if (array_key_exists('u_fr0503', $_POST))
+  if (array_key_exists('u_fr0503', $_POST))
   $u_fr0503 = $_POST['u_fr0503'];
-if (array_key_exists('u_fr0504', $_POST))
+  if (array_key_exists('u_fr0504', $_POST))
   $u_fr0504 = $_POST['u_fr0504'];
 
-if (array_key_exists('u_fr0601', $_POST))
+  if (array_key_exists('u_fr0601', $_POST))
   $u_fr0601 = $_POST['u_fr0601'];
-if (array_key_exists('u_fr0602', $_POST))
+  if (array_key_exists('u_fr0602', $_POST))
   $u_fr0602 = $_POST['u_fr0602'];
-i (array_key_exists('u_fr0603', $_POST))
+  i (array_key_exists('u_fr0603', $_POST))
   $u_fr0603 = $_POST['u_fr0603'];
-if (array_key_exists('u_fr0604', $_POST))
+  if (array_key_exists('u_fr0604', $_POST))
   $u_fr0604 = $_POST['u_fr0604'];
 
-if (array_key_exists('u_fr0701', $_POST))
+  if (array_key_exists('u_fr0701', $_POST))
   $u_fr0701 = $_POST['u_fr0701'];
-if (array_key_exists('u_fr0702', $_POST))
+  if (array_key_exists('u_fr0702', $_POST))
   $u_fr0702 = $_POST['u_fr0702'];
-if (array_key_exists('u_fr0703', $_POST))
+  if (array_key_exists('u_fr0703', $_POST))
   $u_fr0703 = $_POST['u_fr0703'];
-if (array_key_exists('u_fr0704', $_POST))
+  if (array_key_exists('u_fr0704', $_POST))
   $u_fr0704 = $_POST['u_fr0704'];
 
-if (array_key_exists('u_fr0801', $_POST))
+  if (array_key_exists('u_fr0801', $_POST))
   $u_fr0801 = $_POST['u_fr0801'];
-if (array_key_exists('u_fr0802', $_POST))
+  if (array_key_exists('u_fr0802', $_POST))
   $u_fr0802 = $_POST['u_fr0802'];
-if (array_key_exists('u_fr0803', $_POST))
+  if (array_key_exists('u_fr0803', $_POST))
   $u_fr0803 = $_POST['u_fr0803'];
-if (array_key_exists('u_fr0804', $_POST))
+  if (array_key_exists('u_fr0804', $_POST))
   $u_fr0804 = $_POST['u_fr0804'];
 */
 
@@ -269,9 +271,9 @@ if ($u_username !== null && $u_password !== null && $u_languagecode !== null &&
     1. language code to take from browser?
     2. personal code
 
-how would you assert that THESE xlates should be used and not THOSE?
-/xlates/UPLOADERSID/newmarks/LANG/CRID
- so: reload indicating uploadersid*1; lang*1; and newmark1crid=CRID&newmark2crid=CRID etc
+    how would you assert that THESE xlates should be used and not THOSE?
+    /xlates/UPLOADERSID/newmarks/LANG/CRID
+    so: reload indicating uploadersid*1; lang*1; and newmark1crid=CRID&newmark2crid=CRID etc
   */
 
   //  echo ">-$u_username-$u_password-$u_languagecode-$u_fr0001-$u_fr0101-$u_fr0102<";
@@ -481,22 +483,22 @@ if ($guest_params !== '') {
     $g_newmarkfr0201 = $guest_params_arr[5];
     $g_newmarkfr0202 = $guest_params_arr[6];
     /*
-    $g_newmarkfr0104 = $guest_params_arr[6];
-    $g_newmarkfr0105 = $guest_params_arr[7];
-    $g_newmarkfr0106 = $guest_params_arr[8];
-    $g_newmarkfr0107 = $guest_params_arr[9];
-    $g_newmarkfr0108 = $guest_params_arr[10];
-    $g_newmarkfr0301 = $guest_params_arr[6];
-    $g_newmarkfr0302 = $guest_params_arr[7];
-    $g_newmarkfr0303 = $guest_params_arr[8];
-    $g_newmarkfr0401 = $guest_params_arr[9];
-    $g_newmarkfr0402 = $guest_params_arr[10];
-    $g_newmarkfr0501 = $guest_params_arr[11];
-    $g_newmarkfr0502 = $guest_params_arr[12];
-    $g_newmarkfr0601 = $guest_params_arr[13];
-    $g_newmarkfr0602 = $guest_params_arr[14];
-    $g_newmarkfr0801 = $guest_params_arr[15];
-    $g_newmarkfr0802 = $guest_params_arr[16];
+      $g_newmarkfr0104 = $guest_params_arr[6];
+      $g_newmarkfr0105 = $guest_params_arr[7];
+      $g_newmarkfr0106 = $guest_params_arr[8];
+      $g_newmarkfr0107 = $guest_params_arr[9];
+      $g_newmarkfr0108 = $guest_params_arr[10];
+      $g_newmarkfr0301 = $guest_params_arr[6];
+      $g_newmarkfr0302 = $guest_params_arr[7];
+      $g_newmarkfr0303 = $guest_params_arr[8];
+      $g_newmarkfr0401 = $guest_params_arr[9];
+      $g_newmarkfr0402 = $guest_params_arr[10];
+      $g_newmarkfr0501 = $guest_params_arr[11];
+      $g_newmarkfr0502 = $guest_params_arr[12];
+      $g_newmarkfr0601 = $guest_params_arr[13];
+      $g_newmarkfr0602 = $guest_params_arr[14];
+      $g_newmarkfr0801 = $guest_params_arr[15];
+      $g_newmarkfr0802 = $guest_params_arr[16];
     */
   }
 }

@@ -1044,7 +1044,7 @@ function acceptDefLang() {
  if ($deflang == null) {
   $deflang = window.navigator.language;
  }
- var rv = prompt("New Language", $deflang);
+ var rv = prompt("New Language (leave empty to reset)", $deflang);
  if (rv != null) {
   localStorage.setItem('csi18n_lang', rv);
  }
@@ -1597,22 +1597,29 @@ function toggleUploadForm(){
 function onLoad() {
  window.ie = detectIE();
  
+ // if the lang hasn't been set, copy it from user's Accept-Language
+ // do it here so resetting default language happens either on first
+ // visit, or on emptying default language
+ if (!localStorage.getItem('csi18n_lang') || (localStorage.getItem('csi18n_lang') == '')) {
+<?php
+   echo "localStorage.setItem('csi18n_lang', '$hal_lang');";
+?>
+ }
+
  var currently = localStorage.getItem('csi18n_onOrOff');
  if (currently != "on" && currently != "off") {
   localStorage.setItem('csi18n_onOrOff', "on");
   localStorage.setItem('csi18n_un', "test05");
   localStorage.setItem('csi18n_pw', "test");
   localStorage.setItem('csi18n_key', "e3c12c03cf320b243977d6ac389805de");
-  localStorage.setItem('csi18n_lang', "en");
+  // we're here because we've never visited before. Does everyone use
+  // en? Probably not. Maybe consider forcing people to use en;q=0.001 
+  // so they retrieve SOMETHING more than 404s
+  // localStorage.setItem('csi18n_lang', "en;q=0.001");
   sessionStorage.clear();
   sessionStorage.setItem('csi18n_seemore.representations', '');
   sessionStorage.setItem('csi18n_seemore.per_lang_pref', '');
  }
-<?php
-   if ($lang !== '') {
-     echo "localStorage.setItem('csi18n_lang', '$lang');";
-   }
-?>
  xkcdShow(global_g_visitsid, global_g_uploadersid, global_g_lang, global_container_width, global_container_height,
 global_g_newmarkfr0001, global_g_newmarkfr0002,
 global_g_newmarkfr0101, global_g_newmarkfr0102, global_g_newmarkfr0103, global_g_newmarkfr0104,

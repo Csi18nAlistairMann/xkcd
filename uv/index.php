@@ -84,6 +84,38 @@ function post_a_new($un, $pw, $apikey, $newmark, $lang, $vis, $trans, $opt_ignor
   return $loc;
 }
 
+$al = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+$hal_lang = $al;
+$al_arr = explode(',', $al);
+$al_pref_arr = array();
+$maxq = 0;
+foreach($al_arr as $l) {
+  //  echo "new lang seq: $l<br>";
+  $l_arr = explode(';', $l);
+  //  $lang = $l_arr[0]; //array_shift($l_arr);
+  $lang = array_shift($l_arr);
+  //  echo "Lang: $lang (" . print_r($l_arr, true) . ")<br>";
+  $q = 1;
+  foreach($l_arr as $param) {
+    //    echo " new param seq: $param<br>";
+    $param_arr = explode('=', $param);
+    if (sizeof($param_arr) === 2) {
+      if ($param_arr[0] === 'q') {
+	$q = $param_arr[1];
+      }
+    }
+  }
+  $q = (int) ($q * 1000);
+  if ($q > $maxq) {
+    $maxq = $q;
+  }
+  $al_pref_arr[$q][] = $lang;
+}
+$probable_lang = $al_pref_arr[$maxq][0]; //$first_lang;
+$probable_lang = htmlentities($probable_lang);
+//echo ">>" . print_r($al_pref_arr, true) . "<<";
+//echo ">>$probable_lang<<<br>";
+
 $qs = $_SERVER['QUERY_STRING'];
 $in_arr = explode('&', $qs);
 $visitsid = '';
