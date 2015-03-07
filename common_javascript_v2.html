@@ -1320,18 +1320,20 @@ function createDialog_v2($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwi
 
  if (localStorage.getItem('csi18n_onOrOff') == 'on') {
   if ($el === 'fr0001') {
-   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0001\")'>" + escapeHtml($translation) + "</a>"; 
+   // the next six have classes to assist in greentexting 'pwned' 
+   // and this could be extended to all the others as wished
+   d.innerHTML = "<a class='xlate_fr0001' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0001\")'>" + escapeHtml($translation) + "</a>"; 
   } else if ($el === 'fr0002') {
-   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0002\")'>" + escapeHtml($translation) + "</a>"; 
+   d.innerHTML = "<a class='xlate_fr0002' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0002\")'>" + escapeHtml($translation) + "</a>"; 
 
   } else if ($el === 'fr0101') {
-   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0101\")'>" + escapeHtml($translation) + "</a>"; 
+   d.innerHTML = "<a class='xlate_fr0101' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0101\")'>" + escapeHtml($translation) + "</a>"; 
   } else if ($el === 'fr0102') {
-   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0102\")'>" + escapeHtml($translation) + "</a>"; 
+   d.innerHTML = "<a class='xlate_fr0102' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0102\")'>" + escapeHtml($translation) + "</a>"; 
   } else if ($el === 'fr0103') {
-   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0103\")'>" + escapeHtml($translation) + "</a>"; 
+   d.innerHTML = "<a class='xlate_fr0103' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0103\")'>" + escapeHtml($translation) + "</a>"; 
   } else if ($el === 'fr0104') {
-   d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0104\")'>" + escapeHtml($translation) + "</a>"; 
+   d.innerHTML = "<a class='xlate_fr0104' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0104\")'>" + escapeHtml($translation) + "</a>"; 
 
   } else if ($el === 'fr0105') {
    d.innerHTML = "<a href='javascript:toggleShowTranslationMenu(\"csi18n_fr0105\")'>" + escapeHtml($translation) + "</a>"; 
@@ -1443,11 +1445,10 @@ function createDialog_v2($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwi
  d.style.textAlign = align;
 
  // common to all xlates appearing
- d.style.backgroundColor = 'rgba(255, 255, 255, 1)'; // final value is transparent - 1 = 'not'
+// d.style.backgroundColor = 'rgba(255, 255, 255, 1)'; // final value is transparent - 1 = 'not'
  d.style.fontSize = "20px";
  d.style.zIndex = "100";
  d.style.fontSize = $size + "px";
- d.style.fontFamily = "sans";
  d.style.fontStyle = $style;
  d.style.maxWidth = $maxwidth + "px";
 }

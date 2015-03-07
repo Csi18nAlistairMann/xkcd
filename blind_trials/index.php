@@ -1,4 +1,5 @@
 <?php
+// blind_trials
 
 //
 // Who has final moderation control over the content at whichever

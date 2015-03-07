@@ -1,4 +1,15 @@
 <!-- pwned -->
+<style>
+ /* >greentext */
+ a.xlate_fr0101, a.xlate_fr0102, a.xlate_fr0103 {
+   color: #789922; 
+   background-color: transparent;
+   font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
+ }
+ a {
+   font-family: sans;
+ }
+</style>
 <script type="text/javascript">
 
 //
@@ -21,14 +32,15 @@ $g_newmarkfr0801, $g_newmarkfr0802, $g_newmarkfr0803, $g_newmarkfr0804) {
  // fr0001 normally holds the mouseover text
  createDialog_v2("fr0001", "TL T", $cont_width, $cont_height, 0, 0, "12", 350, "", "xkcd-pwned-fr0001", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0001);
  // fr0002 holds the title
- createDialog_v2("fr0002", "TLCT", $cont_width, $cont_height, 0, 0, "16", 350, "", "xkcd-pwned-fr0002", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0002);
+ createDialog_v2("fr0002", "TLCT", $cont_width, $cont_height, 0, 0, "14", 350, "", "xkcd-pwned-fr0002", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0002);
 
  // the remainder are of the form frXXYY - where fr = frame; XX is the frame number starting from 01
  // and YY is the textual element within the frame, also starting at 01
- createDialog_v2("fr0101", "BL", $cont_width, $cont_height, 14, 78, "17", 323, "", "xkcd-pwned-fr0101", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0101);
- createDialog_v2("fr0102", "TL", $cont_width, $cont_height, 44, 85, "17", 295, "", "xkcd-pwned-fr0102", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0102);
- createDialog_v2("fr0103", "TL", $cont_width, $cont_height, 14, 119, "17", 327, "", "xkcd-pwned-fr0103", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0103);
+ createDialog_v2("fr0101", "BL", $cont_width, $cont_height, 14, 78, "15", 323, "", "xkcd-pwned-fr0101", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0101);
+ createDialog_v2("fr0102", "TL", $cont_width, $cont_height, 14, 78, "15", 323, "", "xkcd-pwned-fr0102", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0102);
+
 /*
+ createDialog_v2("fr0103", "TL", $cont_width, $cont_height, 14, 119, "15", 327, "", "xkcd-pwned-fr0103", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0103);
  createDialog_v2("fr0104", "TLC", $cont_width, $cont_height, 245, 175, "12", 191, "", "xkcd-pwned-fr0104", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0104);
  createDialog_v2("fr0105", "TLC", $cont_width, $cont_height, 0, 205, "12", 465, "", "xkcd-pwned-fr0105", $g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $g_newmarkfr0105);
 
@@ -97,13 +109,13 @@ function xkcdShowLines() {
 <div id="fr0002" class="" style="display: block" >frame 00 text 02</div>
 <div id="tochterAusElysium" style="position: absolute; background: #BBBBBB; font-size:10px; width:
 <?php echo $container_width; ?>px; height:<?php echo $container_height; ?>px; font-family:sans;"> 
-<img src="http://i.imgur.com/SIcTImg.png" alt="" usemap="#TupacVsThomasTheTankEngine" ><br>
+<img src="http://i.imgur.com/3Vm1p0x.png" alt="" usemap="#TupacVsThomasTheTankEngine" ><br>
 <map name="TupacVsThomasTheTankEngine" >
   <!-- coords generated at http://www.image-maps.com/ -->
-  <area alt="" title="" shape="rect" coords="14,86,39,113" onMouseOver="showWhatWasImgTitle()"/>
+  <area alt="" title="" shape="rect" coords="0,78,14,100" onMouseOver="showWhatWasImgTitle()"/>
 <!--  <area alt="" title="" shape="poly" coords="85,70,72,73,61,80,54,91,51,104,54,117,61,128,72,135,85,138,98,135,109,128,116,117,119,104,116,91,109,80,98,73" onMouseOver="showWhatWasImgTitle()"/> -->
 </map>
-<div id="fr0001" class="" style="display: none " >frame 00 text 01</div>
+<div id="fr0001" class="" style="display: none; background-color: #ffffff" >frame 00 text 01</div>
 
 Attribution: <a href="http://xkcd.com/91/">http://xkcd.com/91/</a><br>
 XKCD example page retrieved 2015-mar-06<br><br>
@@ -123,8 +135,8 @@ text-shadow:
 
 <div id="fr0101" class="" style="display: inline" >frame 01 text 01</div>
 <div id="fr0102" class="" style="display: inline" >frame 01 text 02</div>
-<div id="fr0103" class="" style="display: inline" >frame 01 text 03</div>
 <!--
+<div id="fr0103" class="" style="display: inline" >frame 01 text 03</div>
 <div id="fr0104" class="" style="display: inline" >frame 01 text 04</div>
 <div id="fr0105" class="" style="display: inline" >frame 01 text 05</div>
 
@@ -204,8 +216,8 @@ the text can be edited like the rest
 
 <textarea rows=3 cols=30 id="u_fr0101" name="u_fr0101"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0102" name="u_fr0102"></textarea><br>
-<textarea rows=3 cols=30 id="u_fr0103" name="u_fr0103"></textarea><br>
 <!--
+<textarea rows=3 cols=30 id="u_fr0103" name="u_fr0103"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0104" name="u_fr0104"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0105" name="u_fr0105"></textarea><br>
 
