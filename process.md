@@ -15,16 +15,16 @@ At mo, code assumes no more than 8 frames, no more than 8 text elements per fram
   4. label the textual elements (“fr0104” etc)
    1. If some textual elements repeat (“Yes”, “X” etc) then label the first, second and subsequent label with a new lable AND the original. This sign that position changes but the newmark doesn't
   5. ~~label point elements (“speech line”) leaving original lines in this time~~
- 7. Title two tables 
+ 1. Title two tables 
   1. textual
    1. one row per textual elements
-   2. cols: corner; x,y, w
-  2. ~~point elements~~
+   1. cols: corner; x,y, w
+  1. ~~point elements~~
    1. ~~one row per two points (“pt1, pt2”)~~
-   2. ~~Cols: xy->xy~~
- 8. Co-ords:
+   1. ~~Cols: xy->xy~~
+ 1. Co-ords:
   1. For each textual element
-   1. determine where the corner should go (just tl, tr, bl, br for now)
+     1. determine where the corner should go (just tl, tr, bl, br for now)
    2. Get pixel co-ords for textual element and point elements
    3. determine max width of bubble
  9. Erase all textual and speech bubble elements
