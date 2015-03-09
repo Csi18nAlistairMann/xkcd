@@ -93,3 +93,4 @@ At mo, code assumes no more than 8 frames, no more than 8 text elements per fram
      5. Submit
    2. Make text a bit larger/smaller to suit
  17. Adjust co-ords to suity
+
