@@ -42,9 +42,9 @@ At mo, code assumes no more than 8 frames, no more than 8 text elements per fram
      3. Change attribution
      4. Change date
      5. Change “prev” link to last xkcd
-     6. change divs to handle particular number this day
-     7. change textareas to handle particular number this day
-     8. comment out unused createDialog_v2s  in xkcdShow()
+     6. ~~change divs to handle particular number this day~~
+     7. ~~change textareas to handle particular number this day~~
+     8. ~~comment out unused createDialog_v2s  in xkcdShow()~~
      9. ~~comment out unused items in xkcdShowLines()~~
      10. Data for xkcdShow() for BT, TL etc, co-ords and widths
      11. Review xkcdShow() font sizes
