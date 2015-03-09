@@ -109,13 +109,14 @@ function post_a_new($un, $pw, $apikey, $newmark, $lang, $vis, $trans, $opt_ignor
 // reason.
 function handlePOSTResponse($rv, &$crid, &$uploadersid) {
   if ($rv === '') return;
-  preg_match('|.*/([^/]*)$|', $rv, $matches);
-  if ($crid === '') {
-    $crid = $matches[1];
-  }
-  preg_match('|.*/xlates/\d+,([^/]*)/.*$|', $rv, $matches);
-  if ($uploadersid === '') {
-    $uploadersid = $matches[1];
+  if (preg_match('|.*/([^/]*)$|', $rv, $matches) === 1) {
+    if ($crid === '') {
+      $crid = $matches[1];
+    }
+    preg_match('|.*/xlates/\d+,([^/]*)/.*$|', $rv, $matches);
+    if ($uploadersid === '') {
+      $uploadersid = $matches[1];
+    }
   }
   return $rv;
 }
