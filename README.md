@@ -1,0 +1,1 @@
+process.md for the process of uploading a new xkcd
