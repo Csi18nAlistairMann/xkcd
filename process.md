@@ -84,12 +84,12 @@ At mo, code assumes no more than 8 frames, no more than 8 text elements per fram
   1. add as “next” to previous index.html
   2. add to xkcd/index.html
  16. At site: Page should now work, with 404s for text. add English text as available translation:
-  1. Make sure your credentials are correct in Globe | username / password -- they default to test05
-  1. For each “404”
-   1. Click
-   2. Offer Another
-   3. Add original English
-   4. Anonymous
-   5. Submit
-  2. Make text a bit larger/smaller to suit
- 17. Adjust co-ords to suity
+   1. Make sure your credentials are correct in Globe | username / password -- they default to test05
+   1. For each “404”
+     1. Click
+     2. Offer Another
+     3. Add original English
+     4. Anonymous
+     5. Submit
+   2. Make text a bit larger/smaller to suit
+ 17. Adjust co-ords to suit
