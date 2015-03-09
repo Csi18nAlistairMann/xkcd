@@ -9,7 +9,7 @@
 //
 //
 // $el, $corner, $totx, $toty, $posx, $posy, $size, $maxwidth, $style, $newmark
-function xkcdShow($g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $cont_width, $cont_height, 
+function xkcdShow($g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $cont_width, $cont_height, $unused,
 $g_newmarkfr0001, $g_newmarkfr0002, 
 $g_newmarkfr0101, $g_newmarkfr0102, $g_newmarkfr0103, $g_newmarkfr0104,
 $g_newmarkfr0105, $g_newmarkfr0106, $g_newmarkfr0107, $g_newmarkfr0108,
@@ -180,12 +180,12 @@ the text can be edited like the rest
 <p>
 
 
-<div onClick="javascript:toggleUploadForm()">[Click here to upload your own]</div>
+<div onClick="javascript:toggleUploadForm()">[Click here to translate]</div>
 <div id="upload-form">
 <form action="" method="POST">
 <input type="text" name="u_username" value="username"></input> <a href="https://service.mpsvr.com/">Join?</a><br>
 <input type="password" name="u_password" value="password"></input><br>
-<input type="text" name="u_languagecode" value="language code"></input><br>
+<input type="text" name="u_languagecode" value="language code"></input><a href="http://csi18n.mpsvr.com/index.php/Find_a_particular_IETF_language_tag%3F">language codes</a><br>
 <textarea rows=3 cols=30 id="u_fr0101" name="u_fr0101"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0102" name="u_fr0102"></textarea><br>
 <textarea rows=3 cols=30 id="u_fr0103" name="u_fr0103"></textarea><br>
@@ -240,7 +240,7 @@ the text can be edited like the rest
 
 <textarea rows=3 cols=30 id="u_fr0001" name="u_fr0001"></textarea><br>
 <!--<textarea rows=3 cols=30 id="u_fr0002" name="u_fr0002"></textarea><br>-->
-<input type=submit value=submit>
+<input type=submit value=Upload>
 </form>
 </div>
 

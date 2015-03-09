@@ -19,6 +19,12 @@ $thisPageBelongsToSID = 92;
 $container_width = 411;
 $container_height = 1024;
 
+//
+// The apikey may be used to effect management of bad clients.
+// Obtain your own from https://service.mpsvr.com/ rather than
+// risk the one below getting revoked
+$dflt_apikey = "e3c12c03cf320b243977d6ac389805de";
+
 header("Content-Type: text/html; charset=utf-8");
 
 function post_a_new($un, $pw, $apikey, $newmark, $lang, $vis, $trans, $opt_ignore_blanks, $thisPageBelongsToSID) {
@@ -157,7 +163,7 @@ if (array_key_exists('u_username', $_POST))
 if (array_key_exists('u_password', $_POST))
   $u_password = $_POST['u_password'];
 if (array_key_exists('u_languagecode', $_POST))
-  $u_languagecode = $_POST['u_languagecode'];
+  $u_languagecode = urlencode($_POST['u_languagecode']);
 if (array_key_exists('u_fr0001', $_POST))
   $u_fr0001 = $_POST['u_fr0001'];
 if (array_key_exists('u_fr0002', $_POST))
@@ -419,7 +425,6 @@ how would you assert that THESE xlates should be used and not THOSE?
       }
     }
 
-    $u_languagecode = urlencode($u_languagecode);
     //-- Doc: script uri
     $link = $_SERVER['SCRIPT_URI'] . "?q=$uploadersid,$u_languagecode,$crid_fr0001,$crid_fr0002";
 
@@ -470,7 +475,7 @@ if ($guest_params !== '') {
   // DONT FORGET TO CHANEGE THE SIZEOF!!
   if (sizeof($guest_params_arr) === 4 ) {
     $g_uploadersid = $guest_params_arr[0];
-    $g_lang = urldecode($guest_params_arr[1]);
+    $g_lang = $guest_params_arr[1];
     $g_newmarkfr0001 = $guest_params_arr[2];
     $g_newmarkfr0002 = $guest_params_arr[3];
     /*
@@ -621,6 +626,7 @@ echo "<script type='text/javascript'>\n".
 "var global_g_lang = '$g_lang';\n".
 "var global_container_width = '$container_width';\n".
 "var global_container_height = '$container_height';\n".
+"var global_frame_array = '';\n" .
 
 "var global_g_newmarkfr0001 = '$g_newmarkfr0001';\n".
 "var global_g_newmarkfr0002 = '$g_newmarkfr0002';\n".

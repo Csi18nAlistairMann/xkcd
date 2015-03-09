@@ -19,6 +19,12 @@ $thisPageBelongsToSID = 92;
 $container_width = 350;
 $container_height = 1024;
 
+//
+// The apikey may be used to effect management of bad clients.
+// Obtain your own from https://service.mpsvr.com/ rather than
+// risk the one below getting revoked
+$dflt_apikey = "e3c12c03cf320b243977d6ac389805de";
+
 header("Content-Type: text/html; charset=utf-8");
 
 function post_a_new($un, $pw, $apikey, $newmark, $lang, $vis, $trans, $opt_ignore_blanks, $thisPageBelongsToSID) {
@@ -157,7 +163,7 @@ if (array_key_exists('u_username', $_POST))
 if (array_key_exists('u_password', $_POST))
   $u_password = $_POST['u_password'];
 if (array_key_exists('u_languagecode', $_POST))
-  $u_languagecode = $_POST['u_languagecode'];
+  $u_languagecode = urlencode($_POST['u_languagecode']);
 if (array_key_exists('u_fr0001', $_POST))
   $u_fr0001 = $_POST['u_fr0001'];
 if (array_key_exists('u_fr0002', $_POST))
@@ -167,9 +173,10 @@ if (array_key_exists('u_fr0101', $_POST))
   $u_fr0101 = $_POST['u_fr0101'];
 if (array_key_exists('u_fr0102', $_POST))
   $u_fr0102 = $_POST['u_fr0102'];
-if (array_key_exists('u_fr0103', $_POST))
-  $u_fr0103 = $_POST['u_fr0103'];
+
 /*
+  if (array_key_exists('u_fr0103', $_POST))
+  $u_fr0103 = $_POST['u_fr0103'];
   if (array_key_exists('u_fr0104', $_POST))
   $u_fr0104 = $_POST['u_fr0104'];
 
@@ -249,7 +256,7 @@ if (array_key_exists('u_fr0103', $_POST))
 //-- Doc: check if enough to POST
 if ($u_username !== null && $u_password !== null && $u_languagecode !== null &&
     $u_fr0001 !== null && $u_fr0002 !== null && 
-    $u_fr0101 !== null && $u_fr0102 !== null && $u_fr0103 !== null
+    $u_fr0101 !== null && $u_fr0102 !== null 
     ){
   
   // Assuming all well, the service will upload this new creation, 
@@ -317,13 +324,13 @@ if ($u_username !== null && $u_password !== null && $u_languagecode !== null &&
       preg_match('|.*/([^/]*)$|', $rv, $matches);
       $crid_fr0102 = $matches[1];
     }
-    $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-pwned-fr0103', $u_languagecode, 'anonymous', $u_fr0103, $opt_ignore_blanks, $thisPageBelongsToSID);
-    if ($rv !== '') {
-      preg_match('|.*/([^/]*)$|', $rv, $matches);
-      $crid_fr0103 = $matches[1];
-    }
 
     if (0) {
+      $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-pwned-fr0103', $u_languagecode, 'anonymous', $u_fr0103, $opt_ignore_blanks, $thisPageBelongsToSID);
+      if ($rv !== '') {
+	preg_match('|.*/([^/]*)$|', $rv, $matches);
+	$crid_fr0103 = $matches[1];
+      }
       $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-pwned-fr0104', $u_languagecode, 'anonymous', $u_fr0104, $opt_ignore_blanks, $thisPageBelongsToSID);
       if ($rv !== '') {
 	preg_match('|.*/([^/]*)$|', $rv, $matches);
@@ -423,9 +430,8 @@ if ($u_username !== null && $u_password !== null && $u_languagecode !== null &&
       }
     }
 
-    $u_languagecode = urlencode($u_languagecode);
     //-- Doc: script uri
-    $link = $_SERVER['SCRIPT_URI'] . "?q=$uploadersid,$u_languagecode,$crid_fr0001,$crid_fr0002,$crid_fr0101,$crid_fr0102,$crid_fr0103";
+    $link = $_SERVER['SCRIPT_URI'] . "?q=$uploadersid,$u_languagecode,$crid_fr0001,$crid_fr0002,$crid_fr0101,$crid_fr0102";
 
     echo "Your changes are at this link, and you can forward it to others!<br>";
     echo "<a href='$link' target=_blank>$link</a><br>";
@@ -472,16 +478,16 @@ $g_newmarkfr0001 = $g_newmarkfr0002 =
 if ($guest_params !== '') {
   $guest_params_arr = explode(',', $guest_params);
   // DONT FORGET TO CHANEGE THE SIZEOF!!
-  if (sizeof($guest_params_arr) === 7 ) {
+  if (sizeof($guest_params_arr) === 6) {
     $g_uploadersid = $guest_params_arr[0];
-    $g_lang = urldecode($guest_params_arr[1]);
+    $g_lang = $guest_params_arr[1];
     $g_newmarkfr0001 = $guest_params_arr[2];
     $g_newmarkfr0002 = $guest_params_arr[3];
     
     $g_newmarkfr0101 = $guest_params_arr[4];
     $g_newmarkfr0102 = $guest_params_arr[5];
-    $g_newmarkfr0103 = $guest_params_arr[6];
     /*
+      $g_newmarkfr0103 = $guest_params_arr[6];
       $g_newmarkfr0104 = $guest_params_arr[7];
       $g_newmarkfr0105 = $guest_params_arr[8];
       $g_newmarkfr0106 = $guest_params_arr[8];
@@ -513,7 +519,7 @@ if ($guest_params !== '') {
 //-- Doc: reset all the things, if not got expected things
 if ($g_uploadersid !== null && $g_lang !== null &&
     $g_newmarkfr0001 !== null && $g_newmarkfr0002 !== null &&
-    $g_newmarkfr0101 !== null && $g_newmarkfr0102 !== null && $g_newmarkfr0103 !== null
+    $g_newmarkfr0101 !== null && $g_newmarkfr0102 !== null
     ){
   
   //  echo ">-$g_uploadersid-$g_lang-$g_newmarkfr0001-$g_newmarkfr0101-$g_newmarkfr0102<";
@@ -630,6 +636,7 @@ echo "<script type='text/javascript'>\n".
 "var global_g_lang = '$g_lang';\n".
 "var global_container_width = '$container_width';\n".
 "var global_container_height = '$container_height';\n".
+"var global_frame_array = '';\n" .
 
 "var global_g_newmarkfr0001 = '$g_newmarkfr0001';\n".
 "var global_g_newmarkfr0002 = '$g_newmarkfr0002';\n".

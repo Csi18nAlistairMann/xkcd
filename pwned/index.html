@@ -15,7 +15,7 @@
 //
 //
 // $el, $corner, $totx, $toty, $posx, $posy, $size, $maxwidth, $style, $newmark
-function xkcdShow($g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $cont_width, $cont_height,
+function xkcdShow($g_thisPageBelongsToSID, $g_uploadersid, $g_lang, $cont_width, $cont_height, $unused,
 $g_newmarkfr0001, $g_newmarkfr0002, 
 $g_newmarkfr0101, $g_newmarkfr0102, $g_newmarkfr0103, $g_newmarkfr0104,
 $g_newmarkfr0105, $g_newmarkfr0106, $g_newmarkfr0107, $g_newmarkfr0108,
@@ -119,7 +119,7 @@ function xkcdShowLines() {
 
 Attribution: <a href="http://xkcd.com/91/">http://xkcd.com/91/</a><br>
 XKCD example page retrieved 2015-mar-06<br><br>
-[ <a href="../hard_reboot">prev</a> | <a href="../">up</a> | <!--<a href="../">next</a>--> ]<br>
+[ <a href="../hard_reboot">prev</a> | <a href="../">up</a> | <a href="../long_light">next</a> ]<br>
 
 <div id="globe" class= "" style="position:fixed; right:0; top: 0;"><img onclick="javascript:toggleShowServiceMenu()" src='../translationglobe.png'></div>
 <div id="globe-lang" class= "" style="position:fixed; right:0; top: 0; color: white; font-family: sans-serif; font-size: 4em; font-weight: bold; 
@@ -202,15 +202,15 @@ the text can be edited like the rest
 
 <p>
 
-<div onClick="javascript:toggleUploadForm()">[Click here to upload your own]</div>
+<div onClick="javascript:toggleUploadForm()">[Click here to translate]</div>
 <div id="upload-form">
 <form action="" method="POST">
 <input type="text" name="u_username" value="username"></input> <a href="https://service.mpsvr.com/">Join?</a><br>
 <input type="password" name="u_password" value="password"></input><br>
 <input type="text" name="u_languagecode" value="<?php
    echo $probable_lang;
-?>
-"></input><br>
+?>">
+</input> <a href="http://csi18n.mpsvr.com/index.php/Find_a_particular_IETF_language_tag%3F">language codes</a><br>
 
 <textarea rows=3 cols=30 id="u_fr0002" name="u_fr0002"></textarea><br> <!--Title text-->
 
@@ -265,7 +265,7 @@ the text can be edited like the rest
 <textarea rows=3 cols=30 id="u_fr0001" name="u_fr0001"></textarea><br> <!--Mouseover text-->
 
 <input type=checkbox name=ignore_blanks value=ignore checked>Ignore blank entries<br>
-<input type=submit value=submit>
+<input type=submit value=Upload>
 </form>
 </div>
 
