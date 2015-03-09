@@ -16,7 +16,7 @@ $thisPageBelongsToSID = 92;
 // can nevertheless be kept a certain distance from the top. For
 // now the width is the width of the webcomic img, and the height
 // sticks at 1 Kilopixels (Kibipixels?)
-$container_width = 640;
+$container_width = 608;
 $container_height = 1024;
 
 //
@@ -31,7 +31,7 @@ $dflt_apikey = "e3c12c03cf320b243977d6ac389805de";
 // of the webcomic: how many text elements are within? Three
 // speech bubbles = 3. Assumption of upto 8 frames, so frame_array
 // must be 9 elements long: pad with zeros
-$frame_array = array(2, 2, 3, 1, 2, 1, 3, 0, 0);
+$frame_array = array(2, 4, 0, 0, 0, 0, 0, 0, 0);
 
 //
 // UTF-8 bc unicode and reasons; head and lack of style amirite
@@ -257,12 +257,7 @@ if ($frame_array[8] > 3 && array_key_exists('u_fr0804', $_POST)) $u_fr0804 = $_P
 // Only accept for upload if all fields are presented. 
 if ($u_username !== null && $u_password !== null && $u_languagecode !== null &&
     $u_fr0001 !== null && $u_fr0002 !== null && 
-    $u_fr0101 !== null && $u_fr0102 !== null && 
-    $u_fr0201 !== null && $u_fr0202 !== null && $u_fr0203 !== null && 
-    $u_fr0301 !== null &&
-    $u_fr0401 !== null && $u_fr0402 !== null && 
-    $u_fr0501 !== null &&
-    $u_fr0601 !== null && $u_fr0602 !== null && $u_fr0603 !== null
+    $u_fr0101 !== null && $u_fr0102 !== null && $u_fr0103 !== null && $u_fr0104 !== null
     ){
   
   // Assuming all well, the service will upload this new creation, 
@@ -302,92 +297,91 @@ if ($u_username !== null && $u_password !== null && $u_languagecode !== null &&
     $crid_fr0801 = $crid_fr0802 = $crid_fr0803 = $crid_fr0804 = '';
 
   //-- Doc: perform POSTs
-    
   $rv = 0;
   $uploadersid = '';
-  if ($rv !== 401 && $frame_array[0] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0001', $u_languagecode, 'anonymous', $u_fr0001, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[0] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0001', $u_languagecode, 'anonymous', $u_fr0001, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0001, $uploadersid);
-  if ($rv !== 401 && $frame_array[0] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0002', $u_languagecode, 'anonymous', $u_fr0001, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[0] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0002', $u_languagecode, 'anonymous', $u_fr0001, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0002, $uploadersid);
 
-  if ($rv !== 401 && $frame_array[1] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0101', $u_languagecode, 'anonymous', $u_fr0101, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[1] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0101', $u_languagecode, 'anonymous', $u_fr0101, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0101, $uploadersid);
-  if ($rv !== 401 && $frame_array[1] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0102', $u_languagecode, 'anonymous', $u_fr0102, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[1] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0102', $u_languagecode, 'anonymous', $u_fr0102, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0102, $uploadersid);
-  if ($rv !== 401 && $frame_array[1] > 2) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0103', $u_languagecode, 'anonymous', $u_fr0103, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[1] > 2) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0103', $u_languagecode, 'anonymous', $u_fr0103, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0103, $uploadersid);
-  if ($rv !== 401 && $frame_array[1] > 3) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0104', $u_languagecode, 'anonymous', $u_fr0104, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[1] > 3) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0104', $u_languagecode, 'anonymous', $u_fr0104, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0104, $uploadersid);
-  if ($rv !== 401 && $frame_array[1] > 4) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0105', $u_languagecode, 'anonymous', $u_fr0105, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[1] > 4) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0105', $u_languagecode, 'anonymous', $u_fr0105, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0105, $uploadersid);
-  if ($rv !== 401 && $frame_array[1] > 5) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0106', $u_languagecode, 'anonymous', $u_fr0106, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[1] > 5) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0106', $u_languagecode, 'anonymous', $u_fr0106, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0106, $uploadersid);
-  if ($rv !== 401 && $frame_array[1] > 6) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0107', $u_languagecode, 'anonymous', $u_fr0107, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[1] > 6) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0107', $u_languagecode, 'anonymous', $u_fr0107, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0107, $uploadersid);
-  if ($rv !== 401 && $frame_array[1] > 7) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0108', $u_languagecode, 'anonymous', $u_fr0108, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[1] > 7) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0108', $u_languagecode, 'anonymous', $u_fr0108, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0108, $uploadersid);
 
-  if ($rv !== 401 && $frame_array[2] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0201', $u_languagecode, 'anonymous', $u_fr0201, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[2] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0201', $u_languagecode, 'anonymous', $u_fr0201, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0201, $uploadersid);
-  if ($rv !== 401 && $frame_array[2] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0202', $u_languagecode, 'anonymous', $u_fr0202, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[2] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0202', $u_languagecode, 'anonymous', $u_fr0202, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0202, $uploadersid);
-  if ($rv !== 401 && $frame_array[2] > 2) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0203', $u_languagecode, 'anonymous', $u_fr0203, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[2] > 2) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0203', $u_languagecode, 'anonymous', $u_fr0203, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0203, $uploadersid);
-  if ($rv !== 401 && $frame_array[2] > 3) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0204', $u_languagecode, 'anonymous', $u_fr0204, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[2] > 3) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0204', $u_languagecode, 'anonymous', $u_fr0204, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0204, $uploadersid);
 
-  if ($rv !== 401 && $frame_array[3] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0301', $u_languagecode, 'anonymous', $u_fr0301, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[3] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0301', $u_languagecode, 'anonymous', $u_fr0301, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0301, $uploadersid);
-  if ($rv !== 401 && $frame_array[3] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0302', $u_languagecode, 'anonymous', $u_fr0302, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[3] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0302', $u_languagecode, 'anonymous', $u_fr0302, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0302, $uploadersid);
-  if ($rv !== 401 && $frame_array[3] > 2) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0303', $u_languagecode, 'anonymous', $u_fr0303, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[3] > 2) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0303', $u_languagecode, 'anonymous', $u_fr0303, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0303, $uploadersid);
-  if ($rv !== 401 && $frame_array[3] > 3) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0304', $u_languagecode, 'anonymous', $u_fr0304, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[3] > 3) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0304', $u_languagecode, 'anonymous', $u_fr0304, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0304, $uploadersid);
 
-  if ($rv !== 401 && $frame_array[4] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0401', $u_languagecode, 'anonymous', $u_fr0401, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[4] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0401', $u_languagecode, 'anonymous', $u_fr0401, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0401, $uploadersid);
-  if ($rv !== 401 && $frame_array[4] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0402', $u_languagecode, 'anonymous', $u_fr0402, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[4] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0402', $u_languagecode, 'anonymous', $u_fr0402, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0402, $uploadersid);
-  if ($rv !== 401 && $frame_array[4] > 2) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0403', $u_languagecode, 'anonymous', $u_fr0403, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[4] > 2) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0403', $u_languagecode, 'anonymous', $u_fr0403, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0403, $uploadersid);
-  if ($rv !== 401 && $frame_array[4] > 3) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0404', $u_languagecode, 'anonymous', $u_fr0404, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[4] > 3) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0404', $u_languagecode, 'anonymous', $u_fr0404, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0404, $uploadersid);
 
-  if ($rv !== 401 && $frame_array[5] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0501', $u_languagecode, 'anonymous', $u_fr0501, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[5] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0501', $u_languagecode, 'anonymous', $u_fr0501, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0501, $uploadersid);
-  if ($rv !== 401 && $frame_array[5] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0502', $u_languagecode, 'anonymous', $u_fr0502, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[5] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0502', $u_languagecode, 'anonymous', $u_fr0502, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0502, $uploadersid);
-  if ($rv !== 401 && $frame_array[5] > 2) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0503', $u_languagecode, 'anonymous', $u_fr0503, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[5] > 2) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0503', $u_languagecode, 'anonymous', $u_fr0503, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0503, $uploadersid);
-  if ($rv !== 401 && $frame_array[5] > 3) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0504', $u_languagecode, 'anonymous', $u_fr0504, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[5] > 3) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0504', $u_languagecode, 'anonymous', $u_fr0504, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0504, $uploadersid);
 
-  if ($rv !== 401 && $frame_array[6] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0601', $u_languagecode, 'anonymous', $u_fr0601, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[6] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0601', $u_languagecode, 'anonymous', $u_fr0601, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0601, $uploadersid);
-  if ($rv !== 401 && $frame_array[6] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0602', $u_languagecode, 'anonymous', $u_fr0602, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[6] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0602', $u_languagecode, 'anonymous', $u_fr0602, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0602, $uploadersid);
-  if ($rv !== 401 && $frame_array[6] > 2) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0603', $u_languagecode, 'anonymous', $u_fr0603, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[6] > 2) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0603', $u_languagecode, 'anonymous', $u_fr0603, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0603, $uploadersid);
-  if ($rv !== 401 && $frame_array[6] > 3) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0604', $u_languagecode, 'anonymous', $u_fr0604, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[6] > 3) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0604', $u_languagecode, 'anonymous', $u_fr0604, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0604, $uploadersid);
 
-  if ($rv !== 401 && $frame_array[7] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0701', $u_languagecode, 'anonymous', $u_fr0701, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[7] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0701', $u_languagecode, 'anonymous', $u_fr0701, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0701, $uploadersid);
-  if ($rv !== 401 && $frame_array[7] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0702', $u_languagecode, 'anonymous', $u_fr0702, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[7] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0702', $u_languagecode, 'anonymous', $u_fr0702, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0702, $uploadersid);
-  if ($rv !== 401 && $frame_array[7] > 2) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0703', $u_languagecode, 'anonymous', $u_fr0703, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[7] > 2) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0703', $u_languagecode, 'anonymous', $u_fr0703, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0703, $uploadersid);
-  if ($rv !== 401 && $frame_array[7] > 3) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0704', $u_languagecode, 'anonymous', $u_fr0704, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[7] > 3) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0704', $u_languagecode, 'anonymous', $u_fr0704, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0704, $uploadersid);
 
-  if ($rv !== 401 && $frame_array[8] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0801', $u_languagecode, 'anonymous', $u_fr0801, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[8] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0801', $u_languagecode, 'anonymous', $u_fr0801, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0801, $uploadersid);
-  if ($rv !== 401 && $frame_array[8] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0802', $u_languagecode, 'anonymous', $u_fr0802, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[8] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0802', $u_languagecode, 'anonymous', $u_fr0802, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0802, $uploadersid);
-  if ($rv !== 401 && $frame_array[8] > 2) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0803', $u_languagecode, 'anonymous', $u_fr0803, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[8] > 2) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0803', $u_languagecode, 'anonymous', $u_fr0803, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0803, $uploadersid);
-  if ($rv !== 401 && $frame_array[8] > 3) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0804', $u_languagecode, 'anonymous', $u_fr0804, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[8] > 3) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-art_project-fr0804', $u_languagecode, 'anonymous', $u_fr0804, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0804, $uploadersid);
 
   if ($rv === 401) {
@@ -398,7 +392,7 @@ if ($u_username !== null && $u_password !== null && $u_languagecode !== null &&
     //-- Doc: script uri
     //
     // construct the permalink
-    $link = $_SERVER['SCRIPT_URI'] . "?q=$uploadersid,$u_languagecode,$crid_fr0001,$crid_fr0002,$crid_fr0101,$crid_fr0102,$crid_fr0201,$crid_fr0202,$crid_fr0203,$crid_fr0301,$crid_fr0401,$crid_fr0402,$crid_fr0501,$crid_fr0601,$crid_fr0602,$crid_fr0603";
+    $link = $_SERVER['SCRIPT_URI'] . "?q=$uploadersid,$u_languagecode,$crid_fr0001,$crid_fr0002,$crid_fr0101,$crid_fr0102,$crid_fr0103,$crid_fr0104";
     
     echo "Your changes are at this link, and you can forward it to others!<br>";
     echo "<a href='$link' target=_blank>$link</a><br>";
@@ -449,7 +443,7 @@ $g_newmarkfr0001 = $g_newmarkfr0002 =
 if ($guest_params !== '') {
   $guest_params_arr = explode(',', $guest_params);
   // DONT FORGET TO CHANEGE THE SIZEOF!!
-  if (sizeof($guest_params_arr) === 17) {
+  if (sizeof($guest_params_arr) === 8) {
     $g_uploadersid = $guest_params_arr[0];
     $g_lang = $guest_params_arr[1];
     $g_newmarkfr0001 = $guest_params_arr[2];
@@ -457,37 +451,37 @@ if ($guest_params !== '') {
     
     $g_newmarkfr0101 = $guest_params_arr[4];
     $g_newmarkfr0102 = $guest_params_arr[5];
+    $g_newmarkfr0103 = $guest_params_arr[6];
+    $g_newmarkfr0104 = $guest_params_arr[7];
     /*
-      $g_newmarkfr0103 = $guest_params_arr[6];
       $g_newmarkfr0104 = $guest_params_arr[7];
       $g_newmarkfr0105 = $guest_params_arr[8];
       $g_newmarkfr0106 = $guest_params_arr[8];
       $g_newmarkfr0107 = $guest_params_arr[9];
       $g_newmarkfr0108 = $guest_params_arr[10];
-    */
     
-    $g_newmarkfr0201 = $guest_params_arr[6];
-    $g_newmarkfr0202 = $guest_params_arr[7];
-    $g_newmarkfr0203 = $guest_params_arr[8];
+      $g_newmarkfr0201 = $guest_params_arr[7];
+      $g_newmarkfr0202 = $guest_params_arr[8];
+      $g_newmarkfr0203 = $guest_params_arr[9];
    
-    $g_newmarkfr0301 = $guest_params_arr[9];
-    /*
+      $g_newmarkfr0301 = $guest_params_arr[10];
+
       $g_newmarkfr0302 = $guest_params_arr[7];
       $g_newmarkfr0303 = $guest_params_arr[8];
-    */
-    $g_newmarkfr0401 = $guest_params_arr[10];
-    $g_newmarkfr0402 = $guest_params_arr[11];
+
+      $g_newmarkfr0401 = $guest_params_arr[11];
+      $g_newmarkfr0402 = $guest_params_arr[12];
       
-    $g_newmarkfr0501 = $guest_params_arr[12];
-    /*
+      $g_newmarkfr0501 = $guest_params_arr[13];
+
       $g_newmarkfr0502 = $guest_params_arr[8];
       $g_newmarkfr0503 = $g_newmarkfr0502;
+
+      $g_newmarkfr0601 = $guest_params_arr[14];
+      $g_newmarkfr0602 = $guest_params_arr[15];
+      $g_newmarkfr0603 = $guest_params_arr[16];
+      $g_newmarkfr0802 = $guest_params_arr[17];
     */
-    $g_newmarkfr0601 = $guest_params_arr[13];
-    $g_newmarkfr0602 = $guest_params_arr[14];
-    $g_newmarkfr0603 = $guest_params_arr[15];
-    $g_newmarkfr0802 = $guest_params_arr[16];
-    
   }
 }
 
@@ -496,12 +490,7 @@ if ($guest_params !== '') {
 // Make sure all relevant CRID assigns took place. If not, reset them all
 if (!($g_uploadersid !== null && $g_lang !== null &&
       $g_newmarkfr0001 !== null && $g_newmarkfr0002 !== null &&
-      $g_newmarkfr0101 !== null && $g_newmarkfr0102 !== null &&
-      $g_newmarkfr0201 !== null && $g_newmarkfr0202 !== null && $g_newmarkfr0203 !== null && 
-      $g_newmarkfr0301 !== null &&
-      $g_newmarkfr0401 !== null && $g_newmarkfr0402 !== null &&
-      $g_newmarkfr0501 !== null && 
-      $g_newmarkfr0601 !== null && $g_newmarkfr0602 !== null && $g_newmarkfr0603 !== null
+      $g_newmarkfr0101 !== null && $g_newmarkfr0102 !== null && $g_newmarkfr0103 !== null && $g_newmarkfr0104 !== null
       )){
   $g_uploadersid = $g_lang = null;
   $g_newmarkfr0001 = $g_newmarkfr0002 = 
