@@ -24,7 +24,7 @@ At mo, code assumes no more than 8 frames, no more than 8 text elements per fram
      1. ~~Cols: xy->xy~~
  1. Co-ords:
    1. For each textual element
-     1. determine where the corner should go (just tl, tr, bl, br for now)
+     1. determine where the corner should go (just tl, tr, bl, br for now; xxC to have it centered; xxxT to have the text container fixed width instead of auto)
      2. Get pixel co-ords for textual element and point elements
      3. determine max width of bubble
  9. Erase all textual and speech bubble elements
