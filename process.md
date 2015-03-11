@@ -9,6 +9,7 @@ At mo, code assumes no more than 8 frames, no more than 8 text elements per fram
  4. File | open | xkcd-orig-<title>.png | open
  5. file | save as | xkcd-orig-<title>.xcf | save
  6. print the image
+   1. Get xkcd# written down
    1. title the image
    2. Record dimensions of image
    3. Hover image on site: is there a title=”” popup? If so, note a fr0001 
@@ -60,6 +61,7 @@ At mo, code assumes no more than 8 frames, no more than 8 text elements per fram
      15. in index.php,
        1. search replace old title with new
        2. change container_width to match image width
+       1. fill in frame_array: first is 2, then number text els in each frame, 8 frames
        3. ~~edit “handle POSTS” to suit~~
        4. edit “check if enough to POST” to suit
        5. ~~edit “perform POSTs”~~

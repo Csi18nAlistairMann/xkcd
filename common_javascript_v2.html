@@ -382,6 +382,7 @@ function sendGet($el, $newmark, $visitsid, $uploader_sid, $lang, $newmarkcrid) {
 //    request.setRequestHeader("If-None-Match", "Wibble");
     if ($el == 'fr0001') { request.onload = handler_fr0001;
     } else if ($el == 'fr0002') { request.onload = handler_fr0002;
+
     } else if ($el == 'fr0101') { request.onload = handler_fr0101;
     } else if ($el == 'fr0102') { request.onload = handler_fr0102;
     } else if ($el == 'fr0103') { request.onload = handler_fr0103;
@@ -390,6 +391,15 @@ function sendGet($el, $newmark, $visitsid, $uploader_sid, $lang, $newmarkcrid) {
     } else if ($el == 'fr0106') { request.onload = handler_fr0106;
     } else if ($el == 'fr0107') { request.onload = handler_fr0107;
     } else if ($el == 'fr0108') { request.onload = handler_fr0108;
+
+    } else if ($el == 'fr0109') { request.onload = handler_fr0109;
+    } else if ($el == 'fr0110') { request.onload = handler_fr0110;
+    } else if ($el == 'fr0111') { request.onload = handler_fr0111;
+    } else if ($el == 'fr0112') { request.onload = handler_fr0112;
+    } else if ($el == 'fr0113') { request.onload = handler_fr0113;
+    } else if ($el == 'fr0114') { request.onload = handler_fr0114;
+    } else if ($el == 'fr0115') { request.onload = handler_fr0115;
+    } else if ($el == 'fr0116') { request.onload = handler_fr0116;
 
     } else if ($el == 'fr0201') { request.onload = handler_fr0201;
     } else if ($el == 'fr0202') { request.onload = handler_fr0202;
@@ -734,6 +744,15 @@ function handler_fr0106() { handler_uber(this, arguments.callee.toString()); }
 function handler_fr0107() { handler_uber(this, arguments.callee.toString()); }
 function handler_fr0108() { handler_uber(this, arguments.callee.toString()); }
 
+function handler_fr0109() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0110() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0111() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0112() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0113() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0114() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0115() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0116() { handler_uber(this, arguments.callee.toString()); }
+
 function handler_fr0201() { handler_uber(this, arguments.callee.toString()); }
 function handler_fr0202() { handler_uber(this, arguments.callee.toString()); }
 function handler_fr0203() { handler_uber(this, arguments.callee.toString()); }
@@ -1023,6 +1042,55 @@ function createDialog_v2($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwi
   sessionStorage.setItem('csi18n_fr0108.tlink', '');
   sessionStorage.setItem('csi18n_fr0108.visitsid', $visitsid);
 
+ } else if ($el === 'fr0109') {
+  sessionStorage.setItem('csi18n_fr0109.result', 0);
+  sessionStorage.setItem('csi18n_fr0109.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0109.representation', '');
+  sessionStorage.setItem('csi18n_fr0109.tlink', '');
+  sessionStorage.setItem('csi18n_fr0109.visitsid', $visitsid);
+ } else if ($el === 'fr0110') {
+  sessionStorage.setItem('csi18n_fr0110.result', 0);
+  sessionStorage.setItem('csi18n_fr0110.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0110.representation', '');
+  sessionStorage.setItem('csi18n_fr0110.tlink', '');
+  sessionStorage.setItem('csi18n_fr0110.visitsid', $visitsid);
+ } else if ($el === 'fr0111') {
+  sessionStorage.setItem('csi18n_fr0111.result', 0);
+  sessionStorage.setItem('csi18n_fr0111.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0111.representation', '');
+  sessionStorage.setItem('csi18n_fr0111.tlink', '');
+  sessionStorage.setItem('csi18n_fr0111.visitsid', $visitsid);
+ } else if ($el === 'fr0112') {
+  sessionStorage.setItem('csi18n_fr0112.result', 0);
+  sessionStorage.setItem('csi18n_fr0112.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0112.representation', '');
+  sessionStorage.setItem('csi18n_fr0112.tlink', '');
+  sessionStorage.setItem('csi18n_fr0112.visitsid', $visitsid);
+ } else if ($el === 'fr0113') {
+  sessionStorage.setItem('csi18n_fr0113.result', 0);
+  sessionStorage.setItem('csi18n_fr0113.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0113.representation', '');
+  sessionStorage.setItem('csi18n_fr0113.tlink', '');
+  sessionStorage.setItem('csi18n_fr0113.visitsid', $visitsid);
+ } else if ($el === 'fr0114') {
+  sessionStorage.setItem('csi18n_fr0114.result', 0);
+  sessionStorage.setItem('csi18n_fr0114.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0114.representation', '');
+  sessionStorage.setItem('csi18n_fr0114.tlink', '');
+  sessionStorage.setItem('csi18n_fr0114.visitsid', $visitsid);
+ } else if ($el === 'fr0115') {
+  sessionStorage.setItem('csi18n_fr0115.result', 0);
+  sessionStorage.setItem('csi18n_fr0115.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0115.representation', '');
+  sessionStorage.setItem('csi18n_fr0115.tlink', '');
+  sessionStorage.setItem('csi18n_fr0115.visitsid', $visitsid);
+ } else if ($el === 'fr0116') {
+  sessionStorage.setItem('csi18n_fr0116.result', 0);
+  sessionStorage.setItem('csi18n_fr0116.newmark', $newmark);
+  sessionStorage.setItem('csi18n_fr0116.representation', '');
+  sessionStorage.setItem('csi18n_fr0116.tlink', '');
+  sessionStorage.setItem('csi18n_fr0116.visitsid', $visitsid);
+
  } else if ($el === 'fr0201') {
   sessionStorage.setItem('csi18n_fr0201.result', 0);
   sessionStorage.setItem('csi18n_fr0201.newmark', $newmark);
@@ -1224,6 +1292,15 @@ function createDialog_v2($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwi
   } else if ($el === 'fr0106') { d.innerHTML = "<a class='xlate_fr0106' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0106\")'>" + escapeHtml($translation) + "</a>"; 
   } else if ($el === 'fr0107') { d.innerHTML = "<a class='xlate_fr0107' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0107\")'>" + escapeHtml($translation) + "</a>"; 
   } else if ($el === 'fr0108') { d.innerHTML = "<a class='xlate_fr0108' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0108\")'>" + escapeHtml($translation) + "</a>"; 
+
+  } else if ($el === 'fr0109') { d.innerHTML = "<a class='xlate_fr0109' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0109\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0110') { d.innerHTML = "<a class='xlate_fr0110' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0110\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0111') { d.innerHTML = "<a class='xlate_fr0111' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0111\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0112') { d.innerHTML = "<a class='xlate_fr0112' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0112\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0113') { d.innerHTML = "<a class='xlate_fr0113' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0113\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0114') { d.innerHTML = "<a class='xlate_fr0114' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0114\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0115') { d.innerHTML = "<a class='xlate_fr0115' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0115\")'>" + escapeHtml($translation) + "</a>"; 
+  } else if ($el === 'fr0116') { d.innerHTML = "<a class='xlate_fr0116' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0116\")'>" + escapeHtml($translation) + "</a>"; 
 
   } else if ($el === 'fr0201') { d.innerHTML = "<a class='xlate_fr0201' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0201\")'>" + escapeHtml($translation) + "</a>"; 
   } else if ($el === 'fr0202') { d.innerHTML = "<a class='xlate_fr0202' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0202\")'>" + escapeHtml($translation) + "</a>"; 
@@ -1499,6 +1576,8 @@ function onLoad() {
 global_g_newmarkfr0001, global_g_newmarkfr0002,
 global_g_newmarkfr0101, global_g_newmarkfr0102, global_g_newmarkfr0103, global_g_newmarkfr0104,
 global_g_newmarkfr0105, global_g_newmarkfr0106, global_g_newmarkfr0107, global_g_newmarkfr0108,
+global_g_newmarkfr0109, global_g_newmarkfr0110, global_g_newmarkfr0111, global_g_newmarkfr0112,
+global_g_newmarkfr0113, global_g_newmarkfr0114, global_g_newmarkfr0115, global_g_newmarkfr0116,
 global_g_newmarkfr0201, global_g_newmarkfr0202, global_g_newmarkfr0203, global_g_newmarkfr0204,
 global_g_newmarkfr0301, global_g_newmarkfr0302, global_g_newmarkfr0303, global_g_newmarkfr0304,
 global_g_newmarkfr0401, global_g_newmarkfr0402, global_g_newmarkfr0403, global_g_newmarkfr0404,

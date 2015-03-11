@@ -600,6 +600,15 @@ echo "<script type='text/javascript'>\n".
 "var global_g_newmarkfr0107 = '$g_newmarkfr0107';\n".
 "var global_g_newmarkfr0108 = '$g_newmarkfr0108';\n".
 
+"var global_g_newmarkfr0109 = '';\n".
+"var global_g_newmarkfr0110 = '';\n".
+"var global_g_newmarkfr0111 = '';\n".
+"var global_g_newmarkfr0112 = '';\n".
+"var global_g_newmarkfr0113 = '';\n".
+"var global_g_newmarkfr0114 = '';\n".
+"var global_g_newmarkfr0115 = '';\n".
+"var global_g_newmarkfr0116 = '';\n".
+
 "var global_g_newmarkfr0201 = '$g_newmarkfr0201';\n".
 "var global_g_newmarkfr0202 = '$g_newmarkfr0202';\n".
 "var global_g_newmarkfr0203 = '$g_newmarkfr0203';\n".
