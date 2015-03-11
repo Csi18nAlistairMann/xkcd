@@ -4,6 +4,14 @@
   -->
 <script type="text/javascript">
 
+//
+// A message may be shown as a result of an http action. These
+// run from 100-Continue to 399 for succesful actions, and
+// 400-499 for client error and 500-599 for server errors. Show
+// successful message for shorter periods.
+var global_1xx2xx3xx_timeout = 400;
+var global_4xx5xx_timeout = 4000;
+
 ///////////////////////////////////////////////////////////////////
 //
 // Translation menu and handlers: see more, offer another, edit, delete
@@ -172,6 +180,7 @@ function trnOfferAnother($ls) {
  d.style.textAlign = "right";
  d.style.fontSize = "20px";
  d.innerHTML = "Offer another<hr>" +
+ "<span style='font-size:21px' id='upload_as_username'>Your username: " + escapeHtml(localStorage.getItem('csi18n_un')) + "</span><br>" +
  "<input type='text' value='" + escapeHtml($newmark) + "' disabled='' size='30' name='newmark_iv' id='newmark_iv' style='font-size:21px'>Newmark<br>" +
  "<input type='text' value='" + escapeHtml($lang) + "' size='30' name='cl_iv' id='cl_iv' style='font-size:21px' oninput='handleContentLanguageChange()'><br><font size=-2><span id='cl_and_url'></span></font>Content-Language<br>" +
  "<textarea cols='20' rows='3' name='translation_iv' id='translation_iv' type='text' style='font-size:21px'>" + escapeHtml($trans) + "</textarea>Translation<br>" +
@@ -203,6 +212,7 @@ function trnDelete($ls) {
   $lang = $json_o.csi18n_xlate_resource.language;
   $trans = $json_o.csi18n_xlate_resource.translation;
   $vis = $json_o.csi18n_xlate_resource.visibility;
+  $uploader_sid = $json_o.csi18n_xlate_resource.uploader_sid;
  } else {
   $lang = localStorage.getItem('csi18n_lang');
   if ($lang == null) {
@@ -225,6 +235,7 @@ function trnDelete($ls) {
  d.style.textAlign = "right";
  d.style.fontSize = "20px";
  d.innerHTML = "Delete<hr>" +
+ "<span style='font-size:21px'>Uploader SID: " + escapeHtml($uploader_sid) + "</span><br>" +
  "<input type='text' value='" + escapeHtml($newmark) + "' disabled size='30' name='newmark_iv' id='newmark_iv' style='font-size:21px'>Newmark<br>" +
  "<input type='text' value='" + escapeHtml($lang) + "' disabled size='30' name='cl_iv' id='cl_iv' style='font-size:21px' oninput='handleContentLanguageChange()'><br><font size=-2><span id='cl_and_url'></span></font>Content-Language<br>" +
  "<textarea disabled cols='30' rows='3' name='translation_iv' id='translation_iv' type='text' style='font-size:21px'>" + escapeHtml($trans) + "</textarea>Translation<br>" +
@@ -280,6 +291,7 @@ function trnEdit($ls) {
  d.style.textAlign = "right";
  d.style.fontSize = "20px";
  d.innerHTML = "Edit<hr>" +
+ "<span style='font-size:21px' id='upload_as_username'>Your username: " + escapeHtml(localStorage.getItem('csi18n_un')) + "</span><br>" +
  "<input type='text' value='" + escapeHtml($newmark) + "' disabled='' size='30' name='newmark_iv' id='newmark_iv' style='font-size:21px'>Newmark<br>" +
  "<input type='text' value='" + escapeHtml($lang) + "' size='30' name='cl_iv' id='cl_iv' style='font-size:21px' oninput='handleContentLanguageChange()'><br><font size=-2><span id='cl_and_url'></span></font>Content-Language<br>" +
  "<textarea cols='30' rows='3' name='translation_iv' id='translation_iv' type='text' style='font-size:21px'>" + escapeHtml($trans) + "</textarea>Translation<br>" +
@@ -555,6 +567,20 @@ function delete_handler() {
   d.style.fontSize = "20px";
   d.innerHTML = escapeHtml(this.statusText);
   d.style.display = "";
+  if ($status < 400) {
+    // short message if 1xx 2xx or 3xx
+    setTimeout("reloadPageAfterWait()", global_1xx2xx3xx_timeout);
+  } else {
+    // longer message if 4xx or 5xx
+    setTimeout("reloadPageAfterWait()", global_4xx5xx_timeout);
+  }
+}
+
+//
+// setTimeout(function() { location.reload(true); }, global_1xx2xx3xx_timeout);
+// One anonymous function, multiple places in source. Coding by Jimmy Rustles
+//
+function reloadPageAfterWait() {
   location.reload(true);
 }
 
@@ -573,7 +599,13 @@ function post_handler() {
   d.style.fontSize = "20px";
   d.innerHTML = escapeHtml(this.statusText);
   d.style.display = "";
-  location.reload(true);
+  if ($status < 400) {
+    // short message if 1xx 2xx or 3xx
+    setTimeout("reloadPageAfterWait()", global_1xx2xx3xx_timeout);
+  } else {
+    // longer message if 4xx or 5xx
+    setTimeout("reloadPageAfterWait()", global_4xx5xx_timeout);
+  }
 }
 
 //
@@ -624,7 +656,13 @@ function put_handler() {
   d.style.fontSize = "20px";
   d.innerHTML = escapeHtml(this.statusText);
   d.style.display = "";
-  location.reload(true);
+  if ($status < 400) {
+    // short message if 1xx 2xx or 3xx
+    setTimeout("reloadPageAfterWait()", global_1xx2xx3xx_timeout);
+  } else {
+    // longer message if 4xx or 5xx
+    setTimeout("reloadPageAfterWait()", global_4xx5xx_timeout);
+  }
 }
 
 //
@@ -817,13 +855,6 @@ function toggleShowServiceMenu() {
 // hide/show translation menu
 function toggleShowTranslationMenu($ls) {
  var d = document.getElementById("trn_menu");
- $res = sessionStorage.getItem($ls + '.representation');
- if ($res != '') {
-  $seemore_uri = $res.csi18n_per_lang_preference;
- } else {
-  $seemore_uri = '';
- }
- sessionStorage.setItem('csi18n_seemore.per_lang_pref', $seemore_uri);
  if (d.style.display == "") {
   d.style.display = "none";
  } else {
@@ -874,6 +905,10 @@ function acceptUsername() {
  if (rv != null) {
   localStorage.setItem('csi18n_un', rv);
  }
+ var d = document.getElementById("upload_as_username");
+ if (d != null) {
+  d.innerHTML = "Your username: " + rv;
+ }
 }
 
 function acceptPassword() {
@@ -902,6 +937,7 @@ function acceptDefLang() {
  if (rv != null) {
   localStorage.setItem('csi18n_lang', rv);
  }
+ toggleShowServiceMenu();
  onLoad();
 }
 
