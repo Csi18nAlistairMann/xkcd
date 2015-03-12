@@ -450,7 +450,7 @@ $g_newmarkfr0001 = $g_newmarkfr0002 =
 if ($guest_params !== '') {
   $guest_params_arr = explode(',', $guest_params);
   // DONT FORGET TO CHANEGE THE SIZEOF!!
-  if (sizeof($guest_params_arr) === 17) {
+  if (sizeof($guest_params_arr) === 16) {
     $g_uploadersid = $guest_params_arr[0];
     $g_lang = $guest_params_arr[1];
     $g_newmarkfr0001 = $guest_params_arr[2];
@@ -487,8 +487,6 @@ if ($guest_params !== '') {
     $g_newmarkfr0601 = $guest_params_arr[13];
     $g_newmarkfr0602 = $guest_params_arr[14];
     $g_newmarkfr0603 = $guest_params_arr[15];
-    $g_newmarkfr0802 = $guest_params_arr[16];
-    
   }
 }
 
