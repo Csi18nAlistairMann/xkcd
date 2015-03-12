@@ -47,12 +47,6 @@ At mo, code assumes no more than 8 frames, no more than 16 text elements per fra
        1. ~~Modify script_uri to suit~~
        1. ~~edit “check guest params inbound”, ensure sizeof correct!~~
        1. ~~Edit “reset all the things, if not got expected things “~~
-     1. in ../common_javascript_v3.html (if additional elements needed)
-       1. extend if $el … to suit (two loads)
-       1. extend handler_fr... to suit 
-       1. extend localstorage.setitem to suit
-       1. extend d.innerHTML to suit
-       1. extend xkcdShow to suit
      1. When dealing with same newmark, different location
        1. Add content to the uncircled/first label
        1. Circled labels should copy
@@ -73,7 +67,7 @@ At mo, code assumes no more than 8 frames, no more than 16 text elements per fra
      1. ~~comment out unused items in xkcdShowLines()~~
      1. Data for xkcdShow() for BT, TL etc, co-ords and widths
      1. Review xkcdShow() font sizes
-     1. ~~Data for xkcdShowLines() for speech lines~~
+     1. Data for xkcdShowLines() for speech lines
      1. If see-through PNG
        1. Work up each z-index
        1. Add second area map because closer z-index of see through PNG means can't click text behind. A better solution: divide PNG into four around unused center 
@@ -82,6 +76,12 @@ At mo, code assumes no more than 8 frames, no more than 16 text elements per fra
        1. If necc, hideWhatWasImgTitle, showWhatWasImgTitle correct element
        1. Correct image-map via [image maps](http://www.image-maps.com/)
          1. Use the first <area … tag in the html code
+    1. in ../common_javascript_v3.html (if additional elements needed)
+      1. extend if $el … to suit (two loads)
+      1. extend handler_fr... to suit 
+      1. extend localstorage.setitem to suit
+      1. extend d.innerHTML to suit
+      1. extend xkcdShow to suit
  11. Tie in this page to any indexing pages:
    1. add as “next” to previous index.html
    1. add to xkcd/index.html
