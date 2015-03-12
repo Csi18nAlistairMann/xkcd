@@ -308,7 +308,7 @@ if ($u_username !== null && $u_password !== null && $u_languagecode !== null &&
   $uploadersid = '';
   if ($rv !== 401 && $frame_array[0] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0001', $u_languagecode, 'anonymous', $u_fr0001, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0001, $uploadersid);
-  if ($rv !== 401 && $frame_array[0] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0002', $u_languagecode, 'anonymous', $u_fr0001, $opt_ignore_blanks, $thisPageBelongsToSID);
+  if ($rv !== 401 && $frame_array[0] > 1) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0002', $u_languagecode, 'anonymous', $u_fr0002, $opt_ignore_blanks, $thisPageBelongsToSID);
   handlePOSTResponse($rv, $crid_fr0002, $uploadersid);
 
   if ($rv !== 401 && $frame_array[1] > 0) $rv = post_a_new($u_username, $u_password, $apikey, 'xkcd-long_light-fr0101', $u_languagecode, 'anonymous', $u_fr0101, $opt_ignore_blanks, $thisPageBelongsToSID);

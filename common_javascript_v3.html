@@ -3,14 +3,146 @@
      Plastic javascript common to all recent xkcds
   -->
 <script type="text/javascript">
-
 //
-// A message may be shown as a result of an http action. These
-// run from 100-Continue to 399 for succesful actions, and
+// Timeouts A message may be shown as a result of an http action. 
+// These run from 100-Continue to 399 for succesful actions, and
 // 400-499 for client error and 500-599 for server errors. Show
 // successful message for shorter periods.
 var global_1xx2xx3xx_timeout = 400;
 var global_4xx5xx_timeout = 4000;
+
+///////////////////////////////////////////////////////////////////
+//
+// First off, keep together the code that depends on frames/balloons.
+// This makes it easier to expand the code to accomodate more
+// of either if necessary.
+//
+// The way code is now, even if the frames/balloons restriction 
+// changes, we shouldn't need to touch the common javascript
+//
+//
+// Used by sendGet, put here to keep together code that depends on 
+// the frames/balloons restrictions
+function sendGetSetHandler(request, $el) {
+    if ($el == 'fr0001') { request.onload = handler_fr0001;
+    } else if ($el == 'fr0002') { request.onload = handler_fr0002;
+
+    } else if ($el == 'fr0101') { request.onload = handler_fr0101;
+    } else if ($el == 'fr0102') { request.onload = handler_fr0102;
+    } else if ($el == 'fr0103') { request.onload = handler_fr0103;
+    } else if ($el == 'fr0104') { request.onload = handler_fr0104;
+    } else if ($el == 'fr0105') { request.onload = handler_fr0105;
+    } else if ($el == 'fr0106') { request.onload = handler_fr0106;
+    } else if ($el == 'fr0107') { request.onload = handler_fr0107;
+    } else if ($el == 'fr0108') { request.onload = handler_fr0108;
+
+    } else if ($el == 'fr0109') { request.onload = handler_fr0109;
+    } else if ($el == 'fr0110') { request.onload = handler_fr0110;
+    } else if ($el == 'fr0111') { request.onload = handler_fr0111;
+    } else if ($el == 'fr0112') { request.onload = handler_fr0112;
+    } else if ($el == 'fr0113') { request.onload = handler_fr0113;
+    } else if ($el == 'fr0114') { request.onload = handler_fr0114;
+    } else if ($el == 'fr0115') { request.onload = handler_fr0115;
+    } else if ($el == 'fr0116') { request.onload = handler_fr0116;
+
+    } else if ($el == 'fr0201') { request.onload = handler_fr0201;
+    } else if ($el == 'fr0202') { request.onload = handler_fr0202;
+    } else if ($el == 'fr0203') { request.onload = handler_fr0203;
+    } else if ($el == 'fr0204') { request.onload = handler_fr0204;
+
+    } else if ($el == 'fr0301') { request.onload = handler_fr0301;
+    } else if ($el == 'fr0302') { request.onload = handler_fr0302;
+    } else if ($el == 'fr0303') { request.onload = handler_fr0303;
+    } else if ($el == 'fr0304') { request.onload = handler_fr0304;
+
+    } else if ($el == 'fr0401') { request.onload = handler_fr0401;
+    } else if ($el == 'fr0402') { request.onload = handler_fr0402;
+    } else if ($el == 'fr0403') { request.onload = handler_fr0403;
+    } else if ($el == 'fr0404') { request.onload = handler_fr0404;
+
+    } else if ($el == 'fr0501') { request.onload = handler_fr0501;
+    } else if ($el == 'fr0502') { request.onload = handler_fr0502;
+    } else if ($el == 'fr0503') { request.onload = handler_fr0503;
+    } else if ($el == 'fr0504') { request.onload = handler_fr0504;
+
+    } else if ($el == 'fr0601') { request.onload = handler_fr0601;
+    } else if ($el == 'fr0602') { request.onload = handler_fr0602;
+    } else if ($el == 'fr0603') { request.onload = handler_fr0603;
+    } else if ($el == 'fr0604') { request.onload = handler_fr0604;
+
+    } else if ($el == 'fr0701') { request.onload = handler_fr0701;
+    } else if ($el == 'fr0702') { request.onload = handler_fr0702;
+    } else if ($el == 'fr0703') { request.onload = handler_fr0703;
+    } else if ($el == 'fr0704') { request.onload = handler_fr0704;
+
+    } else if ($el == 'fr0801') { request.onload = handler_fr0801;
+    } else if ($el == 'fr0802') { request.onload = handler_fr0802;
+    } else if ($el == 'fr0803') { request.onload = handler_fr0803;
+    } else if ($el == 'fr0804') { request.onload = handler_fr0804;
+    }
+}
+
+//
+// Now these are fun. It seems that I can't have one handler 
+// for each possible GET. Handle this by having a handler each, and 
+// then calling the actual handler with this initial handler's name.
+//
+// GET handlers, one per text element
+function handler_fr0001() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0002() { handler_uber(this, arguments.callee.toString()); }
+
+function handler_fr0101() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0102() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0103() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0104() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0105() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0106() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0107() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0108() { handler_uber(this, arguments.callee.toString()); }
+
+function handler_fr0109() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0110() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0111() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0112() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0113() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0114() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0115() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0116() { handler_uber(this, arguments.callee.toString()); }
+
+function handler_fr0201() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0202() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0203() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0204() { handler_uber(this, arguments.callee.toString()); }
+
+function handler_fr0301() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0302() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0303() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0304() { handler_uber(this, arguments.callee.toString()); }
+
+function handler_fr0401() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0402() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0403() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0404() { handler_uber(this, arguments.callee.toString()); }
+
+function handler_fr0501() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0502() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0503() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0504() { handler_uber(this, arguments.callee.toString()); }
+
+function handler_fr0601() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0602() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0603() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0604() { handler_uber(this, arguments.callee.toString()); }
+
+function handler_fr0701() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0702() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0703() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0704() { handler_uber(this, arguments.callee.toString()); }
+
+function handler_fr0801() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0802() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0803() { handler_uber(this, arguments.callee.toString()); }
+function handler_fr0804() { handler_uber(this, arguments.callee.toString()); }
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -322,6 +454,7 @@ function trnEdit($ls) {
 // 
 
 //
+// base64 helper
 // https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/btoa
 function getBase64Credentials() {
  $credents = localStorage.getItem('csi18n_un') + ":" + localStorage.getItem('csi18n_pw');
@@ -349,10 +482,10 @@ function handleContentLanguageChange() {
 
 //
 // HTTP GET to csi18n backend
-function sendGet($el, $newmark, $visitsid, $uploader_sid, $lang, $newmarkcrid) {
- if ($uploader_sid !== 'null' && $lang !== 'null' && $newmark !== 'null' && $newmark !== '') {
-  var url = "https://rest.mpsvr.com/xlates/" + $visitsid + "," + $uploader_sid + "/" + $newmark + "/" + $lang + "/anonymous/" + $newmarkcrid;
- } else if ($newmark !== '') {
+function sendGet($el, $newmark, $visitsid, $uploader_sid, $lang, $crid) {
+ if ($visitsid !== null && $visitsid !== '' && $uploader_sid !== null && $uploader_sid !== '' && $newmark !== null && $newmark !== '' && $lang !== null && $lang !== '' && $crid !== null && $crid !== '') {
+  var url = "https://rest.mpsvr.com/xlates/" + $visitsid + "," + $uploader_sid + "/" + $newmark + "/" + $lang + "/anonymous/" + $crid;
+ } else if ($visitsid !== null && $visitsid !== '' && $newmark !== null && $newmark !== '') {
   var url = "https://rest.mpsvr.com/newmarks/" + $visitsid + "/" + $newmark;
  } else {
   // If the link is incompliant - as would be the case if a permalink is retrieved
@@ -380,62 +513,7 @@ function sendGet($el, $newmark, $visitsid, $uploader_sid, $lang, $newmarkcrid) {
     // but here's what they'd look like:
 //    request.setRequestHeader("If-Modified-Since", "Tue,  1 Jan 1980 19:12:53 BST");
 //    request.setRequestHeader("If-None-Match", "Wibble");
-    if ($el == 'fr0001') { request.onload = handler_fr0001;
-    } else if ($el == 'fr0002') { request.onload = handler_fr0002;
-
-    } else if ($el == 'fr0101') { request.onload = handler_fr0101;
-    } else if ($el == 'fr0102') { request.onload = handler_fr0102;
-    } else if ($el == 'fr0103') { request.onload = handler_fr0103;
-    } else if ($el == 'fr0104') { request.onload = handler_fr0104;
-    } else if ($el == 'fr0105') { request.onload = handler_fr0105;
-    } else if ($el == 'fr0106') { request.onload = handler_fr0106;
-    } else if ($el == 'fr0107') { request.onload = handler_fr0107;
-    } else if ($el == 'fr0108') { request.onload = handler_fr0108;
-
-    } else if ($el == 'fr0109') { request.onload = handler_fr0109;
-    } else if ($el == 'fr0110') { request.onload = handler_fr0110;
-    } else if ($el == 'fr0111') { request.onload = handler_fr0111;
-    } else if ($el == 'fr0112') { request.onload = handler_fr0112;
-    } else if ($el == 'fr0113') { request.onload = handler_fr0113;
-    } else if ($el == 'fr0114') { request.onload = handler_fr0114;
-    } else if ($el == 'fr0115') { request.onload = handler_fr0115;
-    } else if ($el == 'fr0116') { request.onload = handler_fr0116;
-
-    } else if ($el == 'fr0201') { request.onload = handler_fr0201;
-    } else if ($el == 'fr0202') { request.onload = handler_fr0202;
-    } else if ($el == 'fr0203') { request.onload = handler_fr0203;
-    } else if ($el == 'fr0204') { request.onload = handler_fr0204;
-
-    } else if ($el == 'fr0301') { request.onload = handler_fr0301;
-    } else if ($el == 'fr0302') { request.onload = handler_fr0302;
-    } else if ($el == 'fr0303') { request.onload = handler_fr0303;
-    } else if ($el == 'fr0304') { request.onload = handler_fr0304;
-
-    } else if ($el == 'fr0401') { request.onload = handler_fr0401;
-    } else if ($el == 'fr0402') { request.onload = handler_fr0402;
-    } else if ($el == 'fr0403') { request.onload = handler_fr0403;
-    } else if ($el == 'fr0404') { request.onload = handler_fr0404;
-
-    } else if ($el == 'fr0501') { request.onload = handler_fr0501;
-    } else if ($el == 'fr0502') { request.onload = handler_fr0502;
-    } else if ($el == 'fr0503') { request.onload = handler_fr0503;
-    } else if ($el == 'fr0504') { request.onload = handler_fr0504;
-
-    } else if ($el == 'fr0601') { request.onload = handler_fr0601;
-    } else if ($el == 'fr0602') { request.onload = handler_fr0602;
-    } else if ($el == 'fr0603') { request.onload = handler_fr0603;
-    } else if ($el == 'fr0604') { request.onload = handler_fr0604;
-
-    } else if ($el == 'fr0701') { request.onload = handler_fr0701;
-    } else if ($el == 'fr0702') { request.onload = handler_fr0702;
-    } else if ($el == 'fr0703') { request.onload = handler_fr0703;
-    } else if ($el == 'fr0704') { request.onload = handler_fr0704;
-
-    } else if ($el == 'fr0801') { request.onload = handler_fr0801;
-    } else if ($el == 'fr0802') { request.onload = handler_fr0802;
-    } else if ($el == 'fr0803') { request.onload = handler_fr0803;
-    } else if ($el == 'fr0804') { request.onload = handler_fr0804;
-    }
+    sendGetSetHandler(request, $el);
     request.send();
   }
  }
@@ -563,6 +641,15 @@ function sendDelete($ls) {
 //
 // callback handlers - called on response from the csi18n server
 //
+//
+// setTimeout(function() { location.reload(true); }, global_1xx2xx3xx_timeout);
+// One anonymous function, multiple places in source. Coding by Jimmy Rustles
+//
+function reloadPageAfterWait() {
+  location.reload(true);
+}
+
+//
 // WAT DO if delete has completed
 function delete_handler() {
   $status = this.status;
@@ -584,14 +671,6 @@ function delete_handler() {
     // longer message if 4xx or 5xx
     setTimeout("reloadPageAfterWait()", global_4xx5xx_timeout);
   }
-}
-
-//
-// setTimeout(function() { location.reload(true); }, global_1xx2xx3xx_timeout);
-// One anonymous function, multiple places in source. Coding by Jimmy Rustles
-//
-function reloadPageAfterWait() {
-  location.reload(true);
 }
 
 //
@@ -727,68 +806,6 @@ function head_handler() {
 }
 
 //
-// Now these are fun. It seems that I can't have one handler 
-// for each possible GET. Handle this by having a handler each, and 
-// then calling the actual handler with this initial handler's name.
-//
-// GET handlers, one per text element
-function handler_fr0001() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0002() { handler_uber(this, arguments.callee.toString()); }
-
-function handler_fr0101() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0102() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0103() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0104() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0105() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0106() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0107() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0108() { handler_uber(this, arguments.callee.toString()); }
-
-function handler_fr0109() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0110() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0111() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0112() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0113() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0114() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0115() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0116() { handler_uber(this, arguments.callee.toString()); }
-
-function handler_fr0201() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0202() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0203() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0204() { handler_uber(this, arguments.callee.toString()); }
-
-function handler_fr0301() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0302() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0303() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0304() { handler_uber(this, arguments.callee.toString()); }
-
-function handler_fr0401() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0402() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0403() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0404() { handler_uber(this, arguments.callee.toString()); }
-
-function handler_fr0501() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0502() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0503() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0504() { handler_uber(this, arguments.callee.toString()); }
-
-function handler_fr0601() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0602() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0603() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0604() { handler_uber(this, arguments.callee.toString()); }
-
-function handler_fr0701() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0702() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0703() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0704() { handler_uber(this, arguments.callee.toString()); }
-
-function handler_fr0801() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0802() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0803() { handler_uber(this, arguments.callee.toString()); }
-function handler_fr0804() { handler_uber(this, arguments.callee.toString()); }
-
-//
 // Actual handling of a GET response. 
 function handler_uber(this1, name) {
   name = name.substr('function '.length);
@@ -796,7 +813,7 @@ function handler_uber(this1, name) {
   name = name.substr(8);
   var currently = localStorage.getItem('csi18n_onOrOff');
   var d1 = document.getElementById(name);
-  var d2 = document.getElementById("u_" + name);
+  var d2 = document.getElementById("ta_" + name); // preload textareas
   if (this1.status == 200) {
    $json_o = this1.response;
    if (window.ie !== false)
@@ -964,17 +981,10 @@ function acceptDefLang() {
 //
 // JS for creating the bubble on page
 //
+
 function createDialog_v3($corner, $posx, $posy, $maxwidth, $size, $name, $crid, $totx, $toty, $style, $visitsid, $g_uploadersid, $g_lang, $root) {
-
- $newmark = $root + $name;
-
- return createDialog_v2($name, $corner, $totx, $toty, $posx, $posy, $size, $maxwidth, $style, $newmark, $visitsid, $g_uploadersid, $g_lang, $crid);
-}
-
-
-
-function createDialog_v2($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwidth, $style, $newmark, $visitsid, $g_uploadersid, $g_lang, $g_newmark) {
- var d = document.getElementById($el);
+ var $newmark = $root + $name;
+ var d = document.getElementById($name);
  d.style.left = "auto";
  d.style.right = "auto";
  d.style.top = "auto";
@@ -989,297 +999,17 @@ function createDialog_v2($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwi
  // .tlink           : Content-Location / URL of representation received
  // .visitsid        : https://rest.mpsvr.com/newmarks/{*visitsid*}/{newmark}/...
  //                  : https://rest.mpsvr.com/xlates/{*visitsid*}/{newmark}/...
- if ($el === 'fr0001') {
-  sessionStorage.setItem('csi18n_fr0001.result', 0);
-  sessionStorage.setItem('csi18n_fr0001.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0001.representation', '');
-  sessionStorage.setItem('csi18n_fr0001.tlink', '');
-  sessionStorage.setItem('csi18n_fr0001.visitsid', $visitsid);
- } else if ($el === 'fr0002') {
-  sessionStorage.setItem('csi18n_fr0002.result', 0);
-  sessionStorage.setItem('csi18n_fr0002.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0002.representation', '');
-  sessionStorage.setItem('csi18n_fr0002.tlink', '');
-  sessionStorage.setItem('csi18n_fr0002.visitsid', $visitsid);
 
- } else if ($el === 'fr0101') {
-  sessionStorage.setItem('csi18n_fr0101.result', 0);
-  sessionStorage.setItem('csi18n_fr0101.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0101.representation', '');
-  sessionStorage.setItem('csi18n_fr0101.tlink', '');
-  sessionStorage.setItem('csi18n_fr0101.visitsid', $visitsid);
- } else if ($el === 'fr0102') {
-  sessionStorage.setItem('csi18n_fr0102.result', 0);
-  sessionStorage.setItem('csi18n_fr0102.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0102.representation', '');
-  sessionStorage.setItem('csi18n_fr0102.tlink', '');
-  sessionStorage.setItem('csi18n_fr0102.visitsid', $visitsid);
- } else if ($el === 'fr0103') {
-  sessionStorage.setItem('csi18n_fr0103.result', 0);
-  sessionStorage.setItem('csi18n_fr0103.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0103.representation', '');
-  sessionStorage.setItem('csi18n_fr0103.tlink', '');
-  sessionStorage.setItem('csi18n_fr0103.visitsid', $visitsid);
- } else if ($el === 'fr0104') {
-  sessionStorage.setItem('csi18n_fr0104.result', 0);
-  sessionStorage.setItem('csi18n_fr0104.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0104.representation', '');
-  sessionStorage.setItem('csi18n_fr0104.tlink', '');
-  sessionStorage.setItem('csi18n_fr0104.visitsid', $visitsid);
- } else if ($el === 'fr0105') {
-  sessionStorage.setItem('csi18n_fr0105.result', 0);
-  sessionStorage.setItem('csi18n_fr0105.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0105.representation', '');
-  sessionStorage.setItem('csi18n_fr0105.tlink', '');
-  sessionStorage.setItem('csi18n_fr0105.visitsid', $visitsid);
- } else if ($el === 'fr0106') {
-  sessionStorage.setItem('csi18n_fr0106.result', 0);
-  sessionStorage.setItem('csi18n_fr0106.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0106.representation', '');
-  sessionStorage.setItem('csi18n_fr0106.tlink', '');
-  sessionStorage.setItem('csi18n_fr0106.visitsid', $visitsid);
- } else if ($el === 'fr0107') {
-  sessionStorage.setItem('csi18n_fr0107.result', 0);
-  sessionStorage.setItem('csi18n_fr0107.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0107.representation', '');
-  sessionStorage.setItem('csi18n_fr0107.tlink', '');
-  sessionStorage.setItem('csi18n_fr0107.visitsid', $visitsid);
- } else if ($el === 'fr0108') {
-  sessionStorage.setItem('csi18n_fr0108.result', 0);
-  sessionStorage.setItem('csi18n_fr0108.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0108.representation', '');
-  sessionStorage.setItem('csi18n_fr0108.tlink', '');
-  sessionStorage.setItem('csi18n_fr0108.visitsid', $visitsid);
-
- } else if ($el === 'fr0109') {
-  sessionStorage.setItem('csi18n_fr0109.result', 0);
-  sessionStorage.setItem('csi18n_fr0109.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0109.representation', '');
-  sessionStorage.setItem('csi18n_fr0109.tlink', '');
-  sessionStorage.setItem('csi18n_fr0109.visitsid', $visitsid);
- } else if ($el === 'fr0110') {
-  sessionStorage.setItem('csi18n_fr0110.result', 0);
-  sessionStorage.setItem('csi18n_fr0110.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0110.representation', '');
-  sessionStorage.setItem('csi18n_fr0110.tlink', '');
-  sessionStorage.setItem('csi18n_fr0110.visitsid', $visitsid);
- } else if ($el === 'fr0111') {
-  sessionStorage.setItem('csi18n_fr0111.result', 0);
-  sessionStorage.setItem('csi18n_fr0111.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0111.representation', '');
-  sessionStorage.setItem('csi18n_fr0111.tlink', '');
-  sessionStorage.setItem('csi18n_fr0111.visitsid', $visitsid);
- } else if ($el === 'fr0112') {
-  sessionStorage.setItem('csi18n_fr0112.result', 0);
-  sessionStorage.setItem('csi18n_fr0112.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0112.representation', '');
-  sessionStorage.setItem('csi18n_fr0112.tlink', '');
-  sessionStorage.setItem('csi18n_fr0112.visitsid', $visitsid);
- } else if ($el === 'fr0113') {
-  sessionStorage.setItem('csi18n_fr0113.result', 0);
-  sessionStorage.setItem('csi18n_fr0113.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0113.representation', '');
-  sessionStorage.setItem('csi18n_fr0113.tlink', '');
-  sessionStorage.setItem('csi18n_fr0113.visitsid', $visitsid);
- } else if ($el === 'fr0114') {
-  sessionStorage.setItem('csi18n_fr0114.result', 0);
-  sessionStorage.setItem('csi18n_fr0114.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0114.representation', '');
-  sessionStorage.setItem('csi18n_fr0114.tlink', '');
-  sessionStorage.setItem('csi18n_fr0114.visitsid', $visitsid);
- } else if ($el === 'fr0115') {
-  sessionStorage.setItem('csi18n_fr0115.result', 0);
-  sessionStorage.setItem('csi18n_fr0115.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0115.representation', '');
-  sessionStorage.setItem('csi18n_fr0115.tlink', '');
-  sessionStorage.setItem('csi18n_fr0115.visitsid', $visitsid);
- } else if ($el === 'fr0116') {
-  sessionStorage.setItem('csi18n_fr0116.result', 0);
-  sessionStorage.setItem('csi18n_fr0116.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0116.representation', '');
-  sessionStorage.setItem('csi18n_fr0116.tlink', '');
-  sessionStorage.setItem('csi18n_fr0116.visitsid', $visitsid);
-
- } else if ($el === 'fr0201') {
-  sessionStorage.setItem('csi18n_fr0201.result', 0);
-  sessionStorage.setItem('csi18n_fr0201.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0201.representation', '');
-  sessionStorage.setItem('csi18n_fr0201.tlink', '');
-  sessionStorage.setItem('csi18n_fr0201.visitsid', $visitsid);
- } else if ($el === 'fr0202') {
-  sessionStorage.setItem('csi18n_fr0202.result', 0);
-  sessionStorage.setItem('csi18n_fr0202.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0202.representation', '');
-  sessionStorage.setItem('csi18n_fr0202.tlink', '');
-  sessionStorage.setItem('csi18n_fr0202.visitsid', $visitsid);
- } else if ($el === 'fr0203') {
-  sessionStorage.setItem('csi18n_fr0203.result', 0);
-  sessionStorage.setItem('csi18n_fr0203.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0203.representation', '');
-  sessionStorage.setItem('csi18n_fr0203.tlink', '');
-  sessionStorage.setItem('csi18n_fr0203.visitsid', $visitsid);
- } else if ($el === 'fr0204') {
-  sessionStorage.setItem('csi18n_fr0204.result', 0);
-  sessionStorage.setItem('csi18n_fr0204.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0204.representation', '');
-  sessionStorage.setItem('csi18n_fr0204.tlink', '');
-  sessionStorage.setItem('csi18n_fr0204.visitsid', $visitsid);
-
- } else if ($el === 'fr0301') {
-  sessionStorage.setItem('csi18n_fr0301.result', 0);
-  sessionStorage.setItem('csi18n_fr0301.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0301.representation', '');
-  sessionStorage.setItem('csi18n_fr0301.tlink', '');
-  sessionStorage.setItem('csi18n_fr0301.visitsid', $visitsid);
- } else if ($el === 'fr0302') {
-  sessionStorage.setItem('csi18n_fr0302.result', 0);
-  sessionStorage.setItem('csi18n_fr0302.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0302.representation', '');
-  sessionStorage.setItem('csi18n_fr0302.tlink', '');
-  sessionStorage.setItem('csi18n_fr0302.visitsid', $visitsid);
- } else if ($el === 'fr0303') {
-  sessionStorage.setItem('csi18n_fr0303.result', 0);
-  sessionStorage.setItem('csi18n_fr0303.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0303.representation', '');
-  sessionStorage.setItem('csi18n_fr0303.tlink', '');
-  sessionStorage.setItem('csi18n_fr0303.visitsid', $visitsid);
- } else if ($el === 'fr0304') {
-  sessionStorage.setItem('csi18n_fr0304.result', 0);
-  sessionStorage.setItem('csi18n_fr0304.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0304.representation', '');
-  sessionStorage.setItem('csi18n_fr0304.tlink', '');
-  sessionStorage.setItem('csi18n_fr0304.visitsid', $visitsid);
-
- } else if ($el === 'fr0401') {
-  sessionStorage.setItem('csi18n_fr0401.result', 0);
-  sessionStorage.setItem('csi18n_fr0401.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0401.representation', '');
-  sessionStorage.setItem('csi18n_fr0401.tlink', '');
-  sessionStorage.setItem('csi18n_fr0401.visitsid', $visitsid);
- } else if ($el === 'fr0402') {
-  sessionStorage.setItem('csi18n_fr0402.result', 0);
-  sessionStorage.setItem('csi18n_fr0402.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0402.representation', '');
-  sessionStorage.setItem('csi18n_fr0402.tlink', '');
-  sessionStorage.setItem('csi18n_fr0402.visitsid', $visitsid);
- } else if ($el === 'fr0403') {
-  sessionStorage.setItem('csi18n_fr0403.result', 0);
-  sessionStorage.setItem('csi18n_fr0403.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0403.representation', '');
-  sessionStorage.setItem('csi18n_fr0403.tlink', '');
-  sessionStorage.setItem('csi18n_fr0403.visitsid', $visitsid);
- } else if ($el === 'fr0404') {
-  sessionStorage.setItem('csi18n_fr0404.result', 0);
-  sessionStorage.setItem('csi18n_fr0404.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0404.representation', '');
-  sessionStorage.setItem('csi18n_fr0404.tlink', '');
-  sessionStorage.setItem('csi18n_fr0404.visitsid', $visitsid);
-
- } else if ($el === 'fr0501') {
-  sessionStorage.setItem('csi18n_fr0501.result', 0);
-  sessionStorage.setItem('csi18n_fr0501.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0501.representation', '');
-  sessionStorage.setItem('csi18n_fr0501.tlink', '');
-  sessionStorage.setItem('csi18n_fr0501.visitsid', $visitsid);
- } else if ($el === 'fr0502') {
-  sessionStorage.setItem('csi18n_fr0502.result', 0);
-  sessionStorage.setItem('csi18n_fr0502.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0502.representation', '');
-  sessionStorage.setItem('csi18n_fr0502.tlink', '');
-  sessionStorage.setItem('csi18n_fr0502.visitsid', $visitsid);
- } else if ($el === 'fr0503') {
-  sessionStorage.setItem('csi18n_fr0503.result', 0);
-  sessionStorage.setItem('csi18n_fr0503.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0503.representation', '');
-  sessionStorage.setItem('csi18n_fr0503.tlink', '');
-  sessionStorage.setItem('csi18n_fr0503.visitsid', $visitsid);
- } else if ($el === 'fr0504') {
-  sessionStorage.setItem('csi18n_fr0504.result', 0);
-  sessionStorage.setItem('csi18n_fr0504.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0504.representation', '');
-  sessionStorage.setItem('csi18n_fr0504.tlink', '');
-  sessionStorage.setItem('csi18n_fr0504.visitsid', $visitsid);
-
- } else if ($el === 'fr0601') {
-  sessionStorage.setItem('csi18n_fr0601.result', 0);
-  sessionStorage.setItem('csi18n_fr0601.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0601.representation', '');
-  sessionStorage.setItem('csi18n_fr0601.tlink', '');
-  sessionStorage.setItem('csi18n_fr0601.visitsid', $visitsid);
- } else if ($el === 'fr0602') {
-  sessionStorage.setItem('csi18n_fr0602.result', 0);
-  sessionStorage.setItem('csi18n_fr0602.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0602.representation', '');
-  sessionStorage.setItem('csi18n_fr0602.tlink', '');
-  sessionStorage.setItem('csi18n_fr0602.visitsid', $visitsid);
- } else if ($el === 'fr0603') {
-  sessionStorage.setItem('csi18n_fr0603.result', 0);
-  sessionStorage.setItem('csi18n_fr0603.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0603.representation', '');
-  sessionStorage.setItem('csi18n_fr0603.tlink', '');
-  sessionStorage.setItem('csi18n_fr0603.visitsid', $visitsid);
- } else if ($el === 'fr0604') {
-  sessionStorage.setItem('csi18n_fr0604.result', 0);
-  sessionStorage.setItem('csi18n_fr0604.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0604.representation', '');
-  sessionStorage.setItem('csi18n_fr0604.tlink', '');
-  sessionStorage.setItem('csi18n_fr0604.visitsid', $visitsid);
-
- } else if ($el === 'fr0701') {
-  sessionStorage.setItem('csi18n_fr0701.result', 0);
-  sessionStorage.setItem('csi18n_fr0701.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0701.representation', '');
-  sessionStorage.setItem('csi18n_fr0701.tlink', '');
-  sessionStorage.setItem('csi18n_fr0701.visitsid', $visitsid);
- } else if ($el === 'fr0702') {
-  sessionStorage.setItem('csi18n_fr0702.result', 0);
-  sessionStorage.setItem('csi18n_fr0702.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0702.representation', '');
-  sessionStorage.setItem('csi18n_fr0702.tlink', '');
-  sessionStorage.setItem('csi18n_fr0702.visitsid', $visitsid);
- } else if ($el === 'fr0703') {
-  sessionStorage.setItem('csi18n_fr0703.result', 0);
-  sessionStorage.setItem('csi18n_fr0703.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0703.representation', '');
-  sessionStorage.setItem('csi18n_fr0703.tlink', '');
-  sessionStorage.setItem('csi18n_fr0703.visitsid', $visitsid);
- } else if ($el === 'fr0704') {
-  sessionStorage.setItem('csi18n_fr0704.result', 0);
-  sessionStorage.setItem('csi18n_fr0704.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0704.representation', '');
-  sessionStorage.setItem('csi18n_fr0704.tlink', '');
-  sessionStorage.setItem('csi18n_fr0704.visitsid', $visitsid);
-
- } else if ($el === 'fr0801') {
-  sessionStorage.setItem('csi18n_fr0801.result', 0);
-  sessionStorage.setItem('csi18n_fr0801.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0801.representation', '');
-  sessionStorage.setItem('csi18n_fr0801.tlink', '');
-  sessionStorage.setItem('csi18n_fr0801.visitsid', $visitsid);
- } else if ($el === 'fr0802') {
-  sessionStorage.setItem('csi18n_fr0802.result', 0);
-  sessionStorage.setItem('csi18n_fr0802.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0802.representation', '');
-  sessionStorage.setItem('csi18n_fr0802.tlink', '');
-  sessionStorage.setItem('csi18n_fr0802.visitsid', $visitsid);
- } else if ($el === 'fr0803') {
-  sessionStorage.setItem('csi18n_fr0803.result', 0);
-  sessionStorage.setItem('csi18n_fr0803.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0803.representation', '');
-  sessionStorage.setItem('csi18n_fr0803.tlink', '');
-  sessionStorage.setItem('csi18n_fr0803.visitsid', $visitsid);
- } else if ($el === 'fr0804') {
-  sessionStorage.setItem('csi18n_fr0804.result', 0);
-  sessionStorage.setItem('csi18n_fr0804.newmark', $newmark);
-  sessionStorage.setItem('csi18n_fr0804.representation', '');
-  sessionStorage.setItem('csi18n_fr0804.tlink', '');
-  sessionStorage.setItem('csi18n_fr0804.visitsid', $visitsid);
- } 
+ sessionStorage.setItem('csi18n_' + $name + '.result', 0);
+ sessionStorage.setItem('csi18n_' + $name + '.newmark', $newmark);
+ sessionStorage.setItem('csi18n_' + $name + '.representation', '');
+ sessionStorage.setItem('csi18n_' + $name + '.tlink', '');
+ sessionStorage.setItem('csi18n_' + $name + '.visitsid', $visitsid);
 
  //
  // force text to 'undefined' if sendGet seems to have failed
  if ($corner != 'hide') {
-  $rv = sendGet($el, $newmark, $visitsid, $g_uploadersid, $g_lang, $g_newmark);
+  $rv = sendGet($name, $newmark, $visitsid, $g_uploadersid, $g_lang, $crid);
   if (typeof $rv === 'undefined') {
    $translation = 'undefined';
   } else {
@@ -1290,62 +1020,7 @@ function createDialog_v2($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwi
  //
  // escape the response before adding whatever response we got to page
  if (localStorage.getItem('csi18n_onOrOff') == 'on') {
-  if ($el === 'fr0001') { d.innerHTML = "<a class='xlate_fr0001' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0001\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0002') { d.innerHTML = "<a class='xlate_fr0002' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0002\")'>" + escapeHtml($translation) + "</a>"; 
-
-  } else if ($el === 'fr0101') { d.innerHTML = "<a class='xlate_fr0101' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0101\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0102') { d.innerHTML = "<a class='xlate_fr0102' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0102\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0103') { d.innerHTML = "<a class='xlate_fr0103' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0103\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0104') { d.innerHTML = "<a class='xlate_fr0104' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0104\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0105') { d.innerHTML = "<a class='xlate_fr0105' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0105\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0106') { d.innerHTML = "<a class='xlate_fr0106' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0106\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0107') { d.innerHTML = "<a class='xlate_fr0107' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0107\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0108') { d.innerHTML = "<a class='xlate_fr0108' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0108\")'>" + escapeHtml($translation) + "</a>"; 
-
-  } else if ($el === 'fr0109') { d.innerHTML = "<a class='xlate_fr0109' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0109\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0110') { d.innerHTML = "<a class='xlate_fr0110' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0110\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0111') { d.innerHTML = "<a class='xlate_fr0111' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0111\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0112') { d.innerHTML = "<a class='xlate_fr0112' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0112\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0113') { d.innerHTML = "<a class='xlate_fr0113' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0113\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0114') { d.innerHTML = "<a class='xlate_fr0114' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0114\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0115') { d.innerHTML = "<a class='xlate_fr0115' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0115\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0116') { d.innerHTML = "<a class='xlate_fr0116' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0116\")'>" + escapeHtml($translation) + "</a>"; 
-
-  } else if ($el === 'fr0201') { d.innerHTML = "<a class='xlate_fr0201' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0201\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0202') { d.innerHTML = "<a class='xlate_fr0202' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0202\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0203') { d.innerHTML = "<a class='xlate_fr0203' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0203\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0204') { d.innerHTML = "<a class='xlate_fr0204' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0204\")'>" + escapeHtml($translation) + "</a>"; 
-
-  } else if ($el === 'fr0301') { d.innerHTML = "<a class='xlate_fr0301' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0301\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0302') { d.innerHTML = "<a class='xlate_fr0302' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0302\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0303') { d.innerHTML = "<a class='xlate_fr0303' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0303\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0304') { d.innerHTML = "<a class='xlate_fr0304' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0304\")'>" + escapeHtml($translation) + "</a>"; 
-
-  } else if ($el === 'fr0401') { d.innerHTML = "<a class='xlate_fr0401' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0401\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0402') { d.innerHTML = "<a class='xlate_fr0402' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0402\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0403') { d.innerHTML = "<a class='xlate_fr0403' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0403\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0404') { d.innerHTML = "<a class='xlate_fr0404' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0404\")'>" + escapeHtml($translation) + "</a>"; 
-
-  } else if ($el === 'fr0501') { d.innerHTML = "<a class='xlate_fr0501' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0501\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0502') { d.innerHTML = "<a class='xlate_fr0502' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0502\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0503') { d.innerHTML = "<a class='xlate_fr0503' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0503\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0504') { d.innerHTML = "<a class='xlate_fr0504' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0504\")'>" + escapeHtml($translation) + "</a>"; 
-
-  } else if ($el === 'fr0601') { d.innerHTML = "<a class='xlate_fr0601' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0601\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0602') { d.innerHTML = "<a class='xlate_fr0602' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0602\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0603') { d.innerHTML = "<a class='xlate_fr0603' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0603\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0604') { d.innerHTML = "<a class='xlate_fr0604' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0604\")'>" + escapeHtml($translation) + "</a>"; 
-
-  } else if ($el === 'fr0701') { d.innerHTML = "<a class='xlate_fr0701' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0701\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0702') { d.innerHTML = "<a class='xlate_fr0702' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0702\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0703') { d.innerHTML = "<a class='xlate_fr0703' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0703\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0704') { d.innerHTML = "<a class='xlate_fr0704' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0704\")'>" + escapeHtml($translation) + "</a>"; 
-
-  } else if ($el === 'fr0801') { d.innerHTML = "<a class='xlate_fr0801' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0801\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0802') { d.innerHTML = "<a class='xlate_fr0802' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0802\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0803') { d.innerHTML = "<a class='xlate_fr0803' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0803\")'>" + escapeHtml($translation) + "</a>"; 
-  } else if ($el === 'fr0804') { d.innerHTML = "<a class='xlate_fr0804' href='javascript:toggleShowTranslationMenu(\"csi18n_fr0804\")'>" + escapeHtml($translation) + "</a>"; 
-  }
+  d.innerHTML = "<a class='xlate_" + $name + "' href='javascript:toggleShowTranslationMenu(\"csi18n_" + $name + "\")'>" + escapeHtml($translation) + "</a>"; 
  } else { 
   //
   // if we're not showing hyperlinks then there's no point 
@@ -1355,7 +1030,7 @@ function createDialog_v2($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwi
 
  // 
  // title and mouseover div shunt down all else
- if ($corner.substr(3,1) != 'T') { 
+ if ($corner.substr(3, 1) !== 'T') { 
   d.style.position = "absolute";
  }
 
@@ -1363,22 +1038,22 @@ function createDialog_v2($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwi
  // place the given corner of the translation at the
  // specified location; then align as required
  var align = 'auto';
- if ($corner.substr(0,2) == 'BR') {
+ if ($corner.substr(0, 2) == 'BR') {
   d.style.right = ($totx - $posx) + "px";
   d.style.bottom = ($toty - $posy) + "px";
   align = 'right';
 
- } else if ($corner.substr(0,2) == 'TR') {
+ } else if ($corner.substr(0, 2) == 'TR') {
   d.style.right = ($totx - $posx) + "px";
   d.style.top = $posy + "px";
   align = 'right';
 
- } else if ($corner.substr(0,2) == 'BL') {
+ } else if ($corner.substr(0, 2) == 'BL') {
   d.style.left = $posx + "px";;
   d.style.bottom = ($toty - $posy) + "px";
   align = 'left';
 
- } else if ($corner.substr(0,2) == 'TL') {
+ } else if ($corner.substr(0, 2) == 'TL') {
   d.style.left = $posx + "px";
   d.style.top = $posy + "px";
   align = 'left';
@@ -1387,14 +1062,14 @@ function createDialog_v2($el, $corner, $totx, $toty, $posx, $posy, $size, $maxwi
  // Xlates that center within their div force the
  // div to an exact width: otherwise the width
  // shrinks to suit
- if ($corner.substr(2,1) == 'C') {
+ if ($corner.substr(2, 1) === 'C') {
   align = 'center'; 
   d.style.minWidth = $maxwidth + "px";
  }
  d.style.textAlign = align;
 
  // common to all xlates appearing
- // d.style.backgroundColor = 'rgba(255, 255, 255, 1)'; // final value is transparent - 1 = 'not'
+ // d.style.backgroundColor = 'rgba(255, 255, 255, 1)'; // final value is transparency - 1 = 'not'
  d.style.zIndex = "100";
  d.style.fontSize = $size + "px";
  d.style.fontStyle = $style;
@@ -1542,9 +1217,7 @@ function toggleUploadForm(){
   }
 }
 
-///////////////////////////////////////////////////////////////////
 //
-// Setup when never been here before. Preload with credents and use visitor's Accept-Language as default
 // 
 function loadArray($n_arr, $frame, $root, $val) {
  if (typeof $val !== 'undefined') {
@@ -1554,6 +1227,9 @@ function loadArray($n_arr, $frame, $root, $val) {
  }
 }
 
+///////////////////////////////////////////////////////////////////
+//
+// Setup when never been here before. Preload with credents and use visitor's Accept-Language as default
 function onLoad() {
  window.ie = detectIE();
  //
@@ -1588,87 +1264,18 @@ function onLoad() {
  }
 
  COUNT = 0; // index to number of text elements in this frame
- var na = new Array();
+ var crid_array = new Array();
  var frame = 0;
  for (frame = 0; frame < 9; frame++) {
-  na[frame] = new Array();
-  na[frame][COUNT] = 0;
+  crid_array[frame] = new Array();
+  crid_array[frame][COUNT] = 0;
  }
 
- loadArray(na, 0, "fr0001", global_g_newmarkfr0001);
- loadArray(na, 0, "fr0002", global_g_newmarkfr0002);
-
- loadArray(na, 1, "fr0101", global_g_newmarkfr0101);
- loadArray(na, 1, "fr0102", global_g_newmarkfr0102);
- loadArray(na, 1, "fr0103", global_g_newmarkfr0103);
- loadArray(na, 1, "fr0104", global_g_newmarkfr0104);
-
- loadArray(na, 1, "fr0105", global_g_newmarkfr0105);
- loadArray(na, 1, "fr0106", global_g_newmarkfr0106);
- loadArray(na, 1, "fr0107", global_g_newmarkfr0107);
- loadArray(na, 1, "fr0108", global_g_newmarkfr0108);
-
- loadArray(na, 1, "fr0109", global_g_newmarkfr0109);
- loadArray(na, 1, "fr0110", global_g_newmarkfr0110);
- loadArray(na, 1, "fr0111", global_g_newmarkfr0111);
- loadArray(na, 1, "fr0112", global_g_newmarkfr0112);
-
- loadArray(na, 1, "fr0113", global_g_newmarkfr0113);
- loadArray(na, 1, "fr0114", global_g_newmarkfr0114);
- loadArray(na, 1, "fr0115", global_g_newmarkfr0115);
- loadArray(na, 1, "fr0116", global_g_newmarkfr0116);
-
- loadArray(na, 1, "fr0201", global_g_newmarkfr0201);
- loadArray(na, 1, "fr0202", global_g_newmarkfr0202);
- loadArray(na, 1, "fr0203", global_g_newmarkfr0203);
- loadArray(na, 1, "fr0204", global_g_newmarkfr0204);
-
- loadArray(na, 1, "fr0301", global_g_newmarkfr0301);
- loadArray(na, 1, "fr0302", global_g_newmarkfr0302);
- loadArray(na, 1, "fr0303", global_g_newmarkfr0303);
- loadArray(na, 1, "fr0304", global_g_newmarkfr0304);
-
- loadArray(na, 1, "fr0401", global_g_newmarkfr0401);
- loadArray(na, 1, "fr0402", global_g_newmarkfr0402);
- loadArray(na, 1, "fr0403", global_g_newmarkfr0403);
- loadArray(na, 1, "fr0404", global_g_newmarkfr0404);
-
- loadArray(na, 1, "fr0501", global_g_newmarkfr0501);
- loadArray(na, 1, "fr0502", global_g_newmarkfr0502);
- loadArray(na, 1, "fr0503", global_g_newmarkfr0503);
- loadArray(na, 1, "fr0504", global_g_newmarkfr0504);
-
- loadArray(na, 1, "fr0601", global_g_newmarkfr0601);
- loadArray(na, 1, "fr0602", global_g_newmarkfr0602);
- loadArray(na, 1, "fr0603", global_g_newmarkfr0603);
- loadArray(na, 1, "fr0604", global_g_newmarkfr0604);
-
- loadArray(na, 1, "fr0701", global_g_newmarkfr0701);
- loadArray(na, 1, "fr0702", global_g_newmarkfr0702);
- loadArray(na, 1, "fr0703", global_g_newmarkfr0703);
- loadArray(na, 1, "fr0704", global_g_newmarkfr0704);
-
- loadArray(na, 1, "fr0801", global_g_newmarkfr0801);
- loadArray(na, 1, "fr0802", global_g_newmarkfr0802);
- loadArray(na, 1, "fr0803", global_g_newmarkfr0803);
- loadArray(na, 1, "fr0804", global_g_newmarkfr0804);
-
+ getCRIDArrayFromPHP(crid_array);
  //
  // Call for the translations to be bought in, hide the 
  // mouseover and upload form, show any speech lines
- xkcdShow(global_g_visitsid, global_g_uploadersid, global_g_lang, global_container_width, global_container_height, global_frame_array, 
-global_g_newmarkfr0001, global_g_newmarkfr0002,
-global_g_newmarkfr0101, global_g_newmarkfr0102, global_g_newmarkfr0103, global_g_newmarkfr0104,
-global_g_newmarkfr0105, global_g_newmarkfr0106, global_g_newmarkfr0107, global_g_newmarkfr0108,
-global_g_newmarkfr0109, global_g_newmarkfr0110, global_g_newmarkfr0111, global_g_newmarkfr0112,
-global_g_newmarkfr0113, global_g_newmarkfr0114, global_g_newmarkfr0115, global_g_newmarkfr0116,
-global_g_newmarkfr0201, global_g_newmarkfr0202, global_g_newmarkfr0203, global_g_newmarkfr0204,
-global_g_newmarkfr0301, global_g_newmarkfr0302, global_g_newmarkfr0303, global_g_newmarkfr0304,
-global_g_newmarkfr0401, global_g_newmarkfr0402, global_g_newmarkfr0403, global_g_newmarkfr0404,
-global_g_newmarkfr0501, global_g_newmarkfr0502, global_g_newmarkfr0503, global_g_newmarkfr0504,
-global_g_newmarkfr0601, global_g_newmarkfr0602, global_g_newmarkfr0603, global_g_newmarkfr0604,
-global_g_newmarkfr0701, global_g_newmarkfr0702, global_g_newmarkfr0703, global_g_newmarkfr0704,
-global_g_newmarkfr0801, global_g_newmarkfr0802, global_g_newmarkfr0803, global_g_newmarkfr0804, na);
+ xkcdShow(global_g_visitsid, global_g_uploadersid, global_g_lang, global_container_width, global_container_height, crid_array);
  hideWhatWasImgTitle();
  hideUploadForm();
  xkcdShowLines();

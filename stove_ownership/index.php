@@ -1,5 +1,5 @@
 <?php
-// new_products
+// stove_ownership
 
 //
 // Who has final moderation control over the content at whichever
@@ -16,7 +16,7 @@ $thisPageBelongsToSID = 92;
 // can nevertheless be kept a certain distance from the top. For
 // now the width is the width of the webcomic img, and the height
 // sticks at 1024 pixels
-$container_width = 529;
+$container_width = 434;
 $container_height = 1024;
 
 //
@@ -31,7 +31,7 @@ $dflt_apikey = "e3c12c03cf320b243977d6ac389805de";
 // of the webcomic: how many text elements are within? Three
 // speech balloons = 3. Assumption of upto 8 frames, so frame_array
 // must be 9 elements long: pad with zeros
-$frame_array = array(2, 14, 0, 0, 0, 0, 0, 0, 0);
+$frame_array = array(2, 3, 0, 0, 0, 0, 0, 0, 0);
 
 //
 // Each translation appears within a balloon, and each balloon needs
@@ -282,106 +282,106 @@ if ($un !== null && $pw !== null && $lang !== null) {
     $uploadersid = '';
 
     //-- Doc: perform POSTs
-    if ($rv !== 401 && $frame_array[0] > 0) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0001', $lang, 'anonymous', $upload_flds_arr['fr0001'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[0] > 0) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0001', $lang, 'anonymous', $upload_flds_arr['fr0001'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[0] > 1) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0002', $lang, 'anonymous', $upload_flds_arr['fr0002'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-
-    if ($rv !== 401 && $frame_array[1] > 0) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0101', $lang, 'anonymous', $upload_flds_arr['fr0101'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[1] > 1) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0102', $lang, 'anonymous', $upload_flds_arr['fr0102'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[1] > 2) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0103', $lang, 'anonymous', $upload_flds_arr['fr0103'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[1] > 3) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0104', $lang, 'anonymous', $upload_flds_arr['fr0104'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[1] > 4) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0105', $lang, 'anonymous', $upload_flds_arr['fr0105'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[1] > 5) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0106', $lang, 'anonymous', $upload_flds_arr['fr0106'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[1] > 6) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0107', $lang, 'anonymous', $upload_flds_arr['fr0107'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[1] > 7) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0108', $lang, 'anonymous', $upload_flds_arr['fr0108'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[0] > 1) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0002', $lang, 'anonymous', $upload_flds_arr['fr0002'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
 
-    if ($rv !== 401 && $frame_array[1] > 8) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0109', $lang, 'anonymous', $upload_flds_arr['fr0109'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 0) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0101', $lang, 'anonymous', $upload_flds_arr['fr0101'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[1] > 9) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0110', $lang, 'anonymous', $upload_flds_arr['fr0110'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 1) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0102', $lang, 'anonymous', $upload_flds_arr['fr0102'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[1] > 10) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0111', $lang, 'anonymous', $upload_flds_arr['fr0111'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 2) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0103', $lang, 'anonymous', $upload_flds_arr['fr0103'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[1] > 11) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0112', $lang, 'anonymous', $upload_flds_arr['fr0112'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 3) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0104', $lang, 'anonymous', $upload_flds_arr['fr0104'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[1] > 12) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0113', $lang, 'anonymous', $upload_flds_arr['fr0113'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 4) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0105', $lang, 'anonymous', $upload_flds_arr['fr0105'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[1] > 13) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0114', $lang, 'anonymous', $upload_flds_arr['fr0114'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 5) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0106', $lang, 'anonymous', $upload_flds_arr['fr0106'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[1] > 14) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0115', $lang, 'anonymous', $upload_flds_arr['fr0115'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 6) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0107', $lang, 'anonymous', $upload_flds_arr['fr0107'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[1] > 15) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0116', $lang, 'anonymous', $upload_flds_arr['fr0116'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-
-    if ($rv !== 401 && $frame_array[2] > 0) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0201', $lang, 'anonymous', $upload_flds_arr['fr0201'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[2] > 1) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0202', $lang, 'anonymous', $upload_flds_arr['fr0202'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[2] > 2) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0203', $lang, 'anonymous', $upload_flds_arr['fr0203'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[2] > 3) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0204', $lang, 'anonymous', $upload_flds_arr['fr0204'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 7) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0108', $lang, 'anonymous', $upload_flds_arr['fr0108'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
 
-    if ($rv !== 401 && $frame_array[3] > 0) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0301', $lang, 'anonymous', $upload_flds_arr['fr0301'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 8) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0109', $lang, 'anonymous', $upload_flds_arr['fr0109'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[3] > 1) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0302', $lang, 'anonymous', $upload_flds_arr['fr0302'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 9) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0110', $lang, 'anonymous', $upload_flds_arr['fr0110'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[3] > 2) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0303', $lang, 'anonymous', $upload_flds_arr['fr0303'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 10) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0111', $lang, 'anonymous', $upload_flds_arr['fr0111'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[3] > 3) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0304', $lang, 'anonymous', $upload_flds_arr['fr0304'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 11) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0112', $lang, 'anonymous', $upload_flds_arr['fr0112'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-
-    if ($rv !== 401 && $frame_array[4] > 0) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0401', $lang, 'anonymous', $upload_flds_arr['fr0401'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 12) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0113', $lang, 'anonymous', $upload_flds_arr['fr0113'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[4] > 1) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0402', $lang, 'anonymous', $upload_flds_arr['fr0402'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 13) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0114', $lang, 'anonymous', $upload_flds_arr['fr0114'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[4] > 2) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0403', $lang, 'anonymous', $upload_flds_arr['fr0403'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 14) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0115', $lang, 'anonymous', $upload_flds_arr['fr0115'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[4] > 3) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0404', $lang, 'anonymous', $upload_flds_arr['fr0404'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-
-    if ($rv !== 401 && $frame_array[5] > 0) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0501', $lang, 'anonymous', $upload_flds_arr['fr0501'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[5] > 1) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0502', $lang, 'anonymous', $upload_flds_arr['fr0502'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[5] > 2) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0503', $lang, 'anonymous', $upload_flds_arr['fr0503'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[5] > 3) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0504', $lang, 'anonymous', $upload_flds_arr['fr0504'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 15) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0116', $lang, 'anonymous', $upload_flds_arr['fr0116'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
 
-    if ($rv !== 401 && $frame_array[6] > 0) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0601', $lang, 'anonymous', $upload_flds_arr['fr0601'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[2] > 0) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0201', $lang, 'anonymous', $upload_flds_arr['fr0201'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[6] > 1) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0602', $lang, 'anonymous', $upload_flds_arr['fr0602'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[2] > 1) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0202', $lang, 'anonymous', $upload_flds_arr['fr0202'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[6] > 2) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0603', $lang, 'anonymous', $upload_flds_arr['fr0603'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[2] > 2) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0203', $lang, 'anonymous', $upload_flds_arr['fr0203'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[6] > 3) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0604', $lang, 'anonymous', $upload_flds_arr['fr0604'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-
-    if ($rv !== 401 && $frame_array[7] > 0) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0701', $lang, 'anonymous', $upload_flds_arr['fr0701'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[7] > 1) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0702', $lang, 'anonymous', $upload_flds_arr['fr0702'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[7] > 2) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0703', $lang, 'anonymous', $upload_flds_arr['fr0703'], $opt_ignore_blanks, $thisPageBelongsToSID);
-    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[7] > 3) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0704', $lang, 'anonymous', $upload_flds_arr['fr0704'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[2] > 3) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0204', $lang, 'anonymous', $upload_flds_arr['fr0204'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
 
-    if ($rv !== 401 && $frame_array[8] > 0) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0801', $lang, 'anonymous', $upload_flds_arr['fr0801'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[3] > 0) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0301', $lang, 'anonymous', $upload_flds_arr['fr0301'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[8] > 1) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0802', $lang, 'anonymous', $upload_flds_arr['fr0802'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[3] > 1) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0302', $lang, 'anonymous', $upload_flds_arr['fr0302'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[8] > 2) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0803', $lang, 'anonymous', $upload_flds_arr['fr0803'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[3] > 2) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0303', $lang, 'anonymous', $upload_flds_arr['fr0303'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
-    if ($rv !== 401 && $frame_array[8] > 3) $rv = post_a_new($un, $pw, $apikey, 'xkcd-new_products-fr0804', $lang, 'anonymous', $upload_flds_arr['fr0804'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[3] > 3) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0304', $lang, 'anonymous', $upload_flds_arr['fr0304'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+
+    if ($rv !== 401 && $frame_array[4] > 0) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0401', $lang, 'anonymous', $upload_flds_arr['fr0401'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+    if ($rv !== 401 && $frame_array[4] > 1) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0402', $lang, 'anonymous', $upload_flds_arr['fr0402'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+    if ($rv !== 401 && $frame_array[4] > 2) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0403', $lang, 'anonymous', $upload_flds_arr['fr0403'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+    if ($rv !== 401 && $frame_array[4] > 3) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0404', $lang, 'anonymous', $upload_flds_arr['fr0404'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+
+    if ($rv !== 401 && $frame_array[5] > 0) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0501', $lang, 'anonymous', $upload_flds_arr['fr0501'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+    if ($rv !== 401 && $frame_array[5] > 1) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0502', $lang, 'anonymous', $upload_flds_arr['fr0502'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+    if ($rv !== 401 && $frame_array[5] > 2) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0503', $lang, 'anonymous', $upload_flds_arr['fr0503'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+    if ($rv !== 401 && $frame_array[5] > 3) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0504', $lang, 'anonymous', $upload_flds_arr['fr0504'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+
+    if ($rv !== 401 && $frame_array[6] > 0) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0601', $lang, 'anonymous', $upload_flds_arr['fr0601'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+    if ($rv !== 401 && $frame_array[6] > 1) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0602', $lang, 'anonymous', $upload_flds_arr['fr0602'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+    if ($rv !== 401 && $frame_array[6] > 2) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0603', $lang, 'anonymous', $upload_flds_arr['fr0603'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+    if ($rv !== 401 && $frame_array[6] > 3) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0604', $lang, 'anonymous', $upload_flds_arr['fr0604'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+
+    if ($rv !== 401 && $frame_array[7] > 0) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0701', $lang, 'anonymous', $upload_flds_arr['fr0701'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+    if ($rv !== 401 && $frame_array[7] > 1) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0702', $lang, 'anonymous', $upload_flds_arr['fr0702'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+    if ($rv !== 401 && $frame_array[7] > 2) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0703', $lang, 'anonymous', $upload_flds_arr['fr0703'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+    if ($rv !== 401 && $frame_array[7] > 3) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0704', $lang, 'anonymous', $upload_flds_arr['fr0704'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+
+    if ($rv !== 401 && $frame_array[8] > 0) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0801', $lang, 'anonymous', $upload_flds_arr['fr0801'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+    if ($rv !== 401 && $frame_array[8] > 1) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0802', $lang, 'anonymous', $upload_flds_arr['fr0802'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+    if ($rv !== 401 && $frame_array[8] > 2) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0803', $lang, 'anonymous', $upload_flds_arr['fr0803'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
+    if ($rv !== 401 && $frame_array[8] > 3) $rv = post_a_new($un, $pw, $apikey, 'xkcd-stove_ownership-fr0804', $lang, 'anonymous', $upload_flds_arr['fr0804'], $opt_ignore_blanks, $thisPageBelongsToSID);
     handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
 
     if ($rv === 401) {
