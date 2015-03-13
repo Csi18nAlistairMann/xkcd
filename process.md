@@ -9,10 +9,10 @@ At mo, code assumes no more than 8 frames, no more than 16 text elements per fra
  1. File | open | xkcd-orig-<title>.png | open
  1. file | save as | xkcd-orig-<title>.xcf | save
  1. print the image
-   1. Get xkcd# written down
-   1. title the image
+   1. Get xkcd# and title written down
+   1. ~~title the image~~
    1. Record dimensions of image
-   1. Hover image on site: is there a title=”” popup? If so, note a fr0001 
+   1. ~~Hover image on site: is there a title=”” popup? If so, note a fr0001 ~~ All seem to
    1. label the textual elements (“fr0104” etc)
      1. If some textual elements repeat (“Yes”, “X” etc) then label the first, second and subsequent label with a new lable AND the original. This sign that position changes but the newmark doesn't
    1. label point elements (“speech line”) leaving original lines in this time
@@ -26,6 +26,8 @@ At mo, code assumes no more than 8 frames, no more than 16 text elements per fra
  1. Co-ords:
    1. For each textual element
      1. determine where the corner should go (just tl, tr, bl, br for now)
+       1. Append a "C" for centering within autowidth div, space if not used (eg, "TLC", "BR ")
+        1. Append a "T" to make a fixed width block above or below the image (eg, "TLCT")
      1. Get pixel co-ords for textual element and point elements
      1. determine max width of bubble
  1. Erase all textual and speech bubble elements
@@ -95,3 +97,5 @@ At mo, code assumes no more than 8 frames, no more than 16 text elements per fra
      1. Submit
    1. Make text a bit larger/smaller to suit
  1. Adjust co-ords to suit
+ 1. Adjust css styles to suit (top index.html)
+ 2. 
