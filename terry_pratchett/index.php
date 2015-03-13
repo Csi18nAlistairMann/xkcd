@@ -1,5 +1,5 @@
 <?php
-// regular_expressions
+// terry_pratchett
 
 //
 // Who has final moderation control over the content at whichever
@@ -16,7 +16,7 @@ $thisPageBelongsToSID = 92;
 // can nevertheless be kept a certain distance from the top. For
 // now the width is the width of the webcomic img, and the height
 // sticks at 1024 pixels
-$container_width = 600;
+$container_width = 740;
 $container_height = 1024;
 
 //
@@ -31,7 +31,7 @@ $dflt_apikey = "e3c12c03cf320b243977d6ac389805de";
 // of the webcomic: how many text elements are within? Three
 // speech balloons = 3. Assumption of upto 8 frames, so frame_array
 // must be 9 elements long: pad with zeros
-$frame_array = array(2, 1, 1, 2, 1, 1, 0, 2, 0);
+$frame_array = array(2, 2, 0, 0, 0, 0, 0, 0, 0);
 
 //
 // Each translation appears within a balloon, and each balloon needs
@@ -62,6 +62,7 @@ function post_a_new($un, $pw, $apikey, $newmark, $lang, $vis, $trans, $opt_ignor
     return '';
   }
   $errno = $errstr = '';
+  $repost = false;
   $fp = fsockopen("tls://rest.mpsvr.com", 443, $errno, $errstr, 10);
   if (!$fp) {
     $error = true;
@@ -98,6 +99,7 @@ function post_a_new($un, $pw, $apikey, $newmark, $lang, $vis, $trans, $opt_ignor
       //    case (409) : echo "409 - Conflict. Update identical to current"; break;
     case (201) : //201 created ok
     case (301) : //301 moved. POSTing via CORS? Be aware! http://csi18n.mpsvr.com/index.php/Technical_reference#POSTing_duplicates_and_CORS
+      $repost = true;
       break;
     case (401) : //401 Unauthorised
       return 401;
@@ -112,6 +114,9 @@ function post_a_new($un, $pw, $apikey, $newmark, $lang, $vis, $trans, $opt_ignor
   foreach($headers_arr as $header) {
     if (mb_substr($header, 0, 10) === 'Location: ') {
       $loc = mb_substr($header, 10);
+    }
+    if (mb_substr($header, 0, 20) === 'X-CORS-201-not-301: ') {
+      $repost = true;
     }
   }
   return $loc;
@@ -266,7 +271,6 @@ if ($un !== null && $pw !== null && $lang !== null) {
     $frame++;
   }
 
-
   //
   // Only accept for upload if all fields are presented. 
   if ($allUploadFieldsPresentedF === true) {
@@ -283,107 +287,107 @@ if ($un !== null && $pw !== null && $lang !== null) {
 
     //-- Doc: perform POSTs
     if ($rv !== 401 && $frame_array[0] > 0) {
-      $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0001', $lang, 'anonymous', $upload_flds_arr['fr0001'], $opt_ignore_blanks, $thisPageBelongsToSID);
+      $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0001', $lang, 'anonymous', $upload_flds_arr['fr0001'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid);
     }
-    if ($rv !== 401 && $frame_array[0] > 1) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0002', $lang, 'anonymous', $upload_flds_arr['fr0002'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[0] > 1) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0002', $lang, 'anonymous', $upload_flds_arr['fr0002'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
 
-    if ($rv !== 401 && $frame_array[1] > 0) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0101', $lang, 'anonymous', $upload_flds_arr['fr0101'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 0) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0101', $lang, 'anonymous', $upload_flds_arr['fr0101'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[1] > 1) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0102', $lang, 'anonymous', $upload_flds_arr['fr0102'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 1) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0102', $lang, 'anonymous', $upload_flds_arr['fr0102'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[1] > 2) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0103', $lang, 'anonymous', $upload_flds_arr['fr0103'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 2) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0103', $lang, 'anonymous', $upload_flds_arr['fr0103'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[1] > 3) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0104', $lang, 'anonymous', $upload_flds_arr['fr0104'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 3) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0104', $lang, 'anonymous', $upload_flds_arr['fr0104'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[1] > 4) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0105', $lang, 'anonymous', $upload_flds_arr['fr0105'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 4) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0105', $lang, 'anonymous', $upload_flds_arr['fr0105'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[1] > 5) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0106', $lang, 'anonymous', $upload_flds_arr['fr0106'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 5) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0106', $lang, 'anonymous', $upload_flds_arr['fr0106'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[1] > 6) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0107', $lang, 'anonymous', $upload_flds_arr['fr0107'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 6) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0107', $lang, 'anonymous', $upload_flds_arr['fr0107'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[1] > 7) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0108', $lang, 'anonymous', $upload_flds_arr['fr0108'], $opt_ignore_blanks, $thisPageBelongsToSID);
-      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-
-    if ($rv !== 401 && $frame_array[1] > 8) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0109', $lang, 'anonymous', $upload_flds_arr['fr0109'], $opt_ignore_blanks, $thisPageBelongsToSID);
-      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[1] > 9) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0110', $lang, 'anonymous', $upload_flds_arr['fr0110'], $opt_ignore_blanks, $thisPageBelongsToSID);
-      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[1] > 10) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0111', $lang, 'anonymous', $upload_flds_arr['fr0111'], $opt_ignore_blanks, $thisPageBelongsToSID);
-      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[1] > 11) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0112', $lang, 'anonymous', $upload_flds_arr['fr0112'], $opt_ignore_blanks, $thisPageBelongsToSID);
-      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[1] > 12) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0113', $lang, 'anonymous', $upload_flds_arr['fr0113'], $opt_ignore_blanks, $thisPageBelongsToSID);
-      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[1] > 13) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0114', $lang, 'anonymous', $upload_flds_arr['fr0114'], $opt_ignore_blanks, $thisPageBelongsToSID);
-      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[1] > 14) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0115', $lang, 'anonymous', $upload_flds_arr['fr0115'], $opt_ignore_blanks, $thisPageBelongsToSID);
-      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[1] > 15) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0116', $lang, 'anonymous', $upload_flds_arr['fr0116'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 7) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0108', $lang, 'anonymous', $upload_flds_arr['fr0108'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
 
-    if ($rv !== 401 && $frame_array[2] > 0) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0201', $lang, 'anonymous', $upload_flds_arr['fr0201'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 8) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0109', $lang, 'anonymous', $upload_flds_arr['fr0109'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[2] > 1) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0202', $lang, 'anonymous', $upload_flds_arr['fr0202'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 9) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0110', $lang, 'anonymous', $upload_flds_arr['fr0110'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[2] > 2) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0203', $lang, 'anonymous', $upload_flds_arr['fr0203'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 10) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0111', $lang, 'anonymous', $upload_flds_arr['fr0111'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[2] > 3) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0204', $lang, 'anonymous', $upload_flds_arr['fr0204'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 11) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0112', $lang, 'anonymous', $upload_flds_arr['fr0112'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-
-    if ($rv !== 401 && $frame_array[3] > 0) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0301', $lang, 'anonymous', $upload_flds_arr['fr0301'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 12) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0113', $lang, 'anonymous', $upload_flds_arr['fr0113'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[3] > 1) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0302', $lang, 'anonymous', $upload_flds_arr['fr0302'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 13) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0114', $lang, 'anonymous', $upload_flds_arr['fr0114'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[3] > 2) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0303', $lang, 'anonymous', $upload_flds_arr['fr0303'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 14) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0115', $lang, 'anonymous', $upload_flds_arr['fr0115'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[3] > 3) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0304', $lang, 'anonymous', $upload_flds_arr['fr0304'], $opt_ignore_blanks, $thisPageBelongsToSID);
-      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-
-    if ($rv !== 401 && $frame_array[4] > 0) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0401', $lang, 'anonymous', $upload_flds_arr['fr0401'], $opt_ignore_blanks, $thisPageBelongsToSID);
-      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[4] > 1) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0402', $lang, 'anonymous', $upload_flds_arr['fr0402'], $opt_ignore_blanks, $thisPageBelongsToSID);
-      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[4] > 2) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0403', $lang, 'anonymous', $upload_flds_arr['fr0403'], $opt_ignore_blanks, $thisPageBelongsToSID);
-      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[4] > 3) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0404', $lang, 'anonymous', $upload_flds_arr['fr0404'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[1] > 15) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0116', $lang, 'anonymous', $upload_flds_arr['fr0116'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
 
-    if ($rv !== 401 && $frame_array[5] > 0) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0501', $lang, 'anonymous', $upload_flds_arr['fr0501'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[2] > 0) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0201', $lang, 'anonymous', $upload_flds_arr['fr0201'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[5] > 1) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0502', $lang, 'anonymous', $upload_flds_arr['fr0502'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[2] > 1) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0202', $lang, 'anonymous', $upload_flds_arr['fr0202'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[5] > 2) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0503', $lang, 'anonymous', $upload_flds_arr['fr0503'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[2] > 2) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0203', $lang, 'anonymous', $upload_flds_arr['fr0203'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[5] > 3) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0504', $lang, 'anonymous', $upload_flds_arr['fr0504'], $opt_ignore_blanks, $thisPageBelongsToSID);
-      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-
-    if ($rv !== 401 && $frame_array[6] > 0) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0601', $lang, 'anonymous', $upload_flds_arr['fr0601'], $opt_ignore_blanks, $thisPageBelongsToSID);
-      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[6] > 1) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0602', $lang, 'anonymous', $upload_flds_arr['fr0602'], $opt_ignore_blanks, $thisPageBelongsToSID);
-      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[6] > 2) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0603', $lang, 'anonymous', $upload_flds_arr['fr0603'], $opt_ignore_blanks, $thisPageBelongsToSID);
-      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[6] > 3) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0604', $lang, 'anonymous', $upload_flds_arr['fr0604'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[2] > 3) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0204', $lang, 'anonymous', $upload_flds_arr['fr0204'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
 
-    if ($rv !== 401 && $frame_array[7] > 0) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0701', $lang, 'anonymous', $upload_flds_arr['fr0701'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[3] > 0) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0301', $lang, 'anonymous', $upload_flds_arr['fr0301'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[7] > 1) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0702', $lang, 'anonymous', $upload_flds_arr['fr0702'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[3] > 1) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0302', $lang, 'anonymous', $upload_flds_arr['fr0302'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[7] > 2) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0703', $lang, 'anonymous', $upload_flds_arr['fr0703'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[3] > 2) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0303', $lang, 'anonymous', $upload_flds_arr['fr0303'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[7] > 3) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0704', $lang, 'anonymous', $upload_flds_arr['fr0704'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[3] > 3) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0304', $lang, 'anonymous', $upload_flds_arr['fr0304'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
 
-    if ($rv !== 401 && $frame_array[8] > 0) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0801', $lang, 'anonymous', $upload_flds_arr['fr0801'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[4] > 0) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0401', $lang, 'anonymous', $upload_flds_arr['fr0401'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[8] > 1) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0802', $lang, 'anonymous', $upload_flds_arr['fr0802'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[4] > 1) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0402', $lang, 'anonymous', $upload_flds_arr['fr0402'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[8] > 2) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0803', $lang, 'anonymous', $upload_flds_arr['fr0803'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[4] > 2) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0403', $lang, 'anonymous', $upload_flds_arr['fr0403'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
-    if ($rv !== 401 && $frame_array[8] > 3) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-regular_expressions-fr0804', $lang, 'anonymous', $upload_flds_arr['fr0804'], $opt_ignore_blanks, $thisPageBelongsToSID);
+    if ($rv !== 401 && $frame_array[4] > 3) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0404', $lang, 'anonymous', $upload_flds_arr['fr0404'], $opt_ignore_blanks, $thisPageBelongsToSID);
+      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
+
+    if ($rv !== 401 && $frame_array[5] > 0) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0501', $lang, 'anonymous', $upload_flds_arr['fr0501'], $opt_ignore_blanks, $thisPageBelongsToSID);
+      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
+    if ($rv !== 401 && $frame_array[5] > 1) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0502', $lang, 'anonymous', $upload_flds_arr['fr0502'], $opt_ignore_blanks, $thisPageBelongsToSID);
+      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
+    if ($rv !== 401 && $frame_array[5] > 2) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0503', $lang, 'anonymous', $upload_flds_arr['fr0503'], $opt_ignore_blanks, $thisPageBelongsToSID);
+      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
+    if ($rv !== 401 && $frame_array[5] > 3) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0504', $lang, 'anonymous', $upload_flds_arr['fr0504'], $opt_ignore_blanks, $thisPageBelongsToSID);
+      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
+
+    if ($rv !== 401 && $frame_array[6] > 0) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0601', $lang, 'anonymous', $upload_flds_arr['fr0601'], $opt_ignore_blanks, $thisPageBelongsToSID);
+      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
+    if ($rv !== 401 && $frame_array[6] > 1) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0602', $lang, 'anonymous', $upload_flds_arr['fr0602'], $opt_ignore_blanks, $thisPageBelongsToSID);
+      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
+    if ($rv !== 401 && $frame_array[6] > 2) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0603', $lang, 'anonymous', $upload_flds_arr['fr0603'], $opt_ignore_blanks, $thisPageBelongsToSID);
+      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
+    if ($rv !== 401 && $frame_array[6] > 3) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0604', $lang, 'anonymous', $upload_flds_arr['fr0604'], $opt_ignore_blanks, $thisPageBelongsToSID);
+      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
+
+    if ($rv !== 401 && $frame_array[7] > 0) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0701', $lang, 'anonymous', $upload_flds_arr['fr0701'], $opt_ignore_blanks, $thisPageBelongsToSID);
+      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
+    if ($rv !== 401 && $frame_array[7] > 1) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0702', $lang, 'anonymous', $upload_flds_arr['fr0702'], $opt_ignore_blanks, $thisPageBelongsToSID);
+      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
+    if ($rv !== 401 && $frame_array[7] > 2) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0703', $lang, 'anonymous', $upload_flds_arr['fr0703'], $opt_ignore_blanks, $thisPageBelongsToSID);
+      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
+    if ($rv !== 401 && $frame_array[7] > 3) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0704', $lang, 'anonymous', $upload_flds_arr['fr0704'], $opt_ignore_blanks, $thisPageBelongsToSID);
+      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
+
+    if ($rv !== 401 && $frame_array[8] > 0) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0801', $lang, 'anonymous', $upload_flds_arr['fr0801'], $opt_ignore_blanks, $thisPageBelongsToSID);
+      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
+    if ($rv !== 401 && $frame_array[8] > 1) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0802', $lang, 'anonymous', $upload_flds_arr['fr0802'], $opt_ignore_blanks, $thisPageBelongsToSID);
+      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
+    if ($rv !== 401 && $frame_array[8] > 2) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0803', $lang, 'anonymous', $upload_flds_arr['fr0803'], $opt_ignore_blanks, $thisPageBelongsToSID);
+      handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
+    if ($rv !== 401 && $frame_array[8] > 3) { $rv = post_a_new($un, $pw, $apikey, 'xkcd-terry_pratchett-fr0804', $lang, 'anonymous', $upload_flds_arr['fr0804'], $opt_ignore_blanks, $thisPageBelongsToSID);
       handlePOSTResponse_v2($rv, $qs_crid_arr, $uploadersid); }
 
     if ($rv === 401) {

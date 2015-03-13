@@ -155,6 +155,7 @@ function handler_fr0804() { handler_uber(this, arguments.callee.toString()); }
 //
 // Translation menu: prefer another. "I am user X, next time show me Y for newmark Z"
 function trnPreferAnother($index) {
+/*
  $status = sessionStorage.getItem($ls + '.result');
  if ($status != 200) {
   //
@@ -162,6 +163,7 @@ function trnPreferAnother($index) {
   // and the user would need to change the lang(s) and refresh to see more.
   $choices = "No more translations found";
  } else {
+*/
   //
   // if we're not showing 'undefined' the representation will be storing
   // a link to the all preferable resource (visit_link/langs/all)
@@ -169,7 +171,7 @@ function trnPreferAnother($index) {
   $json_arr = JSON.parse($res);
   $json_arr.csi18n_xlate_resources = $json_arr.csi18n_xlate_resources.slice($index, $index + 1);
   $res = JSON.stringify($json_arr);
-  $url = sessionStorage.getItem('csi18n_seemore.per_lang_pref');
+  $url = sessionStorage.getItem('csi18n_seemore.csi18n_per_lang_pref');
   if (XMLHttpRequest) {
     var request = new XMLHttpRequest();
     if("withCredentials" in request) {
@@ -181,7 +183,7 @@ function trnPreferAnother($index) {
      request.onload = preferanother_handler;
      request.send($res);
     }
-  }
+//  }
  }
 }
 
@@ -204,7 +206,7 @@ function trnSeeMore($ls) {
   d.style.backgroundColor = "#AADDDD";
   d.style.textAlign = "right";
   d.style.fontSize = "20px";
-  $choices = "See more<hr>" + $choice;
+  $choices = "See more<br>" + $choice;
   d.innerHTML = escapeHtml($choices);
   d.style.display = "";
  } else {
@@ -699,7 +701,7 @@ function post_handler() {
 
 //
 // WAT DO if a request to see more has completed
-function seemore_handler() {
+function seemore_handler($ls) {
   $status = this.status;
    var d = document.getElementById("trn_menu");
    d.style.position = "fixed";
@@ -720,13 +722,16 @@ function seemore_handler() {
     $el = $json_o.csi18n_xlate_resources[index];
     $unsafe_choice = $el.translation;
     $tlink = $el.url;
-    $safe_choices = $safe_choices + "<li><a href='javascript:trnPreferAnother(\"" + index + "\")'>" + escapeHtml($unsafe_choice) + "</a></li>";
+    if (index > 0) {
+     $safe_choices = $safe_choices + "<li>--------------</li>";
+    }
+    $safe_choices = $safe_choices + "<li><a href='javascript:trnPreferAnother(\"" + $ls + "," + index + "\")'>" + escapeHtml($unsafe_choice) + "</a></li>";
    }
    if ($safe_choices.length > 0) {
     $safe_choices = "<nav><ul>" + $safe_choices + "</ul></nav>";
    } 
-   $choices = "See more<hr>" + $safe_choices;
-   d.innerHTML = $safe_choices;
+   $choices = "See more<br>" + $safe_choices;
+   d.innerHTML = $choices;
    d.style.display = "";
 }
 
