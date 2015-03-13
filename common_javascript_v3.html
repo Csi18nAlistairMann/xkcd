@@ -171,12 +171,17 @@ function trnPreferAnother($index) {
   $json_arr = JSON.parse($res);
   $json_arr.csi18n_xlate_resources = $json_arr.csi18n_xlate_resources.slice($index, $index + 1);
   $res = JSON.stringify($json_arr);
-  $url = sessionStorage.getItem('csi18n_seemore.csi18n_per_lang_pref');
+
+  $frame = sessionStorage.getItem('csi18n_seemore.representations_frame');
+  $rep = sessionStorage.getItem($frame + '.representation');
+  $json_arr = JSON.parse($rep);
+  $puturl = $json_arr.csi18n_per_lang_preference;
+  
   if (XMLHttpRequest) {
     var request = new XMLHttpRequest();
     if("withCredentials" in request) {
      // Firefox 3.5 and Safari 4
-     request.open('PUT', $url, true);
+     request.open('PUT', $puturl, true);
      request.setRequestHeader("Authorization", "Basic " + getBase64Credentials());
      request.setRequestHeader("X-APIKey", localStorage.getItem('csi18n_key'));
      request.setRequestHeader("Content-Type", "application/json;v=1.0");
@@ -191,6 +196,7 @@ function trnPreferAnother($index) {
 // Translation menu: see more. "What other translations are suitable for newmark Z?"
 function trnSeeMore($ls) {
  sessionStorage.setItem('csi18n_seemore.representations', '');
+ sessionStorage.setItem('csi18n_seemore.representations_frame', $ls);
  $status = sessionStorage.getItem($ls + '.result');
  if ($status != 200) {
   //
@@ -701,7 +707,7 @@ function post_handler() {
 
 //
 // WAT DO if a request to see more has completed
-function seemore_handler($ls) {
+function seemore_handler() {
   $status = this.status;
    var d = document.getElementById("trn_menu");
    d.style.position = "fixed";
@@ -725,7 +731,7 @@ function seemore_handler($ls) {
     if (index > 0) {
      $safe_choices = $safe_choices + "<li>--------------</li>";
     }
-    $safe_choices = $safe_choices + "<li><a href='javascript:trnPreferAnother(\"" + $ls + "," + index + "\")'>" + escapeHtml($unsafe_choice) + "</a></li>";
+    $safe_choices = $safe_choices + "<li><a href='javascript:trnPreferAnother(\"" + index + "\")'>" + escapeHtml($unsafe_choice) + "</a></li>";
    }
    if ($safe_choices.length > 0) {
     $safe_choices = "<nav><ul>" + $safe_choices + "</ul></nav>";
