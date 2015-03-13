@@ -12,7 +12,7 @@ At mo, code assumes no more than 8 frames, no more than 16 text elements per fra
    1. Get xkcd# and title written down
    1. ~~title the image~~
    1. Record dimensions of image
-   1. ~~Hover image on site: is there a title=”” popup? If so, note a fr0001 ~~ All seem to
+   1. ~~Hover image on site: is there a title=”” popup? If so, note a fr0001~~ All seem to
    1. label the textual elements (“fr0104” etc)
      1. If some textual elements repeat (“Yes”, “X” etc) then label the first, second and subsequent label with a new lable AND the original. This sign that position changes but the newmark doesn't
    1. label point elements (“speech line”) leaving original lines in this time
