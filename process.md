@@ -51,12 +51,12 @@ At mo, code assumes no more than 8 frames, no more than 16 text elements per fra
        1. ~~Edit “reset all the things, if not got expected things “~~
      1. When dealing with same newmark, different location
        1. Add content to the uncircled/first label
-       1. Circled labels should copy
-       1. index.html/createDialog_v2 should change 10th arg so newmark matches first in line
-       1. index.html comment out textareas for those elements reusing labels
-       1. index.php comment out IFs for those elements reusing labels
-       1. index.php comment out post_a_new for those elements reusing labels
-       1. index.php LEAVE unused elements in allcrids
+        1. Circled labels should copy
+        1. index.html/createDialog_v2 should change 10th arg so newmark matches first in line
+        1. index.html comment out textareas for those elements reusing labels
+        1. index.php comment out IFs for those elements reusing labels
+        1. index.php comment out post_a_new for those elements reusing labels
+        1. index.php LEAVE unused elements in allcrids
    1. In index.html
      1. search/replace previous title with new
      1. change <img src=”
@@ -72,10 +72,10 @@ At mo, code assumes no more than 8 frames, no more than 16 text elements per fra
      1. Data for xkcdShowLines() for speech lines
      1. If see-through PNG
        1. Work up each z-index
-       1. Add second area map because closer z-index of see through PNG means can't click text behind. A better solution: divide PNG into four around unused center 
+        1. Add second area map because closer z-index of see through PNG means can't click text behind. A better solution: divide PNG into four around unused center 
      1. hidden image title?
        1. If necc, uncomment hideWhatWasImgTitle
-       1. If necc, hideWhatWasImgTitle, showWhatWasImgTitle correct element
+        1. ~~If necc, hideWhatWasImgTitle, showWhatWasImgTitle correct element~~
        1. Correct image-map via [image maps](http://www.image-maps.com/)
          1. Use the first <area … tag in the html code
     1. in ../common_javascript_v3.html (if additional elements needed)
@@ -98,4 +98,3 @@ At mo, code assumes no more than 8 frames, no more than 16 text elements per fra
    1. Make text a bit larger/smaller to suit
  1. Adjust co-ords to suit
  1. Adjust css styles to suit (top index.html)
- 2. 
