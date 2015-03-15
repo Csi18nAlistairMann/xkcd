@@ -23,32 +23,34 @@ var global_4xx5xx_timeout = 4000;
 //
 // Translation menu: prefer another. "I am user X, next time show me Y for newmark Z"
 function trnPreferAnother($index) {
- $status = sessionStorage.getItem($ls + '.result');
- if ($status != 200) {
-  //
-  // if we're showing 'undefined', then there is no "see more" to look at
-  // and the user would need to change the lang(s) and refresh to see more.
-  $choices = "No more translations found";
- } else {
-  //
-  // if we're not showing 'undefined' the representation will be storing
-  // a link to the all preferable resource (visit_link/langs/all)
-  $res = sessionStorage.getItem('csi18n_seemore.representations');
-  $json_arr = JSON.parse($res);
-  $json_arr.csi18n_xlate_resources = $json_arr.csi18n_xlate_resources.slice($index, $index + 1);
-  $res = JSON.stringify($json_arr);
-  $url = sessionStorage.getItem('csi18n_seemore.per_lang_pref');
-  if (XMLHttpRequest) {
-    var request = new XMLHttpRequest();
-    if("withCredentials" in request) {
-     // Firefox 3.5 and Safari 4
-     request.open('PUT', $url, true);
-     request.setRequestHeader("Authorization", "Basic " + getBase64Credentials());
-     request.setRequestHeader("X-APIKey", localStorage.getItem('csi18n_key'));
-     request.setRequestHeader("Content-Type", "application/json;v=1.0");
-     request.onload = preferanother_handler;
-     request.send($res);
-    }
+ $index = parseInt($index); // index into the <select /> showing choices
+ //
+ // obtain the list select was built from, get it into JSON and 
+ // slice out the one entry chosen. Put that one entry back.
+ // So we are returning the same representation but with the non-chosen
+ // entries removed.
+ $list = sessionStorage.getItem('csi18n_seemore.representations');
+ $json_arr = JSON.parse($list);
+ $json_arr.csi18n_xlate_resources = $json_arr.csi18n_xlate_resources.slice($index, $index + 1);
+ $representation = JSON.stringify($json_arr);
+ //
+ // Now get the preference URL for the particular text chosen.
+ $frame = sessionStorage.getItem('csi18n_seemore.representations_frame');
+ $rep = sessionStorage.getItem($frame + '.representation');
+ $json_arr = JSON.parse($rep);
+ $puturl = $json_arr.csi18n_per_lang_preference;
+ //
+ // Now send them back 
+ if (XMLHttpRequest) {
+  var request = new XMLHttpRequest();
+  if("withCredentials" in request) {
+   // Firefox 3.5 and Safari 4
+   request.open('PUT', $puturl, true);
+   request.setRequestHeader("Authorization", "Basic " + getBase64Credentials());
+   request.setRequestHeader("X-APIKey", localStorage.getItem('csi18n_key'));
+   request.setRequestHeader("Content-Type", "application/json;v=1.0");
+   request.onload = preferanother_handler;
+   request.send($res);
   }
  }
 }
@@ -58,6 +60,7 @@ function trnPreferAnother($index) {
 function trnSeeMore($ls) {
  sessionStorage.setItem('csi18n_seemore.representations', '');
  $status = sessionStorage.getItem($ls + '.result');
+ sessionStorage.setItem('csi18n_seemore.representations_frame', $ls);
  if ($status != 200) {
   //
   // if we're showing 'undefined', then there is no "see more" to look at

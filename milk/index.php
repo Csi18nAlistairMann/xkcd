@@ -4,7 +4,7 @@
 // The newmark identifies 'that which is to be translated', and is
 // formed on these pages using "xkcd" - "title" - "fr" + frame number + 
 // balloon number. Those first two elements are defined here.
-$nroot = 'xkcd-screws-';
+$nroot = 'xkcd-milk-';
 
 //
 // Who has final moderation control over the content at whichever
@@ -21,7 +21,7 @@ $thisPageBelongsToSID = 92;
 // can nevertheless be kept a certain distance from the top. For
 // now the width is the width of the webcomic img, and the height
 // sticks at 1024 pixels
-$container_width = 384;
+$container_width = 740;
 $container_height = 1024;
 
 //
@@ -36,7 +36,7 @@ $dflt_apikey = "e3c12c03cf320b243977d6ac389805de";
 // of the webcomic: how many text elements are within? Three
 // speech balloons = 3. Assumption of upto 8 frames, so frame_array
 // must be 9 elements long: pad with zeros
-$frame_array = array(2, 8, 0, 0, 0, 0, 0, 0, 0);
+$frame_array = array(2, 0, 2, 0, 1, 0, 0, 0, 0);
 
 //
 // Each translation appears within a balloon, and each balloon needs
