@@ -1,7 +1,7 @@
 Updating a copy of xkcd for which others can offer up translations
 Alistair Mann
 
-At mo, code assumes no more than 8 frames, no more than 16 text elements per frame on first frame, 4 on remainder
+At mo, code assumes no more than 8 frames, no more than 48 text elements per frame on first frame, 4 on remainder. Process takes about 20 assuming the simplest kind, excluding mistakes, backing up, etc etc
 
  1. Visit [xkcd](https://xkcd.com/)
  1. Right-click image | save image as | xkcd-orig-\<title>.png | save
