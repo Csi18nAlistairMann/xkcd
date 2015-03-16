@@ -304,23 +304,29 @@ function trnSeeMore($ls) {
   $res = sessionStorage.getItem($ls + '.representation');
   $json = JSON.parse($res);
   $url = $json.csi18n_all_preferable;
-  if (XMLHttpRequest) {
-    $url = $url + forcedIfNoCache();
-    var request = new XMLHttpRequest();
-    if("withCredentials" in request) {
-     // Firefox 3.5 and Safari 4
-     $lang = localStorage.getItem('csi18n_lang');
-     if ($lang == null) {
-      $lang = window.navigator.language;
-     }
-     request.open('GET', $url, true);
-     request.setRequestHeader("Authorization", "Basic " + getBase64Credentials());
-     request.setRequestHeader("X-APIKey", localStorage.getItem('csi18n_key'));
-     request.setRequestHeader("Accept", "application/json");
-     request.responseType = "json";
-     request.onload = seemore_handler;
-     request.send();
+  if (typeof $url === 'undefined') {
+   // then this was probably a permalink request for a specific translation,
+   // and so there is nothing that could be preferred
+   alert("Sorry! 'See more' can't be used with a permalink translation");
+  } else {
+   if (XMLHttpRequest) {
+     $url = $url + forcedIfNoCache();
+     var request = new XMLHttpRequest();
+     if("withCredentials" in request) {
+      // Firefox 3.5 and Safari 4
+      $lang = localStorage.getItem('csi18n_lang');
+      if ($lang == null) {
+       $lang = window.navigator.language;
+      }
+      request.open('GET', $url, true);
+      request.setRequestHeader("Authorization", "Basic " + getBase64Credentials());
+      request.setRequestHeader("X-APIKey", localStorage.getItem('csi18n_key'));
+      request.setRequestHeader("Accept", "application/json");
+      request.responseType = "json";
+      request.onload = seemore_handler;
+      request.send();
     }
+   }
   }
  }
 }
@@ -816,11 +822,13 @@ function seemore_handler() {
    for(index = 0; index < $json_o.csi18n_xlate_resources.length; index++) {
     $el = $json_o.csi18n_xlate_resources[index];
     $unsafe_choice = $el.translation;
+    $unsafe_language = $el.language;
+    $unsafe_uploader = $el.uploader_sid;
     $tlink = $el.url;
     if (index > 0) {
      $safe_choices = $safe_choices + "<li>--------------</li>";
     }
-    $safe_choices = $safe_choices + "<li><font size=-1><a href='javascript:trnPreferAnother(\"" + index + "\")'>" + escapeHtml($unsafe_choice) + "</a></font></li>";
+    $safe_choices = $safe_choices + "<li><font size=-1><a href='javascript:trnPreferAnother(\"" + index + "\")'>" + escapeHtml($unsafe_choice) + "</a> (" + escapeHtml($unsafe_uploader + "/" + $unsafe_language) + ")</font></li>";
    }
    if ($safe_choices.length > 0) {
     $safe_choices = "<nav><ul>" + $safe_choices + "</ul></nav>";
