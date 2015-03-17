@@ -803,6 +803,8 @@ function post_handler() {
 //
 // WAT DO if a request to see more has completed
 function seemore_handler() {
+  localStorage.setItem('csi18n_xhr2_have_json', 'true');
+  document.getElementById("xhr2_json_at_all").style.display = 'none';
   $status = this.status;
    var d = document.getElementById("trn_menu");
    d.style.position = "fixed";
@@ -916,6 +918,8 @@ function head_handler() {
 //
 // Actual handling of a GET response. 
 function handler_uber(this1, name) {
+  localStorage.setItem('csi18n_xhr2_have_json', 'true');
+  document.getElementById("xhr2_json_at_all").style.display = 'none';
   name = name.substr('function '.length);
   name = name.substr(0, name.indexOf('('));
   name = name.substr(8);
@@ -1413,6 +1417,12 @@ function loadArray($n_arr, $frame, $root, $val) {
 // Setup when never been here before. Preload with credents and use visitor's Accept-Language as default
 function onLoad() {
  window.ie = detectIE();
+
+ // 
+ // turn off the no javascript warning
+ document.getElementById("javascript_at_all").style.display = 'none';
+ document.getElementById("xhr2_json_at_all").style.display = 'none';
+
  //
  // if the lang hasn't been set, copy it from user's Accept-Language
  // do it here so resetting default language happens either on first
@@ -1435,6 +1445,7 @@ function onLoad() {
   localStorage.setItem('csi18n_un', "test05");
   localStorage.setItem('csi18n_pw', "test");
   localStorage.setItem('csi18n_cache_off_timeout', new Date().getTime());
+  localStorage.setItem('csi18n_xhr2_have_json_test', 'false');
   //
   // we're here because we've never visited before. Does everyone use
   // en? Probably not. Maybe consider forcing people to use en;q=0.001 
@@ -1443,6 +1454,12 @@ function onLoad() {
   sessionStorage.clear();
   sessionStorage.setItem('csi18n_seemore.representations', '');
   sessionStorage.setItem('csi18n_seemore.per_lang_pref', '');
+ }
+
+ // 
+ //
+ if (localStorage.getItem('csi18n_xhr2_have_json') !== 'true') {
+  document.getElementById("xhr2_json_at_all").style.display = 'block';
  }
 
  COUNT = 0; // index to number of text elements in this frame

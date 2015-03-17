@@ -186,6 +186,10 @@ function xkcdShowLines() {
 <!-- Per-xkcd HTML -->
 </head>
 <body onload='javascript:onLoad()'>
+<!-- Warning messages for those without JS and XHR2 -->
+<div id="javascript_at_all" class="" style="display: block">If you can read this, then you don't have JavaScript, or have it turned off. Please use a different browser<br></div>
+<div id="xhr2_json_at_all" class="" style="display: none)">If you can read this, then your browser can't handle JSON responses, or hasn't yet been able to check<br></div>
+
 <!-- title div, grey background div, image and image map, then hidden div for the mouseover text -->
 <?php 
    // only show the title if we have one. Earlier example pages didn't

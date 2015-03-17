@@ -181,6 +181,10 @@ function xkcdShowLines() {
 <!-- Per-xkcd HTML -->
 </head>
 <body onload='javascript:onLoad()'>
+<!-- Warning messages for those without JS and XHR2 -->
+<div id="javascript_at_all" class="" style="display: block">If you can read this, then you don't have JavaScript, or have it turned off. Please use a different browser<br></div>
+<div id="xhr2_json_at_all" class="" style="display: none)">If you can read this, then your browser can't handle JSON responses, or hasn't yet been able to check<br></div>
+
 <!-- title div, grey background div, image and image map, then hidden div for the mouseover text -->
 <?php 
    // only show the title if we have one. Earlier example pages didn't
@@ -208,7 +212,7 @@ function xkcdShowLines() {
 <!-- Attribution, data and navigator -->
 Attribution: <a href="http://xkcd.com/642/">http://xkcd.com/642/</a><br>
 XKCD example page retrieved 2015-mar-16<br><br>
-[ <a href="../scrabble">prev</a> | <a href="../">up</a> | <!--<a href="../">next</a>--> ]<br<!-->
+[ <a href="../scrabble">prev</a> | <a href="../">up</a> | <a href="../arbitrage">next</a> ]<br<!-->
 <!-- Add divs for the speech bubbles. Only as per the frame_array declared in index.php -->
 <?php
    if ($frame_array[1] >  0) echo '<div id="fr0101" class="" style="display: inline" tabindex="00101">frame 01 text 01</div>'; 
