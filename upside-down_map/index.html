@@ -1,4 +1,4 @@
-<!-- arbitrage -->
+<!-- upside-down_map -->
 <!-->
 <!-- Per-xkcd CSS Styles-->
 <style>
@@ -43,11 +43,11 @@ function xkcdShow(vsid, usid, lang, $w, $h, crids) {
  COUNT = 0;      // index to number of text elements in this frame
  CRID_NAME = 0;  // index to the branch crid_name of the element, such as 'fr0307'
  CRID = 1;       // index to the numeric CRID of the entry: /xlates/user/newmark/language/visibility/CRID
- var n = "xkcd-arbitrage-"; // root of the newmark to which the branch name is appended
+ var n = "xkcd-upside-down_map-"; // root of the newmark to which the branch name is appended
 
  var frame = 0;
  // fr0001 normally holds the mouseover text
- if (crids[frame][COUNT] >  0) createDialog_v3("TL T",  0,    0,  $w, "12", crids[frame][ 1][CRID_NAME], crids[frame][ 1][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 1][CRID_NAME]);
+ if (crids[frame][COUNT] >  0) createDialog_v3("TLCT",  0,    0,  $w, "12", crids[frame][ 1][CRID_NAME], crids[frame][ 1][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 1][CRID_NAME]);
  // fr0002 holds the title
  if (crids[frame][COUNT] >  1) createDialog_v3("TLCT",  0,    0,  $w, "18", crids[frame][ 2][CRID_NAME], crids[frame][ 2][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 2][CRID_NAME]);
 
@@ -58,31 +58,31 @@ function xkcdShow(vsid, usid, lang, $w, $h, crids) {
 
  frame = 1;
  // fr0101
- if (crids[frame][COUNT] >  0) createDialog_v3("BL ",  13,   54, 170, "13", crids[frame][ 1][CRID_NAME], crids[frame][ 1][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 1][CRID_NAME]);
- if (crids[frame][COUNT] >  1) createDialog_v3("BL ",  12,  124, 176, "13", crids[frame][ 2][CRID_NAME], crids[frame][ 2][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 2][CRID_NAME]);
- if (crids[frame][COUNT] >  2) createDialog_v3("BL ", 137,  249,  34, " 9", crids[frame][ 3][CRID_NAME], crids[frame][ 3][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 3][CRID_NAME]);
- if (crids[frame][COUNT] >  3) createDialog_v3("TLC",   0,  272, 195, "13", crids[frame][ 4][CRID_NAME], crids[frame][ 4][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 4][CRID_NAME]);
- if (crids[frame][COUNT] >  4) createDialog_v3("TL ", 264,  424,  14, "13", crids[frame][ 5][CRID_NAME], crids[frame][ 5][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 5][CRID_NAME]);
- if (crids[frame][COUNT] >  5) createDialog_v3("TL ", 285,  424,  14, "13", crids[frame][ 6][CRID_NAME], crids[frame][ 6][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 6][CRID_NAME]);
- if (crids[frame][COUNT] >  6) createDialog_v3("TL ", 305,  425,  14, "13", crids[frame][ 7][CRID_NAME], crids[frame][ 7][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 7][CRID_NAME]);
- if (crids[frame][COUNT] >  7) createDialog_v3("TL ", 330,  425,  15, "13", crids[frame][ 8][CRID_NAME], crids[frame][ 8][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 8][CRID_NAME]);
+ if (crids[frame][COUNT] >  0) createDialog_v3("BL ", 168,   58,  48, " 8", crids[frame][ 1][CRID_NAME], crids[frame][ 1][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 1][CRID_NAME]);
+ if (crids[frame][COUNT] >  1) createDialog_v3("BLC",  81,  125,  66, "15", crids[frame][ 2][CRID_NAME], crids[frame][ 2][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 2][CRID_NAME]);
+ if (crids[frame][COUNT] >  2) createDialog_v3("BLC",  23,  264,  78, "20", crids[frame][ 3][CRID_NAME], crids[frame][ 3][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 3][CRID_NAME]);
+ if (crids[frame][COUNT] >  3) createDialog_v3("BL ", 168,  137,  37, " 8", crids[frame][ 4][CRID_NAME], crids[frame][ 4][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 4][CRID_NAME]);
+ if (crids[frame][COUNT] >  4) createDialog_v3("BLC", 117,  318,  83, "20", crids[frame][ 5][CRID_NAME], crids[frame][ 5][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 5][CRID_NAME]);
+ if (crids[frame][COUNT] >  5) createDialog_v3("BLC", 208,  126, 109, "22", crids[frame][ 6][CRID_NAME], crids[frame][ 6][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 6][CRID_NAME]);
+ if (crids[frame][COUNT] >  6) createDialog_v3("TL ", 220,  370, 109, " 6", crids[frame][ 7][CRID_NAME], crids[frame][ 7][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 7][CRID_NAME]);
+ if (crids[frame][COUNT] >  7) createDialog_v3("BL ", 324,   27,  68, " 8", crids[frame][ 8][CRID_NAME], crids[frame][ 8][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 8][CRID_NAME]);
  // fr0109
- if (crids[frame][COUNT] >  8) createDialog_v3("TL ", 348,  426,  16, "13", crids[frame][ 9][CRID_NAME], crids[frame][ 9][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 9][CRID_NAME]);
- if (crids[frame][COUNT] >  9) createDialog_v3("TLC",   0,  488, 574, "13", crids[frame][10][CRID_NAME], crids[frame][10][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][10][CRID_NAME]);
- if (crids[frame][COUNT] > 10) createDialog_v3("TL ",   0,  488, 233, "13", crids[frame][11][CRID_NAME], crids[frame][11][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][11][CRID_NAME]);
- if (crids[frame][COUNT] > 11) createDialog_v3("BLC", 260,  331, 233, "13", crids[frame][12][CRID_NAME], crids[frame][12][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][12][CRID_NAME]);
- if (crids[frame][COUNT] > 12) createDialog_v3("BLC", 260,  412, 233, "13", crids[frame][13][CRID_NAME], crids[frame][13][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][13][CRID_NAME]);
- if (crids[frame][COUNT] > 13) createDialog_v3("BLC", 260,  492, 233, "13", crids[frame][14][CRID_NAME], crids[frame][14][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][14][CRID_NAME]);
- if (crids[frame][COUNT] > 14) createDialog_v3("BLC", 260,  492, 233, "13", crids[frame][15][CRID_NAME], crids[frame][15][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][15][CRID_NAME]);
- if (crids[frame][COUNT] > 15) createDialog_v3("BLC", 260,  492, 233, "13", crids[frame][16][CRID_NAME], crids[frame][16][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][16][CRID_NAME]);
+ if (crids[frame][COUNT] >  8) createDialog_v3("TR ", 359,   46, 124, "10", crids[frame][ 9][CRID_NAME], crids[frame][ 9][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 9][CRID_NAME]);
+ if (crids[frame][COUNT] >  9) createDialog_v3("BLC", 298,  319, 129, "22", crids[frame][10][CRID_NAME], crids[frame][10][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][10][CRID_NAME]);
+ if (crids[frame][COUNT] > 10) createDialog_v3("BRC", 536,  109, 155, "35", crids[frame][11][CRID_NAME], crids[frame][11][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][11][CRID_NAME]);
+ if (crids[frame][COUNT] > 11) createDialog_v3("BLC", 424,  266, 117, "22", crids[frame][12][CRID_NAME], crids[frame][12][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][12][CRID_NAME]);
+ if (crids[frame][COUNT] > 12) createDialog_v3("TL ", 466,  333, 144, " 8", crids[frame][13][CRID_NAME], crids[frame][13][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][13][CRID_NAME]);
+ if (crids[frame][COUNT] > 13) createDialog_v3("TL ", 515,  171,  39, " 6", crids[frame][14][CRID_NAME], crids[frame][14][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][14][CRID_NAME]);
+ if (crids[frame][COUNT] > 14) createDialog_v3("TR ", 635,  108,  97, "15", crids[frame][15][CRID_NAME], crids[frame][15][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][15][CRID_NAME]);
+ if (crids[frame][COUNT] > 15) createDialog_v3("BLC", 622,   68, 110, "22", crids[frame][16][CRID_NAME], crids[frame][16][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][16][CRID_NAME]);
  // fr0117
- if (crids[frame][COUNT] > 16) createDialog_v3("BL ", 498,   66,  98, " 9", crids[frame][17][CRID_NAME], crids[frame][17][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][17][CRID_NAME]);
- if (crids[frame][COUNT] > 17) createDialog_v3("TL ", 568,   86,  54, " 9", crids[frame][18][CRID_NAME], crids[frame][18][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][18][CRID_NAME]);
- if (crids[frame][COUNT] > 18) createDialog_v3("BL ", 628,  128,  64, " 9", crids[frame][19][CRID_NAME], crids[frame][19][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][19][CRID_NAME]);
- if (crids[frame][COUNT] > 19) createDialog_v3("BL ", 490,  244,  47, " 9", crids[frame][20][CRID_NAME], crids[frame][20][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][20][CRID_NAME]);
- if (crids[frame][COUNT] > 20) createDialog_v3("BL ", 504,  276,  33, " 9", crids[frame][21][CRID_NAME], crids[frame][21][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][21][CRID_NAME]);
- if (crids[frame][COUNT] > 21) createDialog_v3("BL ", 542,  310, 105, " 9", crids[frame][22][CRID_NAME], crids[frame][22][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][22][CRID_NAME]);
- if (crids[frame][COUNT] > 22) createDialog_v3("TL ", 458,  328,  39, " 9", crids[frame][23][CRID_NAME], crids[frame][23][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][23][CRID_NAME]);
+ if (crids[frame][COUNT] > 16) createDialog_v3("TL ", 683,  102,  53, " 8", crids[frame][17][CRID_NAME], crids[frame][17][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][17][CRID_NAME]);
+ if (crids[frame][COUNT] > 17) createDialog_v3("TL ", 646,  125,  89, " 8", crids[frame][18][CRID_NAME], crids[frame][18][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][18][CRID_NAME]);
+ if (crids[frame][COUNT] > 18) createDialog_v3("BLC", 650,  194,  88, "20", crids[frame][19][CRID_NAME], crids[frame][19][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][19][CRID_NAME]);
+ if (crids[frame][COUNT] > 19) createDialog_v3("TR ", 600,  229,  64, " 9", crids[frame][20][CRID_NAME], crids[frame][20][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][20][CRID_NAME]);
+ if (crids[frame][COUNT] > 20) createDialog_v3("BL ", 602,  292,  89, "15", crids[frame][21][CRID_NAME], crids[frame][21][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][21][CRID_NAME]);
+ if (crids[frame][COUNT] > 21) createDialog_v3("TR ", 731,  352, 150, " 8", crids[frame][22][CRID_NAME], crids[frame][22][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][22][CRID_NAME]);
+ if (crids[frame][COUNT] > 22) createDialog_v3("TLC",   0,  392, 740, "16", crids[frame][23][CRID_NAME], crids[frame][23][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][23][CRID_NAME]);
  if (crids[frame][COUNT] > 23) createDialog_v3("TR ", 397,  365,  77, " 9", crids[frame][24][CRID_NAME], crids[frame][24][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][24][CRID_NAME]);
  // fr0125
  if (crids[frame][COUNT] > 24) createDialog_v3("BR ", 624,   65, 124, "13", crids[frame][25][CRID_NAME], crids[frame][25][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][25][CRID_NAME]);
@@ -192,14 +192,14 @@ function xkcdShowLines() {
 ?>
 <div id="tochterAusElysium" style="position: absolute; background: #BBBBBB; font-size:10px; width: <?php echo $container_width; ?>px; height:<?php echo $container_height; ?>px; font-family:sans;"> 
 
-<img src="http://i.imgur.com/7Z2yooX.png" alt="" usemap="#TupacVsThomasTheTankEngine" ><br>
-<map name="TupacVsThomasTheTankEngine" >
+<img src="http://i.imgur.com/KWHg8Cw.png" alt="" usemap="#TupacVsThomasTheTankEngine" ><br>
+<map name="TupacVsThomasTheTankEngine">
   <!-- 
        The area map is used to reveal a div containing the img title text RM uses as an easter egg. 
        This necessary bc img titles could be retrieved, but can't be clicked on for translating
     -->
   <!-- coords generated at http://www.image-maps.com/ -->
-  <area alt="" title="" shape="poly" coords="53,255,62,240,70,233,71,210,44,210,43,202,52,203,53,198,59,199,58,204,68,204,62,194,78,190,89,195,82,205,88,204,95,204,96,198,104,199,100,205,107,204,105,210,78,212,79,229,87,241,91,251,95,258" onMouseOver="showWhatWasImgTitle()"/>
+  <area alt="" title="" shape="poly" coords="700,348,728,315,739,323,712,355" onMouseOver="showWhatWasImgTitle()"/>
 <!--  <area alt="" title="" shape="poly" coords="121,134,113,136,105,140,101,148,99,156,101,164,105,172,113,176,121,178,129,176,137,172,141,164,143,156,141,148,137,140,129,136" onMouseOver="showWhatWasImgTitle()"/>-->
 </map>
 
@@ -209,9 +209,9 @@ function xkcdShowLines() {
 <!-->
 <!-->
 <!-- Attribution, data and navigator -->
-Attribution: <a href="http://xkcd.com/1499/">http://xkcd.com/1499/</a><br>
+Attribution: <a href="http://xkcd.com/1500/">http://xkcd.com/1500/</a><br>
 XKCD example page 2015-mar-18<br><br>
-[ <a href="../creepy">prev</a> | <a href="../">up</a> | <a href="../upside-down_map">next</a> ]<br<!-->
+[ <a href="../arbitrage">prev</a> | <a href="../">up</a> | <!--<a href="../">next</a>--> ]<br<!-->
 <!-- Add divs for the speech bubbles. Only as per the frame_array declared in index.php -->
 <?php
    if ($frame_array[1] >  0) echo '<div id="fr0101" class="" style="display: inline" tabindex="00101">frame 01 text 01</div>'; 
