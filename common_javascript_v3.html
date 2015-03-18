@@ -583,6 +583,8 @@ function handleContentLanguageChange() {
 function sendGet($el, $newmark, $visitsid, $uploader_sid, $lang, $crid) {
  if ($visitsid !== null && $visitsid !== '' && $uploader_sid !== null && $uploader_sid !== '' && $newmark !== null && $newmark !== '' && $lang !== null && $lang !== '' && $crid !== null && $crid !== '') {
   var url = "https://rest.mpsvr.com/xlates/" + $visitsid + "," + $uploader_sid + "/" + $newmark + "/" + $lang + "/anonymous/" + $crid;
+ } else if ($visitsid !== null && $visitsid !== '' && $newmark !== null && $newmark !== '' && $lang !== null && $lang !== '') {
+  var url = "https://rest.mpsvr.com/newmarks/" + $visitsid + "/" + $newmark + "/" + $lang;
  } else if ($visitsid !== null && $visitsid !== '' && $newmark !== null && $newmark !== '') {
   var url = "https://rest.mpsvr.com/newmarks/" + $visitsid + "/" + $newmark;
  } else {
