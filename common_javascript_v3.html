@@ -972,12 +972,12 @@ function handler_uber(this1, name) {
 //
 
 //
-// To problems with browser caches, I effect a ten-minute timeout
+// For problems with browser caches, I effect a ten-minute timeout
 // where the idempotent get timestamps added. If the browser is
 // refreshed in that period, that also expires the timeout.
 //
 // If not in effect or expired, show "off". When in effect, show a 
-// clock face and the 24hour time the timeout expires.
+// clock face and the 24hour localtime the timeout expires.
 function ifWhenCacheTimeout() {
  var millisecs = localStorage.getItem('csi18n_cache_off_timeout');
  var d = new Date();
@@ -988,7 +988,6 @@ function ifWhenCacheTimeout() {
   var m = d.getMinutes().toString();
   if (h.length === 1) h = "0" + h;
   if (m.length === 1) m = "0" + m;
-
   return "⌚" + h + m + "[<a href='javascript:setCacheTimeoutOff()'>x</a>]";
  } else {
   return "Off";
@@ -1017,7 +1016,6 @@ function setCacheTimeoutOff() {
   d.innerHTML = ifWhenCacheTimeout();
  }
 }
-
 
 //
 // Maintain a local idea of whether to force the browser to no-cache. If
@@ -1429,6 +1427,17 @@ function onLoad() {
  // if the lang hasn't been set, copy it from user's Accept-Language
  // do it here so resetting default language happens either on first
  // visit, or on emptying default language
+ //	 
+ // Does everyone use en? No: 
+ // Internet Explorer v11/Win8 only provides "en-GB" here, so user gets
+ // British English but broad English "en" is ignored.
+ // Safari 8.0.3/OSXv10.10.2 only provides "en-us" here, so even though 
+ // machine, install and user is British, British English is ignored, as
+ // is broad English, AND standard American English (where
+ // uppercase subtags are recommended per IETF so en-US not en-us)
+ //
+ // What I'll do is, if en-* appears and en doesn't, is add en;q=0.001.
+ // That'll happen in the common php.
  if (!localStorage.getItem('csi18n_lang') || (localStorage.getItem('csi18n_lang') == '')) {
 <?php
    echo "localStorage.setItem('csi18n_lang', '$hal_lang');";
@@ -1443,16 +1452,13 @@ function onLoad() {
  }
  var currently = localStorage.getItem('csi18n_onOrOff');
  if (currently != "on" && currently != "off") {
+  //
+  // We're here because we've never visited before.
   localStorage.setItem('csi18n_onOrOff', "on");
   localStorage.setItem('csi18n_un', "test05");
   localStorage.setItem('csi18n_pw', "test");
   localStorage.setItem('csi18n_cache_off_timeout', new Date().getTime());
   localStorage.setItem('csi18n_xhr2_have_json_test', 'false');
-  //
-  // we're here because we've never visited before. Does everyone use
-  // en? Probably not. Maybe consider forcing people to use en;q=0.001 
-  // so they retrieve SOMETHING more than 404s
-  // localStorage.setItem('csi18n_lang', "en;q=0.001");
   sessionStorage.clear();
   sessionStorage.setItem('csi18n_seemore.representations', '');
   sessionStorage.setItem('csi18n_seemore.per_lang_pref', '');

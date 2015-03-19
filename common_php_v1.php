@@ -144,12 +144,13 @@ $un = $pw = $lang = $opt_ignore_blanks = null;
 // Discover our visitor's AL for later use, specifically
 // also obtain user's most likely lang as first highest 
 // priority lang in the AL string: we'll use it to preload
-// the upload form
+// the upload form.
+// 
 $al = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-$hal_lang = $al;
 $al_arr = explode(',', $al);
 $al_pref_arr = array();
 $maxq = 0;
+$seen_en = $seen_any_en = false;
 foreach($al_arr as $l) {
   $l_arr = explode(';', $l);
   $lang = array_shift($l_arr);
@@ -167,9 +168,29 @@ foreach($al_arr as $l) {
     $maxq = $q;
   }
   $al_pref_arr[$q][] = $lang;
+  if ($lang === 'en') {
+    $seen_en = true;
+  } elseif (mb_substr($lang, 0, 3) === 'en-') {
+    $seen_any_en = true;
+  }
 }
 $probable_lang = $al_pref_arr[$maxq][0]; //$first_lang;
 $probable_lang = htmlentities($probable_lang);
+// 
+// Does everyone use en? No: 
+// Internet Explorer v11/Win8 only provides "en-GB" here, so user gets
+// British English but broad English "en" is ignored.
+// Safari 8.0.3/OSXv10.10.2 only provides "en-us" here, so even though 
+// machine, install and user is British, British English is ignored, as
+// is broad English, AND standard American English (where
+// uppercase subtags are recommended per IETF so en-US not en-us)
+//
+// What I'll do is, if en-* appears and en doesn't, is add en;q=0.001.
+if ($seen_any_en === true && $seen_en === false) {
+  $hal_lang = "$al,en;q=0.001";
+} else {
+  $hal_lang = $al;
+}
 
 // 
 // investigate if user is trying to upload for a permalink
