@@ -227,7 +227,7 @@ if ($frame_array[1] > 15 && array_key_exists('ta_fr0116', $_POST)) $upload_flds_
 if ($frame_array[1] > 16 && array_key_exists('ta_fr0117', $_POST)) $upload_flds_arr['fr0117'] = $_POST['ta_fr0117'];
 if ($frame_array[1] > 17 && array_key_exists('ta_fr0118', $_POST)) $upload_flds_arr['fr0118'] = $_POST['ta_fr0118'];
 if ($frame_array[1] > 18 && array_key_exists('ta_fr0119', $_POST)) $upload_flds_arr['fr0119'] = $_POST['ta_fr0119'];
-if ($frame_array[1] > 29 && array_key_exists('ta_fr0120', $_POST)) $upload_flds_arr['fr0120'] = $_POST['ta_fr0120'];
+if ($frame_array[1] > 19 && array_key_exists('ta_fr0120', $_POST)) $upload_flds_arr['fr0120'] = $_POST['ta_fr0120'];
 if ($frame_array[1] > 20 && array_key_exists('ta_fr0121', $_POST)) $upload_flds_arr['fr0121'] = $_POST['ta_fr0121'];
 if ($frame_array[1] > 21 && array_key_exists('ta_fr0122', $_POST)) $upload_flds_arr['fr0122'] = $_POST['ta_fr0122'];
 if ($frame_array[1] > 22 && array_key_exists('ta_fr0123', $_POST)) $upload_flds_arr['fr0123'] = $_POST['ta_fr0123'];
