@@ -1066,7 +1066,7 @@ function toggleShowServiceMenu() {
 // hide/show translation menu
 function toggleShowTranslationMenu($ls) {
  var d = document.getElementById("trn_menu");
- if (d.style.display == "") {
+ if (d.style.display == "" || typeof $ls === undefined) {
   d.style.display = "none";
  } else {
   d.style.position = "fixed";
@@ -1157,6 +1157,7 @@ function acceptDefLang() {
   localStorage.setItem('csi18n_lang', rv);
  }
  toggleShowServiceMenu();
+ toggleShowTranslationMenu();
  onLoad();
 }
 
