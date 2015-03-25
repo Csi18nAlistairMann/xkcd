@@ -1,4 +1,4 @@
-<!-- wasted_time -->
+<!-- squirrel_plans -->
 <!-->
 <!-- Per-xkcd CSS Styles-->
 <style>
@@ -43,7 +43,7 @@ function xkcdShow(vsid, usid, lang, $w, $h, crids) {
  COUNT = 0;      // index to number of text elements in this frame
  CRID_NAME = 0;  // index to the branch crid_name of the element, such as 'fr0307'
  CRID = 1;       // index to the numeric CRID of the entry: /xlates/user/newmark/language/visibility/CRID
- var n = "xkcd-wasted_time-"; // root of the newmark to which the branch name is appended
+ var n = "xkcd-squirrel_plans-"; // root of the newmark to which the branch name is appended
 
  var frame = 0;
  // fr0001 normally holds the mouseover text
@@ -58,9 +58,9 @@ function xkcdShow(vsid, usid, lang, $w, $h, crids) {
 
  frame = 1;
  // fr0101
- if (crids[frame][COUNT] >  0) createDialog_v3("BR ", 145,   43, 140, "12", crids[frame][ 1][CRID_NAME], crids[frame][ 1][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 1][CRID_NAME]);
- if (crids[frame][COUNT] >  1) createDialog_v3("BR ", 150,   86, 146, "12", crids[frame][ 2][CRID_NAME], crids[frame][ 2][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 2][CRID_NAME]);
- if (crids[frame][COUNT] >  2) createDialog_v3("BL ", 211,  460, 258, "12", crids[frame][ 3][CRID_NAME], crids[frame][ 3][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 3][CRID_NAME]);
+ if (crids[frame][COUNT] >  0) createDialog_v3("BR ", 240,   93, 223, "13", crids[frame][ 1][CRID_NAME], crids[frame][ 1][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 1][CRID_NAME]);
+ if (crids[frame][COUNT] >  1) createDialog_v3("BL ",  74,  145, 127, "13", crids[frame][ 2][CRID_NAME], crids[frame][ 2][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 2][CRID_NAME]);
+ if (crids[frame][COUNT] >  2) createDialog_v3("TR ", 242,  164, 137, "13", crids[frame][ 3][CRID_NAME], crids[frame][ 3][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 3][CRID_NAME]);
  if (crids[frame][COUNT] >  3) createDialog_v3("BR ", 113,  236, 113, "12", crids[frame][ 4][CRID_NAME], crids[frame][ 4][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 4][CRID_NAME]);
  if (crids[frame][COUNT] >  4) createDialog_v3("BR ", 566,  233,  94, "12", crids[frame][ 5][CRID_NAME], crids[frame][ 5][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 5][CRID_NAME]);
  if (crids[frame][COUNT] >  5) createDialog_v3("TL ", 131,   68, 129, "12", crids[frame][ 6][CRID_NAME], crids[frame][ 6][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 6][CRID_NAME]);
@@ -192,14 +192,14 @@ function xkcdShowLines() {
 ?>
 <div id="tochterAusElysium" style="position: absolute; background: #BBBBBB; font-size:10px; width: <?php echo $container_width; ?>px; height:<?php echo $container_height; ?>px; font-family:sans;"> 
 
-<img src="http://i.imgur.com/HfDr8Th.png" alt="" usemap="#TupacVsThomasTheTankEngine" ><br>
+<img src="http://i.imgur.com/NXxT9vW.png" alt="" usemap="#TupacVsThomasTheTankEngine" ><br>
 <map name="TupacVsThomasTheTankEngine">
   <!-- 
        The area map is used to reveal a div containing the img title text RM uses as an easter egg. 
        This necessary bc img titles could be retrieved, but can't be clicked on for translating
     -->
   <!-- coords generated at http://www.image-maps.com/ -->
-  <area alt="" title="" shape="rect" coords="27,157,650,206" onMouseOver="showWhatWasImgTitle()"/>
+  <area alt="" title="" shape="rect" coords="30,274,56,230,63,232,146,277,143,285,29,282" onMouseOver="showWhatWasImgTitle()"/>
 <!--  <area alt="" title="" shape="poly" coords="121,134,113,136,105,140,101,148,99,156,101,164,105,172,113,176,121,178,129,176,137,172,141,164,143,156,141,148,137,140,129,136" onMouseOver="showWhatWasImgTitle()"/>-->
 </map>
 
@@ -210,9 +210,9 @@ function xkcdShowLines() {
 <!-->
 <!-- Attribution, data and navigator -->
 <font size=2>
-Attribution: <a href="http://xkcd.com/1502/">http://xkcd.com/1502/</a><br>
-XKCD example page 2015-mar-23<br><br>
-[ <a href="../mysteries">prev</a> | <a href="../">up</a> | <a href="../squirrel_plans">next</a> ]<br<!-->
+Attribution: <a href="http://xkcd.com/1503/">http://xkcd.com/1503/</a><br>
+XKCD example page 2015-mar-25<br><br>
+[ <a href="../wasted_time">prev</a> | <a href="../">up</a> | <!--<a href="../">next</a>--> ]<br<!-->
 </font>
 <!-- Add divs for the speech bubbles. Only as per the frame_array declared in index.php -->
 <?php
