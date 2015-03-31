@@ -496,7 +496,7 @@ function trnSeeMore($ls) {
   $res = sessionStorage.getItem($ls + '.representation');
   $json = JSON.parse($res);
   $url = sessionStorage.getItem($ls + '.all_preferable');
-  if (typeof $url === 'undefined') {
+  if ($url === '') {
    // then this was probably a permalink request for a specific translation,
    // and so there is nothing that could be preferred
    alert("Sorry! 'See more' can't be used with a permalink translation");
