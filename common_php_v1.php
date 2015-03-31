@@ -45,7 +45,7 @@ function post_a_new($un, $pw, $apikey, $root, $lang, $vis, $uplds_arr, $name, $o
   $newmark = $root . $name;
   $errno = $errstr = '';
   $repost = false;
-  $fp = fsockopen("tls://rest.mpsvr.com", 443, $errno, $errstr, 10);
+  $fp = fsockopen("tls://greenroom.mpsvr.com", 443, $errno, $errstr, 10);
   if (!$fp) {
     $error = true;
     //    echo "$errstr ($errno)<br />\n";
@@ -58,7 +58,7 @@ function post_a_new($un, $pw, $apikey, $root, $lang, $vis, $uplds_arr, $name, $o
     $x .= "\r\n\r\n";
 
     $out = "POST /newmarks/$thisPageBelongsToSID/$newmark HTTP/1.1\r\n";
-    $out .= "Host: rest.mpsvr.com\r\n";
+    $out .= "Host: greenroom.mpsvr.com\r\n";
     $out .= "X-APIKey: $apikey\r\n";
     $out .= "Authorization: Basic " . base64_encode("$un:$pw") . "\r\n";
     $out .= "Content-Type: application/json;v=1.0\r\n";
@@ -625,9 +625,11 @@ for($frames = 0; $frames < sizeof($frame_array); $frames++) {
 
 // 
 // bound checks
+$permalinkF = 'false';
 if ($g_uploadersid !== null && $g_lang !== null && $allRelevantF === true) {
   // permalink
   // leave all in place
+  $permalinkF = 'true';
 } elseif ($g_lang !== null) {
   // language-only link
   // knock out all but language
@@ -778,12 +780,13 @@ var global_g_lang = '$g_lang';
 var global_container_width = '$container_width';  // width of xkcd image
 var global_container_height = '$container_height';// height of grey box
 var global_frame_array = [$js_frame_array]; // el[0] is always 2, el[1-8] how many translations in each frame
+var global_permalink = '$permalinkF';
 </script>\n";
 
 //
 // include javascript common to all pages (implementing service
 // and translation menus, for example)
-include_once('../common_javascript_v3.html');
+include_once('common_javascript_v3.html');
 
 //
 // Include per-xkcd styles, javascript and body

@@ -4,7 +4,7 @@
 // The newmark identifies 'that which is to be translated', and is
 // formed on these pages using "xkcd" - "title" - "fr" + frame number + 
 // balloon number. Those first two elements are defined here.
-$nroot = 'xkcd-balloon_internet-';
+$nroot = 'xkcd-opportunity-';
 
 //
 // Who has final moderation control over the content at whichever
@@ -36,7 +36,7 @@ $dflt_apikey = "e3c12c03cf320b243977d6ac389805de";
 // of the webcomic: how many text elements are within? Three
 // speech balloons = 3. Assumption of upto 8 frames, so frame_array
 // must be 9 elements long: pad with zeros
-$frame_array = array(2, 0, 0, 0, 2, 0, 0, 0, 0);
+$frame_array = array(2, 3, 4, 3, 4, 0, 0, 0, 0);
 
 include_once('../common_php_v1.php');
 ?>

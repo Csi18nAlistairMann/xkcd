@@ -1,0 +1,453 @@
+<!-- ontological_argument -->
+<!-->
+<!-- Per-xkcd CSS Styles-->
+<style>
+ /* 
+ Add per-xkcd styles here 
+ Each <div> has an id of the form xlate_fr0101 for hanging css
+ */
+ div.fr0002 {
+  font-variant: small-caps;
+  font-family: Lucida,Helvetica,sans-serif;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 25px;
+ }
+/*
+ a.xlate_fr0101, a.xlate_fr0102 {
+   color: #789922;
+   background-color: #ffffff;
+   font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
+ }
+*/
+ a {
+   font-family: sans;
+ }
+</style>
+<!-->
+<!-- Per-xkcd JavaScript-->
+<script type="text/javascript">
+//
+// Tell the browser what data it needs from the server, and where to put it
+//
+// In:
+// vsid                  : visit_sid - owner of the page
+// usid                  : the user who uploaded the translation
+// lang                  : the language of the uploaded translation
+// w:  width of the grey container, currently same as image width
+// h: h of grey container, currently 1024
+// crids: 3d array defining translations:
+//  crids[frame][0] -- the number of text balloons in this frame
+//  crids[frame][balloon][0] -- the branch name of the element, such as "fr0307", forms part of the newmark
+//  crids[frame][balloon][1] -- the CRID, continuity record ID, of the particular translation
+//
+// This strange way of handling the data below is:
+//  - it's visually easier to see which data needs updating
+//  - it make xkcdShow parameters independent of the number of frames or balloons per frame.
+//    and that makes common_javascript_v3 independent of frames/balloons restrictions
+//
+function xkcdShow(vsid, usid, lang, $w, $h, crids) {
+ COUNT = 0;      // index to number of text elements in this frame
+ CRID_NAME = 0;  // index to the branch crid_name of the element, such as 'fr0307'
+ CRID = 1;       // index to the numeric CRID of the entry: /xlates/user/newmark/language/visibility/CRID
+ var n = "xkcd-ontological_argument-"; // root of the newmark to which the branch name is appended
+
+ var frame = 0;
+ // fr0001 normally holds the mouseover text
+ if (crids[frame][COUNT] >  0) createDialog_v3("TLCT",  0,    0,  $w, "12", crids[frame][ 1][CRID_NAME], crids[frame][ 1][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 1][CRID_NAME]);
+ // fr0002 holds the title
+ if (crids[frame][COUNT] >  1) createDialog_v3("TLCT",  0,    0,  $w, "18", crids[frame][ 2][CRID_NAME], crids[frame][ 2][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 2][CRID_NAME]);
+
+ // the remainder are of the form frXXYY - where fr = frame; XX is the frame number starting from 01
+ // and YY is the textual element within the frame, also starting at 01
+ // BL, TL, TR, BR = fix text to flow away from: bottom left, top left, top right, bottom right
+ // BLC, TLC, TRC, BRC = as above, but center text within it's div
+
+ frame = 1;
+ // fr0101
+ if (crids[frame][COUNT] >  0) createDialog_v3("BLC",  18,   99, 226, "13", crids[frame][ 1][CRID_NAME], crids[frame][ 1][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 1][CRID_NAME]);
+ if (crids[frame][COUNT] >  1) createDialog_v3("BL ",   8,   86, 165, "11", crids[frame][ 2][CRID_NAME], crids[frame][ 2][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 2][CRID_NAME]);
+ if (crids[frame][COUNT] >  2) createDialog_v3("BRC", 170,  130,  86, "11", crids[frame][ 3][CRID_NAME], crids[frame][ 3][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 3][CRID_NAME]);
+ if (crids[frame][COUNT] >  3) createDialog_v3("BR ", 113,  236, 113, "11", crids[frame][ 4][CRID_NAME], crids[frame][ 4][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 4][CRID_NAME]);
+ if (crids[frame][COUNT] >  4) createDialog_v3("BR ", 566,  233,  94, "11", crids[frame][ 5][CRID_NAME], crids[frame][ 5][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 5][CRID_NAME]);
+ if (crids[frame][COUNT] >  5) createDialog_v3("TL ", 131,   68, 129, "11", crids[frame][ 6][CRID_NAME], crids[frame][ 6][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 6][CRID_NAME]);
+ if (crids[frame][COUNT] >  6) createDialog_v3("BLC", 236,  150,  91, "11", crids[frame][ 7][CRID_NAME], crids[frame][ 7][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 7][CRID_NAME]);
+ if (crids[frame][COUNT] >  7) createDialog_v3("TL ", 174,  149,  92, "11", crids[frame][ 8][CRID_NAME], crids[frame][ 8][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 8][CRID_NAME]);
+ // fr0109
+ if (crids[frame][COUNT] >  8) createDialog_v3("TL ", 209,  180,  80, "11", crids[frame][ 9][CRID_NAME], crids[frame][ 9][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 9][CRID_NAME]);
+ if (crids[frame][COUNT] >  9) createDialog_v3("TL ", 135,  217, 200, "11", crids[frame][10][CRID_NAME], crids[frame][10][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][10][CRID_NAME]);
+ if (crids[frame][COUNT] > 10) createDialog_v3("TL ", 363,  132,  68, "11", crids[frame][11][CRID_NAME], crids[frame][11][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][11][CRID_NAME]);
+ if (crids[frame][COUNT] > 11) createDialog_v3("BLC", 428,  137,  25, "11", crids[frame][12][CRID_NAME], crids[frame][12][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][12][CRID_NAME]);
+ if (crids[frame][COUNT] > 12) createDialog_v3("TR ", 580,   66, 133, "11", crids[frame][13][CRID_NAME], crids[frame][13][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][13][CRID_NAME]);
+ if (crids[frame][COUNT] > 13) createDialog_v3("TR ", 579,   99,  66, "11", crids[frame][14][CRID_NAME], crids[frame][14][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][14][CRID_NAME]);
+ if (crids[frame][COUNT] > 14) createDialog_v3("TR ", 562,  169,  76, "11", crids[frame][15][CRID_NAME], crids[frame][15][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][15][CRID_NAME]);
+ if (crids[frame][COUNT] > 15) createDialog_v3("TR ", 427,  213,  73, "11", crids[frame][16][CRID_NAME], crids[frame][16][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][16][CRID_NAME]);
+ // fr0117
+ if (crids[frame][COUNT] > 16) createDialog_v3("TR ", 244,  302, 102, "11", crids[frame][17][CRID_NAME], crids[frame][17][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][17][CRID_NAME]);
+ if (crids[frame][COUNT] > 17) createDialog_v3("TL ",  86,  385, 133, "11", crids[frame][18][CRID_NAME], crids[frame][18][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][18][CRID_NAME]);
+ if (crids[frame][COUNT] > 18) createDialog_v3("TL ", 282,  368,  53, "11", crids[frame][19][CRID_NAME], crids[frame][19][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][19][CRID_NAME]);
+ if (crids[frame][COUNT] > 19) createDialog_v3("TL ", 249,  406,  77, "11", crids[frame][20][CRID_NAME], crids[frame][20][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][20][CRID_NAME]);
+ if (crids[frame][COUNT] > 20) createDialog_v3("TL ", 399,  279,  98, "11", crids[frame][21][CRID_NAME], crids[frame][21][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][21][CRID_NAME]);
+ if (crids[frame][COUNT] > 21) createDialog_v3("TL ", 372,  320,  65, "11", crids[frame][22][CRID_NAME], crids[frame][22][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][22][CRID_NAME]);
+ if (crids[frame][COUNT] > 22) createDialog_v3("BLC", 427,  359,  73, "11", crids[frame][23][CRID_NAME], crids[frame][23][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][23][CRID_NAME]);
+ if (crids[frame][COUNT] > 23) createDialog_v3("BR ", 412,  412,  70, "11", crids[frame][24][CRID_NAME], crids[frame][24][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][24][CRID_NAME]);
+ // fr0125
+ if (crids[frame][COUNT] > 24) createDialog_v3("TL ", 412,  412,  85, "11", crids[frame][25][CRID_NAME], crids[frame][25][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][25][CRID_NAME]);
+ if (crids[frame][COUNT] > 25) createDialog_v3("BLC", 450,  397, 129, "11", crids[frame][26][CRID_NAME], crids[frame][26][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][26][CRID_NAME]);
+ if (crids[frame][COUNT] > 26) createDialog_v3("TLC", 499,  424, 114, "11", crids[frame][27][CRID_NAME], crids[frame][27][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][27][CRID_NAME]);
+ if (crids[frame][COUNT] > 27) createDialog_v3("BL ", 372,  626,  68, "11", crids[frame][28][CRID_NAME], crids[frame][28][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][28][CRID_NAME]);
+ if (crids[frame][COUNT] > 28) createDialog_v3("TL ", 153,  184,  95, "11", crids[frame][29][CRID_NAME], crids[frame][29][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][29][CRID_NAME]);
+ if (crids[frame][COUNT] > 29) createDialog_v3("BL ", 342,   64,  67, "11", crids[frame][30][CRID_NAME], crids[frame][30][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][30][CRID_NAME]);
+ if (crids[frame][COUNT] > 30) createDialog_v3("BL ", 330,  179, 100, "11", crids[frame][31][CRID_NAME], crids[frame][31][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][31][CRID_NAME]);
+ if (crids[frame][COUNT] > 31) createDialog_v3("BL ", 334,  324,  24, "11", crids[frame][32][CRID_NAME], crids[frame][32][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][32][CRID_NAME]);
+ // fr0133
+ if (crids[frame][COUNT] > 32) createDialog_v3("TR ", 184,  360,  66, "11", crids[frame][33][CRID_NAME], crids[frame][33][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][33][CRID_NAME]);
+ if (crids[frame][COUNT] > 33) createDialog_v3("BL ", 118,  498,  20, "11", crids[frame][34][CRID_NAME], crids[frame][34][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][34][CRID_NAME]);
+ if (crids[frame][COUNT] > 34) createDialog_v3("TL ", 208,  142,  64, "11", crids[frame][35][CRID_NAME], crids[frame][35][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][35][CRID_NAME]);
+ if (crids[frame][COUNT] > 35) createDialog_v3("TL ", 290,  108,  80, "11", crids[frame][36][CRID_NAME], crids[frame][36][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][36][CRID_NAME]);
+ if (crids[frame][COUNT] > 36) createDialog_v3("TL ", 290,  213, 119, "11", crids[frame][37][CRID_NAME], crids[frame][37][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][37][CRID_NAME]);
+ if (crids[frame][COUNT] > 37) createDialog_v3("BR ", 144,  326, 117, "11", crids[frame][38][CRID_NAME], crids[frame][38][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][38][CRID_NAME]);
+ if (crids[frame][COUNT] > 38) createDialog_v3("TL ", 222,  336,  21, "11", crids[frame][39][CRID_NAME], crids[frame][39][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][39][CRID_NAME]);
+ if (crids[frame][COUNT] > 39) createDialog_v3("BR ", 234,  624, 200, "11", crids[frame][40][CRID_NAME], crids[frame][40][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][40][CRID_NAME]);
+ // fr0141
+ if (crids[frame][COUNT] > 40) createDialog_v3("TR ", 446,  276, 148, "11", crids[frame][41][CRID_NAME], crids[frame][41][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][41][CRID_NAME]);
+ if (crids[frame][COUNT] > 41) createDialog_v3("TR ", 456,   98,  70, "11", crids[frame][42][CRID_NAME], crids[frame][42][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][42][CRID_NAME]);
+ if (crids[frame][COUNT] > 42) createDialog_v3("BL ", 546,  378,  80, "11", crids[frame][43][CRID_NAME], crids[frame][43][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][43][CRID_NAME]);
+ if (crids[frame][COUNT] > 43) createDialog_v3("TL ", 446,  430,  35, "11", crids[frame][44][CRID_NAME], crids[frame][44][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][44][CRID_NAME]);
+ if (crids[frame][COUNT] > 44) createDialog_v3("TR ", 396,  466,  56, "11", crids[frame][45][CRID_NAME], crids[frame][45][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][45][CRID_NAME]);
+ if (crids[frame][COUNT] > 45) createDialog_v3("TL ", 546,  472,  83, "11", crids[frame][46][CRID_NAME], crids[frame][46][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][46][CRID_NAME]);
+ if (crids[frame][COUNT] > 46) createDialog_v3("BL ", 260,  492, 233, "11", crids[frame][47][CRID_NAME], crids[frame][47][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][47][CRID_NAME]);
+ if (crids[frame][COUNT] > 47) createDialog_v3("BL ", 260,  492, 233, "11", crids[frame][48][CRID_NAME], crids[frame][48][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][48][CRID_NAME]);
+
+ frame = 2;
+ // fr0201
+ if (crids[frame][COUNT] >  0) createDialog_v3("TL ", 200,    6,  36, "11", crids[frame][ 1][CRID_NAME], crids[frame][ 1][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 1][CRID_NAME]);
+ if (crids[frame][COUNT] >  1) createDialog_v3("BL ", 197,   52, 132, "11", crids[frame][ 2][CRID_NAME], crids[frame][ 2][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 2][CRID_NAME]);
+ if (crids[frame][COUNT] >  2) createDialog_v3("TL ", 226,   64, 130, "11", crids[frame][ 3][CRID_NAME], crids[frame][ 3][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 3][CRID_NAME]);
+ if (crids[frame][COUNT] >  3) createDialog_v3("TL ", 200,  112, 108, "11", crids[frame][ 4][CRID_NAME], crids[frame][ 4][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 4][CRID_NAME]);
+
+ frame = 3;
+ // fr0301
+ if (crids[frame][COUNT] >  0) createDialog_v3("TL ", 386,    5,  36, "11", crids[frame][ 1][CRID_NAME], crids[frame][ 1][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 1][CRID_NAME]);
+ if (crids[frame][COUNT] >  1) createDialog_v3("BL ", 380,   84, 167, "11", crids[frame][ 2][CRID_NAME], crids[frame][ 2][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 2][CRID_NAME]);
+ if (crids[frame][COUNT] >  2) createDialog_v3("BR ", 549,  145, 141, "11", crids[frame][ 3][CRID_NAME], crids[frame][ 3][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 3][CRID_NAME]);
+ if (crids[frame][COUNT] >  3) createDialog_v3("BLC",  25,  211, 230, "11", crids[frame][ 4][CRID_NAME], crids[frame][ 4][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 4][CRID_NAME]);
+
+ frame = 4;
+ // fr0401
+ if (crids[frame][COUNT] >  0) createDialog_v3("TL ", 568,    6, 165, "11", crids[frame][ 1][CRID_NAME], crids[frame][ 1][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 1][CRID_NAME]);
+ if (crids[frame][COUNT] >  1) createDialog_v3("BL ", 566,   84, 168, "11", crids[frame][ 2][CRID_NAME], crids[frame][ 2][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 2][CRID_NAME]);
+ if (crids[frame][COUNT] >  2) createDialog_v3("BR ", 735,  107, 150, "11", crids[frame][ 3][CRID_NAME], crids[frame][ 3][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 3][CRID_NAME]);
+ if (crids[frame][COUNT] >  3) createDialog_v3("TL ", 564,  114, 145, "11", crids[frame][ 4][CRID_NAME], crids[frame][ 4][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 4][CRID_NAME]);
+
+ frame = 5;
+ // fr0501
+ if (crids[frame][COUNT] >  0) createDialog_v3("BL ", 619,   60, 109, "11", crids[frame][ 1][CRID_NAME], crids[frame][ 1][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 1][CRID_NAME]);
+ if (crids[frame][COUNT] >  1) createDialog_v3("TL ",  20,  303, 154, "11", crids[frame][ 2][CRID_NAME], crids[frame][ 2][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 2][CRID_NAME]);
+ if (crids[frame][COUNT] >  2) createDialog_v3("BLC",  25,  172, 230, "11", crids[frame][ 3][CRID_NAME], crids[frame][ 3][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 3][CRID_NAME]);
+ if (crids[frame][COUNT] >  3) createDialog_v3("BLC",  25,  211, 230, "11", crids[frame][ 4][CRID_NAME], crids[frame][ 4][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 4][CRID_NAME]);
+
+ frame = 6;
+ // fr0601
+ if (crids[frame][COUNT] >  0) createDialog_v3("BL ", 389,  287, 104, "11", crids[frame][ 1][CRID_NAME], crids[frame][ 1][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 1][CRID_NAME]);
+ if (crids[frame][COUNT] >  1) createDialog_v3("BR ", 614,  324, 130, "11", crids[frame][ 2][CRID_NAME], crids[frame][ 2][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 2][CRID_NAME]);
+ if (crids[frame][COUNT] >  2) createDialog_v3("TR ", 496,  329, 111, "11", crids[frame][ 3][CRID_NAME], crids[frame][ 3][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 3][CRID_NAME]);
+ if (crids[frame][COUNT] >  3) createDialog_v3("BLC",  25,  211, 230, "11", crids[frame][ 4][CRID_NAME], crids[frame][ 4][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 4][CRID_NAME]);
+
+ frame = 7;
+ // fr0701
+ if (crids[frame][COUNT] >  0) createDialog_v3("BRC", 263,  535, 100, "20", crids[frame][ 1][CRID_NAME], crids[frame][ 1][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 1][CRID_NAME]);
+ if (crids[frame][COUNT] >  1) createDialog_v3("TLC", 282,  523,  52,  "6", crids[frame][ 2][CRID_NAME], crids[frame][ 2][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 2][CRID_NAME]);
+ if (crids[frame][COUNT] >  2) createDialog_v3("BLC",  25,  172, 230, "11", crids[frame][ 3][CRID_NAME], crids[frame][ 3][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 3][CRID_NAME]);
+ if (crids[frame][COUNT] >  3) createDialog_v3("BLC",  25,  211, 230, "11", crids[frame][ 4][CRID_NAME], crids[frame][ 4][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 4][CRID_NAME]);
+
+ frame = 8;
+ // fr0801
+ if (crids[frame][COUNT] >  0) createDialog_v3("BR ", 728,  339, 164, "11", crids[frame][ 1][CRID_NAME], crids[frame][ 1][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 1][CRID_NAME]);
+ if (crids[frame][COUNT] >  1) createDialog_v3("TL ", 609,  347, 128, "11", crids[frame][ 2][CRID_NAME], crids[frame][ 2][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 2][CRID_NAME]);
+ if (crids[frame][COUNT] >  2) createDialog_v3("BLC",  25,  172, 230, "11", crids[frame][ 3][CRID_NAME], crids[frame][ 3][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 3][CRID_NAME]);
+ if (crids[frame][COUNT] >  3) createDialog_v3("BLC",  25,  211, 230, "11", crids[frame][ 4][CRID_NAME], crids[frame][ 4][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 4][CRID_NAME]);
+}
+
+//
+// Used to replace lines RM uses to connect speech bubble
+// to speaker.
+function xkcdShowLines() {
+/*
+ DrawLine(252,  251, 304,  220);
+ DrawLine(519,  253, 570,  221);
+ DrawLine(226,   47, 290,  196); 
+ DrawLine(294,  123, 296,  195);
+ DrawLine(417,   89, 425,  156);
+ DrawLine(441,  181, 475,  206);
+ DrawLine(530,  150, 492,  206);
+*/
+}
+</script>
+<!-->
+<!-- Per-xkcd HTML -->
+</head>
+<body onload='javascript:onLoad()'>
+<!-- Warning messages for those without JS and XHR2 -->
+<div id="javascript_at_all" class="" style="display: block">If you can read this, then you don't have JavaScript, or have it turned off. Please use a different browser<br></div>
+<div id="xhr2_json_at_all" class="" style="display: none)">If you can read this, then your browser can't handle JSON responses, or hasn't yet been able to check<br></div>
+
+<!-- title div, grey background div, image and image map, then hidden div for the mouseover text -->
+<?php 
+   // only show the title if we have one. Earlier example pages didn't
+   if ($frame_array[0] > 1) echo '<div title="" id="fr0002" class="fr0002" style="display: block" tabindex="0090">frame 00 text 02</div><!--title text-->'; 
+?>
+<div id="tochterAusElysium" style="position: absolute; background: #BBBBBB; font-size:10px; width: <?php echo $container_width; ?>px; height:<?php echo $container_height; ?>px; font-family:sans;"> 
+
+<img src="http://i.imgur.com/pmKp2PI.png" alt="" usemap="#TupacVsThomasTheTankEngine" ><br>
+<map name="TupacVsThomasTheTankEngine">
+  <!-- 
+       The area map is used to reveal a div containing the img title text RM uses as an easter egg. 
+       This necessary bc img titles could be retrieved, but can't be clicked on for translating
+    -->
+  <!-- coords generated at http://www.image-maps.com/ -->
+  <area alt="" title="" shape="poly" coords="68,145,130,127,153,133,161,157,153,173,139,177,83,193,64,187,56,174,57,155" onMouseOver="showWhatWasImgTitle()"/>
+</map>
+
+<?php 
+   if ($frame_array[0] > 0) echo '<div title="" id="fr0001" class="" style="display: none; background-color: #ffffff" tabindex="0091">frame 00 text 01</div><!--mouseover text-->'; 
+?>
+<!-->
+<!-->
+<!-- Attribution, data and navigator -->
+<font size=2>
+Attribution: <a href="http://xkcd.com/1505/">http://xkcd.com/1505/</a><br>
+XKCD example page 2015-mar-307<br><br>
+[ <a href="../ontological_argument">prev</a> | <a href="../">up</a> | <!--<a href="../">next</a>--> ]<br<!-->
+</font>
+<!-- Add divs for the speech bubbles. Only as per the frame_array declared in index.php -->
+<?php
+   if ($frame_array[1] >  0) echo '<div title="" id="fr0101" class="fr0101" style="display: inline" tabindex="00101">frame 01 text 01</div>'; 
+   if ($frame_array[1] >  1) echo '<div title="" id="fr0102" class="fr0102" style="display: inline" tabindex="00102">frame 01 text 02</div>';
+   if ($frame_array[1] >  2) echo '<div title="" id="fr0103" class="fr0103" style="display: inline" tabindex="00103">frame 01 text 03</div>'; 
+   if ($frame_array[1] >  3) echo '<div title="" id="fr0104" class="fr0104" style="display: inline" tabindex="00104">frame 01 text 04</div>';
+   if ($frame_array[1] >  4) echo '<div title="" id="fr0105" class="fr0105" style="display: inline" tabindex="00105">frame 01 text 05</div>'; 
+   if ($frame_array[1] >  5) echo '<div title="" id="fr0106" class="fr0106" style="display: inline" tabindex="00106">frame 01 text 06</div>';
+   if ($frame_array[1] >  6) echo '<div title="" id="fr0107" class="fr0107" style="display: inline" tabindex="00107">frame 01 text 07</div>'; 
+   if ($frame_array[1] >  7) echo '<div title="" id="fr0108" class="fr0108" style="display: inline" tabindex="00108">frame 01 text 08</div>';
+
+   if ($frame_array[1] >  8) echo '<div title="" id="fr0109" class="fr0109" style="display: inline" tabindex="00109">frame 01 text 09</div>'; 
+   if ($frame_array[1] >  9) echo '<div title="" id="fr0110" class="fr0110" style="display: inline" tabindex="00110">frame 01 text 10</div>';
+   if ($frame_array[1] > 10) echo '<div title="" id="fr0111" class="fr0111" style="display: inline" tabindex="00111">frame 01 text 11</div>'; 
+   if ($frame_array[1] > 11) echo '<div title="" id="fr0112" class="fr0112" style="display: inline" tabindex="00112">frame 01 text 12</div>';
+   if ($frame_array[1] > 12) echo '<div title="" id="fr0113" class="fr0113" style="display: inline" tabindex="00113">frame 01 text 13</div>'; 
+   if ($frame_array[1] > 13) echo '<div title="" id="fr0114" class="fr0114" style="display: inline" tabindex="00114">frame 01 text 14</div>';
+   if ($frame_array[1] > 14) echo '<div title="" id="fr0115" class="fr0115" style="display: inline" tabindex="00115">frame 01 text 15</div>'; 
+   if ($frame_array[1] > 15) echo '<div title="" id="fr0116" class="fr0116" style="display: inline" tabindex="00116">frame 01 text 16</div>';
+
+   if ($frame_array[1] > 16) echo '<div title="" id="fr0117" class="fr0117" style="display: inline" tabindex="00117">frame 01 text 17</div>'; 
+   if ($frame_array[1] > 17) echo '<div title="" id="fr0118" class="fr0118" style="display: inline" tabindex="00118">frame 01 text 18</div>';
+   if ($frame_array[1] > 18) echo '<div title="" id="fr0119" class="fr0119" style="display: inline" tabindex="00119">frame 01 text 19</div>'; 
+   if ($frame_array[1] > 19) echo '<div title="" id="fr0120" class="fr0120" style="display: inline" tabindex="00120">frame 01 text 20</div>';
+   if ($frame_array[1] > 20) echo '<div title="" id="fr0121" class="fr0121" style="display: inline" tabindex="00121">frame 01 text 21</div>'; 
+   if ($frame_array[1] > 21) echo '<div title="" id="fr0122" class="fr0122" style="display: inline" tabindex="00122">frame 01 text 22</div>';
+   if ($frame_array[1] > 22) echo '<div title="" id="fr0123" class="fr0123" style="display: inline" tabindex="00123">frame 01 text 23</div>'; 
+   if ($frame_array[1] > 23) echo '<div title="" id="fr0124" class="fr0124" style="display: inline" tabindex="00124">frame 01 text 24</div>';
+
+   if ($frame_array[1] > 24) echo '<div title="" id="fr0125" class="fr0125" style="display: inline" tabindex="00125">frame 01 text 25</div>'; 
+   if ($frame_array[1] > 25) echo '<div title="" id="fr0126" class="fr0126" style="display: inline" tabindex="00126">frame 01 text 26</div>';
+   if ($frame_array[1] > 26) echo '<div title="" id="fr0127" class="fr0127" style="display: inline" tabindex="00127">frame 01 text 27</div>'; 
+   if ($frame_array[1] > 27) echo '<div title="" id="fr0128" class="fr0128" style="display: inline" tabindex="00128">frame 01 text 28</div>';
+   if ($frame_array[1] > 28) echo '<div title="" id="fr0129" class="fr0129" style="display: inline" tabindex="00129">frame 01 text 29</div>'; 
+   if ($frame_array[1] > 29) echo '<div title="" id="fr0130" class="fr0130" style="display: inline" tabindex="00130">frame 01 text 30</div>';
+   if ($frame_array[1] > 30) echo '<div title="" id="fr0131" class="fr0131" style="display: inline" tabindex="00131">frame 01 text 31</div>'; 
+   if ($frame_array[1] > 31) echo '<div title="" id="fr0132" class="fr0132" style="display: inline" tabindex="00132">frame 01 text 32</div>';
+
+   if ($frame_array[1] > 32) echo '<div title="" id="fr0133" class="fr0133" style="display: inline" tabindex="00133">frame 01 text 33</div>'; 
+   if ($frame_array[1] > 33) echo '<div title="" id="fr0134" class="fr0134" style="display: inline" tabindex="00134">frame 01 text 34</div>';
+   if ($frame_array[1] > 34) echo '<div title="" id="fr0135" class="fr0135" style="display: inline" tabindex="00135">frame 01 text 35</div>'; 
+   if ($frame_array[1] > 35) echo '<div title="" id="fr0136" class="fr0136" style="display: inline" tabindex="00136">frame 01 text 36</div>';
+   if ($frame_array[1] > 36) echo '<div title="" id="fr0137" class="fr0137" style="display: inline" tabindex="00137">frame 01 text 37</div>'; 
+   if ($frame_array[1] > 37) echo '<div title="" id="fr0138" class="fr0138" style="display: inline" tabindex="00138">frame 01 text 38</div>';
+   if ($frame_array[1] > 38) echo '<div title="" id="fr0139" class="fr0139" style="display: inline" tabindex="00139">frame 01 text 39</div>'; 
+   if ($frame_array[1] > 39) echo '<div title="" id="fr0140" class="fr0140" style="display: inline" tabindex="00140">frame 01 text 40</div>';
+
+   if ($frame_array[1] > 40) echo '<div title="" id="fr0141" class="fr0141" style="display: inline" tabindex="00141">frame 01 text 41</div>'; 
+   if ($frame_array[1] > 41) echo '<div title="" id="fr0142" class="fr0142" style="display: inline" tabindex="00142">frame 01 text 42</div>';
+   if ($frame_array[1] > 42) echo '<div title="" id="fr0143" class="fr0143" style="display: inline" tabindex="00143">frame 01 text 43</div>'; 
+   if ($frame_array[1] > 43) echo '<div title="" id="fr0144" class="fr0144" style="display: inline" tabindex="00144">frame 01 text 44</div>';
+   if ($frame_array[1] > 44) echo '<div title="" id="fr0145" class="fr0145" style="display: inline" tabindex="00145">frame 01 text 45</div>'; 
+   if ($frame_array[1] > 45) echo '<div title="" id="fr0146" class="fr0146" style="display: inline" tabindex="00146">frame 01 text 46</div>';
+   if ($frame_array[1] > 46) echo '<div title="" id="fr0147" class="fr0147" style="display: inline" tabindex="00147">frame 01 text 47</div>'; 
+   if ($frame_array[1] > 47) echo '<div title="" id="fr0148" class="fr0148" style="display: inline" tabindex="00148">frame 01 text 48</div>';
+
+   // frame 02
+   if ($frame_array[2] > 0) echo '<div title="" id="fr0201" class="fr0201" style="display: inline" tabindex="00201">frame 02 text 01</div>'; 
+   if ($frame_array[2] > 1) echo '<div title="" id="fr0202" class="fr0202" style="display: inline" tabindex="00202">frame 02 text 02</div>';
+   if ($frame_array[2] > 2) echo '<div title="" id="fr0203" class="fr0203" style="display: inline" tabindex="00203">frame 02 text 03</div>'; 
+   if ($frame_array[2] > 3) echo '<div title="" id="fr0204" class="fr0204" style="display: inline" tabindex="00204">frame 02 text 04</div>';
+
+   if ($frame_array[3] > 0) echo '<div title="" id="fr0301" class="fr0301" style="display: inline" tabindex="00301">frame 03 text 01</div>'; 
+   if ($frame_array[3] > 1) echo '<div title="" id="fr0302" class="fr0302" style="display: inline" tabindex="00302">frame 03 text 02</div>';
+   if ($frame_array[3] > 2) echo '<div title="" id="fr0303" class="fr0303" style="display: inline" tabindex="00303">frame 03 text 03</div>'; 
+   if ($frame_array[3] > 3) echo '<div title="" id="fr0304" class="fr0304" style="display: inline" tabindex="00304">frame 03 text 04</div>';
+
+   if ($frame_array[4] > 0) echo '<div title="" id="fr0401" class="fr0401" style="display: inline" tabindex="00401">frame 04 text 01</div>'; 
+   if ($frame_array[4] > 1) echo '<div title="" id="fr0402" class="fr0402" style="display: inline" tabindex="00402">frame 04 text 02</div>';
+   if ($frame_array[4] > 2) echo '<div title="" id="fr0403" class="fr0403" style="display: inline" tabindex="00403">frame 04 text 03</div>'; 
+   if ($frame_array[4] > 3) echo '<div title="" id="fr0404" class="fr0404" style="display: inline" tabindex="00404">frame 04 text 04</div>';
+
+   if ($frame_array[5] > 0) echo '<div title="" id="fr0501" class="fr0501" style="display: inline" tabindex="00501">frame 05 text 01</div>'; 
+   if ($frame_array[5] > 1) echo '<div title="" id="fr0502" class="fr0502" style="display: inline" tabindex="00502">frame 05 text 02</div>';
+   if ($frame_array[5] > 2) echo '<div title="" id="fr0503" class="fr0503" style="display: inline" tabindex="00503">frame 05 text 03</div>'; 
+   if ($frame_array[5] > 3) echo '<div title="" id="fr0504" class="fr0504" style="display: inline" tabindex="00504">frame 05 text 04</div>';
+
+   if ($frame_array[6] > 0) echo '<div title="" id="fr0601" class="fr0601" style="display: inline" tabindex="00601">frame 06 text 01</div>'; 
+   if ($frame_array[6] > 1) echo '<div title="" id="fr0602" class="fr0602" style="display: inline" tabindex="00602">frame 06 text 02</div>';
+   if ($frame_array[6] > 2) echo '<div title="" id="fr0603" class="fr0603" style="display: inline" tabindex="00603">frame 06 text 03</div>'; 
+   if ($frame_array[6] > 3) echo '<div title="" id="fr0604" class="fr0604" style="display: inline" tabindex="00604">frame 06 text 04</div>';
+
+   if ($frame_array[7] > 0) echo '<div title="" id="fr0701" class="fr0701" style="display: inline" tabindex="00701">frame 07 text 01</div>'; 
+   if ($frame_array[7] > 1) echo '<div title="" id="fr0702" class="fr0702" style="display: inline" tabindex="00702">frame 07 text 02</div>';
+   if ($frame_array[7] > 2) echo '<div title="" id="fr0703" class="fr0703" style="display: inline" tabindex="00703">frame 07 text 03</div>'; 
+   if ($frame_array[7] > 3) echo '<div title="" id="fr0704" class="fr0704" style="display: inline" tabindex="00704">frame 07 text 04</div>';
+
+   if ($frame_array[8] > 0) echo '<div title="" id="fr0801" class="fr0801" style="display: inline" tabindex="00801">frame 08 text 01</div>'; 
+   if ($frame_array[8] > 1) echo '<div title="" id="fr0802" class="fr0802" style="display: inline" tabindex="00802">frame 08 text 02</div>';
+   if ($frame_array[8] > 2) echo '<div title="" id="fr0803" class="fr0803" style="display: inline" tabindex="00803">frame 08 text 03</div>'; 
+   if ($frame_array[8] > 3) echo '<div title="" id="fr0804" class="fr0804" style="display: inline" tabindex="00804">frame 08 text 04</div>';
+?>
+<!-->
+<!-- Upload form normally hidden behind 'Click here' message-->
+<p>
+<div onClick="javascript:toggleUploadForm()" tabindex="1090"><font size=2>[Click here to translate]</font></div>
+<div id="upload-form">
+<form action="" method="POST">
+<input type="text" name="u_languagecode" value='<?php
+   // probable_lang is first highest priority language tag from Accept-Language
+   echo $probable_lang;
+?>' tabindex="1091"></input> <a href="http://csi18n.mpsvr.com/index.php/Find_a_particular_IETF_language_tag%3F">language codes</a><br>
+<input type="text" name="u_username" value="test05" tabindex="1092"></input><br>
+<input type="password" name="u_password" value="test" tabindex="1093"></input><br>
+The username and password will work but other people can use them to change your translation.  <a href="https://service.mpsvr.com/">Join instead?</a><br>
+
+<?php
+   if ($frame_array[0] > 1) echo '<textarea rows=3 cols=30 id="ta_fr0002" name="ta_fr0002" tabindex="2002"></textarea><br><!--Title text-->';
+
+   if ($frame_array[1] >  0) echo '<textarea rows=3 cols=30 id="ta_fr0101" name="ta_fr0101" tabindex="2101"></textarea><br>';
+   if ($frame_array[1] >  1) echo '<textarea rows=3 cols=30 id="ta_fr0102" name="ta_fr0102" tabindex="2102"></textarea><br>';
+   if ($frame_array[1] >  2) echo '<textarea rows=3 cols=30 id="ta_fr0103" name="ta_fr0103" tabindex="2103"></textarea><br>';
+   if ($frame_array[1] >  3) echo '<textarea rows=3 cols=30 id="ta_fr0104" name="ta_fr0104" tabindex="2104"></textarea><br>';
+   if ($frame_array[1] >  4) echo '<textarea rows=3 cols=30 id="ta_fr0105" name="ta_fr0105" tabindex="2105"></textarea><br>';
+   if ($frame_array[1] >  5) echo '<textarea rows=3 cols=30 id="ta_fr0106" name="ta_fr0106" tabindex="2106"></textarea><br>';
+   if ($frame_array[1] >  6) echo '<textarea rows=3 cols=30 id="ta_fr0107" name="ta_fr0107" tabindex="2107"></textarea><br>';
+   if ($frame_array[1] >  7) echo '<textarea rows=3 cols=30 id="ta_fr0108" name="ta_fr0108" tabindex="2108"></textarea><br>';
+
+   if ($frame_array[1] >  8) echo '<textarea rows=3 cols=30 id="ta_fr0109" name="ta_fr0109" tabindex="2109"></textarea><br>';
+   if ($frame_array[1] >  9) echo '<textarea rows=3 cols=30 id="ta_fr0110" name="ta_fr0110" tabindex="2110"></textarea><br>';
+   if ($frame_array[1] > 10) echo '<textarea rows=3 cols=30 id="ta_fr0111" name="ta_fr0111" tabindex="2111"></textarea><br>';
+   if ($frame_array[1] > 11) echo '<textarea rows=3 cols=30 id="ta_fr0112" name="ta_fr0112" tabindex="2112"></textarea><br>';
+   if ($frame_array[1] > 12) echo '<textarea rows=3 cols=30 id="ta_fr0113" name="ta_fr0113" tabindex="2113"></textarea><br>';
+   if ($frame_array[1] > 13) echo '<textarea rows=3 cols=30 id="ta_fr0114" name="ta_fr0114" tabindex="2114"></textarea><br>';
+   if ($frame_array[1] > 14) echo '<textarea rows=3 cols=30 id="ta_fr0115" name="ta_fr0115" tabindex="2115"></textarea><br>';
+   if ($frame_array[1] > 15) echo '<textarea rows=3 cols=30 id="ta_fr0116" name="ta_fr0116" tabindex="2116"></textarea><br>';
+
+   if ($frame_array[1] > 16) echo '<textarea rows=3 cols=30 id="ta_fr0117" name="ta_fr0117" tabindex="2117"></textarea><br>';
+   if ($frame_array[1] > 17) echo '<textarea rows=3 cols=30 id="ta_fr0118" name="ta_fr0118" tabindex="2118"></textarea><br>';
+   if ($frame_array[1] > 18) echo '<textarea rows=3 cols=30 id="ta_fr0119" name="ta_fr0119" tabindex="2119"></textarea><br>';
+   if ($frame_array[1] > 19) echo '<textarea rows=3 cols=30 id="ta_fr0120" name="ta_fr0120" tabindex="2120"></textarea><br>';
+   if ($frame_array[1] > 20) echo '<textarea rows=3 cols=30 id="ta_fr0121" name="ta_fr0121" tabindex="2121"></textarea><br>';
+   if ($frame_array[1] > 21) echo '<textarea rows=3 cols=30 id="ta_fr0122" name="ta_fr0122" tabindex="2122"></textarea><br>';
+   if ($frame_array[1] > 22) echo '<textarea rows=3 cols=30 id="ta_fr0123" name="ta_fr0123" tabindex="2123"></textarea><br>';
+   if ($frame_array[1] > 23) echo '<textarea rows=3 cols=30 id="ta_fr0124" name="ta_fr0124" tabindex="2124"></textarea><br>';
+
+   if ($frame_array[1] > 24) echo '<textarea rows=3 cols=30 id="ta_fr0125" name="ta_fr0125" tabindex="2125"></textarea><br>';
+   if ($frame_array[1] > 25) echo '<textarea rows=3 cols=30 id="ta_fr0126" name="ta_fr0126" tabindex="2126"></textarea><br>';
+   if ($frame_array[1] > 26) echo '<textarea rows=3 cols=30 id="ta_fr0127" name="ta_fr0127" tabindex="2127"></textarea><br>';
+   if ($frame_array[1] > 27) echo '<textarea rows=3 cols=30 id="ta_fr0128" name="ta_fr0128" tabindex="2128"></textarea><br>';
+   if ($frame_array[1] > 28) echo '<textarea rows=3 cols=30 id="ta_fr0129" name="ta_fr0129" tabindex="2129"></textarea><br>';
+   if ($frame_array[1] > 29) echo '<textarea rows=3 cols=30 id="ta_fr0130" name="ta_fr0130" tabindex="2130"></textarea><br>';
+   if ($frame_array[1] > 30) echo '<textarea rows=3 cols=30 id="ta_fr0131" name="ta_fr0131" tabindex="2131"></textarea><br>';
+   if ($frame_array[1] > 31) echo '<textarea rows=3 cols=30 id="ta_fr0132" name="ta_fr0132" tabindex="2132"></textarea><br>';
+
+   if ($frame_array[1] > 32) echo '<textarea rows=3 cols=30 id="ta_fr0133" name="ta_fr0133" tabindex="2133"></textarea><br>';
+   if ($frame_array[1] > 33) echo '<textarea rows=3 cols=30 id="ta_fr0134" name="ta_fr0134" tabindex="2134"></textarea><br>';
+   if ($frame_array[1] > 34) echo '<textarea rows=3 cols=30 id="ta_fr0135" name="ta_fr0135" tabindex="2135"></textarea><br>';
+   if ($frame_array[1] > 35) echo '<textarea rows=3 cols=30 id="ta_fr0136" name="ta_fr0136" tabindex="2136"></textarea><br>';
+   if ($frame_array[1] > 36) echo '<textarea rows=3 cols=30 id="ta_fr0137" name="ta_fr0137" tabindex="2137"></textarea><br>';
+   if ($frame_array[1] > 37) echo '<textarea rows=3 cols=30 id="ta_fr0138" name="ta_fr0138" tabindex="2138"></textarea><br>';
+   if ($frame_array[1] > 38) echo '<textarea rows=3 cols=30 id="ta_fr0139" name="ta_fr0139" tabindex="2139"></textarea><br>';
+   if ($frame_array[1] > 39) echo '<textarea rows=3 cols=30 id="ta_fr0140" name="ta_fr0140" tabindex="2140"></textarea><br>';
+
+   if ($frame_array[1] > 40) echo '<textarea rows=3 cols=30 id="ta_fr0141" name="ta_fr0141" tabindex="2141"></textarea><br>';
+   if ($frame_array[1] > 41) echo '<textarea rows=3 cols=30 id="ta_fr0142" name="ta_fr0142" tabindex="2142"></textarea><br>';
+   if ($frame_array[1] > 42) echo '<textarea rows=3 cols=30 id="ta_fr0143" name="ta_fr0143" tabindex="2143"></textarea><br>';
+   if ($frame_array[1] > 43) echo '<textarea rows=3 cols=30 id="ta_fr0144" name="ta_fr0144" tabindex="2144"></textarea><br>';
+   if ($frame_array[1] > 44) echo '<textarea rows=3 cols=30 id="ta_fr0145" name="ta_fr0145" tabindex="2145"></textarea><br>';
+   if ($frame_array[1] > 45) echo '<textarea rows=3 cols=30 id="ta_fr0146" name="ta_fr0146" tabindex="2146"></textarea><br>';
+   if ($frame_array[1] > 46) echo '<textarea rows=3 cols=30 id="ta_fr0147" name="ta_fr0147" tabindex="2147"></textarea><br>';
+   if ($frame_array[1] > 47) echo '<textarea rows=3 cols=30 id="ta_fr0148" name="ta_fr0148" tabindex="2148"></textarea><br>';
+
+   // frame 02
+   if ($frame_array[2] > 0) echo '<textarea rows=3 cols=30 id="ta_fr0201" name="ta_fr0201" tabindex="2201"></textarea><br>';
+   if ($frame_array[2] > 1) echo '<textarea rows=3 cols=30 id="ta_fr0202" name="ta_fr0202" tabindex="2202"></textarea><br>';
+   if ($frame_array[2] > 2) echo '<textarea rows=3 cols=30 id="ta_fr0203" name="ta_fr0203" tabindex="2203"></textarea><br>';
+   if ($frame_array[2] > 3) echo '<textarea rows=3 cols=30 id="ta_fr0204" name="ta_fr0204" tabindex="2204"></textarea><br>';
+
+   if ($frame_array[3] > 0) echo '<textarea rows=3 cols=30 id="ta_fr0301" name="ta_fr0301" tabindex="2301"></textarea><br>';
+   if ($frame_array[3] > 1) echo '<textarea rows=3 cols=30 id="ta_fr0302" name="ta_fr0302" tabindex="2302"></textarea><br>';
+   if ($frame_array[3] > 2) echo '<textarea rows=3 cols=30 id="ta_fr0303" name="ta_fr0303" tabindex="2303"></textarea><br>';
+   if ($frame_array[3] > 3) echo '<textarea rows=3 cols=30 id="ta_fr0304" name="ta_fr0304" tabindex="2304"></textarea><br>';
+
+   if ($frame_array[4] > 0) echo '<textarea rows=3 cols=30 id="ta_fr0401" name="ta_fr0401" tabindex="2401"></textarea><br>';
+   if ($frame_array[4] > 1) echo '<textarea rows=3 cols=30 id="ta_fr0402" name="ta_fr0402" tabindex="2402"></textarea><br>';
+   if ($frame_array[4] > 2) echo '<textarea rows=3 cols=30 id="ta_fr0403" name="ta_fr0403" tabindex="2403"></textarea><br>';
+   if ($frame_array[4] > 3) echo '<textarea rows=3 cols=30 id="ta_fr0404" name="ta_fr0404" tabindex="2404"></textarea><br>';
+
+   if ($frame_array[5] > 0) echo '<textarea rows=3 cols=30 id="ta_fr0501" name="ta_fr0501" tabindex="2501"></textarea><br>';
+   if ($frame_array[5] > 1) echo '<textarea rows=3 cols=30 id="ta_fr0502" name="ta_fr0502" tabindex="2502"></textarea><br>';
+   if ($frame_array[5] > 2) echo '<textarea rows=3 cols=30 id="ta_fr0503" name="ta_fr0503" tabindex="2503"></textarea><br>';
+   if ($frame_array[5] > 3) echo '<textarea rows=3 cols=30 id="ta_fr0504" name="ta_fr0504" tabindex="2504"></textarea><br>';
+
+   if ($frame_array[6] > 0) echo '<textarea rows=3 cols=30 id="ta_fr0601" name="ta_fr0601" tabindex="2601"></textarea><br>';
+   if ($frame_array[6] > 1) echo '<textarea rows=3 cols=30 id="ta_fr0602" name="ta_fr0602" tabindex="2602"></textarea><br>';
+   if ($frame_array[6] > 2) echo '<textarea rows=3 cols=30 id="ta_fr0603" name="ta_fr0603" tabindex="2603"></textarea><br>';
+   if ($frame_array[6] > 3) echo '<textarea rows=3 cols=30 id="ta_fr0604" name="ta_fr0604" tabindex="2604"></textarea><br>';
+
+   if ($frame_array[7] > 0) echo '<textarea rows=3 cols=30 id="ta_fr0701" name="ta_fr0701" tabindex="2701"></textarea><br>';
+   if ($frame_array[7] > 1) echo '<textarea rows=3 cols=30 id="ta_fr0702" name="ta_fr0702" tabindex="2702"></textarea><br>';
+   if ($frame_array[7] > 2) echo '<textarea rows=3 cols=30 id="ta_fr0703" name="ta_fr0703" tabindex="2703"></textarea><br>';
+   if ($frame_array[7] > 3) echo '<textarea rows=3 cols=30 id="ta_fr0704" name="ta_fr0704" tabindex="2704"></textarea><br>';
+
+   if ($frame_array[8] > 0) echo '<textarea rows=3 cols=30 id="ta_fr0801" name="ta_fr0801" tabindex="2801"></textarea><br>';
+   if ($frame_array[8] > 1) echo '<textarea rows=3 cols=30 id="ta_fr0802" name="ta_fr0802" tabindex="2802"></textarea><br>';
+   if ($frame_array[8] > 2) echo '<textarea rows=3 cols=30 id="ta_fr0803" name="ta_fr0803" tabindex="2803"></textarea><br>';
+   if ($frame_array[8] > 3) echo '<textarea rows=3 cols=30 id="ta_fr0804" name="ta_fr0804" tabindex="2804"></textarea><br>';
+
+   // mouseover text deliberate after all else
+   if ($frame_array[0] > 0) echo '<textarea rows=3 cols=30 id="ta_fr0001" name="ta_fr0001" tabindex="9997"></textarea><br><!--mouseover text-->';
+?>
+<!-- 
+     If a space IS necessary as a translation, uncheck this. 
+     In order to be clickable the pages would then use a unicode space.
+-->
+<input type=checkbox name=ignore_blanks value=ignore checked tabindex="9998">Ignore blank entries<br>
+<input type=submit value=Upload  tabindex="9999">
+</form>
+</div>
+<!-->
+<!-- 
+     Fix the globe at top right. Also Add the service (globe) menu and translation menu. Hide both initially
+-->
+<div id="globe" class= "" style="position:fixed; right:0; top: 0;"><img onclick="javascript:toggleShowServiceMenu()" src='../translationglobe.png'></div>
+<div id="svc_menu" class="" style="display:none" ><a href="http://www.youtube.com/watch?v=CiGPTL8bnC4">Sandy White</a></div>
+<div id="trn_menu" class="" style="display:none" ><a href="http://www.gutenberg.org/cache/epub/74/pg74.txt">Mark Twain</a></div>
+<br>
+<br>
+<br>
+<!-- 
+     Link back to csi18n for those who know us not
+-->
+<?php
+   include_once('../linkback.php');
+?>
+<!--<a href="../csi18n_roll_your_own.php">Putting this on your own site</a><br>-->
+<!-->
+<!-- They_think_it's_all_over_1966.mp4 -->
+</body>
+</html>
