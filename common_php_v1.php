@@ -45,7 +45,7 @@ function post_a_new($un, $pw, $apikey, $root, $lang, $vis, $uplds_arr, $name, $o
   $newmark = $root . $name;
   $errno = $errstr = '';
   $repost = false;
-  $fp = fsockopen("tls://greenroom.mpsvr.com", 443, $errno, $errstr, 10);
+  $fp = fsockopen("tls://rest.mpsvr.com", 443, $errno, $errstr, 10);
   if (!$fp) {
     $error = true;
     //    echo "$errstr ($errno)<br />\n";
@@ -58,7 +58,7 @@ function post_a_new($un, $pw, $apikey, $root, $lang, $vis, $uplds_arr, $name, $o
     $x .= "\r\n\r\n";
 
     $out = "POST /newmarks/$thisPageBelongsToSID/$newmark HTTP/1.1\r\n";
-    $out .= "Host: greenroom.mpsvr.com\r\n";
+    $out .= "Host: rest.mpsvr.com\r\n";
     $out .= "X-APIKey: $apikey\r\n";
     $out .= "Authorization: Basic " . base64_encode("$un:$pw") . "\r\n";
     $out .= "Content-Type: application/json;v=1.0\r\n";
