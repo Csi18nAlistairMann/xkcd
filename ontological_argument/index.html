@@ -6,23 +6,16 @@
  Add per-xkcd styles here 
  Each <div> has an id of the form xlate_fr0101 for hanging css
  */
- div.fr0002 {
-  font-variant: small-caps;
-  font-family: Lucida,Helvetica,sans-serif;
-  font-size: 21px;
-  font-weight: 700;
-  line-height: 25px;
- }
 /*
  a.xlate_fr0101, a.xlate_fr0102 {
    color: #789922;
    background-color: #ffffff;
    font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
  }
-*/
  a {
-   font-family: sans;
+   font-family: xkcd-Regular;
  }
+*/
 </style>
 <!-->
 <!-- Per-xkcd JavaScript-->
@@ -210,7 +203,7 @@ function xkcdShowLines() {
 </map>
 
 <?php 
-   if ($frame_array[0] > 0) echo '<div title="" id="fr0001" class="" style="display: none; background-color: #ffffff" tabindex="0091">frame 00 text 01</div><!--mouseover text-->'; 
+   if ($frame_array[0] > 0) echo '<div title="" id="fr0001" class="fr0001" style="display: none; background-color: #ffffff" tabindex="0091">frame 00 text 01</div><!--mouseover text-->'; 
 ?>
 <!-->
 <!-->
@@ -218,99 +211,99 @@ function xkcdShowLines() {
 <font size=2>
 Attribution: <a href="http://xkcd.com/1505/">http://xkcd.com/1505/</a><br>
 XKCD example page 2015-mar-30<br><br>
-[ <a href="../ontological_argument">prev</a> | <a href="../">up</a> | <a href="../xkcloud">next</a> ]<br<!-->
+[ <a href="../opportunity">prev</a> | <a href="../">up</a> | <a href="../xkcloud">next</a> ]<br<!-->
 </font>
 <!-- Add divs for the speech bubbles. Only as per the frame_array declared in index.php -->
 <?php
-   if ($frame_array[1] >  0) echo '<div title="" id="fr0101" class="fr0101" style="display: inline" tabindex="00101">frame 01 text 01</div>'; 
-   if ($frame_array[1] >  1) echo '<div title="" id="fr0102" class="fr0102" style="display: inline" tabindex="00102">frame 01 text 02</div>';
-   if ($frame_array[1] >  2) echo '<div title="" id="fr0103" class="fr0103" style="display: inline" tabindex="00103">frame 01 text 03</div>'; 
-   if ($frame_array[1] >  3) echo '<div title="" id="fr0104" class="fr0104" style="display: inline" tabindex="00104">frame 01 text 04</div>';
-   if ($frame_array[1] >  4) echo '<div title="" id="fr0105" class="fr0105" style="display: inline" tabindex="00105">frame 01 text 05</div>'; 
-   if ($frame_array[1] >  5) echo '<div title="" id="fr0106" class="fr0106" style="display: inline" tabindex="00106">frame 01 text 06</div>';
-   if ($frame_array[1] >  6) echo '<div title="" id="fr0107" class="fr0107" style="display: inline" tabindex="00107">frame 01 text 07</div>'; 
-   if ($frame_array[1] >  7) echo '<div title="" id="fr0108" class="fr0108" style="display: inline" tabindex="00108">frame 01 text 08</div>';
+   if ($frame_array[1] >  0) echo '<div title="" id="fr0101" class="fr0101, xkcd_font" style="display: inline" tabindex="00101">frame 01 text 01</div>'; 
+   if ($frame_array[1] >  1) echo '<div title="" id="fr0102" class="fr0102, xkcd_font" style="display: inline" tabindex="00102">frame 01 text 02</div>';
+   if ($frame_array[1] >  2) echo '<div title="" id="fr0103" class="fr0103, xkcd_font" style="display: inline" tabindex="00103">frame 01 text 03</div>'; 
+   if ($frame_array[1] >  3) echo '<div title="" id="fr0104" class="fr0104, xkcd_font" style="display: inline" tabindex="00104">frame 01 text 04</div>';
+   if ($frame_array[1] >  4) echo '<div title="" id="fr0105" class="fr0105, xkcd_font" style="display: inline" tabindex="00105">frame 01 text 05</div>'; 
+   if ($frame_array[1] >  5) echo '<div title="" id="fr0106" class="fr0106, xkcd_font" style="display: inline" tabindex="00106">frame 01 text 06</div>';
+   if ($frame_array[1] >  6) echo '<div title="" id="fr0107" class="fr0107, xkcd_font" style="display: inline" tabindex="00107">frame 01 text 07</div>'; 
+   if ($frame_array[1] >  7) echo '<div title="" id="fr0108" class="fr0108, xkcd_font" style="display: inline" tabindex="00108">frame 01 text 08</div>';
 
-   if ($frame_array[1] >  8) echo '<div title="" id="fr0109" class="fr0109" style="display: inline" tabindex="00109">frame 01 text 09</div>'; 
-   if ($frame_array[1] >  9) echo '<div title="" id="fr0110" class="fr0110" style="display: inline" tabindex="00110">frame 01 text 10</div>';
-   if ($frame_array[1] > 10) echo '<div title="" id="fr0111" class="fr0111" style="display: inline" tabindex="00111">frame 01 text 11</div>'; 
-   if ($frame_array[1] > 11) echo '<div title="" id="fr0112" class="fr0112" style="display: inline" tabindex="00112">frame 01 text 12</div>';
-   if ($frame_array[1] > 12) echo '<div title="" id="fr0113" class="fr0113" style="display: inline" tabindex="00113">frame 01 text 13</div>'; 
-   if ($frame_array[1] > 13) echo '<div title="" id="fr0114" class="fr0114" style="display: inline" tabindex="00114">frame 01 text 14</div>';
-   if ($frame_array[1] > 14) echo '<div title="" id="fr0115" class="fr0115" style="display: inline" tabindex="00115">frame 01 text 15</div>'; 
-   if ($frame_array[1] > 15) echo '<div title="" id="fr0116" class="fr0116" style="display: inline" tabindex="00116">frame 01 text 16</div>';
+   if ($frame_array[1] >  8) echo '<div title="" id="fr0109" class="fr0109, xkcd_font" style="display: inline" tabindex="00109">frame 01 text 09</div>'; 
+   if ($frame_array[1] >  9) echo '<div title="" id="fr0110" class="fr0110, xkcd_font" style="display: inline" tabindex="00110">frame 01 text 10</div>';
+   if ($frame_array[1] > 10) echo '<div title="" id="fr0111" class="fr0111, xkcd_font" style="display: inline" tabindex="00111">frame 01 text 11</div>'; 
+   if ($frame_array[1] > 11) echo '<div title="" id="fr0112" class="fr0112, xkcd_font" style="display: inline" tabindex="00112">frame 01 text 12</div>';
+   if ($frame_array[1] > 12) echo '<div title="" id="fr0113" class="fr0113, xkcd_font" style="display: inline" tabindex="00113">frame 01 text 13</div>'; 
+   if ($frame_array[1] > 13) echo '<div title="" id="fr0114" class="fr0114, xkcd_font" style="display: inline" tabindex="00114">frame 01 text 14</div>';
+   if ($frame_array[1] > 14) echo '<div title="" id="fr0115" class="fr0115, xkcd_font" style="display: inline" tabindex="00115">frame 01 text 15</div>'; 
+   if ($frame_array[1] > 15) echo '<div title="" id="fr0116" class="fr0116, xkcd_font" style="display: inline" tabindex="00116">frame 01 text 16</div>';
 
-   if ($frame_array[1] > 16) echo '<div title="" id="fr0117" class="fr0117" style="display: inline" tabindex="00117">frame 01 text 17</div>'; 
-   if ($frame_array[1] > 17) echo '<div title="" id="fr0118" class="fr0118" style="display: inline" tabindex="00118">frame 01 text 18</div>';
-   if ($frame_array[1] > 18) echo '<div title="" id="fr0119" class="fr0119" style="display: inline" tabindex="00119">frame 01 text 19</div>'; 
-   if ($frame_array[1] > 19) echo '<div title="" id="fr0120" class="fr0120" style="display: inline" tabindex="00120">frame 01 text 20</div>';
-   if ($frame_array[1] > 20) echo '<div title="" id="fr0121" class="fr0121" style="display: inline" tabindex="00121">frame 01 text 21</div>'; 
-   if ($frame_array[1] > 21) echo '<div title="" id="fr0122" class="fr0122" style="display: inline" tabindex="00122">frame 01 text 22</div>';
-   if ($frame_array[1] > 22) echo '<div title="" id="fr0123" class="fr0123" style="display: inline" tabindex="00123">frame 01 text 23</div>'; 
-   if ($frame_array[1] > 23) echo '<div title="" id="fr0124" class="fr0124" style="display: inline" tabindex="00124">frame 01 text 24</div>';
+   if ($frame_array[1] > 16) echo '<div title="" id="fr0117" class="fr0117, xkcd_font" style="display: inline" tabindex="00117">frame 01 text 17</div>'; 
+   if ($frame_array[1] > 17) echo '<div title="" id="fr0118" class="fr0118, xkcd_font" style="display: inline" tabindex="00118">frame 01 text 18</div>';
+   if ($frame_array[1] > 18) echo '<div title="" id="fr0119" class="fr0119, xkcd_font" style="display: inline" tabindex="00119">frame 01 text 19</div>'; 
+   if ($frame_array[1] > 19) echo '<div title="" id="fr0120" class="fr0120, xkcd_font" style="display: inline" tabindex="00120">frame 01 text 20</div>';
+   if ($frame_array[1] > 20) echo '<div title="" id="fr0121" class="fr0121, xkcd_font" style="display: inline" tabindex="00121">frame 01 text 21</div>'; 
+   if ($frame_array[1] > 21) echo '<div title="" id="fr0122" class="fr0122, xkcd_font" style="display: inline" tabindex="00122">frame 01 text 22</div>';
+   if ($frame_array[1] > 22) echo '<div title="" id="fr0123" class="fr0123, xkcd_font" style="display: inline" tabindex="00123">frame 01 text 23</div>'; 
+   if ($frame_array[1] > 23) echo '<div title="" id="fr0124" class="fr0124, xkcd_font" style="display: inline" tabindex="00124">frame 01 text 24</div>';
 
-   if ($frame_array[1] > 24) echo '<div title="" id="fr0125" class="fr0125" style="display: inline" tabindex="00125">frame 01 text 25</div>'; 
-   if ($frame_array[1] > 25) echo '<div title="" id="fr0126" class="fr0126" style="display: inline" tabindex="00126">frame 01 text 26</div>';
-   if ($frame_array[1] > 26) echo '<div title="" id="fr0127" class="fr0127" style="display: inline" tabindex="00127">frame 01 text 27</div>'; 
-   if ($frame_array[1] > 27) echo '<div title="" id="fr0128" class="fr0128" style="display: inline" tabindex="00128">frame 01 text 28</div>';
-   if ($frame_array[1] > 28) echo '<div title="" id="fr0129" class="fr0129" style="display: inline" tabindex="00129">frame 01 text 29</div>'; 
-   if ($frame_array[1] > 29) echo '<div title="" id="fr0130" class="fr0130" style="display: inline" tabindex="00130">frame 01 text 30</div>';
-   if ($frame_array[1] > 30) echo '<div title="" id="fr0131" class="fr0131" style="display: inline" tabindex="00131">frame 01 text 31</div>'; 
-   if ($frame_array[1] > 31) echo '<div title="" id="fr0132" class="fr0132" style="display: inline" tabindex="00132">frame 01 text 32</div>';
+   if ($frame_array[1] > 24) echo '<div title="" id="fr0125" class="fr0125, xkcd_font" style="display: inline" tabindex="00125">frame 01 text 25</div>'; 
+   if ($frame_array[1] > 25) echo '<div title="" id="fr0126" class="fr0126, xkcd_font" style="display: inline" tabindex="00126">frame 01 text 26</div>';
+   if ($frame_array[1] > 26) echo '<div title="" id="fr0127" class="fr0127, xkcd_font" style="display: inline" tabindex="00127">frame 01 text 27</div>'; 
+   if ($frame_array[1] > 27) echo '<div title="" id="fr0128" class="fr0128, xkcd_font" style="display: inline" tabindex="00128">frame 01 text 28</div>';
+   if ($frame_array[1] > 28) echo '<div title="" id="fr0129" class="fr0129, xkcd_font" style="display: inline" tabindex="00129">frame 01 text 29</div>'; 
+   if ($frame_array[1] > 29) echo '<div title="" id="fr0130" class="fr0130, xkcd_font" style="display: inline" tabindex="00130">frame 01 text 30</div>';
+   if ($frame_array[1] > 30) echo '<div title="" id="fr0131" class="fr0131, xkcd_font" style="display: inline" tabindex="00131">frame 01 text 31</div>'; 
+   if ($frame_array[1] > 31) echo '<div title="" id="fr0132" class="fr0132, xkcd_font" style="display: inline" tabindex="00132">frame 01 text 32</div>';
 
-   if ($frame_array[1] > 32) echo '<div title="" id="fr0133" class="fr0133" style="display: inline" tabindex="00133">frame 01 text 33</div>'; 
-   if ($frame_array[1] > 33) echo '<div title="" id="fr0134" class="fr0134" style="display: inline" tabindex="00134">frame 01 text 34</div>';
-   if ($frame_array[1] > 34) echo '<div title="" id="fr0135" class="fr0135" style="display: inline" tabindex="00135">frame 01 text 35</div>'; 
-   if ($frame_array[1] > 35) echo '<div title="" id="fr0136" class="fr0136" style="display: inline" tabindex="00136">frame 01 text 36</div>';
-   if ($frame_array[1] > 36) echo '<div title="" id="fr0137" class="fr0137" style="display: inline" tabindex="00137">frame 01 text 37</div>'; 
-   if ($frame_array[1] > 37) echo '<div title="" id="fr0138" class="fr0138" style="display: inline" tabindex="00138">frame 01 text 38</div>';
-   if ($frame_array[1] > 38) echo '<div title="" id="fr0139" class="fr0139" style="display: inline" tabindex="00139">frame 01 text 39</div>'; 
-   if ($frame_array[1] > 39) echo '<div title="" id="fr0140" class="fr0140" style="display: inline" tabindex="00140">frame 01 text 40</div>';
+   if ($frame_array[1] > 32) echo '<div title="" id="fr0133" class="fr0133, xkcd_font" style="display: inline" tabindex="00133">frame 01 text 33</div>'; 
+   if ($frame_array[1] > 33) echo '<div title="" id="fr0134" class="fr0134, xkcd_font" style="display: inline" tabindex="00134">frame 01 text 34</div>';
+   if ($frame_array[1] > 34) echo '<div title="" id="fr0135" class="fr0135, xkcd_font" style="display: inline" tabindex="00135">frame 01 text 35</div>'; 
+   if ($frame_array[1] > 35) echo '<div title="" id="fr0136" class="fr0136, xkcd_font" style="display: inline" tabindex="00136">frame 01 text 36</div>';
+   if ($frame_array[1] > 36) echo '<div title="" id="fr0137" class="fr0137, xkcd_font" style="display: inline" tabindex="00137">frame 01 text 37</div>'; 
+   if ($frame_array[1] > 37) echo '<div title="" id="fr0138" class="fr0138, xkcd_font" style="display: inline" tabindex="00138">frame 01 text 38</div>';
+   if ($frame_array[1] > 38) echo '<div title="" id="fr0139" class="fr0139, xkcd_font" style="display: inline" tabindex="00139">frame 01 text 39</div>'; 
+   if ($frame_array[1] > 39) echo '<div title="" id="fr0140" class="fr0140, xkcd_font" style="display: inline" tabindex="00140">frame 01 text 40</div>';
 
-   if ($frame_array[1] > 40) echo '<div title="" id="fr0141" class="fr0141" style="display: inline" tabindex="00141">frame 01 text 41</div>'; 
-   if ($frame_array[1] > 41) echo '<div title="" id="fr0142" class="fr0142" style="display: inline" tabindex="00142">frame 01 text 42</div>';
-   if ($frame_array[1] > 42) echo '<div title="" id="fr0143" class="fr0143" style="display: inline" tabindex="00143">frame 01 text 43</div>'; 
-   if ($frame_array[1] > 43) echo '<div title="" id="fr0144" class="fr0144" style="display: inline" tabindex="00144">frame 01 text 44</div>';
-   if ($frame_array[1] > 44) echo '<div title="" id="fr0145" class="fr0145" style="display: inline" tabindex="00145">frame 01 text 45</div>'; 
-   if ($frame_array[1] > 45) echo '<div title="" id="fr0146" class="fr0146" style="display: inline" tabindex="00146">frame 01 text 46</div>';
-   if ($frame_array[1] > 46) echo '<div title="" id="fr0147" class="fr0147" style="display: inline" tabindex="00147">frame 01 text 47</div>'; 
-   if ($frame_array[1] > 47) echo '<div title="" id="fr0148" class="fr0148" style="display: inline" tabindex="00148">frame 01 text 48</div>';
+   if ($frame_array[1] > 40) echo '<div title="" id="fr0141" class="fr0141, xkcd_font" style="display: inline" tabindex="00141">frame 01 text 41</div>'; 
+   if ($frame_array[1] > 41) echo '<div title="" id="fr0142" class="fr0142, xkcd_font" style="display: inline" tabindex="00142">frame 01 text 42</div>';
+   if ($frame_array[1] > 42) echo '<div title="" id="fr0143" class="fr0143, xkcd_font" style="display: inline" tabindex="00143">frame 01 text 43</div>'; 
+   if ($frame_array[1] > 43) echo '<div title="" id="fr0144" class="fr0144, xkcd_font" style="display: inline" tabindex="00144">frame 01 text 44</div>';
+   if ($frame_array[1] > 44) echo '<div title="" id="fr0145" class="fr0145, xkcd_font" style="display: inline" tabindex="00145">frame 01 text 45</div>'; 
+   if ($frame_array[1] > 45) echo '<div title="" id="fr0146" class="fr0146, xkcd_font" style="display: inline" tabindex="00146">frame 01 text 46</div>';
+   if ($frame_array[1] > 46) echo '<div title="" id="fr0147" class="fr0147, xkcd_font" style="display: inline" tabindex="00147">frame 01 text 47</div>'; 
+   if ($frame_array[1] > 47) echo '<div title="" id="fr0148" class="fr0148, xkcd_font" style="display: inline" tabindex="00148">frame 01 text 48</div>';
 
    // frame 02
-   if ($frame_array[2] > 0) echo '<div title="" id="fr0201" class="fr0201" style="display: inline" tabindex="00201">frame 02 text 01</div>'; 
-   if ($frame_array[2] > 1) echo '<div title="" id="fr0202" class="fr0202" style="display: inline" tabindex="00202">frame 02 text 02</div>';
-   if ($frame_array[2] > 2) echo '<div title="" id="fr0203" class="fr0203" style="display: inline" tabindex="00203">frame 02 text 03</div>'; 
-   if ($frame_array[2] > 3) echo '<div title="" id="fr0204" class="fr0204" style="display: inline" tabindex="00204">frame 02 text 04</div>';
+   if ($frame_array[2] > 0) echo '<div title="" id="fr0201" class="fr0201, xkcd_font" style="display: inline" tabindex="00201">frame 02 text 01</div>'; 
+   if ($frame_array[2] > 1) echo '<div title="" id="fr0202" class="fr0202, xkcd_font" style="display: inline" tabindex="00202">frame 02 text 02</div>';
+   if ($frame_array[2] > 2) echo '<div title="" id="fr0203" class="fr0203, xkcd_font" style="display: inline" tabindex="00203">frame 02 text 03</div>'; 
+   if ($frame_array[2] > 3) echo '<div title="" id="fr0204" class="fr0204, xkcd_font" style="display: inline" tabindex="00204">frame 02 text 04</div>';
 
-   if ($frame_array[3] > 0) echo '<div title="" id="fr0301" class="fr0301" style="display: inline" tabindex="00301">frame 03 text 01</div>'; 
-   if ($frame_array[3] > 1) echo '<div title="" id="fr0302" class="fr0302" style="display: inline" tabindex="00302">frame 03 text 02</div>';
-   if ($frame_array[3] > 2) echo '<div title="" id="fr0303" class="fr0303" style="display: inline" tabindex="00303">frame 03 text 03</div>'; 
-   if ($frame_array[3] > 3) echo '<div title="" id="fr0304" class="fr0304" style="display: inline" tabindex="00304">frame 03 text 04</div>';
+   if ($frame_array[3] > 0) echo '<div title="" id="fr0301" class="fr0301, xkcd_font" style="display: inline" tabindex="00301">frame 03 text 01</div>'; 
+   if ($frame_array[3] > 1) echo '<div title="" id="fr0302" class="fr0302, xkcd_font" style="display: inline" tabindex="00302">frame 03 text 02</div>';
+   if ($frame_array[3] > 2) echo '<div title="" id="fr0303" class="fr0303, xkcd_font" style="display: inline" tabindex="00303">frame 03 text 03</div>'; 
+   if ($frame_array[3] > 3) echo '<div title="" id="fr0304" class="fr0304, xkcd_font" style="display: inline" tabindex="00304">frame 03 text 04</div>';
 
-   if ($frame_array[4] > 0) echo '<div title="" id="fr0401" class="fr0401" style="display: inline" tabindex="00401">frame 04 text 01</div>'; 
-   if ($frame_array[4] > 1) echo '<div title="" id="fr0402" class="fr0402" style="display: inline" tabindex="00402">frame 04 text 02</div>';
-   if ($frame_array[4] > 2) echo '<div title="" id="fr0403" class="fr0403" style="display: inline" tabindex="00403">frame 04 text 03</div>'; 
-   if ($frame_array[4] > 3) echo '<div title="" id="fr0404" class="fr0404" style="display: inline" tabindex="00404">frame 04 text 04</div>';
+   if ($frame_array[4] > 0) echo '<div title="" id="fr0401" class="fr0401, xkcd_font" style="display: inline" tabindex="00401">frame 04 text 01</div>'; 
+   if ($frame_array[4] > 1) echo '<div title="" id="fr0402" class="fr0402, xkcd_font" style="display: inline" tabindex="00402">frame 04 text 02</div>';
+   if ($frame_array[4] > 2) echo '<div title="" id="fr0403" class="fr0403, xkcd_font" style="display: inline" tabindex="00403">frame 04 text 03</div>'; 
+   if ($frame_array[4] > 3) echo '<div title="" id="fr0404" class="fr0404, xkcd_font" style="display: inline" tabindex="00404">frame 04 text 04</div>';
 
-   if ($frame_array[5] > 0) echo '<div title="" id="fr0501" class="fr0501" style="display: inline" tabindex="00501">frame 05 text 01</div>'; 
-   if ($frame_array[5] > 1) echo '<div title="" id="fr0502" class="fr0502" style="display: inline" tabindex="00502">frame 05 text 02</div>';
-   if ($frame_array[5] > 2) echo '<div title="" id="fr0503" class="fr0503" style="display: inline" tabindex="00503">frame 05 text 03</div>'; 
-   if ($frame_array[5] > 3) echo '<div title="" id="fr0504" class="fr0504" style="display: inline" tabindex="00504">frame 05 text 04</div>';
+   if ($frame_array[5] > 0) echo '<div title="" id="fr0501" class="fr0501, xkcd_font" style="display: inline" tabindex="00501">frame 05 text 01</div>'; 
+   if ($frame_array[5] > 1) echo '<div title="" id="fr0502" class="fr0502, xkcd_font" style="display: inline" tabindex="00502">frame 05 text 02</div>';
+   if ($frame_array[5] > 2) echo '<div title="" id="fr0503" class="fr0503, xkcd_font" style="display: inline" tabindex="00503">frame 05 text 03</div>'; 
+   if ($frame_array[5] > 3) echo '<div title="" id="fr0504" class="fr0504, xkcd_font" style="display: inline" tabindex="00504">frame 05 text 04</div>';
 
-   if ($frame_array[6] > 0) echo '<div title="" id="fr0601" class="fr0601" style="display: inline" tabindex="00601">frame 06 text 01</div>'; 
-   if ($frame_array[6] > 1) echo '<div title="" id="fr0602" class="fr0602" style="display: inline" tabindex="00602">frame 06 text 02</div>';
-   if ($frame_array[6] > 2) echo '<div title="" id="fr0603" class="fr0603" style="display: inline" tabindex="00603">frame 06 text 03</div>'; 
-   if ($frame_array[6] > 3) echo '<div title="" id="fr0604" class="fr0604" style="display: inline" tabindex="00604">frame 06 text 04</div>';
+   if ($frame_array[6] > 0) echo '<div title="" id="fr0601" class="fr0601, xkcd_font" style="display: inline" tabindex="00601">frame 06 text 01</div>'; 
+   if ($frame_array[6] > 1) echo '<div title="" id="fr0602" class="fr0602, xkcd_font" style="display: inline" tabindex="00602">frame 06 text 02</div>';
+   if ($frame_array[6] > 2) echo '<div title="" id="fr0603" class="fr0603, xkcd_font" style="display: inline" tabindex="00603">frame 06 text 03</div>'; 
+   if ($frame_array[6] > 3) echo '<div title="" id="fr0604" class="fr0604, xkcd_font" style="display: inline" tabindex="00604">frame 06 text 04</div>';
 
-   if ($frame_array[7] > 0) echo '<div title="" id="fr0701" class="fr0701" style="display: inline" tabindex="00701">frame 07 text 01</div>'; 
-   if ($frame_array[7] > 1) echo '<div title="" id="fr0702" class="fr0702" style="display: inline" tabindex="00702">frame 07 text 02</div>';
-   if ($frame_array[7] > 2) echo '<div title="" id="fr0703" class="fr0703" style="display: inline" tabindex="00703">frame 07 text 03</div>'; 
-   if ($frame_array[7] > 3) echo '<div title="" id="fr0704" class="fr0704" style="display: inline" tabindex="00704">frame 07 text 04</div>';
+   if ($frame_array[7] > 0) echo '<div title="" id="fr0701" class="fr0701, xkcd_font" style="display: inline" tabindex="00701">frame 07 text 01</div>'; 
+   if ($frame_array[7] > 1) echo '<div title="" id="fr0702" class="fr0702, xkcd_font" style="display: inline" tabindex="00702">frame 07 text 02</div>';
+   if ($frame_array[7] > 2) echo '<div title="" id="fr0703" class="fr0703, xkcd_font" style="display: inline" tabindex="00703">frame 07 text 03</div>'; 
+   if ($frame_array[7] > 3) echo '<div title="" id="fr0704" class="fr0704, xkcd_font" style="display: inline" tabindex="00704">frame 07 text 04</div>';
 
-   if ($frame_array[8] > 0) echo '<div title="" id="fr0801" class="fr0801" style="display: inline" tabindex="00801">frame 08 text 01</div>'; 
-   if ($frame_array[8] > 1) echo '<div title="" id="fr0802" class="fr0802" style="display: inline" tabindex="00802">frame 08 text 02</div>';
-   if ($frame_array[8] > 2) echo '<div title="" id="fr0803" class="fr0803" style="display: inline" tabindex="00803">frame 08 text 03</div>'; 
-   if ($frame_array[8] > 3) echo '<div title="" id="fr0804" class="fr0804" style="display: inline" tabindex="00804">frame 08 text 04</div>';
+   if ($frame_array[8] > 0) echo '<div title="" id="fr0801" class="fr0801, xkcd_font" style="display: inline" tabindex="00801">frame 08 text 01</div>'; 
+   if ($frame_array[8] > 1) echo '<div title="" id="fr0802" class="fr0802, xkcd_font" style="display: inline" tabindex="00802">frame 08 text 02</div>';
+   if ($frame_array[8] > 2) echo '<div title="" id="fr0803" class="fr0803, xkcd_font" style="display: inline" tabindex="00803">frame 08 text 03</div>'; 
+   if ($frame_array[8] > 3) echo '<div title="" id="fr0804" class="fr0804, xkcd_font" style="display: inline" tabindex="00804">frame 08 text 04</div>';
 ?>
 <!-->
 <!-- Upload form normally hidden behind 'Click here' message-->

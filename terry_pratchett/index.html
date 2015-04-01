@@ -15,10 +15,10 @@
    background-color: #ffffff;
    font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
  }
-*/
  a {
    font-family: sans;
  }
+*/
 </style>
 <!-->
 <!-- Per-xkcd JavaScript-->
@@ -207,7 +207,7 @@ function xkcdShowLines() {
 </map>
 
 <?php 
-   if ($frame_array[0] > 0) echo '<div id="fr0001" class="" style="display: none; background-color: #ffffff" tabindex="0091">frame 00 text 01</div><!--mouseover text-->'; 
+   if ($frame_array[0] > 0) echo '<div title="" id="fr0001" class="fr0001" style="display: none; background-color: #ffffff" tabindex="0091">frame 00 text 01</div><!--mouseover text-->'; 
 ?>
 <!-->
 <!-->
@@ -306,7 +306,7 @@ XKCD example page retrieved 2015-mar-13<br><br>
    if ($frame_array[8] > 0) echo '<div id="fr0801" class="" style="display: inline" tabindex="00801">frame 08 text 01</div>'; 
    if ($frame_array[8] > 1) echo '<div id="fr0802" class="" style="display: inline" tabindex="00802">frame 08 text 02</div>';
    if ($frame_array[8] > 2) echo '<div id="fr0803" class="" style="display: inline" tabindex="00803">frame 08 text 03</div>'; 
-   if ($frame_array[8] > 3) echo '<div id="fr0804" class="" style="display: inline" tabindex="00804">frame 08 text 04</div>';
+if ($frame_array[8] > 3) echo '<div id="fr0804" class="" style="display: inline" tabindex="00804">frame 08 text 04</div>';
 ?>
 <!-->
 <!-- Upload form normally hidden behind 'Click here' message-->
