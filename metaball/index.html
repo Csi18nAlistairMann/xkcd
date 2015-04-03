@@ -1,4 +1,4 @@
-<!-- xkcloud -->
+<!-- metaball -->
 <!-->
 <!-- Per-xkcd CSS Styles-->
 <style>
@@ -46,7 +46,7 @@ function xkcdShow(vsid, usid, lang, $w, $h, crids) {
  COUNT = 0;      // index to number of text elements in this frame
  CRID_NAME = 0;  // index to the branch crid_name of the element, such as 'fr0307'
  CRID = 1;       // index to the numeric CRID of the entry: /xlates/user/newmark/language/visibility/CRID
- var n = "xkcd-xkcloud-"; // root of the newmark to which the branch name is appended
+ var n = "xkcd-metaball-"; // root of the newmark to which the branch name is appended
 
  var frame = 0;
  // fr0001 normally holds the mouseover text
@@ -124,16 +124,16 @@ function xkcdShow(vsid, usid, lang, $w, $h, crids) {
 
  frame = 3;
  // fr0301
- if (crids[frame][COUNT] >  0) createDialog_v3("TL ", 386,    5,  36, "11", crids[frame][ 1][CRID_NAME], crids[frame][ 1][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 1][CRID_NAME]);
+ if (crids[frame][COUNT] >  0) createDialog_v3("BR ", 548,  206,  83, "35", crids[frame][ 1][CRID_NAME], crids[frame][ 1][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 1][CRID_NAME]);
  if (crids[frame][COUNT] >  1) createDialog_v3("BL ", 380,   84, 167, "11", crids[frame][ 2][CRID_NAME], crids[frame][ 2][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 2][CRID_NAME]);
  if (crids[frame][COUNT] >  2) createDialog_v3("BR ", 549,  145, 141, "11", crids[frame][ 3][CRID_NAME], crids[frame][ 3][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 3][CRID_NAME]);
  if (crids[frame][COUNT] >  3) createDialog_v3("BLC",  25,  211, 230, "11", crids[frame][ 4][CRID_NAME], crids[frame][ 4][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 4][CRID_NAME]);
 
  frame = 4;
  // fr0401
- if (crids[frame][COUNT] >  0) createDialog_v3("TL ", 568,    6, 165, "11", crids[frame][ 1][CRID_NAME], crids[frame][ 1][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 1][CRID_NAME]);
- if (crids[frame][COUNT] >  1) createDialog_v3("BL ", 566,   84, 168, "11", crids[frame][ 2][CRID_NAME], crids[frame][ 2][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 2][CRID_NAME]);
- if (crids[frame][COUNT] >  2) createDialog_v3("BR ", 735,  107, 150, "11", crids[frame][ 3][CRID_NAME], crids[frame][ 3][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 3][CRID_NAME]);
+ if (crids[frame][COUNT] >  0) createDialog_v3("BL ", 567,   30, 167, "13", crids[frame][ 1][CRID_NAME], crids[frame][ 1][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 1][CRID_NAME]);
+ if (crids[frame][COUNT] >  1) createDialog_v3("BL ", 608,  110, 129, "13", crids[frame][ 2][CRID_NAME], crids[frame][ 2][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 2][CRID_NAME]);
+ if (crids[frame][COUNT] >  2) createDialog_v3("BL ", 565,  139,  81, "13", crids[frame][ 3][CRID_NAME], crids[frame][ 3][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 3][CRID_NAME]);
  if (crids[frame][COUNT] >  3) createDialog_v3("TL ", 564,  114, 145, "11", crids[frame][ 4][CRID_NAME], crids[frame][ 4][CRID], $w, $h, "", vsid, usid, lang, n + crids[frame][ 4][CRID_NAME]);
 
  frame = 5;
@@ -195,7 +195,7 @@ function xkcdShowLines() {
 ?>
 <div id="tochterAusElysium" style="position: absolute; background: #BBBBBB; font-size:10px; width: <?php echo $container_width; ?>px; height:<?php echo $container_height; ?>px; font-family:sans;"> 
 
-<img src="http://i.imgur.com/Huejpag.png" alt="" usemap="#TupacVsThomasTheTankEngine" ><br>
+<img src="http://i.imgur.com/3zyiF4t.png" alt="" usemap="#TupacVsThomasTheTankEngine" ><br>
 <map name="TupacVsThomasTheTankEngine">
   <!-- 
        The area map is used to reveal a div containing the img title text RM uses as an easter egg. 
@@ -203,7 +203,7 @@ function xkcdShowLines() {
     -->
   <!-- coords generated at http://www.image-maps.com/ -->
 <!--  <area alt="" title="" shape="rect" coords="697,723,699,725" onMouseOver="showWhatWasImgTitle()"/>-->
-  <area alt="" title="hello world" shape="rect" coords="126,615,570,703" onClick="location.href='https://xkcd.com/1506';"/>
+  <area alt="" title="hello world" shape="poly" coords="502,98,515,90,544,92,551,98,544,110,537,132,513,135,512,115" onMouseOver="showWhatWasImgTitle()"/>
 </map>
 
 <?php 
@@ -213,9 +213,9 @@ function xkcdShowLines() {
 <!-->
 <!-- Attribution, data and navigator -->
 <font size=2>
-Attribution: <a href="http://xkcd.com/1506/">http://xkcd.com/1506/</a><br>
-XKCD example page 2015-apr-01<br><br>
-[ <a href="../ontological_argument">prev</a> | <a href="../">up</a> | <a href="../metaball">next</a> ]<br<!-->
+Attribution: <a href="http://xkcd.com/1507/">http://xkcd.com/1507/</a><br>
+XKCD example page 2015-apr-03<br><br>
+[ <a href="../xkcloud">prev</a> | <a href="../">up</a> | <!--<a href="../">next</a>--> ]<br<!-->
 </font>
 <!-- Add divs for the speech bubbles. Only as per the frame_array declared in index.php -->
 <?php
