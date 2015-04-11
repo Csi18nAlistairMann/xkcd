@@ -1,0 +1,1879 @@
+<!-->
+<!-- 
+     Plastic javascript common to all recent xkcds
+  -->
+<script type="text/javascript">
+//
+// Timeouts. A message may be shown as a result of an http action. 
+// These run from 100-Continue to 399 for succesful actions, and
+// 400-499 for client error and 500-599 for server errors. Show
+// successful message for shorter periods.
+var global_1xx2xx3xx_timeout = 400;
+var global_4xx5xx_timeout = 4000;
+
+///////////////////////////////////////////////////////////////////
+//
+// First off, keep together the code that depends on frames/balloons.
+// This makes it easier to expand the code to accomodate more
+// of either if necessary.
+//
+// The way code is now, even if the frames/balloons restriction 
+// changes within all examples save 'payloads', we shouldn't need to
+// touch the common javascript
+//
+//
+// Used by sendGet, put here to keep together code that depends on 
+// the frames/balloons restrictions
+function sendGet_SetNewmarkHandler(request, $el) {
+    if ($el == 'fr0001') { request.onload = newmark_fr0001;
+    } else if ($el == 'fr0002') { request.onload = newmark_fr0002;
+
+    } else if ($el == 'fr0101') { request.onload = newmark_fr0101;
+    } else if ($el == 'fr0102') { request.onload = newmark_fr0102;
+    } else if ($el == 'fr0103') { request.onload = newmark_fr0103;
+    } else if ($el == 'fr0104') { request.onload = newmark_fr0104;
+    } else if ($el == 'fr0105') { request.onload = newmark_fr0105;
+    } else if ($el == 'fr0106') { request.onload = newmark_fr0106;
+    } else if ($el == 'fr0107') { request.onload = newmark_fr0107;
+    } else if ($el == 'fr0108') { request.onload = newmark_fr0108;
+
+    } else if ($el == 'fr0109') { request.onload = newmark_fr0109;
+    } else if ($el == 'fr0110') { request.onload = newmark_fr0110;
+    } else if ($el == 'fr0111') { request.onload = newmark_fr0111;
+    } else if ($el == 'fr0112') { request.onload = newmark_fr0112;
+    } else if ($el == 'fr0113') { request.onload = newmark_fr0113;
+    } else if ($el == 'fr0114') { request.onload = newmark_fr0114;
+    } else if ($el == 'fr0115') { request.onload = newmark_fr0115;
+    } else if ($el == 'fr0116') { request.onload = newmark_fr0116;
+
+    } else if ($el == 'fr0117') { request.onload = newmark_fr0117;
+    } else if ($el == 'fr0118') { request.onload = newmark_fr0118;
+    } else if ($el == 'fr0119') { request.onload = newmark_fr0119;
+    } else if ($el == 'fr0120') { request.onload = newmark_fr0120;
+    } else if ($el == 'fr0121') { request.onload = newmark_fr0121;
+    } else if ($el == 'fr0122') { request.onload = newmark_fr0122;
+    } else if ($el == 'fr0123') { request.onload = newmark_fr0123;
+    } else if ($el == 'fr0124') { request.onload = newmark_fr0124;
+
+    } else if ($el == 'fr0125') { request.onload = newmark_fr0125;
+    } else if ($el == 'fr0126') { request.onload = newmark_fr0126;
+    } else if ($el == 'fr0127') { request.onload = newmark_fr0127;
+    } else if ($el == 'fr0128') { request.onload = newmark_fr0128;
+    } else if ($el == 'fr0129') { request.onload = newmark_fr0129;
+    } else if ($el == 'fr0130') { request.onload = newmark_fr0130;
+    } else if ($el == 'fr0131') { request.onload = newmark_fr0131;
+    } else if ($el == 'fr0132') { request.onload = newmark_fr0132;
+
+    } else if ($el == 'fr0133') { request.onload = newmark_fr0133;
+    } else if ($el == 'fr0134') { request.onload = newmark_fr0134;
+    } else if ($el == 'fr0135') { request.onload = newmark_fr0135;
+    } else if ($el == 'fr0136') { request.onload = newmark_fr0136;
+    } else if ($el == 'fr0137') { request.onload = newmark_fr0137;
+    } else if ($el == 'fr0138') { request.onload = newmark_fr0138;
+    } else if ($el == 'fr0139') { request.onload = newmark_fr0139;
+    } else if ($el == 'fr0140') { request.onload = newmark_fr0140;
+
+    } else if ($el == 'fr0141') { request.onload = newmark_fr0141;
+    } else if ($el == 'fr0142') { request.onload = newmark_fr0142;
+    } else if ($el == 'fr0143') { request.onload = newmark_fr0143;
+    } else if ($el == 'fr0144') { request.onload = newmark_fr0144;
+    } else if ($el == 'fr0145') { request.onload = newmark_fr0145;
+    } else if ($el == 'fr0146') { request.onload = newmark_fr0146;
+    } else if ($el == 'fr0147') { request.onload = newmark_fr0147;
+    } else if ($el == 'fr0148') { request.onload = newmark_fr0148;
+
+    } else if ($el == 'fr0149') { request.onload = newmark_fr0149;
+    } else if ($el == 'fr0150') { request.onload = newmark_fr0150;
+    } else if ($el == 'fr0151') { request.onload = newmark_fr0151;
+    } else if ($el == 'fr0152') { request.onload = newmark_fr0152;
+    } else if ($el == 'fr0153') { request.onload = newmark_fr0153;
+    } else if ($el == 'fr0154') { request.onload = newmark_fr0154;
+    } else if ($el == 'fr0155') { request.onload = newmark_fr0155;
+    } else if ($el == 'fr0156') { request.onload = newmark_fr0156;
+
+    } else if ($el == 'fr0157') { request.onload = newmark_fr0157;
+    } else if ($el == 'fr0158') { request.onload = newmark_fr0158;
+    } else if ($el == 'fr0159') { request.onload = newmark_fr0159;
+    } else if ($el == 'fr0160') { request.onload = newmark_fr0160;
+    } else if ($el == 'fr0161') { request.onload = newmark_fr0161;
+    } else if ($el == 'fr0162') { request.onload = newmark_fr0162;
+    } else if ($el == 'fr0163') { request.onload = newmark_fr0163;
+    } else if ($el == 'fr0164') { request.onload = newmark_fr0164;
+
+    } else if ($el == 'fr0165') { request.onload = newmark_fr0165;
+    } else if ($el == 'fr0166') { request.onload = newmark_fr0166;
+    } else if ($el == 'fr0167') { request.onload = newmark_fr0167;
+    } else if ($el == 'fr0168') { request.onload = newmark_fr0168;
+    } else if ($el == 'fr0169') { request.onload = newmark_fr0169;
+    } else if ($el == 'fr0170') { request.onload = newmark_fr0170;
+    } else if ($el == 'fr0171') { request.onload = newmark_fr0171;
+
+    } else if ($el == 'fr0201') { request.onload = newmark_fr0201;
+    } else if ($el == 'fr0202') { request.onload = newmark_fr0202;
+    } else if ($el == 'fr0203') { request.onload = newmark_fr0203;
+    } else if ($el == 'fr0204') { request.onload = newmark_fr0204;
+
+    } else if ($el == 'fr0301') { request.onload = newmark_fr0301;
+    } else if ($el == 'fr0302') { request.onload = newmark_fr0302;
+    } else if ($el == 'fr0303') { request.onload = newmark_fr0303;
+    } else if ($el == 'fr0304') { request.onload = newmark_fr0304;
+
+    } else if ($el == 'fr0401') { request.onload = newmark_fr0401;
+    } else if ($el == 'fr0402') { request.onload = newmark_fr0402;
+    } else if ($el == 'fr0403') { request.onload = newmark_fr0403;
+    } else if ($el == 'fr0404') { request.onload = newmark_fr0404;
+
+    } else if ($el == 'fr0501') { request.onload = newmark_fr0501;
+    } else if ($el == 'fr0502') { request.onload = newmark_fr0502;
+    } else if ($el == 'fr0503') { request.onload = newmark_fr0503;
+    } else if ($el == 'fr0504') { request.onload = newmark_fr0504;
+
+    } else if ($el == 'fr0601') { request.onload = newmark_fr0601;
+    } else if ($el == 'fr0602') { request.onload = newmark_fr0602;
+    } else if ($el == 'fr0603') { request.onload = newmark_fr0603;
+    } else if ($el == 'fr0604') { request.onload = newmark_fr0604;
+
+    } else if ($el == 'fr0701') { request.onload = newmark_fr0701;
+    } else if ($el == 'fr0702') { request.onload = newmark_fr0702;
+    } else if ($el == 'fr0703') { request.onload = newmark_fr0703;
+    } else if ($el == 'fr0704') { request.onload = newmark_fr0704;
+
+    } else if ($el == 'fr0801') { request.onload = newmark_fr0801;
+    } else if ($el == 'fr0802') { request.onload = newmark_fr0802;
+    } else if ($el == 'fr0803') { request.onload = newmark_fr0803;
+    } else if ($el == 'fr0804') { request.onload = newmark_fr0804;
+    }
+}
+
+function sendGet_SetXlateHandler(request, $el) {
+    if ($el == 'fr0001') { request.onload = xlate_fr0001;
+    } else if ($el == 'fr0002') { request.onload = xlate_fr0002;
+
+    } else if ($el == 'fr0101') { request.onload = xlate_fr0101;
+    } else if ($el == 'fr0102') { request.onload = xlate_fr0102;
+    } else if ($el == 'fr0103') { request.onload = xlate_fr0103;
+    } else if ($el == 'fr0104') { request.onload = xlate_fr0104;
+    } else if ($el == 'fr0105') { request.onload = xlate_fr0105;
+    } else if ($el == 'fr0106') { request.onload = xlate_fr0106;
+    } else if ($el == 'fr0107') { request.onload = xlate_fr0107;
+    } else if ($el == 'fr0108') { request.onload = xlate_fr0108;
+
+    } else if ($el == 'fr0109') { request.onload = xlate_fr0109;
+    } else if ($el == 'fr0110') { request.onload = xlate_fr0110;
+    } else if ($el == 'fr0111') { request.onload = xlate_fr0111;
+    } else if ($el == 'fr0112') { request.onload = xlate_fr0112;
+    } else if ($el == 'fr0113') { request.onload = xlate_fr0113;
+    } else if ($el == 'fr0114') { request.onload = xlate_fr0114;
+    } else if ($el == 'fr0115') { request.onload = xlate_fr0115;
+    } else if ($el == 'fr0116') { request.onload = xlate_fr0116;
+
+    } else if ($el == 'fr0117') { request.onload = xlate_fr0117;
+    } else if ($el == 'fr0118') { request.onload = xlate_fr0118;
+    } else if ($el == 'fr0119') { request.onload = xlate_fr0119;
+    } else if ($el == 'fr0120') { request.onload = xlate_fr0120;
+    } else if ($el == 'fr0121') { request.onload = xlate_fr0121;
+    } else if ($el == 'fr0122') { request.onload = xlate_fr0122;
+    } else if ($el == 'fr0123') { request.onload = xlate_fr0123;
+    } else if ($el == 'fr0124') { request.onload = xlate_fr0124;
+
+    } else if ($el == 'fr0125') { request.onload = xlate_fr0125;
+    } else if ($el == 'fr0126') { request.onload = xlate_fr0126;
+    } else if ($el == 'fr0127') { request.onload = xlate_fr0127;
+    } else if ($el == 'fr0128') { request.onload = xlate_fr0128;
+    } else if ($el == 'fr0129') { request.onload = xlate_fr0129;
+    } else if ($el == 'fr0130') { request.onload = xlate_fr0130;
+    } else if ($el == 'fr0131') { request.onload = xlate_fr0131;
+    } else if ($el == 'fr0132') { request.onload = xlate_fr0132;
+
+    } else if ($el == 'fr0133') { request.onload = xlate_fr0133;
+    } else if ($el == 'fr0134') { request.onload = xlate_fr0134;
+    } else if ($el == 'fr0135') { request.onload = xlate_fr0135;
+    } else if ($el == 'fr0136') { request.onload = xlate_fr0136;
+    } else if ($el == 'fr0137') { request.onload = xlate_fr0137;
+    } else if ($el == 'fr0138') { request.onload = xlate_fr0138;
+    } else if ($el == 'fr0139') { request.onload = xlate_fr0139;
+    } else if ($el == 'fr0140') { request.onload = xlate_fr0140;
+
+    } else if ($el == 'fr0141') { request.onload = xlate_fr0141;
+    } else if ($el == 'fr0142') { request.onload = xlate_fr0142;
+    } else if ($el == 'fr0143') { request.onload = xlate_fr0143;
+    } else if ($el == 'fr0144') { request.onload = xlate_fr0144;
+    } else if ($el == 'fr0145') { request.onload = xlate_fr0145;
+    } else if ($el == 'fr0146') { request.onload = xlate_fr0146;
+    } else if ($el == 'fr0147') { request.onload = xlate_fr0147;
+    } else if ($el == 'fr0148') { request.onload = xlate_fr0148;
+
+    } else if ($el == 'fr0149') { request.onload = xlate_fr0149;
+    } else if ($el == 'fr0150') { request.onload = xlate_fr0150;
+    } else if ($el == 'fr0151') { request.onload = xlate_fr0151;
+    } else if ($el == 'fr0152') { request.onload = xlate_fr0152;
+    } else if ($el == 'fr0153') { request.onload = xlate_fr0153;
+    } else if ($el == 'fr0154') { request.onload = xlate_fr0154;
+    } else if ($el == 'fr0155') { request.onload = xlate_fr0155;
+    } else if ($el == 'fr0156') { request.onload = xlate_fr0156;
+
+    } else if ($el == 'fr0157') { request.onload = xlate_fr0157;
+    } else if ($el == 'fr0158') { request.onload = xlate_fr0158;
+    } else if ($el == 'fr0159') { request.onload = xlate_fr0159;
+    } else if ($el == 'fr0160') { request.onload = xlate_fr0160;
+    } else if ($el == 'fr0161') { request.onload = xlate_fr0161;
+    } else if ($el == 'fr0162') { request.onload = xlate_fr0162;
+    } else if ($el == 'fr0163') { request.onload = xlate_fr0163;
+    } else if ($el == 'fr0164') { request.onload = xlate_fr0164;
+
+    } else if ($el == 'fr0165') { request.onload = xlate_fr0165;
+    } else if ($el == 'fr0166') { request.onload = xlate_fr0166;
+    } else if ($el == 'fr0167') { request.onload = xlate_fr0167;
+    } else if ($el == 'fr0168') { request.onload = xlate_fr0168;
+    } else if ($el == 'fr0169') { request.onload = xlate_fr0169;
+    } else if ($el == 'fr0170') { request.onload = xlate_fr0170;
+    } else if ($el == 'fr0171') { request.onload = xlate_fr0171;
+    } else if ($el == 'fr0172') { request.onload = xlate_fr0172;
+
+    } else if ($el == 'fr0201') { request.onload = xlate_fr0201;
+    } else if ($el == 'fr0202') { request.onload = xlate_fr0202;
+    } else if ($el == 'fr0203') { request.onload = xlate_fr0203;
+    } else if ($el == 'fr0204') { request.onload = xlate_fr0204;
+
+    } else if ($el == 'fr0301') { request.onload = xlate_fr0301;
+    } else if ($el == 'fr0302') { request.onload = xlate_fr0302;
+    } else if ($el == 'fr0303') { request.onload = xlate_fr0303;
+    } else if ($el == 'fr0304') { request.onload = xlate_fr0304;
+
+    } else if ($el == 'fr0401') { request.onload = xlate_fr0401;
+    } else if ($el == 'fr0402') { request.onload = xlate_fr0402;
+    } else if ($el == 'fr0403') { request.onload = xlate_fr0403;
+    } else if ($el == 'fr0404') { request.onload = xlate_fr0404;
+
+    } else if ($el == 'fr0501') { request.onload = xlate_fr0501;
+    } else if ($el == 'fr0502') { request.onload = xlate_fr0502;
+    } else if ($el == 'fr0503') { request.onload = xlate_fr0503;
+    } else if ($el == 'fr0504') { request.onload = xlate_fr0504;
+
+    } else if ($el == 'fr0601') { request.onload = xlate_fr0601;
+    } else if ($el == 'fr0602') { request.onload = xlate_fr0602;
+    } else if ($el == 'fr0603') { request.onload = xlate_fr0603;
+    } else if ($el == 'fr0604') { request.onload = xlate_fr0604;
+
+    } else if ($el == 'fr0701') { request.onload = xlate_fr0701;
+    } else if ($el == 'fr0702') { request.onload = xlate_fr0702;
+    } else if ($el == 'fr0703') { request.onload = xlate_fr0703;
+    } else if ($el == 'fr0704') { request.onload = xlate_fr0704;
+
+    } else if ($el == 'fr0801') { request.onload = xlate_fr0801;
+    } else if ($el == 'fr0802') { request.onload = xlate_fr0802;
+    } else if ($el == 'fr0803') { request.onload = xlate_fr0803;
+    } else if ($el == 'fr0804') { request.onload = xlate_fr0804;
+    }
+}
+
+//
+// Now these are fun. It seems that I can't have one handler 
+// for each possible GET. Handle this by having a handler each, and 
+// then calling the actual handler with this initial handler's name.
+//
+// GET handlers, one per text element
+// Handlers to /newmark/user/newmark, generally for getting direction to semirandom/preferred translation
+function newmark_fr0001() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0002() { newmark_handler(this, arguments.callee.toString()); }
+
+function newmark_fr0101() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0102() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0103() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0104() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0105() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0106() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0107() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0108() { newmark_handler(this, arguments.callee.toString()); }
+
+function newmark_fr0109() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0110() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0111() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0112() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0113() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0114() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0115() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0116() { newmark_handler(this, arguments.callee.toString()); }
+
+function newmark_fr0117() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0118() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0119() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0120() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0121() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0122() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0123() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0124() { newmark_handler(this, arguments.callee.toString()); }
+
+function newmark_fr0125() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0126() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0127() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0128() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0129() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0130() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0131() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0132() { newmark_handler(this, arguments.callee.toString()); }
+
+function newmark_fr0133() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0134() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0135() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0136() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0137() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0138() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0139() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0140() { newmark_handler(this, arguments.callee.toString()); }
+
+function newmark_fr0141() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0142() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0143() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0144() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0145() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0146() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0147() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0148() { newmark_handler(this, arguments.callee.toString()); }
+
+function newmark_fr0149() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0150() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0151() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0152() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0153() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0154() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0155() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0156() { newmark_handler(this, arguments.callee.toString()); }
+
+function newmark_fr0157() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0158() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0159() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0160() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0161() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0162() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0163() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0164() { newmark_handler(this, arguments.callee.toString()); }
+
+function newmark_fr0165() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0166() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0167() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0168() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0169() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0170() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0171() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0172() { newmark_handler(this, arguments.callee.toString()); }
+
+function newmark_fr0201() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0202() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0203() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0204() { newmark_handler(this, arguments.callee.toString()); }
+
+function newmark_fr0301() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0302() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0303() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0304() { newmark_handler(this, arguments.callee.toString()); }
+
+function newmark_fr0401() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0402() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0403() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0404() { newmark_handler(this, arguments.callee.toString()); }
+
+function newmark_fr0501() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0502() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0503() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0504() { newmark_handler(this, arguments.callee.toString()); }
+
+function newmark_fr0601() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0602() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0603() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0604() { newmark_handler(this, arguments.callee.toString()); }
+
+function newmark_fr0701() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0702() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0703() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0704() { newmark_handler(this, arguments.callee.toString()); }
+
+function newmark_fr0801() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0802() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0803() { newmark_handler(this, arguments.callee.toString()); }
+function newmark_fr0804() { newmark_handler(this, arguments.callee.toString()); }
+
+// Handlers to /xlate/user/newmark/language/visibility/crid, generally for accessing particular translation
+function xlate_fr0001() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0002() { xlate_handler(this, arguments.callee.toString()); }
+
+function xlate_fr0101() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0102() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0103() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0104() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0105() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0106() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0107() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0108() { xlate_handler(this, arguments.callee.toString()); }
+
+function xlate_fr0109() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0110() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0111() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0112() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0113() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0114() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0115() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0116() { xlate_handler(this, arguments.callee.toString()); }
+
+function xlate_fr0117() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0118() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0119() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0120() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0121() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0122() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0123() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0124() { xlate_handler(this, arguments.callee.toString()); }
+
+function xlate_fr0125() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0126() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0127() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0128() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0129() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0130() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0131() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0132() { xlate_handler(this, arguments.callee.toString()); }
+
+function xlate_fr0133() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0134() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0135() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0136() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0137() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0138() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0139() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0140() { xlate_handler(this, arguments.callee.toString()); }
+
+function xlate_fr0141() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0142() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0143() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0144() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0145() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0146() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0147() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0148() { xlate_handler(this, arguments.callee.toString()); }
+
+function xlate_fr0149() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0150() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0151() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0152() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0153() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0154() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0155() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0156() { xlate_handler(this, arguments.callee.toString()); }
+
+function xlate_fr0157() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0158() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0159() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0160() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0161() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0162() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0163() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0164() { xlate_handler(this, arguments.callee.toString()); }
+
+function xlate_fr0165() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0166() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0167() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0168() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0169() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0170() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0171() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0172() { xlate_handler(this, arguments.callee.toString()); }
+
+function xlate_fr0201() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0202() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0203() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0204() { xlate_handler(this, arguments.callee.toString()); }
+
+function xlate_fr0301() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0302() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0303() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0304() { xlate_handler(this, arguments.callee.toString()); }
+
+function xlate_fr0401() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0402() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0403() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0404() { xlate_handler(this, arguments.callee.toString()); }
+
+function xlate_fr0501() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0502() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0503() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0504() { xlate_handler(this, arguments.callee.toString()); }
+
+function xlate_fr0601() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0602() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0603() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0604() { xlate_handler(this, arguments.callee.toString()); }
+
+function xlate_fr0701() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0702() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0703() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0704() { xlate_handler(this, arguments.callee.toString()); }
+
+function xlate_fr0801() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0802() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0803() { xlate_handler(this, arguments.callee.toString()); }
+function xlate_fr0804() { xlate_handler(this, arguments.callee.toString()); }
+
+///////////////////////////////////////////////////////////////////
+//
+// Translation menu and handlers: see more, offer another, edit, delete
+// The history, lock links direct to the developer wiki - reader can 
+// implement if they want: my purpose is not full-feature implementation here.
+//
+///////////////////////////////////////////////////////////////////
+//
+// Caching. JavaScript doesn't implement a reasonable method for asking 
+// the browser, per-request, to not visit (or even better, make stale)
+// the cache for a response. This leads to a situation where the user can
+// edit a translation, but has to wait until the cache entry goes does go
+// stale before seeing the replacement in place: having just visited the
+// resource, the human editor is literally the last reader to see the change!
+//
+//  The appallingly shameful bodge is to always append a timestamp to the URL,
+// which BTFO the value of caching in the first place, and callously abuses
+// every human and device through which the requests pass. 
+// Browser peeps! http://knowyourmeme.com/memes/youre-doing-it-wrong
+//  
+// Dealt with here by giving the user a ten minute timeout when the bodge
+// will be used. 
+//
+// Or, you know, I could design the service properly instead of deleting
+// through one URI what I getted from another
+
+//
+// Translation menu: prefer another. "I am user X, next time show me Y for newmark Z"
+function trnPreferAnother($index) {
+ $index = parseInt($index); // index into the <select /> showing choices
+ //
+ // obtain the list select was built from, get it into JSON and 
+ // slice out the one entry chosen. Put that one entry back.
+ // So we are returning the same representation but with the non-chosen
+ // entries removed.
+ $list = sessionStorage.getItem('csi18n_seemore.representations');
+ $json_arr = JSON.parse($list);
+ $json_arr.csi18n_xlate_resources = $json_arr.csi18n_xlate_resources.slice($index, $index + 1);
+ $puturl = $json_arr.csi18n_xlate_resources[0].put_url_to_prefer;
+ $representation = JSON.stringify($json_arr);
+ //
+ // Now get the preference URL for the particular text chosen.
+ $frame = sessionStorage.getItem('csi18n_seemore.representations_frame');
+ $rep = sessionStorage.getItem($frame + '.representation');
+ $json_arr = JSON.parse($rep);
+ //
+ // Now send them back 
+ if (XMLHttpRequest) {
+  var request = new XMLHttpRequest();
+  if("withCredentials" in request) {
+   // Firefox 3.5 and Safari 4
+   request.open('PUT', $puturl, true);
+   request.setRequestHeader("Authorization", "Basic " + getBase64Credentials());
+   request.setRequestHeader("X-APIKey", localStorage.getItem('csi18n_key'));
+   request.setRequestHeader("Content-Type", "application/json;v=1.0");
+   request.onload = preferanother_handler;
+   request.send($representation);
+  }
+ }
+}
+
+//
+// Translation menu: see more. "What other translations are suitable for newmark Z?"
+function trnSeeMore($ls) {
+ sessionStorage.setItem('csi18n_seemore.representations', '');
+ sessionStorage.setItem('csi18n_seemore.representations_frame', $ls);
+ $status = sessionStorage.getItem($ls + '.result');
+ if ($status != 200) {
+  //
+  // if we're showing 'undefined', then there is no "see more" to look at
+  // and the user would need to change the lang(s) and refresh to see more.
+  $choice = "No more translations found";
+  var d = document.getElementById("trn_menu");
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "101";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  $choices = "See more<br>" + $choice;
+  d.innerHTML = escapeHtml($choices);
+  d.style.display = "";
+ } else {
+  // if we're not showing 'undefined' the representation will be storing
+  // a link to the all preferable resource (visit_link/langs/all)
+  $res = sessionStorage.getItem($ls + '.representation');
+  $json = JSON.parse($res);
+  $url = sessionStorage.getItem($ls + '.all_preferable');
+  if ($url === '') {
+   // then this was probably a permalink request for a specific translation,
+   // and so there is nothing that could be preferred
+   alert("Sorry! 'See more' can't be used with a permalink translation");
+  } else {
+   if (XMLHttpRequest) {
+     $url = $url + forcedIfNoCache();
+     var request = new XMLHttpRequest();
+     if("withCredentials" in request) {
+      // Firefox 3.5 and Safari 4
+      $lang = localStorage.getItem('csi18n_lang');
+      if ($lang == null) {
+       $lang = window.navigator.language;
+      }
+      request.open('GET', $url, true);
+      request.setRequestHeader("Authorization", "Basic " + getBase64Credentials());
+      request.setRequestHeader("X-APIKey", localStorage.getItem('csi18n_key'));
+      request.setRequestHeader("Accept", "application/json");
+      request.responseType = "json";
+      request.onload = seemore_handler;
+      request.send();
+    }
+   }
+  }
+ }
+}
+
+//
+// translation menu: Offer Another. "I am user X, and translation Y is appropriate for newmark Z"
+function trnOfferAnother($ls) {
+ var $result = sessionStorage.getItem($ls + '.result');
+ var $newmark = sessionStorage.getItem($ls + '.newmark');
+ var $visitsid = sessionStorage.getItem($ls + '.visitsid');
+ var $rep = sessionStorage.getItem($ls + '.representation');
+ var $xlateUrl = sessionStorage.getItem($ls + '.xlateUrl');
+ var $newmarkUrl = sessionStorage.getItem($ls + '.newmarkUrl');
+ if ($result == 200) {
+  // yes yes, 200 is not the only response
+  $json_o = JSON.parse($rep);
+  $lang = $json_o.csi18n_xlate_resource.language;
+  $trans = $json_o.csi18n_xlate_resource.translation;
+  $vis = $json_o.csi18n_xlate_resource.visibility;
+ } else {
+  $lang = localStorage.getItem('csi18n_lang');
+  if ($lang == null) {
+   $lang = window.navigator.language;
+  }
+  $trans = '';
+  $vis = '';
+ }
+ var isano = ($vis == 'anonymous') ? 'selected' : '';
+ var ispub = ($vis == 'public') ? 'selected' : '';
+ var isprv = ($vis == 'private') ? 'selected' : '';
+ var isper = ($vis == 'personal') ? 'selected' : '';
+ if (isano == '' && ispub == '' && isprv == '' && isper == '') {
+  isano = 'selected';
+ }
+ var d = document.getElementById("trn_menu");
+ d.style.position = "fixed";
+ d.style.fontFamily = "sans";
+ d.style.right = "0px";
+ d.style.top = "240px";
+ d.style.zIndex = "100";
+ d.style.backgroundColor = "#AADDDD";
+ d.style.textAlign = "right";
+ d.style.fontSize = "20px";
+ d.innerHTML = "Offer another<hr>" +
+ "<span style='font-size:21px' id='upload_as_username_tmenu'>Your username: " + escapeHtml(localStorage.getItem('csi18n_un')) + "</span><br>" +
+ "<input type='text' value='" + escapeHtml($newmark) + "' disabled='' size='30' name='newmark_iv' id='newmark_iv' style='font-size:21px'>Newmark<br>" +
+ "<input type='text' value='" + escapeHtml($lang) + "' size='30' name='cl_iv' id='cl_iv' style='font-size:21px' oninput='handleContentLanguageChange()'><br><font size=-2><span id='cl_and_url'></span></font>Content-Language<br>" +
+ "<textarea cols='20' rows='3' name='translation_iv' id='translation_iv' type='text' style='font-size:21px'>" + escapeHtml($trans) + "</textarea>Translation<br>" +
+ "<select size='4' name='visibility_iv' id='visibility_iv' style='font-size:21px'>" +
+ "<option value='anonymous' " + isano + ">Anonymous</option>" +
+ "<option value='public' " + ispub + ">Public</option>" +
+ "<option value='private' " + isprv + ">Private</option>" +
+ "<option value='personal' " + isper + ">Personal</option>" +
+ "</select>Visibility<br>" +
+ "<input type='hidden' value='" + $visitsid + "' name='visitsid'>" +
+ "<input type='hidden' value='test05' name='un'>" +
+ "<input type='hidden' value='e3c12c03cf320b243977d6ac389805de' name='apikey'>" +
+ "<input type='hidden' value='test' name='pw'>" +
+ "<input type='button' value='Submit' style='font-size:21px' onClick='javascript:sendPost(" + $visitsid + ")'>";
+ d.style.display = "";
+ handleContentLanguageChange(); 
+}
+
+//
+// translation menu: Delete. "I am user X, try to delete translation Y"
+function trnDelete($ls) {
+ var $result = sessionStorage.getItem($ls + '.result');
+ var $newmark = sessionStorage.getItem($ls + '.newmark');
+ var $rep = sessionStorage.getItem($ls + '.representation');
+ var $xlateUrl = sessionStorage.getItem($ls + '.xlateUrl');
+ var $newmarkUrl = sessionStorage.getItem($ls + '.newmarkUrl');
+ if ($result == 200) {
+  // yes yes, 200 is not the only response
+  $json_o = JSON.parse($rep);
+  $lang = $json_o.csi18n_xlate_resource.language;
+  $trans = $json_o.csi18n_xlate_resource.translation;
+  $vis = $json_o.csi18n_xlate_resource.visibility;
+  $uploader_sid = $json_o.csi18n_xlate_resource.uploader_sid;
+ } else {
+  $lang = localStorage.getItem('csi18n_lang');
+  if ($lang == null) {
+   $lang = window.navigator.language;
+  }
+  $trans = '';
+  $vis = '';
+ }
+ var isano = ($vis == 'anonymous') ? 'selected' : '';
+ var ispub = ($vis == 'public') ? 'selected' : '';
+ var isprv = ($vis == 'private') ? 'selected' : '';
+ var isper = ($vis == 'personal') ? 'selected' : '';
+ var d = document.getElementById("trn_menu");
+ d.style.position = "fixed";
+ d.style.fontFamily = "sans";
+ d.style.right = "0px";
+ d.style.top = "240px";
+ d.style.zIndex = "100";
+ d.style.backgroundColor = "#AADDDD";
+ d.style.textAlign = "right";
+ d.style.fontSize = "20px";
+ d.innerHTML = "Delete<hr>" +
+ "<span style='font-size:21px'>Uploader SID: " + escapeHtml($uploader_sid) + "</span><br>" +
+ "<input type='text' value='" + escapeHtml($newmark) + "' disabled size='30' name='newmark_iv' id='newmark_iv' style='font-size:21px'>Newmark<br>" +
+ "<input type='text' value='" + escapeHtml($lang) + "' disabled size='30' name='cl_iv' id='cl_iv' style='font-size:21px' oninput='handleContentLanguageChange()'><br><font size=-2><span id='cl_and_url'></span></font>Content-Language<br>" +
+ "<textarea disabled cols='30' rows='3' name='translation_iv' id='translation_iv' type='text' style='font-size:21px'>" + escapeHtml($trans) + "</textarea>Translation<br>" +
+ "<select disabled size='4' name='visibility_iv' id='visibility_iv' style='font-size:21px'>" +
+ "<option value='anonymous' " + isano + ">Anonymous</option>" +
+ "<option value='public' " + ispub + ">Public</option>" +
+ "<option value='private' " + isprv + ">Private</option>" +
+ "<option value='personal' " + isper + ">Personal</option>" +
+ "</select>Visibility<br>" +
+ "<input type='hidden' value='1' name='visitsid'>" +
+ "<input type='hidden' value='test05' name='un'>" +
+ "<input type='hidden' value='e3c12c03cf320b243977d6ac389805de' name='apikey'>" +
+ "<input type='hidden' value='test' name='pw'>" +
+ "<input type='button' value='Delete' style='font-size:21px' onClick='javascript:sendDelete(\"" + $ls + "\")'>";
+ d.style.display = "";
+}
+
+//
+// translation menu: Edit. "I am user X, and translation Y should change to Z"
+function trnEdit($ls) {
+ var $result = sessionStorage.getItem($ls + '.result');
+ var $newmark = sessionStorage.getItem($ls + '.newmark');
+ var $rep = sessionStorage.getItem($ls + '.representation');
+ var $xlateUrl = sessionStorage.getItem($ls + '.xlateUrl');
+ var $newmarkUrl = sessionStorage.getItem($ls + '.newmarkUrl');
+ if ($result == 200) {
+  // yes yes, 200 is not the only response
+  $json_o = JSON.parse($rep);
+  $lang = $json_o.csi18n_xlate_resource.language;
+  $trans = $json_o.csi18n_xlate_resource.translation;
+  $vis = $json_o.csi18n_xlate_resource.visibility;
+ } else {
+  $lang = localStorage.getItem('csi18n_lang');
+  if ($lang == null) {
+   $lang = window.navigator.language;
+  }
+  $trans = '';
+  $vis = '';
+ }
+ var isano = ($vis == 'anonymous') ? 'selected' : '';
+ var ispub = ($vis == 'public') ? 'selected' : '';
+ var isprv = ($vis == 'private') ? 'selected' : '';
+ var isper = ($vis == 'personal') ? 'selected' : '';
+ if (isano == '' && ispub == '' && isprv == '' && isper == '') {
+  isano = 'selected';
+ }
+ var d = document.getElementById("trn_menu");
+ d.style.position = "fixed";
+ d.style.fontFamily = "sans";
+ d.style.right = "0px";
+ d.style.top = "240px";
+ d.style.zIndex = "100";
+ d.style.backgroundColor = "#AADDDD";
+ d.style.textAlign = "right";
+ d.style.fontSize = "20px";
+ d.innerHTML = "Edit<hr>" +
+ "<span style='font-size:21px' id='upload_as_username_tmenu'>Your username: " + escapeHtml(localStorage.getItem('csi18n_un')) + "</span><br>" +
+ "<input type='text' value='" + escapeHtml($newmark) + "' disabled='' size='30' name='newmark_iv' id='newmark_iv' style='font-size:21px'>Newmark<br>" +
+ "<input type='text' value='" + escapeHtml($lang) + "' size='30' name='cl_iv' id='cl_iv' style='font-size:21px' oninput='handleContentLanguageChange()'><br><font size=-2><span id='cl_and_url'></span></font>Content-Language<br>" +
+ "<textarea cols='30' rows='3' name='translation_iv' id='translation_iv' type='text' style='font-size:21px'>" + escapeHtml($trans) + "</textarea>Translation<br>" +
+ "<select size='4' name='visibility_iv' id='visibility_iv' style='font-size:21px'>" +
+ "<option value='anonymous' " + isano + ">Anonymous</option>" +
+ "<option value='public' " + ispub + ">Public</option>" +
+ "<option value='private' " + isprv + ">Private</option>" +
+ "<option value='personal' " + isper + ">Personal</option>" +
+ "</select>Visibility<br>" +
+ "<input type='hidden' value='1' name='visitsid'>" +
+ "<input type='hidden' value='test05' name='un'>" +
+ "<input type='hidden' value='e3c12c03cf320b243977d6ac389805de' name='apikey'>" +
+ "<input type='hidden' value='test' name='pw'>" +
+ "<input type='button' value='Submit' style='font-size:21px' onClick='javascript:sendPut(\"" + $ls + "\")'>";
+ d.style.display = "";
+ handleContentLanguageChange(); 
+}
+
+///////////////////////////////////////////////////////////////////
+//
+// Functions for effecting the various HTTP method calls
+//
+// Note that these all make CORS requests in the background first, as the
+// call are all Cross Origin in nature.
+//
+// The functions to send the request appear first; the callback handlers
+// for when the server has replied appear after
+// 
+
+//
+// base64 helper
+// https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/btoa
+function getBase64Credentials() {
+ $credents = localStorage.getItem('csi18n_un') + ":" + localStorage.getItem('csi18n_pw');
+ return window.btoa(unescape(encodeURIComponent($credents)));
+}
+
+//
+// If the user types in a language code, and that language code contains
+// characters requiring URL encoding, then print the actual encoded value
+// to be used. 'oninput' used as captures mouse-driven edits too
+function handleContentLanguageChange() {
+ var unenc_el = document.getElementById("cl_iv");
+ var unenc_val = unenc_el.value;
+ var enc_val = encodeURIComponent(unenc_val);
+ enc_val = enc_val.replace(/%20/g, '+');
+ var d = document.getElementById("cl_and_url");
+ if (unenc_val == '') {
+  d.innerHTML = ''; // handle if deleted
+ } else if (enc_val != unenc_val) {
+  d.innerHTML = "(" + enc_val + ") ";
+ } else if (enc_val != d.innerHTML) {
+  d.innerHTML = ''; // handle replace encoded with unencoded
+ }
+}
+
+function serverName() {
+ $un = localStorage.getItem('csi18n_un');
+// if ($un !== 'am') {
+  return 'rest.mpsvr.com';
+// } else {
+//  return 'rest.mpsvr.com';
+// }
+}
+
+//
+// HTTP GET to csi18n backend
+function sendNewmarkGet($el, $newmark, $visitsid, $lang) {
+ $server = serverName();
+ if ($visitsid !== null && $visitsid !== '' && $newmark !== null && $newmark !== '' && $lang !== null && $lang !== '') {
+  // Get 'see more' translations
+  var url = "https://" + $server + "/newmarks/" + $visitsid + "/" + $newmark + "/" + $lang;
+ } else if ($visitsid !== null && $visitsid !== '' && $newmark !== null && $newmark !== '') {
+  // Get semirandom/preferred translations
+  var url = "https://" + $server + "/newmarks/" + $visitsid + "/" + $newmark;
+ } else {
+  // If the link is incompliant - as would be the case if a permalink is retrieved
+  // with a blank CRID - print up this non-breaking space. These are clickable 
+  // where ASCII #20 is not
+  return '&#xA0;'; 
+ }
+ if (XMLHttpRequest) {
+   url = url + forcedIfNoCache();
+   var request = new XMLHttpRequest();
+   if("withCredentials" in request) {
+    // Firefox 3.5 and Safari 4
+    var lang = localStorage.getItem('csi18n_lang');
+    if (lang == null) {
+     lang = window.navigator.language;
+    }
+    lang = lang.replace(/ /g, '+');
+    sessionStorage.setItem('csi18n_' + $el + '.newmarkUrl', url);
+
+    request.open('GET', url, true);
+    request.setRequestHeader("Authorization", "Basic " + getBase64Credentials());
+    request.setRequestHeader("X-APIKey", localStorage.getItem('csi18n_key'));
+    request.setRequestHeader("Accept", "application/json");
+    request.responseType = "json";
+    request.setRequestHeader("Accept-Language", lang);
+    // 
+    // The backend server does honour conditionals, but I've made no
+    // attempt to keep track of them here. Chrome doesn't add them in
+    // but here's what they'd look like:
+//    request.setRequestHeader("If-Modified-Since", "Tue,  1 Jan 1980 19:12:53 BST");
+//    request.setRequestHeader("If-None-Match", "Wibble");
+    sendGet_SetNewmarkHandler(request, $el);
+    request.send();
+  }
+ }
+}
+
+// Permalinks come straight here, otherwise only after the newmark GET provides a semirandom/preference link
+function sendXlateGet($el, $newmark, $visitsid, $uploader_sid, $lang, $crid) {
+ $server = serverName();
+ if ($visitsid !== null && $visitsid !== '' && $uploader_sid !== null && $uploader_sid !== '' && $newmark !== null && $newmark !== '' && $lang !== null && $lang !== '' && $crid !== null && $crid !== '') {
+  // Get a particular translation
+  var url = "https://" + $server + "/xlates/" + $visitsid + "," + $uploader_sid + "/" + $newmark + "/" + $lang + "/anonymous/" + $crid;
+ } else {
+  // If the link is incompliant - as would be the case if a permalink is retrieved
+  // with a blank CRID - print up this non-breaking space. These are clickable 
+  // where ASCII #20 is not
+  return '&#xA0;'; 
+ }
+ if (XMLHttpRequest) {
+   url = url + forcedIfNoCache();
+   var request = new XMLHttpRequest();
+   if("withCredentials" in request) {
+    // Firefox 3.5 and Safari 4
+    var lang = localStorage.getItem('csi18n_lang');
+    if (lang == null) {
+     lang = window.navigator.language;
+    }
+    lang = lang.replace(/ /g, '+');
+    sessionStorage.setItem('csi18n_' + $el + '.newmarkUrl', url);
+
+    request.open('GET', url, true);
+    request.setRequestHeader("Authorization", "Basic " + getBase64Credentials());
+    request.setRequestHeader("X-APIKey", localStorage.getItem('csi18n_key'));
+    request.setRequestHeader("Accept", "application/json");
+    request.responseType = "json";
+    request.setRequestHeader("Accept-Language", lang);
+    // 
+    // The backend server does honour conditionals, but I've made no
+    // attempt to keep track of them here. Chrome doesn't add them in
+    // but here's what they'd look like:
+//    request.setRequestHeader("If-Modified-Since", "Tue,  1 Jan 1980 19:12:53 BST");
+//    request.setRequestHeader("If-None-Match", "Wibble");
+    sendGet_SetXlateHandler(request, $el);
+    request.send();
+  }
+ }
+}
+
+//
+// HTTP POST to csi18n backend
+function sendPost($visitsid) {
+ var d = document.getElementById("newmark_iv");
+ $newmark = d.value;
+ d = document.getElementById("translation_iv");
+ $translation = d.value;
+ d = document.getElementById("cl_iv");
+ $cont_lang = encodeURIComponent(d.value);
+ $cont_lang = $cont_lang.replace(/%20/g, '+');
+ d = document.getElementById("visibility_iv");
+ $vis = d.value;
+ // Not very HATEOAS: we're gonna hard-code the data and what we do with it
+ $arr = { 'csi18n_xlate_resource' : { 'language' : $cont_lang, 'translation' : $translation, 'visibility' : $vis } };
+ $json_s = JSON.stringify($arr);
+ $server = serverName();
+ var url = "https://" + $server + "/newmarks/" + $visitsid + "/" + $newmark;
+ if (XMLHttpRequest) {
+   var request = new XMLHttpRequest();
+   if("withCredentials" in request) {
+    // Firefox 3.5 and Safari 4
+    request.open('POST', url, true);
+    request.setRequestHeader("Authorization", "Basic " + getBase64Credentials());
+    request.setRequestHeader("X-APIKey", localStorage.getItem('csi18n_key'));
+    request.setRequestHeader("Content-Type", "application/json;v=1.0");
+    request.onload = post_handler;
+    request.send($json_s);
+  }
+ }
+}
+
+//
+// HTTP PUT to csi18n backend
+function sendPut($ls) {
+ var d = document.getElementById("newmark_iv");
+ $newmark = d.value;
+ d = document.getElementById("translation_iv");
+ $translation = d.value;
+ d = document.getElementById("cl_iv");
+ $cont_lang = encodeURIComponent(d.value);
+ $cont_lang = $cont_lang.replace(/%20/g, '+');
+ d = document.getElementById("visibility_iv");
+ $vis = d.value;
+ // again not very HATEOAS
+ $arr = { 'csi18n_xlate_resource' : { 'language' : $cont_lang, 'translation' : $translation, 'visibility' : $vis } };
+ $json_s = JSON.stringify($arr);
+ $xlateUrl = sessionStorage.getItem($ls + '.xlateUrl');
+ if (XMLHttpRequest) {
+   var request = new XMLHttpRequest();
+   if("withCredentials" in request) {
+    // Firefox 3.5 and Safari 4
+    request.open('PUT', $xlateUrl, true);
+    request.setRequestHeader("Authorization", "Basic " + getBase64Credentials());
+    request.setRequestHeader("X-APIKey", localStorage.getItem('csi18n_key'));
+    request.setRequestHeader("Content-Type", "application/json;v=1.0");
+    request.onload = put_handler;
+    request.send($json_s);
+  }
+ }
+}
+
+//
+// HTTP DELETE to csi18n backend
+function sendDelete($ls) {
+ var $xlateUrl = sessionStorage.getItem($ls + '.xlateUrl');
+ if (XMLHttpRequest) {
+   var request = new XMLHttpRequest();
+   if("withCredentials" in request) {
+    // Firefox 3.5 and Safari 4
+    request.open('DELETE', $xlateUrl, true);
+    request.setRequestHeader("Authorization", "Basic " + getBase64Credentials());
+    request.setRequestHeader("X-APIKey", localStorage.getItem('csi18n_key'));
+    //
+    // If the conditionals are not set to something, Safari 804 seems to fill
+    // in If-None-Match and If-Modified-Since with most recent GET LastModified
+    // and etag. Not sure why. 
+    request.setRequestHeader("If-Unmodified-Since", sessionStorage.getItem($ls + '.last-modified'));
+    request.setRequestHeader("If-Match", sessionStorage.getItem($ls + '.etag'));
+    request.setRequestHeader("If-Modified-Since", '');
+    request.setRequestHeader("If-None-Match", '');
+    request.setRequestHeader("Cache-Control", "max-age=0");
+    request.setRequestHeader("Accept", "application/json");
+    request.responseType = "json";
+    request.onload = delete_handler;
+    request.send();
+  }
+ }
+}
+
+//
+// callback handlers - called on response from the csi18n server
+//
+//
+// setTimeout(function() { location.reload(true); }, global_1xx2xx3xx_timeout);
+// One anonymous function, multiple places in source. Coding by Jimmy Rustles
+//
+function reloadPageAfterWait() {
+  location.reload(true);
+}
+
+//
+// WAT DO if delete has completed
+function delete_handler() {
+  $status = this.status;
+  var d = document.getElementById("trn_menu");
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "101";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.innerHTML = escapeHtml(this.statusText);
+  d.style.display = "";
+  if ($status < 400) {
+    // short message if 1xx 2xx or 3xx
+    setTimeout("reloadPageAfterWait()", global_1xx2xx3xx_timeout);
+  } else {
+    // longer message if 4xx or 5xx
+    setTimeout("reloadPageAfterWait()", global_4xx5xx_timeout);
+  }
+}
+
+//
+// WAT DO if post has completed
+function post_handler() {
+  $status = this.status;
+  var d = document.getElementById("trn_menu");
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "101";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.innerHTML = escapeHtml(this.statusText);
+  d.style.display = "";
+  if ($status < 400) {
+    // short message if 1xx 2xx or 3xx
+    setTimeout("reloadPageAfterWait()", global_1xx2xx3xx_timeout);
+  } else {
+    // longer message if 4xx or 5xx
+    setTimeout("reloadPageAfterWait()", global_4xx5xx_timeout);
+  }
+}
+
+//
+// WAT DO if a request to see more has completed
+function seemore_handler() {
+  localStorage.setItem('csi18n_xhr2_have_json', 'true');
+  document.getElementById("xhr2_json_at_all").style.display = 'none';
+  $status = this.status;
+   var d = document.getElementById("trn_menu");
+   d.style.position = "fixed";
+   d.style.fontFamily = "sans";
+   d.style.right = "0px";
+   d.style.top = "240px";
+   d.style.zIndex = "101";
+   d.style.backgroundColor = "#AADDDD";
+   d.style.textAlign = "right";
+   d.style.fontSize = "20px";
+   $json_o = this.response;
+   if (window.ie !== false)
+    $json_o = JSON.parse($json_o);
+   sessionStorage.setItem('csi18n_seemore.representations', JSON.stringify($json_o));
+   var $el = '';
+   var $safe_choices = '';
+   for(index = 0; index < $json_o.csi18n_xlate_resources.length; index++) {
+    $el = $json_o.csi18n_xlate_resources[index];
+    $unsafe_choice = $el.translation;
+    $unsafe_language = $el.language;
+    $unsafe_uploader = $el.uploader_sid;
+    $newmarkUrl = $el.url;
+    $xlateUrl = $el.url;
+    if (index > 0) {
+     $safe_choices = $safe_choices + "<li>--------------</li>";
+    }
+    $safe_choices = $safe_choices + "<li><font size=-1><a href='javascript:trnPreferAnother(\"" + index + "\")'>" + escapeHtml($unsafe_choice) + "</a> (" + escapeHtml($unsafe_uploader + "/" + $unsafe_language) + ")</font></li>";
+   }
+   if ($safe_choices.length > 0) {
+    $safe_choices = "<nav><ul>" + $safe_choices + "</ul></nav>";
+   } 
+   $choices = "See more<br>" + $safe_choices;
+   d.innerHTML = $choices;
+   d.style.display = "";
+}
+
+//
+// WAT DO if put has completed
+function put_handler() {
+  $status = this.status;
+  var d = document.getElementById("trn_menu");
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "101";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.innerHTML = escapeHtml(this.statusText);
+  d.style.display = "";
+  if ($status < 400) {
+    // short message if 1xx 2xx or 3xx
+    setTimeout("reloadPageAfterWait()", global_1xx2xx3xx_timeout);
+  } else {
+    // longer message if 4xx or 5xx
+    setTimeout("reloadPageAfterWait()", global_4xx5xx_timeout);
+  }
+}
+
+//
+// WAT DO if preference of another has completed
+function preferanother_handler() {
+  $status = this.status;
+  var d = document.getElementById("trn_menu");
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "101";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.innerHTML = escapeHtml(this.statusText);
+  d.style.display = "";
+}
+
+//
+// Start handling of preferred translation conversation: get direction to a translation
+function newmark_handler(this1, name) {
+  localStorage.setItem('csi18n_xhr2_have_json', 'true');
+  document.getElementById("xhr2_json_at_all").style.display = 'none';
+  name = name.substr('function '.length);
+  name = name.substr(0, name.indexOf('('));
+  name = name.substr(8);
+  var currently = localStorage.getItem('csi18n_onOrOff');
+  var d1 = document.getElementById(name);
+  var d2 = document.getElementById("ta_" + name); // preload textareas
+  if (this1.status == 200) {
+   $json_o = this1.response;
+   if (window.ie !== false) {
+    $json_o = JSON.parse($json_o);
+   }
+   $xlate_location = $json_o.csi18n_xlate_location;
+   sessionStorage.setItem('csi18n_' + name + '.all_preferable', $json_o.csi18n_all_preferable);
+   sessionStorage.setItem('csi18n_' + name + '.chosen_because', $json_o.csi18n_xlate_resource.source);
+
+   if (XMLHttpRequest) {
+    $xlate_location = $xlate_location + forcedIfNoCache();
+    var request = new XMLHttpRequest();
+    if("withCredentials" in request) {
+     // Firefox 3.5 and Safari 4
+     // $lang = localStorage.getItem('csi18n_lang');
+     // if ($lang == null) {
+     //  $lang = window.navigator.language;
+     // }
+     sessionStorage.setItem('csi18n_' + name + '.responseURL', $xlate_location); // record just in case old browser
+     request.open('GET', $xlate_location, true);
+     request.setRequestHeader("Authorization", "Basic " + getBase64Credentials());
+     request.setRequestHeader("X-APIKey", localStorage.getItem('csi18n_key'));
+     request.setRequestHeader("Accept", "application/json");
+     request.responseType = "json";
+     // Accept-Language doesn't matter in /xlates
+     // request.setRequestHeader("Accept-Language", $lang);
+     // 
+     // The backend server does honour conditionals, but I've made no
+     // attempt to keep track of them here. Chrome doesn't add them in
+     // but here's what they'd look like:
+//    request.setRequestHeader("If-Modified-Since", "Tue,  1 Jan 1980 19:12:53 BST");
+//    request.setRequestHeader("If-None-Match", "Wibble");
+     sendGet_SetXlateHandler(request, name);
+     request.send();
+    }
+   }
+  } else {
+   if (currently != "off") {
+    d1.firstChild.innerHTML = escapeHtml(this1.status.toString())
+   } else {
+    d1.innerHTML = escapeHtml(this1.status.toString());
+   }
+  }
+}
+
+//
+// Complete handling of a preference conversation: obtain translation
+function xlate_handler(this1, name) {
+  localStorage.setItem('csi18n_xhr2_have_json', 'true');
+  document.getElementById("xhr2_json_at_all").style.display = 'none';
+  name = name.substr('function '.length);
+  name = name.substr(0, name.indexOf('('));
+  name = name.substr(6);
+  var currently = localStorage.getItem('csi18n_onOrOff');
+  var d1 = document.getElementById(name);
+  var d2 = document.getElementById("ta_" + name); // preload textareas
+  if (this1.status == 200) {
+   $json_o = this1.response;
+   if (window.ie !== false) {
+    $json_o = JSON.parse($json_o);
+   }
+   $translation = $json_o.csi18n_xlate_resource.translation;
+   $language = $json_o.csi18n_xlate_resource.language;
+   if (currently != "off") {
+    d1.firstChild.innerHTML = escapeHtml($translation);
+    d1.firstChild.title = escapeHtml($language);
+   } else {
+    d1.innerHTML = escapeHtml($translation);
+    d1.title = escapeHtml($language);
+   }
+   if (d2 != null) {
+    //
+    // if a representation is used multiple times, only the first use will attract a 
+    // textarea where the user can upload his own version. Later uses will see a null d2
+    // as the textarea doesn't exist.
+    d2.innerHTML = escapeHtml($translation);
+   }
+   sessionStorage.setItem('csi18n_' + name + '.representation', JSON.stringify($json_o));
+   sessionStorage.setItem('csi18n_' + name + '.result', this1.status);
+   sessionStorage.setItem('csi18n_' + name + '.language', $json_o.csi18n_xlate_resource.language);
+   sessionStorage.setItem('csi18n_' + name + '.last-modified', this1.getResponseHeader('Last-Modified'));
+   sessionStorage.setItem('csi18n_' + name + '.etag', this1.getResponseHeader('ETag'));
+
+   var cl = this1.getResponseHeader('Content-Location');
+   if (cl == null) {
+    //
+    // If we ask via /newmark for best translation we get a Content-Location header to
+    // tell us where that resource lives. If we ask via /xlates for a specific translation
+    // we already know where it lives: at the URL we requested
+    cl = this1.responseURL;
+    if (typeof cl == 'undefined') {
+     // Not all browsers will give us response.responseURL so we reuse recorded URL earlier
+     cl = sessionStorage.getItem('csi18n_' + name + '.responseURL');
+    }
+   }
+   sessionStorage.setItem('csi18n_' + name + '.xlateUrl', cl);
+  } else {
+   if (currently != "off") {
+    d1.firstChild.innerHTML = escapeHtml(this1.status.toString())
+   } else {
+    d1.innerHTML = escapeHtml(this1.status.toString());
+   }
+  }
+}
+
+///////////////////////////////////////////////////////////////////
+//
+// Service menu and handlers: hyperlinks, credentials and language
+// toggleShowServiceMenu effected by single-click on Globe
+//
+
+//
+// For problems with browser caches, I effect a ten-minute timeout
+// where the idempotent get timestamps added. If the browser is
+// refreshed in that period, that also expires the timeout.
+//
+// If not in effect or expired, show "off". When in effect, show a 
+// clock face and the 24hour localtime the timeout expires.
+function ifWhenCacheTimeout() {
+ var millisecs = localStorage.getItem('csi18n_cache_off_timeout');
+ var d = new Date();
+ d.setTime(millisecs);
+ var now = new Date();
+ if (d.getTime() > now.getTime()) {
+  var h = d.getHours().toString();
+  var m = d.getMinutes().toString();
+  if (h.length === 1) h = "0" + h;
+  if (m.length === 1) m = "0" + m;
+  return "⌚" + h + m + "[<a href='javascript:setCacheTimeoutOff()'>x</a>]";
+ } else {
+  return "Off";
+ }
+}
+
+//
+// Its enough to click the timeout to start it. 
+function acceptCacheTimeout() {
+ var d = new Date(); 
+ d.setMinutes(d.getMinutes() + 10);
+ localStorage.setItem('csi18n_cache_off_timeout', d.getTime()); 
+ var d = document.getElementById("cache_timeout_smenu");
+ if (d != null) {
+  d.innerHTML = ifWhenCacheTimeout();
+ }
+}
+
+//
+// Turn off the timeout
+function setCacheTimeoutOff() {
+ var d = new Date(); 
+ localStorage.setItem('csi18n_cache_off_timeout', d.getTime()); 
+ var d = document.getElementById("cache_timeout_smenu");
+ if (d != null) {
+  d.innerHTML = ifWhenCacheTimeout();
+ }
+}
+
+//
+// Maintain a local idea of whether to force the browser to no-cache. If
+// needed, return a string for the horrible, horrible timestamp bodge
+function forcedIfNoCache() {
+ var expires = localStorage.getItem('csi18n_cache_off_timeout');
+ var d = new Date();
+ var now = d.getTime();
+ if (expires > now) {
+  return '?cache_bodge=' + d.getTime();
+ } else {
+  return '';
+ }
+}
+
+//
+// hide/show the service (globe) menu
+function toggleShowServiceMenu() {
+ var d = document.getElementById("svc_menu");
+ if (d.style.display == "") {
+  d.style.display = "none";
+ } else {
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "100px";
+  d.style.width = "33%";
+  d.style.zIndex = "100";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.innerHTML = "<a href='javascript:toggleShowHyperlinks()'>Hyperlinks on/off<a><br> " +
+ "<a href='javascript:acceptUsername()'>Username:</a> <span id='upload_as_username_smenu'>" + escapeHtml(localStorage.getItem('csi18n_un')) + "</span><br>" +
+ "<a href='javascript:acceptPassword()'>Password</a><br>" +
+ "<a href='javascript:acceptApikey()'>Apikey</a><br>" +
+ "<a href='javascript:acceptDefLang()'>Default Language</a><br>" +
+// "<a href='javascript:acceptCacheTimeout()'>Cache timeout:</a> <span id='cache_timeout_smenu'>" + ifWhenCacheTimeout() + "</span><br>" +
+ "<a href='https://service.mpsvr.com'>[Join]</a><br>"+
+ "<a href='http://csi18n.mpsvr.com/index.php/Xkcd'>[Documentation]</a><br>";
+  d.style.display = "";
+ }
+}
+
+// 
+// Translation menu effected by click text in the speech bubbles while 
+// hyperlinks on
+//
+// hide/show translation menu
+function toggleTranslationMenu($ls) {
+ if (canSeeTranslationMenu($ls) === true) {
+  hideTranslationMenu();
+ } else {
+  showTranslationMenu($ls);
+ }
+}
+
+function getTranslationMenuEl() {
+ return document.getElementById("trn_menu");
+}
+
+function canSeeTranslationMenu($ls) {
+ var d = getTranslationMenuEl();
+ if (d.style.display == "" || typeof $ls === undefined) {
+  return true;
+ } else {
+  return false;
+ }
+}
+
+function showTranslationMenu($ls) {
+  var d = getTranslationMenuEl();
+  d.style.position = "fixed";
+  d.style.fontFamily = "sans";
+  d.style.right = "0px";
+  d.style.top = "240px";
+  d.style.zIndex = "100";
+  d.style.backgroundColor = "#AADDDD";
+  d.style.textAlign = "right";
+  d.style.fontSize = "20px";
+  d.style.height = "";
+  d.style.width = "33%";
+  d.innerHTML = "<a href='javascript:trnSeeMore(\"" + $ls + "\")'>See more</a><br>" +
+ "<a href='javascript:trnOfferAnother(\"" + $ls + "\")'>Offer another</a><br>" +
+ "<a href='javascript:trnEdit(\"" + $ls + "\")'>- Edit</a><br>" +
+ "<a href='javascript:trnDelete(\"" + $ls + "\")'>- Delete</a><br>" +
+// "<a href='http://csi18n.mpsvr.com/index.php/Storyboard_03'>- Bump</a><br>" +
+// "<a href='http://csi18n.mpsvr.com/index.php/Storyboard_03'>- UnBump</a><br>" +
+// "<a href='http://csi18n.mpsvr.com/index.php/Storyboard_01'>- Lock</a><br>" +
+// "<a href='http://csi18n.mpsvr.com/index.php/Storyboard_01'>- Unlock</a><br>" + 
+// "<a href='http://csi18n.mpsvr.com/index.php/Storyboard_01'>- History</a><br>";
+ "";
+ d.style.display = "";
+}
+
+function hideTranslationMenu() {
+  var d = getTranslationMenuEl();
+  d.style.display = "none";
+}
+
+//
+// Sometimes the hyperlinks get in the way. This is a simple
+// way to turn them 
+function toggleShowHyperlinks() {
+ var currently = localStorage.getItem('csi18n_onOrOff');
+ if (currently != "off") {
+  localStorage.setItem('csi18n_onOrOff','off');
+ } else {
+  localStorage.setItem('csi18n_onOrOff','on');
+ }
+}
+
+///////////////////////////////////////////////////////////////////
+//
+// Accept changes to username, password, apikey or default language
+
+function acceptUsername() {
+ $username = localStorage.getItem('csi18n_un');
+ var rv = prompt("Username", $username);
+ if (rv != null) {
+  localStorage.setItem('csi18n_un', rv);
+ }
+ var d = document.getElementById("upload_as_username_tmenu");
+ if (d != null) {
+  d.innerHTML = "Your username: " + rv;
+ }
+ var d = document.getElementById("upload_as_username_smenu");
+ if (d != null) {
+  d.innerHTML = rv;
+ }
+}
+
+function acceptPassword() {
+ $password = localStorage.getItem('csi18n_pw');
+ var rv = prompt("Password", $password);
+ if (rv != null) {
+  localStorage.setItem('csi18n_pw', rv);
+ }
+}
+
+function acceptApikey() {
+ $apikey = localStorage.getItem('csi18n_key');
+ var rv = prompt("APIKey (leave empty to reset)", $apikey);
+ if (rv != null) {
+  localStorage.setItem('csi18n_key', rv);
+ }
+ onLoad();
+}
+
+// 
+// The default language when empty is taken as the user's AL if
+// not otherwise set. Once set, it's used to work out the most 
+// probably language code for the upload form.
+function acceptDefLang() {
+ $deflang = localStorage.getItem('csi18n_lang');
+ if ($deflang == null) {
+  $deflang = window.navigator.language;
+ }
+ var rv = prompt("New Language (leave empty to reset)", $deflang);
+ if (rv != null) {
+  localStorage.setItem('csi18n_lang', rv);
+ }
+ toggleShowServiceMenu();
+ hideTranslationMenu(); // confuses 'see more' if we don't as default lang would no longer guides what's seeable
+ onLoad();
+}
+
+///////////////////////////////////////////////////////////////////
+//
+// JS for creating the bubble on page
+//
+
+function createDialog_v3($corner, $posx, $posy, $maxwidth, $size, $angle, $name, $crid, $totx, $toty, $style, $visitsid, $g_uploadersid, $g_lang, $newmark) {
+ var d = document.getElementById($name);
+ d.style.left = "auto";
+ d.style.right = "auto";
+ d.style.top = "auto";
+ d.style.bottom = "auto";
+
+ //
+ // make a local note of data received in case needed later
+ // .result          : http status code
+ // .newmark         : https://rest.mpsvr.com/newmarks/{visitsid}/{*newmark*}/...
+ //                  : https://rest.mpsvr.com/xlates/{visitsid}/{*newmark*}/...
+ // .representation  : the representation if received back from the server
+ // .xlateUrl           : Content-Location / URL of representation received
+ // .visitsid        : https://rest.mpsvr.com/newmarks/{*visitsid*}/{newmark}/...
+ //                  : https://rest.mpsvr.com/xlates/{*visitsid*}/{newmark}/...
+
+ sessionStorage.setItem('csi18n_' + $name + '.result', 0);
+ sessionStorage.setItem('csi18n_' + $name + '.newmark', $newmark);
+ sessionStorage.setItem('csi18n_' + $name + '.representation', '');
+ sessionStorage.setItem('csi18n_' + $name + '.xlateUrl', '');
+ sessionStorage.setItem('csi18n_' + $name + '.newmarkUrl', '');
+ sessionStorage.setItem('csi18n_' + $name + '.visitsid', $visitsid);
+ sessionStorage.setItem('csi18n_' + $name + '.language', '');
+ sessionStorage.setItem('csi18n_' + $name + '.all_preferable', '');
+ sessionStorage.setItem('csi18n_' + $name + '.chosen_because', '');
+ sessionStorage.setItem('csi18n_' + $name + '.responseURL', '');
+ sessionStorage.setItem('csi18n_' + $name + '.last-modified', '');
+ sessionStorage.setItem('csi18n_' + $name + '.etag', '');
+
+ //
+ // force text to 'undefined' if sendGet seems to have 
+ // failed without getting an http status code
+ if ($corner != 'hide') {
+  if ($crid === '') {
+   $rv = sendNewmarkGet($name, $newmark, $visitsid, $g_lang);
+  } else {
+   $rv = sendXlateGet($name, $newmark, $visitsid, $g_uploadersid, $g_lang, $crid);
+  }
+  if (typeof $rv === 'undefined') {
+   $translation = 'undefined';
+  } else {
+   $translation = $rv;
+  }
+ }
+ 
+ //
+ // escape the response before adding whatever response we got to page
+ if (localStorage.getItem('csi18n_onOrOff') == 'on') {
+  d.innerHTML = "<a class='xlate_" + $name + "' href='javascript:toggleTranslationMenu(\"csi18n_" + $name + "\")'>" + escapeHtml($translation) + "</a>"; 
+ } else { 
+  //
+  // if we're not showing hyperlinks then there's no point 
+  // doing anything but getting it out.
+  d.innerHTML = escapeHtml($translation); 
+ }
+
+ //
+ // place the given corner of the translation at the
+ // specified location; then align as required
+ var align = 'auto';
+ if ($corner.substr(0, 2) == 'BR') {
+  d.style.right = ($totx - $posx) + "px";
+  d.style.bottom = ($toty - $posy) + "px";
+  align = 'right';
+  $transformOrigin = 'right bottom';
+
+ } else if ($corner.substr(0, 2) == 'TR') {
+  d.style.right = ($totx - $posx) + "px";
+  d.style.top = $posy + "px";
+  align = 'right';
+  $transformOrigin = 'right top';
+
+ } else if ($corner.substr(0, 2) == 'BL') {
+  d.style.left = $posx + "px";;
+  d.style.bottom = ($toty - $posy) + "px";
+  align = 'left';
+  $transformOrigin = 'left bottom';
+
+ } else if ($corner.substr(0, 2) == 'TL') {
+  d.style.left = $posx + "px";
+  d.style.top = $posy + "px";
+  align = 'left';
+  $transformOrigin = 'left top';
+ }
+
+ // 
+ // title and mouseover div shunt down all else
+ if ($corner.substr(3, 1) !== 'T') { 
+  d.style.position = "absolute";
+ }
+ if (typeof $angle != "undefined" && $angle != " 0" && $angle != "" ) {
+  deg = $angle;
+  d.style.transformOrigin = $transformOrigin;
+  d.style.transform = 'rotate('+deg+'deg)'; 
+ }
+
+ //
+ // Xlates that center within their div force the
+ // div to an exact width: otherwise the width
+ // shrinks to suit
+ if ($corner.substr(2, 1) === 'C') {
+  align = 'center'; 
+  d.style.minWidth = $maxwidth + "px";
+ }
+ d.style.textAlign = align;
+
+ // common to all xlates appearing
+ // d.style.backgroundColor = 'rgba(255, 255, 255, 1)'; // final value is transparency - 1 = 'not'
+ d.style.zIndex = "100";
+ d.style.fontSize = $size + "px";
+ d.style.fontStyle = $style;
+ d.style.maxWidth = $maxwidth + "px";
+
+/*
+    if(y1 < y2){
+        var pom = y1;
+        y1 = y2;
+        y2 = pom;
+        pom = x1;
+        x1 = x2;
+        x2 = pom;
+    }
+    var a = Math.abs(x1-x2);
+    var b = Math.abs(y1-y2);
+    var c;
+    var sx = (x1+x2)/2 ;
+    var sy = (y1+y2)/2 ;
+    var width = Math.sqrt(a*a + b*b ) ;
+    var x = sx - width/2;
+    var y = sy;
+    a = width / 2;
+    c = Math.abs(sx-x);
+    b = Math.sqrt(Math.abs(x1-x)*Math.abs(x1-x)+Math.abs(y1-y)*Math.abs(y1-y) );
+    var cosb = (b*b - a*a - c*c) / (2*a*c);
+    var rad = Math.acos(cosb);
+    var deg = (rad*180)/Math.PI
+    htmlns = "http://www.w3.org/1999/xhtml";
+*/
+}
+
+///////////////////////////////////////////////////////////////////
+//
+// madox2 @ http://stackoverflow.com/questions/4270485/drawing-lines-on-html-page
+// as modified by suggestion on the same page to include transform:rotate('+deg+'deg); for
+// the benefit of IE
+//
+function DrawLine(x1, y1, x2, y2){
+    if(y1 < y2){
+        var pom = y1;
+        y1 = y2;
+        y2 = pom;
+        pom = x1;
+        x1 = x2;
+        x2 = pom;
+    }
+    var a = Math.abs(x1-x2);
+    var b = Math.abs(y1-y2);
+    var c;
+    var sx = (x1+x2)/2 ;
+    var sy = (y1+y2)/2 ;
+    var width = Math.sqrt(a*a + b*b ) ;
+    var x = sx - width/2;
+    var y = sy;
+    a = width / 2;
+    c = Math.abs(sx-x);
+    b = Math.sqrt(Math.abs(x1-x)*Math.abs(x1-x)+Math.abs(y1-y)*Math.abs(y1-y) );
+    var cosb = (b*b - a*a - c*c) / (2*a*c);
+    var rad = Math.acos(cosb);
+    var deg = (rad*180)/Math.PI
+    htmlns = "http://www.w3.org/1999/xhtml";
+    div = document.createElementNS(htmlns, "div");
+    div.setAttribute('style','border:1px solid black;width:'+width+'px;height:0px;transform:rotate('+deg+'deg);-moz-transform:rotate('+deg+'deg);-webkit-transform:rotate('+deg+'deg);position:absolute;top:'+y+'px;left:'+x+'px;');   
+    document.getElementById("tochterAusElysium").appendChild(div);
+}
+
+///////////////////////////////////////////////////
+//
+// XSS. Storing:
+//   hello</a><img src=bogus onerror=alert(1337)><a href="">
+// is an XSS vuln: sanitise text before use. In practice, I only seem to 
+// use .innerHtml for use so either .innerHtml = escapeHtml(unsafe) or
+// name vars as safe/unsafe and only assign a safe to .innerHtml
+//
+// Bolted on: allow the user to let <br> <i> </i> <b> </b> and &#x (html printing chars) through
+//
+// developed from bjornd @ http://stackoverflow.com/questions/6234773/can-i-escape-html-special-chars-in-javascript
+function escapeHtml(unsafe) {
+ unsafe = unsafe.replace(/<br>/g, "LadiesWithAnAttitudeFellasThatWereInTheMood");
+ unsafe = unsafe.replace(/<i>/g, "DeepDishvsDireStraitsFlashingForMoneySultanClubMix");
+ unsafe = unsafe.replace(/<\/i>/g, "WhatIsThiSIdontEven1");
+ unsafe = unsafe.replace(/<b>/g, "WhatIsThiSIdontEven2");
+ unsafe = unsafe.replace(/<\/b>/g, "WhatIsThiSIdontEven3");
+ unsafe = unsafe.replace(/&#x/g, "WhatIsThiSIdontEven4");
+ unsafe = unsafe
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+ unsafe = unsafe.replace(/LadiesWithAnAttitudeFellasThatWereInTheMood/g, "<br>");
+ unsafe = unsafe.replace(/DeepDishvsDireStraitsFlashingForMoneySultanClubMix/g, "<i>");
+ unsafe = unsafe.replace(/WhatIsThiSIdontEven1/g, "</i>");
+ unsafe = unsafe.replace(/WhatIsThiSIdontEven2/g, "<b>");
+ unsafe = unsafe.replace(/WhatIsThiSIdontEven3/g, "</b>");
+ unsafe = unsafe.replace(/WhatIsThiSIdontEven4/g, "&#x");
+ safe = unsafe;
+ return safe;
+}
+//" <-- emacs discolours below unless I terminate the stroke-quote-stroke above
+
+////////////////////////////////////////////////////////////////////
+//
+// It's 2015 and it's /still/ necessary to detect the browser. HOLY CRAP
+// 
+// IE doesn't automagical a JSON response string into JSON proper, so make a global
+// called window.ie that is false for working browsers, and !false otherwise. Not that
+// I'm implying this page will render on anything under IE11.
+//   $json_o = this.response;
+//   if (window.ie !== false)
+//    $json_o = JSON.parse($json_o);
+//   $translation = $json_o.csi18n_xlate_resource.translation;
+// 
+// mario @ http://stackoverflow.com/questions/19999388/jquery-check-if-user-is-using-ie
+function detectIE() {
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf('MSIE ');
+    var trident = ua.indexOf('Trident/');
+    if (msie > 0) {
+        // IE 10 or older => return version number
+        return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+    }
+    if (trident > 0) {
+        // IE 11 (or newer) => return version number
+        var rv = ua.indexOf('rv:');
+        return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+    }
+    // other browser
+    return false;
+}
+
+//
+// Tada! show the mouseover text
+function showWhatWasImgTitle(){
+  var d = document.getElementById("fr0001");
+  d.style.display = "";
+}
+
+//
+// Facility to force mouseover text to vanish
+// until needed
+function hideWhatWasImgTitle(){
+  var d = document.getElementById("fr0001");
+  d.style.display = "none";
+}
+
+//
+// Tada! You clicked here to upload a translation
+function showUploadForm(){
+  var d = document.getElementById("upload-form");
+  d.style.display = "";
+}
+
+//
+// Facility to force translation upload form to vanish
+// until needed
+function hideUploadForm(){
+  var d = document.getElementById("upload-form");
+  d.style.display = "none";
+}
+
+//
+// Facility to force translation upload form to hide/show
+function toggleUploadForm(){
+  var d = document.getElementById("upload-form");
+  if (d.style.display != "none") {
+    d.style.display = "none";
+  } else {
+    d.style.display = "";
+  }
+}
+
+//
+// The crid array is used to say which balloons have
+// text in. This function used by PHP to regenerate
+// the correct array in JavaScript
+function loadArray($n_arr, $frame, $root, $val) {
+ if (typeof $val !== 'undefined') {
+  $a = new Array($root, $val);
+  $n_arr[$frame].push($a);
+  $n_arr[$frame][0]++;
+ }
+}
+
+///////////////////////////////////////////////////////////////////
+//
+// Setup when never been here before. Preload with credents and use visitor's Accept-Language as default
+function onLoad() {
+ window.ie = detectIE();
+
+ // 
+ // turn off the no javascript warning
+ document.getElementById("javascript_at_all").style.display = 'none';
+ document.getElementById("xhr2_json_at_all").style.display = 'none';
+
+ //
+ // if the lang hasn't been set, copy it from user's Accept-Language
+ // do it here so resetting default language happens either on first
+ // visit, or on emptying default language
+ //	 
+ // Does everyone use en? No: 
+ // Internet Explorer v11/Win8 only provides "en-GB" here, so user gets
+ // British English but broad English "en" is ignored.
+ // Safari 8.0.3/OSXv10.10.2 only provides "en-us" here, so even though 
+ // machine, install and user is British, British English is ignored, as
+ // is broad English, AND standard American English (where
+ // uppercase subtags are recommended per IETF so en-US not en-us)
+ //
+ // What I'll do is, if en-* appears and en doesn't, is add en;q=0.001.
+ // That'll happen in the common php.
+ if (!localStorage.getItem('csi18n_lang') || (localStorage.getItem('csi18n_lang') == '')) {
+<?php
+   echo "localStorage.setItem('csi18n_lang', '$hal_lang');";
+?>
+ }
+ //
+ // ditto apikey
+ if (!localStorage.getItem('csi18n_key') || (localStorage.getItem('csi18n_key') == '')) {
+<?php
+   echo "localStorage.setItem('csi18n_key', '$dflt_apikey');";
+?>
+ }
+ var currently = localStorage.getItem('csi18n_onOrOff');
+ if (currently != "on" && currently != "off") {
+  //
+  // We're here because we've never visited before.
+  localStorage.setItem('csi18n_onOrOff', "on");
+  localStorage.setItem('csi18n_un', "test05");
+  localStorage.setItem('csi18n_pw', "test");
+  localStorage.setItem('csi18n_cache_off_timeout', new Date().getTime());
+  localStorage.setItem('csi18n_xhr2_have_json_test', 'false');
+  sessionStorage.clear();
+  sessionStorage.setItem('csi18n_seemore.representations', '');
+  sessionStorage.setItem('csi18n_seemore.per_lang_pref', '');
+ }
+
+ // 
+ //
+ if (localStorage.getItem('csi18n_xhr2_have_json') !== 'true') {
+  document.getElementById("xhr2_json_at_all").style.display = 'block';
+ }
+
+ COUNT = 0; // index to number of text elements in this frame
+ var crid_array = new Array();
+ var frame = 0;
+ for (frame = 0; frame < 9; frame++) {
+  crid_array[frame] = new Array();
+  crid_array[frame][COUNT] = 0;
+ }
+
+ // getCRIDArrayFromPHP calls a function generated on the fly by PHP
+ getCRIDArrayFromPHP(crid_array);
+
+ //
+ // Call for the translations to be bought in, hide the 
+ // mouseover and upload form, show any speech lines
+ xkcdShow(global_g_visitsid, global_g_uploadersid, global_g_lang, global_container_width, global_container_height, crid_array);
+ hideWhatWasImgTitle();
+ hideUploadForm();
+ xkcdShowLines();
+}
+</script>
