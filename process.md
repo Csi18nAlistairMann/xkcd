@@ -28,6 +28,7 @@ At mo, code assumes no more than 8 frames, no more than 48 text elements per fra
      1. determine where the corner should go (just tl, tr, bl, br for now. The corner should generally be the closest corner the ballon has to any line indicating the speaker. )
        1. Append a "C" for centering within autowidth div, space if not used (eg, "TLC", "BR ")
         1. Append a "T" to make a fixed width block above or below the image (eg, "TLCT")
+         1. For an angle in GIMP, use rectangle tool to draw around where the bubble will be, then Shift-R to rotate. Rotate to suit and read off the Angle reached. I ignore decimal points
      1. Get pixel co-ords for textual element and point elements
      1. determine max width of bubble
  1. Erase all textual and speech bubble elements
